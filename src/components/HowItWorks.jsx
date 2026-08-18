@@ -1,4 +1,12 @@
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 function HowItWorks() {
+  const sectionRef = useRef(null);
+
   const steps = [
     {
       number: "01",
@@ -20,21 +28,103 @@ function HowItWorks() {
     },
   ];
 
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) {
+      return undefined;
+    }
+
+    const context = gsap.context(() => {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (prefersReducedMotion) {
+        gsap.set(
+          [
+            ".how-it-works-eyebrow",
+            ".how-it-works-title",
+            ".how-it-works-description",
+            ".step-card",
+          ],
+          {
+            clearProps: "all",
+          }
+        );
+
+        return;
+      }
+
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 75%",
+          once: true,
+        },
+        defaults: {
+          ease: "power3.out",
+        },
+      });
+
+      timeline
+        .from(".how-it-works-eyebrow", {
+          y: 24,
+          opacity: 0,
+          duration: 0.6,
+        })
+        .from(
+          ".how-it-works-title",
+          {
+            y: 36,
+            opacity: 0,
+            duration: 0.8,
+          },
+          "-=0.35"
+        )
+        .from(
+          ".how-it-works-description",
+          {
+            y: 24,
+            opacity: 0,
+            duration: 0.7,
+          },
+          "-=0.4"
+        )
+        .from(
+          ".step-card",
+          {
+            y: 36,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.15,
+          },
+          "-=0.25"
+        );
+    }, section);
+
+    return () => {
+      context.revert();
+    };
+  }, []);
+
   return (
-    <section className="how-it-works">
+    <section ref={sectionRef} className="how-it-works">
       <div className="page-container">
         <div className="how-it-works-heading">
           <div>
-            <p className="eyebrow">How WHERE2 works</p>
+            <p className="eyebrow how-it-works-eyebrow">
+              How WHERE2 works
+            </p>
 
-            <h2 className="section-title">
+            <h2 className="section-title how-it-works-title">
               Your life is unique.
               <br />
               Your city should be too.
             </h2>
           </div>
 
-          <p className="section-description">
+          <p className="section-description how-it-works-description">
             WHERE2 turns the things that matter to you into
             a clearer picture of where you could live, work,
             and build your life.
