@@ -1,53 +1,16 @@
 import "./App.css";
+import Nav from "./components/Nav";
+import Hero from "./components/Hero";
+import HowItWorks from "./components/HowItWorks";
+import CityPreview from "./components/CityPreview";
 
 function App() {
   return (
     <main className="design-system">
-      <header className="demo-header">
-        <div className="page-container demo-header-inner">
-          <a href="/" className="brand" aria-label="WHERE2 home">
-            WHERE<span>2</span>
-          </a>
-
-          <span className="eyebrow">
-            Design System
-          </span>
-        </div>
-      </header>
-
-      <section className="demo-hero">
-        <div className="page-container demo-hero-content">
-          <p className="eyebrow">
-            Find the place that fits your life
-          </p>
-
-          <h1 className="display-heading">
-            Where could you live that fits your life?
-          </h1>
-
-          <p className="lead-text">
-            WHERE2 helps people discover and compare cities
-            based on their lifestyle, budget, career goals,
-            climate preferences, and personal priorities.
-          </p>
-
-          <div className="button-group">
-            <button
-              type="button"
-              className="button button-primary"
-            >
-              Discover your cities
-            </button>
-
-            <button
-              type="button"
-              className="button button-secondary"
-            >
-              Explore how it works
-            </button>
-          </div>
-        </div>
-      </section>
+      <Nav />
+      <Hero />
+      <HowItWorks />
+      <CityPreview />
 
       <section className="component-section">
         <div className="page-container">
@@ -64,8 +27,8 @@ function App() {
               <h3>Primary</h3>
 
               <p>
-                The main WHERE2 brand color used for
-                important actions and highlights.
+                The main WHERE2 brand color used for important
+                actions and highlights.
               </p>
             </article>
 
