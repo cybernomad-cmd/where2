@@ -2,6 +2,7 @@ import "./App.css";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import HowItWorks from "./components/HowItWorks";
+import CityPreview from "./components/CityPreview";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Nav />
       <Hero />
       <HowItWorks />
+      <CityPreview />
 
       <section className="component-section">
         <div className="page-container">
