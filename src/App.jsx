@@ -1,122 +1,100 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <main className="design-system">
+      <header className="demo-header">
+        <div className="page-container demo-header-inner">
+          <a href="/" className="brand" aria-label="WHERE2 home">
+            WHERE<span>2</span>
+          </a>
+
+          <span className="eyebrow">
+            Design System
+          </span>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+      </header>
+
+      <section className="demo-hero">
+        <div className="page-container demo-hero-content">
+          <p className="eyebrow">
+            Find the place that fits your life
           </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
+          <h1 className="display-heading">
+            Where could you live that fits your life?
+          </h1>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+          <p className="lead-text">
+            WHERE2 helps people discover and compare cities
+            based on their lifestyle, budget, career goals,
+            climate preferences, and personal priorities.
+          </p>
+
+          <div className="button-group">
+            <button
+              type="button"
+              className="button button-primary"
+            >
+              Discover your cities
+            </button>
+
+            <button
+              type="button"
+              className="button button-secondary"
+            >
+              Explore how it works
+            </button>
+          </div>
         </div>
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <section className="component-section">
+        <div className="page-container">
+          <div className="section-heading">
+            <p className="eyebrow">Foundation</p>
+
+            <h2>WHERE2 design system</h2>
+          </div>
+
+          <div className="component-grid">
+            <article className="demo-card">
+              <div className="color-sample color-primary" />
+
+              <h3>Primary</h3>
+
+              <p>
+                The main WHERE2 brand color used for
+                important actions and highlights.
+              </p>
+            </article>
+
+            <article className="demo-card">
+              <div className="color-sample color-light" />
+
+              <h3>Primary Light</h3>
+
+              <p>
+                A soft supporting color for backgrounds,
+                highlights, and selected states.
+              </p>
+            </article>
+
+            <article className="demo-card">
+              <div className="color-sample color-surface" />
+
+              <h3>Surface</h3>
+
+              <p>
+                Used for cards, sections, and subtle
+                separation from the main background.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
 }
 
-export default App
+export default App;
