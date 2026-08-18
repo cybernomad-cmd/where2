@@ -3,9 +3,7 @@
   min-height: 100vh;
 }
 
-/* ========================================
-   WHERE2 DESIGN SYSTEM PREVIEW
-   ======================================== */
+/*Where2 Design Preview*/
 
 .design-system {
   min-height: 100vh;
@@ -20,7 +18,7 @@
   margin-inline: auto;
 }
 
-/* Typography */
+/*Typography*/
 
 .eyebrow {
   color: var(--color-primary);
@@ -47,7 +45,7 @@
   line-height: 1.6;
 }
 
-/* Header */
+/*Design Heading*/
 
 .demo-header {
   padding-block: var(--space-6);
@@ -72,7 +70,7 @@
   color: var(--color-primary);
 }
 
-/* Hero */
+/*Hero*/
 
 .demo-hero {
   display: flex;
@@ -87,7 +85,7 @@
   gap: var(--space-6);
 }
 
-/* Buttons */
+/*Buttons*/
 
 .button-group {
   display: flex;
@@ -140,7 +138,7 @@
   border-color: var(--color-primary);
 }
 
-/* Cards */
+/*Design System Cards*/
 
 .component-section {
   padding-block: var(--space-16);
@@ -176,7 +174,7 @@
   line-height: 1.6;
 }
 
-/* Color samples */
+/*Color Samples*/
 
 .color-sample {
   min-height: 100px;
@@ -197,7 +195,59 @@
   border: 1px solid var(--color-border);
 }
 
-/* Responsive */
+/*Navbar*/
+
+.navbar {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid var(--color-border);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.navbar-inner {
+  display: flex;
+  min-height: 76px;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.navbar-links a,
+.nav-login {
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.navbar-links a:hover,
+.nav-login:hover {
+  color: var(--color-primary);
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.nav-cta {
+  min-height: 44px;
+  padding-inline: var(--space-5);
+}
+
+/*Responsive — Tablet*/
 
 @media (max-width: 1024px) {
   .page-container {
@@ -217,6 +267,16 @@
   }
 }
 
+/*Responsive — Navbar Tablet*/
+
+@media (max-width: 900px) {
+  .navbar-links {
+    gap: var(--space-4);
+  }
+}
+
+/*Responsive — Mobile*/
+
 @media (max-width: 767px) {
   .page-container {
     width: min(
@@ -230,7 +290,6 @@
   }
 
   .demo-hero {
-    min-height: auto;
     padding-block: var(--space-16);
   }
 
@@ -250,7 +309,18 @@
   .component-grid {
     grid-template-columns: 1fr;
   }
+
+  .navbar-inner {
+    min-height: 68px;
+  }
+
+  .navbar-links,
+  .navbar-actions {
+    display: none;
+  }
 }
+
+/*Responsive — Small Mobile*/
 
 @media (max-width: 480px) {
   .page-container {
