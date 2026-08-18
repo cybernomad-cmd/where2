@@ -1,12 +1,14 @@
 import "./App.css";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
+import HowItWorks from "./components/HowItWorks";
 
 function App() {
   return (
     <main className="design-system">
       <Nav />
       <Hero />
+      <HowItWorks />
 
       <section className="component-section">
         <div className="page-container">

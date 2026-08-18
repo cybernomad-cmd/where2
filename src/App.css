@@ -453,3 +453,133 @@
     padding: var(--space-6);
   }
 }
+
+/*How Where2 WorksS*/
+
+.how-it-works {
+  padding-block: var(--space-24);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.how-it-works-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.65fr);
+  align-items: end;
+  gap: var(--space-12);
+  margin-bottom: var(--space-12);
+}
+
+.section-title {
+  max-width: 700px;
+  margin-top: var(--space-4);
+  color: var(--color-heading);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.section-description {
+  max-width: 480px;
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--color-border);
+}
+
+.step-card {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-8);
+  padding: var(--space-8);
+  border-right: 1px solid var(--color-border);
+}
+
+.step-card:first-child {
+  padding-left: 0;
+}
+
+.step-card:last-child {
+  padding-right: 0;
+  border-right: none;
+}
+
+.step-number {
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.step-content h3 {
+  margin-bottom: var(--space-3);
+  color: var(--color-heading);
+  font-size: 1.5rem;
+  letter-spacing: -0.025em;
+}
+
+.step-content p {
+  max-width: 320px;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+/*How It Works—Tablet*/
+
+@media (max-width: 900px) {
+  .how-it-works {
+    padding-block: var(--space-20);
+  }
+
+  .how-it-works-heading {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .step-card,
+  .step-card:first-child,
+  .step-card:last-child {
+    min-height: auto;
+    padding: var(--space-8) 0;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .step-card:last-child {
+    border-bottom: none;
+  }
+}
+
+/*How it Works—Mobile*/
+
+@media (max-width: 767px) {
+  .how-it-works {
+    padding-block: var(--space-16);
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+
+  .step-card,
+  .step-card:first-child,
+  .step-card:last-child {
+    padding-block: var(--space-6);
+  }
+
+  .step-content h3 {
+    font-size: 1.35rem;
+  }
+}
