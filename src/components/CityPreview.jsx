@@ -1,4 +1,12 @@
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 function CityPreview() {
+  const sectionRef = useRef(null);
+
   const cities = [
     {
       name: "Nairobi",
@@ -23,21 +31,177 @@ function CityPreview() {
     },
   ];
 
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) {
+      return undefined;
+    }
+
+    const context = gsap.context(() => {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (prefersReducedMotion) {
+        gsap.set(
+          [
+            ".city-preview-eyebrow",
+            ".city-preview-title",
+            ".city-preview-description",
+            ".city-card",
+          ],
+          {
+            clearProps: "all",
+          }
+        );
+
+        return;
+      }
+
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 75%",
+          once: true,
+        },
+        defaults: {
+          ease: "power3.out",
+        },
+      });
+
+      timeline
+        .from(".city-preview-eyebrow", {
+          y: 24,
+          opacity: 0,
+          duration: 0.6,
+        })
+        .from(
+          ".city-preview-title",
+          {
+            y: 36,
+            opacity: 0,
+            duration: 0.8,
+          },
+          "-=0.35"
+        )
+        .from(
+          ".city-preview-description",
+          {
+            y: 24,
+            opacity: 0,
+            duration: 0.7,
+          },
+          "-=0.4"
+        )
+        .from(
+          ".city-card",
+          {
+            y: 48,
+            opacity: 0,
+            scale: 0.97,
+            duration: 0.8,
+            stagger: 0.16,
+          },
+          "-=0.25"
+        );
+    }, section);
+
+    return () => {
+      context.revert();
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) {
+      return undefined;
+    }
+
+    const context = gsap.context(() => {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (prefersReducedMotion) {
+        return;
+      }
+
+      const cards = gsap.utils.toArray(".city-card");
+
+      cards.forEach((card) => {
+        const handleEnter = () => {
+          gsap.to(card, {
+            y: -6,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        };
+
+        const handleLeave = () => {
+          gsap.to(card, {
+            y: 0,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        };
+
+        card.addEventListener("mouseenter", handleEnter);
+        card.addEventListener("mouseleave", handleLeave);
+
+        card._where2Enter = handleEnter;
+        card._where2Leave = handleLeave;
+      });
+    }, section);
+
+    return () => {
+      const cards = gsap.utils.toArray(".city-card");
+
+      cards.forEach((card) => {
+        if (card._where2Enter) {
+          card.removeEventListener(
+            "mouseenter",
+            card._where2Enter
+          );
+        }
+
+        if (card._where2Leave) {
+          card.removeEventListener(
+            "mouseleave",
+            card._where2Leave
+          );
+        }
+
+        delete card._where2Enter;
+        delete card._where2Leave;
+      });
+
+      context.revert();
+    };
+  }, []);
+
   return (
-    <section className="city-preview" id="cities">
+    <section
+      ref={sectionRef}
+      className="city-preview"
+      id="cities"
+    >
       <div className="page-container">
         <div className="city-preview-heading">
           <div>
-            <p className="eyebrow">Explore possibilities</p>
+            <p className="eyebrow city-preview-eyebrow">
+              Explore possibilities
+            </p>
 
-            <h2 className="section-title">
+            <h2 className="section-title city-preview-title">
               Cities that could
               <br />
               fit your life.
             </h2>
           </div>
 
-          <p className="section-description">
+          <p className="section-description city-preview-description">
             Every person has different priorities. WHERE2
             helps you look beyond popular destinations and
             discover places that make sense for you.
