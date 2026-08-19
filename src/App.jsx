@@ -1,17 +1,120 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import HowItWorks from "./components/HowItWorks";
 import CityPreview from "./components/CityPreview";
 import FinalCTA from "./components/FinalCTA";
+import CitySearch from "./components/CitySearch";
+import WeatherCard from "./components/WeatherCard";
+import { getCurrentWeather } from "./services/weatherApi";
 
 function App() {
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [weather, setWeather] = useState(null);
+  const [weatherStatus, setWeatherStatus] = useState("idle");
+  const [weatherError, setWeatherError] = useState("");
+
+  useEffect(() => {
+    if (!selectedCity) {
+      return;
+    }
+
+    let isActive = true;
+
+    async function loadWeather() {
+      try {
+        const currentWeather = await getCurrentWeather(
+          selectedCity.latitude,
+          selectedCity.longitude
+        );
+
+        if (!isActive) {
+          return;
+        }
+
+        setWeather(currentWeather);
+        setWeatherStatus("success");
+      } catch (requestError) {
+        if (!isActive) {
+          return;
+        }
+
+        setWeather(null);
+        setWeatherError(
+          requestError.message ||
+            "Unable to retrieve weather data right now."
+        );
+        setWeatherStatus("error");
+      }
+    }
+
+    loadWeather();
+
+    return () => {
+      isActive = false;
+    };
+  }, [selectedCity]);
+
+function handleCitySelect(city) {
+  const isSameCity = selectedCity?.id === city.id;
+
+  if (isSameCity && weatherStatus !== "error") {
+    return;
+  }
+
+  setSelectedCity(city);
+  setWeather(null);
+  setWeatherError("");
+  setWeatherStatus("loading");
+}
+
   return (
     <main className="design-system">
       <Nav />
+
       <Hero />
+
+      <CitySearch onCitySelect={handleCitySelect} />
+
+      {selectedCity && (
+        <section className="weather-section">
+          <div className="page-container">
+            {weatherStatus === "loading" && (
+              <div className="search-state">
+                <p>
+                  Loading weather for {selectedCity.name}...
+                </p>
+              </div>
+            )}
+
+            {weatherStatus === "error" && (
+              <div
+                className="search-state search-state-error"
+                role="alert"
+              >
+                <h3>
+                  We couldn't load the weather.
+                </h3>
+
+                <p>{weatherError}</p>
+              </div>
+            )}
+
+            {weatherStatus === "success" && (
+              <WeatherCard
+                city={selectedCity}
+                weather={weather}
+              />
+            )}
+          </div>
+        </section>
+      )}
+
       <HowItWorks />
+
       <CityPreview />
+
       <FinalCTA />
 
       <section className="component-section">
