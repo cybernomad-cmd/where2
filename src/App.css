@@ -1672,3 +1672,107 @@
     text-align: left;
   }
 }
+
+/* City Details */
+
+.city-details {
+  padding-block: var(--space-16);
+  background: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.city-details-heading {
+  max-width: 760px;
+  margin-bottom: var(--space-10);
+}
+
+.city-details-heading h2 {
+  margin-top: var(--space-2);
+  color: var(--color-heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+}
+
+.city-details-heading p:last-child {
+  max-width: 680px;
+  margin-top: var(--space-4);
+  color: var(--color-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.city-details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  max-width: 1100px;
+}
+
+.city-detail-card {
+  display: flex;
+  min-height: 150px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.city-detail-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
+.city-detail-card > span {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.city-detail-card strong {
+  margin-top: var(--space-4);
+  color: var(--color-heading);
+  font-size: 1.25rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.city-detail-card small {
+  margin-top: var(--space-2);
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 900px) {
+  .city-details-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .city-details {
+    padding-block: var(--space-12);
+  }
+
+  .city-details-heading {
+    margin-bottom: var(--space-8);
+  }
+
+  .city-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .city-detail-card {
+    min-height: 130px;
+    padding: var(--space-5);
+  }
+}
