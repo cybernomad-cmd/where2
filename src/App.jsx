@@ -11,6 +11,9 @@ import WeatherCard from "./components/WeatherCard";
 import WeatherForecast from "./components/WeatherForecast";
 import { getCurrentWeather } from "./services/weatherApi";
 import { getWeatherForecast } from "./services/forecastApi";
+import {
+  calculateRecommendation,
+} from "./services/recommendationService";
 
 function App() {
   const [selectedCity, setSelectedCity] = useState(null);
@@ -133,6 +136,11 @@ function App() {
     setForecastStatus("loading");
   }
 
+  const recommendation = calculateRecommendation(
+    preferences,
+    weather
+  );
+
   return (
     <main className="design-system">
       <Nav />
@@ -176,6 +184,49 @@ function App() {
                 weather={weather}
               />
             )}
+
+            {weatherStatus === "success" &&
+              recommendation.label !==
+                "Not enough information" && (
+                <section
+                  className="recommendation-section"
+                  aria-label="City recommendation"
+                >
+                  <div className="recommendation-card">
+                    <div className="recommendation-header">
+                      <div>
+                        <p className="eyebrow">
+                          Your WHERE2 match
+                        </p>
+
+                        <h2>
+                          {recommendation.label}
+                        </h2>
+                      </div>
+
+                      <span className="recommendation-score">
+                        {recommendation.score}
+                      </span>
+                    </div>
+
+                    {recommendation.reasons.length > 0 && (
+                      <div className="recommendation-reasons">
+                        <h3>Why it may suit you</h3>
+
+                        <ul>
+                          {recommendation.reasons.map(
+                            (reason) => (
+                              <li key={reason}>
+                                {reason}
+                              </li>
+                            )
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </section>
+              )}
 
             {forecastStatus === "loading" && (
               <div className="search-state">
