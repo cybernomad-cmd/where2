@@ -1215,3 +1215,127 @@
     min-height: auto;
   }
 }
+
+
+/* Preferences */
+
+.preferences-section {
+  padding-block: var(--space-16);
+  background: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.preferences-heading {
+  max-width: 720px;
+  margin-bottom: var(--space-10);
+}
+
+.preferences-heading .section-title {
+  margin-top: var(--space-2);
+  color: var(--color-heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+}
+
+.preferences-heading .section-description {
+  max-width: 640px;
+  margin-top: var(--space-4);
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.preferences-form {
+  display: grid;
+  gap: var(--space-8);
+  max-width: 900px;
+}
+
+.preference-group {
+  margin: 0;
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.preference-group legend {
+  margin-bottom: var(--space-5);
+  padding: 0;
+  color: var(--color-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.preference-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.preference-option {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0 var(--space-5);
+  color: var(--color-heading);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.preference-option:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.preference-option:focus-within {
+  outline: 3px solid var(--color-primary-light);
+  outline-offset: 3px;
+}
+
+.preference-option input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--color-primary);
+}
+
+.preference-option span {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.preference-options-multiple {
+  align-items: stretch;
+}
+
+@media (max-width: 767px) {
+  .preferences-section {
+    padding-block: var(--space-12);
+  }
+
+  .preferences-heading {
+    margin-bottom: var(--space-8);
+  }
+
+  .preference-group {
+    padding: var(--space-5);
+  }
+
+  .preference-options {
+    flex-direction: column;
+  }
+
+  .preference-option {
+    width: 100%;
+    justify-content: flex-start;
+    border-radius: var(--radius-md);
+  }
+}
