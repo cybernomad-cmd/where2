@@ -2021,3 +2021,162 @@
     width: 100%;
   }
 }
+
+/* =========================================================
+   COST OF LIVING
+   ========================================================= */
+
+.cost-of-living {
+  margin-top: 64px;
+  padding: 64px 0 80px;
+  border-top: 1px solid var(--border-color);
+}
+
+.cost-of-living-heading {
+  max-width: 820px;
+  margin-bottom: 36px;
+}
+
+.cost-of-living-heading h2 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.cost-of-living-heading > p:last-child {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* Summary */
+
+.cost-of-living-summary {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.cost-of-living-summary > div {
+  min-height: 150px;
+  padding: 28px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background: var(--surface-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cost-of-living-summary span {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cost-of-living-summary strong {
+  color: var(--text-primary);
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Category cards */
+
+.cost-of-living-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.cost-of-living-card {
+  min-height: 170px;
+  padding: 28px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background: var(--surface-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cost-of-living-card > span {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cost-of-living-card strong {
+  color: var(--text-primary);
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.cost-of-living-card p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* Loading / error states */
+
+.cost-of-living .search-state {
+  margin-top: 24px;
+}
+
+.cost-of-living .search-state-error {
+  border-color: var(--border-color);
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .cost-of-living-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cost-of-living-summary > div:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .cost-of-living-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .cost-of-living {
+    margin-top: 40px;
+    padding: 48px 0 56px;
+  }
+
+  .cost-of-living-heading h2 {
+    font-size: 28px;
+  }
+
+  .cost-of-living-heading > p:last-child {
+    font-size: 15px;
+  }
+
+  .cost-of-living-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .cost-of-living-summary > div:first-child {
+    grid-column: auto;
+  }
+
+  .cost-of-living-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cost-of-living-summary > div,
+  .cost-of-living-card {
+    min-height: 140px;
+    padding: 24px;
+  }
+}
