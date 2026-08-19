@@ -18,7 +18,7 @@ function CostOfLiving({ city }) {
       setError("");
 
       try {
-        const data = await getCostOfLiving(city.name);
+        const data = await getCostOfLiving(city);
 
         if (!isActive) {
           return;
@@ -47,24 +47,24 @@ function CostOfLiving({ city }) {
     };
   }, [city]);
 
-  function formatPrice(value) {
+  function formatCurrency(value) {
     if (!Number.isFinite(Number(value))) {
       return "Not available";
     }
 
-    return `$${Number(value).toFixed(2)}`;
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    }).format(value);
   }
 
-  function formatCategory(category) {
-    if (!category) {
-      return "Other";
+  function formatIndex(value) {
+    if (!Number.isFinite(Number(value))) {
+      return "Not available";
     }
 
-    return category
-      .replace(/[_-]+/g, " ")
-      .replace(/\b\w/g, (letter) =>
-        letter.toUpperCase()
-      );
+    return Number(value).toFixed(0);
   }
 
   if (!city) {
@@ -86,8 +86,9 @@ function CostOfLiving({ city }) {
           </h2>
 
           <p>
-            Explore everyday prices to get a better
-            sense of what living in this city may cost.
+            Explore estimated monthly costs and
+            category indexes to better understand the
+            affordability of this location.
           </p>
         </div>
 
@@ -113,91 +114,98 @@ function CostOfLiving({ city }) {
           </div>
         )}
 
-        {status === "success" &&
-          costOfLiving &&
-          costOfLiving.prices.length > 0 && (
-            <div className="cost-of-living-content">
-              <div className="cost-of-living-summary">
-                <div>
-                  <span>City</span>
+        {status === "success" && costOfLiving && (
+          <div className="cost-of-living-content">
+            <div className="cost-of-living-summary">
+              <div>
+                <span>Estimated monthly cost</span>
 
-                  <strong>
-                    {costOfLiving.city}
-                  </strong>
-                </div>
-
-                <div>
-                  <span>Country</span>
-
-                  <strong>
-                    {costOfLiving.country ||
-                      city.country}
-                  </strong>
-                </div>
-
-                <div>
-                  <span>Currency</span>
-
-                  <strong>
-                    {costOfLiving.currency ||
-                      "USD"}
-                  </strong>
-                </div>
+                <strong>
+                  {formatCurrency(
+                    costOfLiving.monthlyEstimateUsd
+                  )}
+                </strong>
               </div>
 
-              <div className="cost-of-living-grid">
-                {costOfLiving.prices.map(
-                  (price, index) => (
-                    <article
-                      className="cost-of-living-card"
-                      key={`${price.name}-${index}`}
-                    >
-                      <div className="cost-of-living-card-top">
-                        <span>
-                          {formatCategory(
-                            price.category
-                          )}
-                        </span>
-                      </div>
+              <div>
+                <span>Cost index</span>
 
-                      <h3>{price.name}</h3>
+                <strong>
+                  {formatIndex(
+                    costOfLiving.costIndex
+                  )}
+                </strong>
+              </div>
 
-                      <strong>
-                        {formatPrice(price.usd)}
-                      </strong>
+              <div>
+                <span>Region</span>
 
-                      {Number.isFinite(
-                        Number(price.local)
-                      ) && (
-                        <p>
-                          Local price:{" "}
-                          {Number(price.local).toFixed(
-                            2
-                          )}{" "}
-                          {price.currency || ""}
-                        </p>
-                      )}
-                    </article>
-                  )
-                )}
+                <strong>
+                  {costOfLiving.region ||
+                    "Not available"}
+                </strong>
               </div>
             </div>
-          )}
 
-        {status === "success" &&
-          costOfLiving &&
-          costOfLiving.prices.length === 0 && (
-            <div className="search-state">
-              <h3>
-                No price information available.
-              </h3>
+            <div className="cost-of-living-grid">
+              <article className="cost-of-living-card">
+                <span>Groceries</span>
 
-              <p>
-                We couldn't find detailed cost-of-living
-                information for {city.name} yet.
-              </p>
+                <strong>
+                  {formatIndex(
+                    costOfLiving.groceryIndex
+                  )}
+                </strong>
+
+                <p>
+                  Grocery cost index
+                </p>
+              </article>
+
+              <article className="cost-of-living-card">
+                <span>Rent</span>
+
+                <strong>
+                  {formatIndex(
+                    costOfLiving.rentIndex
+                  )}
+                </strong>
+
+                <p>
+                  Rent cost index
+                </p>
+              </article>
+
+              <article className="cost-of-living-card">
+                <span>Utilities</span>
+
+                <strong>
+                  {formatIndex(
+                    costOfLiving.utilitiesIndex
+                  )}
+                </strong>
+
+                <p>
+                  Utilities cost index
+                </p>
+              </article>
+
+              <article className="cost-of-living-card">
+                <span>Transport</span>
+
+                <strong>
+                  {formatIndex(
+                    costOfLiving.transportIndex
+                  )}
+                </strong>
+
+                <p>
+                  Transport cost index
+                </p>
+              </article>
             </div>
-          )}
+          </div>
+        )}
       </div>
     </section>
   );
