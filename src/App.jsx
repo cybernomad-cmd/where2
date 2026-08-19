@@ -13,6 +13,7 @@ import WeatherForecast from "./components/WeatherForecast";
 import CityComparison from "./components/CityComparison";
 import CityDetails from "./components/CityDetails";
 import SavedCities from "./components/SavedCities";
+import CostOfLiving from "./components/CostOfLiving";
 
 import { getCurrentWeather } from "./services/weatherApi";
 import { getWeatherForecast } from "./services/forecastApi";
@@ -49,21 +50,28 @@ function App() {
   });
 
   const [weather, setWeather] = useState(null);
-  const [weatherStatus, setWeatherStatus] = useState("idle");
+  const [weatherStatus, setWeatherStatus] =
+    useState("idle");
   const [weatherError, setWeatherError] = useState("");
 
   const [forecast, setForecast] = useState(null);
-  const [forecastStatus, setForecastStatus] = useState("idle");
-  const [forecastError, setForecastError] = useState("");
+  const [forecastStatus, setForecastStatus] =
+    useState("idle");
+  const [forecastError, setForecastError] =
+    useState("");
 
   const [comparisonWeather, setComparisonWeather] =
     useState(null);
 
-  const [comparisonWeatherStatus, setComparisonWeatherStatus] =
-    useState("idle");
+  const [
+    comparisonWeatherStatus,
+    setComparisonWeatherStatus,
+  ] = useState("idle");
 
-  const [comparisonWeatherError, setComparisonWeatherError] =
-    useState("");
+  const [
+    comparisonWeatherError,
+    setComparisonWeatherError,
+  ] = useState("");
 
   useEffect(() => {
     if (!selectedCity) {
@@ -74,10 +82,11 @@ function App() {
 
     async function loadWeather() {
       try {
-        const currentWeather = await getCurrentWeather(
-          selectedCity.latitude,
-          selectedCity.longitude
-        );
+        const currentWeather =
+          await getCurrentWeather(
+            selectedCity.latitude,
+            selectedCity.longitude
+          );
 
         if (!isActive) {
           return;
@@ -117,10 +126,11 @@ function App() {
 
     async function loadForecast() {
       try {
-        const forecastData = await getWeatherForecast(
-          selectedCity.latitude,
-          selectedCity.longitude
-        );
+        const forecastData =
+          await getWeatherForecast(
+            selectedCity.latitude,
+            selectedCity.longitude
+          );
 
         if (!isActive) {
           return;
@@ -163,10 +173,11 @@ function App() {
       setComparisonWeatherError("");
 
       try {
-        const currentWeather = await getCurrentWeather(
-          comparisonCity.latitude,
-          comparisonCity.longitude
-        );
+        const currentWeather =
+          await getCurrentWeather(
+            comparisonCity.latitude,
+            comparisonCity.longitude
+          );
 
         if (!isActive) {
           return;
@@ -197,13 +208,18 @@ function App() {
     };
   }, [comparisonCity]);
 
-  function handlePreferencesChange(updatedPreferences) {
+  function handlePreferencesChange(
+    updatedPreferences
+  ) {
     setPreferences(updatedPreferences);
   }
 
   function handleCitySelect(city) {
-    const isSelectedCity = selectedCity?.id === city.id;
-    const isComparisonCity = comparisonCity?.id === city.id;
+    const isSelectedCity =
+      selectedCity?.id === city.id;
+
+    const isComparisonCity =
+      comparisonCity?.id === city.id;
 
     if (isSelectedCity || isComparisonCity) {
       return;
@@ -290,10 +306,9 @@ function App() {
         )
       : null;
 
-  const comparisonWinner =
-    comparison
-      ? getComparisonWinner(comparison)
-      : null;
+  const comparisonWinner = comparison
+    ? getComparisonWinner(comparison)
+    : null;
 
   const cityDetails = selectedCity
     ? getCityDetails(selectedCity)
@@ -311,10 +326,14 @@ function App() {
 
       <Preferences
         value={preferences}
-        onPreferencesChange={handlePreferencesChange}
+        onPreferencesChange={
+          handlePreferencesChange
+        }
       />
 
-      <CitySearch onCitySelect={handleCitySelect} />
+      <CitySearch
+        onCitySelect={handleCitySelect}
+      />
 
       <SavedCities
         cities={savedCities}
@@ -394,7 +413,8 @@ function App() {
                       </span>
                     </div>
 
-                    {recommendation.reasons.length > 0 && (
+                    {recommendation.reasons.length >
+                      0 && (
                       <div className="recommendation-reasons">
                         <h3>
                           Why it may suit you
@@ -483,6 +503,12 @@ function App() {
 
             {cityDetails && (
               <CityDetails city={cityDetails} />
+            )}
+
+            {weatherStatus === "success" && (
+              <CostOfLiving
+                city={selectedCity}
+              />
             )}
           </div>
         </section>
