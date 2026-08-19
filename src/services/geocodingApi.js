@@ -1,6 +1,36 @@
 const GEOCODING_API_URL =
   "https://geocoding-api.open-meteo.com/v1/search";
 
+function rankCityResults(results, cityName) {
+  const normalizedQuery = cityName
+    .trim()
+    .toLowerCase();
+
+  return [...results].sort((a, b) => {
+    const aExact =
+      a.name?.toLowerCase() === normalizedQuery ? 1 : 0;
+
+    const bExact =
+      b.name?.toLowerCase() === normalizedQuery ? 1 : 0;
+
+    if (aExact !== bExact) {
+      return bExact - aExact;
+    }
+
+    const aCapital = a.feature_code === "PPLC" ? 1 : 0;
+    const bCapital = b.feature_code === "PPLC" ? 1 : 0;
+
+    if (aCapital !== bCapital) {
+      return bCapital - aCapital;
+    }
+
+    const aPopulation = Number(a.population) || 0;
+    const bPopulation = Number(b.population) || 0;
+
+    return bPopulation - aPopulation;
+  });
+}
+
 export async function searchCities(cityName) {
   const trimmedCityName = cityName.trim();
 
@@ -25,5 +55,8 @@ export async function searchCities(cityName) {
 
   const data = await response.json();
 
-  return data.results ?? [];
+  return rankCityResults(
+    data.results ?? [],
+    trimmedCityName
+  );
 }
