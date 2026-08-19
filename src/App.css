@@ -1039,6 +1039,13 @@
   line-height: 1;
 }
 
+.weather-condition {
+  margin-top: var(--space-2);
+  color: var(--color-muted);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
 .weather-details {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

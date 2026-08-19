@@ -1,7 +1,11 @@
+import { getWeatherCondition } from "../services/weatherConditions";
+
 function WeatherCard({ city, weather }) {
   if (!city || !weather) {
     return null;
   }
+
+  const condition = getWeatherCondition(weather.weather_code);
 
   return (
     <article className="weather-card">
@@ -12,6 +16,10 @@ function WeatherCard({ city, weather }) {
           <h2>
             {city.name}, {city.country}
           </h2>
+
+          <p className="weather-condition">
+            {condition}
+          </p>
         </div>
 
         <span className="weather-temperature">
@@ -22,6 +30,7 @@ function WeatherCard({ city, weather }) {
       <div className="weather-details">
         <div className="weather-detail">
           <span>Feels like</span>
+
           <strong>
             {Math.round(weather.apparent_temperature)}°C
           </strong>
@@ -29,6 +38,7 @@ function WeatherCard({ city, weather }) {
 
         <div className="weather-detail">
           <span>Humidity</span>
+
           <strong>
             {weather.relative_humidity_2m}%
           </strong>
@@ -36,6 +46,7 @@ function WeatherCard({ city, weather }) {
 
         <div className="weather-detail">
           <span>Wind</span>
+
           <strong>
             {weather.wind_speed_10m} km/h
           </strong>
