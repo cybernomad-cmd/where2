@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { searchCities } from "../services/geocodingApi";
 
-function CitySearch() {
+function CitySearch({ onCitySelect }) {
   const [query, setQuery] = useState("");
   const [cities, setCities] = useState([]);
   const [status, setStatus] = useState("idle");
@@ -36,6 +36,10 @@ function CitySearch() {
       );
       setStatus("error");
     }
+  }
+
+  function handleCitySelect(city) {
+    onCitySelect(city);
   }
 
   return (
@@ -110,6 +114,7 @@ function CitySearch() {
           {status === "empty" && (
             <div className="search-state">
               <h3>No cities found.</h3>
+
               <p>
                 Try another city name or check your spelling.
               </p>
@@ -119,9 +124,11 @@ function CitySearch() {
           {status === "success" && (
             <div className="city-search-grid">
               {cities.map((city) => (
-                <article
+                <button
+                  type="button"
                   className="search-city-card"
                   key={city.id}
+                  onClick={() => handleCitySelect(city)}
                 >
                   <div className="search-city-card-top">
                     <span className="city-country">
@@ -150,7 +157,11 @@ function CitySearch() {
                       Longitude: {city.longitude.toFixed(4)}
                     </span>
                   </div>
-                </article>
+
+                  <span className="search-city-action">
+                    View weather →
+                  </span>
+                </button>
               ))}
             </div>
           )}
