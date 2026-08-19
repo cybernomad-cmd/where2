@@ -23,6 +23,7 @@ function Hero() {
             ".hero-heading",
             ".hero-description",
             ".hero-buttons",
+            ".hero-features",
             ".hero-city-card",
           ],
           {
@@ -41,30 +42,21 @@ function Hero() {
 
       timeline
         .from(".hero-eyebrow", {
-          y: 24,
+          y: 25,
           opacity: 0,
-          duration: 0.6,
+          duration: 0.5,
         })
         .from(
           ".hero-heading",
           {
-            y: 40,
+            y: 35,
             opacity: 0,
-            duration: 0.9,
+            duration: 0.8,
           },
-          "-=0.35"
+          "-=0.25"
         )
         .from(
           ".hero-description",
-          {
-            y: 24,
-            opacity: 0,
-            duration: 0.7,
-          },
-          "-=0.45"
-        )
-        .from(
-          ".hero-buttons",
           {
             y: 20,
             opacity: 0,
@@ -73,12 +65,30 @@ function Hero() {
           "-=0.35"
         )
         .from(
+          ".hero-buttons",
+          {
+            y: 15,
+            opacity: 0,
+            duration: 0.5,
+          },
+          "-=0.25"
+        )
+        .from(
+          ".hero-features",
+          {
+            y: 15,
+            opacity: 0,
+            duration: 0.5,
+          },
+          "-=0.25"
+        )
+        .from(
           ".hero-city-card",
           {
-            y: 40,
+            y: 25,
             opacity: 0,
             scale: 0.96,
-            duration: 0.9,
+            duration: 0.7,
           },
           "-=0.35"
         );
@@ -90,52 +100,71 @@ function Hero() {
   }, []);
 
   return (
-    <section ref={heroRef} className="hero-section">
-      <div className="page-container hero-container">
-        <div className="hero-content">
+    <section
+      ref={heroRef}
+      className="hero-section"
+      aria-labelledby="hero-title"
+    >
+      <div className="hero-background" aria-hidden="true" />
+
+      <div className="hero-overlay" aria-hidden="true" />
+
+      <div className="hero-container">
+        <div className="hero-main-content">
           <p className="eyebrow hero-eyebrow">
             Find the place that fits your life
           </p>
 
-          <h1 className="display-heading hero-heading">
-            Where could you live that fits your life?
+          <h1 id="hero-title" className="hero-heading">
+            Where could you
+            <br />
+            live better?
           </h1>
 
-          <p className="lead-text hero-description">
-            WHERE2 helps you discover and compare cities based
-            on your lifestyle, budget, career goals, climate
-            preferences, and personal priorities.
+          <p className="hero-description">
+            Find the place that fits your life, your income,
+            your priorities, and the way you want to live.
           </p>
 
-          <div className="button-group hero-buttons">
+          <div className="hero-buttons">
             <button
               type="button"
               className="button button-primary"
             >
-              Discover your cities
+              Discover My Cities →
             </button>
 
             <button
               type="button"
               className="button button-secondary"
             >
-              Explore how it works
+              Explore How It Works
             </button>
+          </div>
+
+          <div className="hero-features">
+            <span>☀ Live Weather</span>
+            <span>● Cost of Living</span>
+            <span>♡ Lifestyle</span>
+            <span>✓ Safety</span>
+            <span>▣ Career</span>
           </div>
         </div>
 
-        <div className="hero-visual" aria-hidden="true">
-          <div className="hero-city-card">
-            <span className="hero-city-label">
-              YOUR NEXT CITY
-            </span>
+        <div className="hero-city-card">
+          <span className="hero-city-label">
+            YOUR NEXT CITY
+          </span>
 
-            <strong>Could be anywhere.</strong>
+          <strong>
+            Could be
+            <br />
+            anywhere.
+          </strong>
 
-            <div className="hero-location">
-              <span>◉</span>
-              <span>Worldwide</span>
-            </div>
+          <div className="hero-location">
+            <span className="hero-location-dot">●</span>
+            <span>Worldwide</span>
           </div>
         </div>
       </div>

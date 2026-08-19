@@ -1,211 +1,124 @@
-import { useEffect, useState } from "react";
-import { getCostOfLiving } from "../services/costOfLivingService";
-
-function CostOfLiving({ city }) {
-  const [costOfLiving, setCostOfLiving] = useState(null);
-  const [status, setStatus] = useState("idle");
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    if (!city?.name) {
-      return;
-    }
-
-    let isActive = true;
-
-    async function loadCostOfLiving() {
-      setStatus("loading");
-      setError("");
-
-      try {
-        const data = await getCostOfLiving(city);
-
-        if (!isActive) {
-          return;
-        }
-
-        setCostOfLiving(data);
-        setStatus("success");
-      } catch (requestError) {
-        if (!isActive) {
-          return;
-        }
-
-        setCostOfLiving(null);
-        setError(
-          requestError.message ||
-            "Unable to load cost-of-living information."
-        );
-        setStatus("error");
-      }
-    }
-
-    loadCostOfLiving();
-
-    return () => {
-      isActive = false;
-    };
-  }, [city]);
-
-  function formatCurrency(value) {
-    if (!Number.isFinite(Number(value))) {
-      return "Not available";
-    }
-
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      maximumFractionDigits: 0,
-    }).format(value);
+function CostOfLiving({ data, cityName }) {
+  if (!data) {
+    return (
+      <section className="cost-of-living-section">
+        <div className="cost-of-living-container">
+          <p className="eyebrow">Cost of living</p>
+          <h2>Cost of living information unavailable</h2>
+          <p className="cost-of-living-intro">
+            We couldn't load cost of living information for this location.
+          </p>
+        </div>
+      </section>
+    );
   }
 
-  function formatIndex(value) {
-    if (!Number.isFinite(Number(value))) {
-      return "Not available";
-    }
+  const {
+    estimated_monthly_cost,
+    cost_index,
+    region,
+    groceries,
+    rent,
+    utilities,
+    transport,
+  } = data;
 
-    return Number(value).toFixed(0);
-  }
+  const locationName = cityName || data.city || "this city";
 
-  if (!city) {
-    return null;
-  }
+  const primaryMetrics = [
+    {
+      label: "Estimated monthly cost",
+      value: estimated_monthly_cost,
+      modifier: "primary",
+    },
+    {
+      label: "Cost index",
+      value: cost_index,
+    },
+    {
+      label: "Region",
+      value: region,
+    },
+  ];
+
+  const breakdownMetrics = [
+    {
+      label: "Groceries",
+      value: groceries,
+      description: "Grocery cost index",
+    },
+    {
+      label: "Rent",
+      value: rent,
+      description: "Rent cost index",
+    },
+    {
+      label: "Utilities",
+      value: utilities,
+      description: "Utilities cost index",
+    },
+    {
+      label: "Transport",
+      value: transport,
+      description: "Transport cost index",
+    },
+  ];
 
   return (
-    <section
-      className="cost-of-living"
-      id="cost-of-living"
-      aria-label={`Cost of living in ${city.name}`}
-    >
-      <div className="page-container">
-        <div className="cost-of-living-heading">
+    <section className="cost-of-living-section">
+      <div className="cost-of-living-container">
+        <div className="cost-of-living-header">
           <p className="eyebrow">Cost of living</p>
 
-          <h2>
-            What does life cost in {city.name}?
-          </h2>
+          <h2>What does life cost in {locationName}?</h2>
 
-          <p>
-            Explore estimated monthly costs and
-            category indexes to better understand the
-            affordability of this location.
+          <p className="cost-of-living-intro">
+            Explore estimated monthly costs and category indexes to better
+            understand the affordability of this location.
           </p>
         </div>
 
-        {status === "loading" && (
-          <div className="search-state">
-            <p>
-              Loading cost-of-living information for{" "}
-              {city.name}...
-            </p>
-          </div>
-        )}
+        <div className="cost-primary-grid">
+          {primaryMetrics.map((metric) => (
+            <article
+              key={metric.label}
+              className={`cost-primary-card ${
+                metric.modifier ? `cost-primary-card-${metric.modifier}` : ""
+              }`}
+            >
+              <span className="cost-card-label">{metric.label}</span>
 
-        {status === "error" && (
-          <div
-            className="search-state search-state-error"
-            role="alert"
-          >
-            <h3>
-              We couldn't load cost-of-living data.
-            </h3>
+              <strong className="cost-primary-value">
+                {metric.value}
+              </strong>
+            </article>
+          ))}
+        </div>
 
-            <p>{error}</p>
-          </div>
-        )}
+        <div className="cost-breakdown-header">
+          <p className="eyebrow">Cost breakdown</p>
+          <h3>Where your money goes</h3>
+        </div>
 
-        {status === "success" && costOfLiving && (
-          <div className="cost-of-living-content">
-            <div className="cost-of-living-summary">
-              <div>
-                <span>Estimated monthly cost</span>
+        <div className="cost-breakdown-grid">
+          {breakdownMetrics.map((metric) => (
+            <article className="cost-breakdown-card" key={metric.label}>
+              <div className="cost-breakdown-top">
+                <span className="cost-card-label">{metric.label}</span>
 
-                <strong>
-                  {formatCurrency(
-                    costOfLiving.monthlyEstimateUsd
-                  )}
-                </strong>
+                <span className="cost-card-icon" aria-hidden="true">
+                  +
+                </span>
               </div>
 
-              <div>
-                <span>Cost index</span>
+              <strong className="cost-breakdown-value">
+                {metric.value}
+              </strong>
 
-                <strong>
-                  {formatIndex(
-                    costOfLiving.costIndex
-                  )}
-                </strong>
-              </div>
-
-              <div>
-                <span>Region</span>
-
-                <strong>
-                  {costOfLiving.region ||
-                    "Not available"}
-                </strong>
-              </div>
-            </div>
-
-            <div className="cost-of-living-grid">
-              <article className="cost-of-living-card">
-                <span>Groceries</span>
-
-                <strong>
-                  {formatIndex(
-                    costOfLiving.groceryIndex
-                  )}
-                </strong>
-
-                <p>
-                  Grocery cost index
-                </p>
-              </article>
-
-              <article className="cost-of-living-card">
-                <span>Rent</span>
-
-                <strong>
-                  {formatIndex(
-                    costOfLiving.rentIndex
-                  )}
-                </strong>
-
-                <p>
-                  Rent cost index
-                </p>
-              </article>
-
-              <article className="cost-of-living-card">
-                <span>Utilities</span>
-
-                <strong>
-                  {formatIndex(
-                    costOfLiving.utilitiesIndex
-                  )}
-                </strong>
-
-                <p>
-                  Utilities cost index
-                </p>
-              </article>
-
-              <article className="cost-of-living-card">
-                <span>Transport</span>
-
-                <strong>
-                  {formatIndex(
-                    costOfLiving.transportIndex
-                  )}
-                </strong>
-
-                <p>
-                  Transport cost index
-                </p>
-              </article>
-            </div>
-          </div>
-        )}
+              <p>{metric.description}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
