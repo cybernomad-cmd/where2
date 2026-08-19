@@ -4,12 +4,14 @@ import Hero from "./components/Hero";
 import HowItWorks from "./components/HowItWorks";
 import CityPreview from "./components/CityPreview";
 import FinalCTA from "./components/FinalCTA";
+import CitySearch from "./components/CitySearch";
 
 function App() {
   return (
     <main className="design-system">
       <Nav />
       <Hero />
+      <CitySearch />
       <HowItWorks />
       <CityPreview />
       <FinalCTA />
