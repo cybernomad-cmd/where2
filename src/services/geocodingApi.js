@@ -31,6 +31,21 @@ function rankCityResults(results, cityName) {
   });
 }
 
+function filterCityResults(results, cityName) {
+  const normalizedQuery = cityName
+    .trim()
+    .toLowerCase();
+
+  return results.filter((city) => {
+    const cityNameValue = city.name?.toLowerCase() || "";
+
+    return (
+      cityNameValue === normalizedQuery ||
+      cityNameValue.includes(normalizedQuery)
+    );
+  });
+}
+
 export async function searchCities(cityName) {
   const trimmedCityName = cityName.trim();
 
@@ -55,8 +70,14 @@ export async function searchCities(cityName) {
 
   const data = await response.json();
 
+  const results = data.results ?? [];
+  const filteredResults = filterCityResults(
+    results,
+    trimmedCityName
+  );
+
   return rankCityResults(
-    data.results ?? [],
+    filteredResults,
     trimmedCityName
   );
 }
