@@ -16,19 +16,20 @@ function Hero() {
         "(prefers-reduced-motion: reduce)"
       ).matches;
 
-      const animatedElements = [
-        ".hero-eyebrow",
-        ".hero-heading",
-        ".hero-description",
-        ".hero-buttons",
-        ".hero-feature-pills",
-        ".hero-city-card",
-      ];
-
       if (prefersReducedMotion) {
-        gsap.set(animatedElements, {
-          clearProps: "all",
-        });
+        gsap.set(
+          [
+            ".hero-eyebrow",
+            ".hero-heading",
+            ".hero-description",
+            ".hero-buttons",
+            ".hero-features",
+            ".hero-city-card",
+          ],
+          {
+            clearProps: "all",
+          }
+        );
 
         return;
       }
@@ -41,30 +42,21 @@ function Hero() {
 
       timeline
         .from(".hero-eyebrow", {
-          y: 24,
+          y: 25,
           opacity: 0,
-          duration: 0.6,
+          duration: 0.5,
         })
         .from(
           ".hero-heading",
           {
-            y: 40,
+            y: 35,
             opacity: 0,
-            duration: 0.9,
+            duration: 0.8,
           },
-          "-=0.35"
+          "-=0.25"
         )
         .from(
           ".hero-description",
-          {
-            y: 24,
-            opacity: 0,
-            duration: 0.7,
-          },
-          "-=0.45"
-        )
-        .from(
-          ".hero-buttons",
           {
             y: 20,
             opacity: 0,
@@ -73,23 +65,32 @@ function Hero() {
           "-=0.35"
         )
         .from(
-          ".hero-feature-pills",
+          ".hero-buttons",
           {
-            y: 18,
+            y: 15,
             opacity: 0,
             duration: 0.5,
           },
-          "-=0.3"
+          "-=0.25"
+        )
+        .from(
+          ".hero-features",
+          {
+            y: 15,
+            opacity: 0,
+            duration: 0.5,
+          },
+          "-=0.25"
         )
         .from(
           ".hero-city-card",
           {
-            y: 30,
+            y: 25,
             opacity: 0,
-            scale: 0.97,
-            duration: 0.8,
+            scale: 0.96,
+            duration: 0.7,
           },
-          "-=0.25"
+          "-=0.35"
         );
     }, hero);
 
@@ -98,92 +99,37 @@ function Hero() {
     };
   }, []);
 
-  const features = [
-    {
-      icon: "☀",
-      label: "Live Weather",
-    },
-    {
-      icon: "◉",
-      label: "Cost of Living",
-    },
-    {
-      icon: "♡",
-      label: "Lifestyle",
-    },
-    {
-      icon: "✓",
-      label: "Safety",
-    },
-    {
-      icon: "▣",
-      label: "Career",
-    },
-  ];
-
-  function handleDiscoverCities() {
-    document
-      .getElementById("city-search")
-      ?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-  }
-
-  function handleExploreHowItWorks() {
-    document
-      .getElementById("how-it-works")
-      ?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-  }
-
   return (
     <section
       ref={heroRef}
       className="hero-section"
-      aria-labelledby="hero-heading"
+      aria-labelledby="hero-title"
     >
-      {/* Hero background image */}
-      <div className="hero-background" aria-hidden="true">
-        <img
-          src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=2200&q=85"
-          alt=""
-        />
-      </div>
+      <div className="hero-background" aria-hidden="true" />
 
-      {/* Dark overlay for text readability */}
-      <div
-        className="hero-overlay"
-        aria-hidden="true"
-      />
+      <div className="hero-overlay" aria-hidden="true" />
 
-      <div className="page-container hero-container">
-        <div className="hero-content">
+      <div className="hero-container">
+        <div className="hero-main-content">
           <p className="eyebrow hero-eyebrow">
             Find the place that fits your life
           </p>
 
-          <h1
-            id="hero-heading"
-            className="display-heading hero-heading"
-          >
+          <h1 id="hero-title" className="hero-heading">
             Where could you
             <br />
             live better?
           </h1>
 
-          <p className="lead-text hero-description">
+          <p className="hero-description">
             Find the place that fits your life, your income,
             your priorities, and the way you want to live.
           </p>
 
-          <div className="button-group hero-buttons">
+          <div className="hero-buttons">
             <button
               type="button"
               className="button button-primary"
-              onClick={handleDiscoverCities}
             >
               Discover My Cities →
             </button>
@@ -191,53 +137,34 @@ function Hero() {
             <button
               type="button"
               className="button button-secondary"
-              onClick={handleExploreHowItWorks}
             >
               Explore How It Works
             </button>
           </div>
 
-          <div
-            className="hero-feature-pills"
-            aria-label="WHERE2 features"
-          >
-            {features.map((feature) => (
-              <span
-                className="hero-feature-pill"
-                key={feature.label}
-              >
-                <span
-                  className="hero-feature-icon"
-                  aria-hidden="true"
-                >
-                  {feature.icon}
-                </span>
-
-                {feature.label}
-              </span>
-            ))}
+          <div className="hero-features">
+            <span>☀ Live Weather</span>
+            <span>● Cost of Living</span>
+            <span>♡ Lifestyle</span>
+            <span>✓ Safety</span>
+            <span>▣ Career</span>
           </div>
         </div>
 
-        <div
-          className="hero-visual"
-          aria-hidden="true"
-        >
-          <div className="hero-city-card">
-            <span className="hero-city-label">
-              YOUR NEXT CITY
-            </span>
+        <div className="hero-city-card">
+          <span className="hero-city-label">
+            YOUR NEXT CITY
+          </span>
 
-            <strong>
-              Could be
-              <br />
-              anywhere.
-            </strong>
+          <strong>
+            Could be
+            <br />
+            anywhere.
+          </strong>
 
-            <div className="hero-location">
-              <span>●</span>
-              <span>Worldwide</span>
-            </div>
+          <div className="hero-location">
+            <span className="hero-location-dot">●</span>
+            <span>Worldwide</span>
           </div>
         </div>
       </div>
