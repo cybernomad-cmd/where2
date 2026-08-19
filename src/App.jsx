@@ -7,13 +7,20 @@ import CityPreview from "./components/CityPreview";
 import FinalCTA from "./components/FinalCTA";
 import CitySearch from "./components/CitySearch";
 import WeatherCard from "./components/WeatherCard";
+import WeatherForecast from "./components/WeatherForecast";
 import { getCurrentWeather } from "./services/weatherApi";
+import { getWeatherForecast } from "./services/forecastApi";
 
 function App() {
   const [selectedCity, setSelectedCity] = useState(null);
+
   const [weather, setWeather] = useState(null);
   const [weatherStatus, setWeatherStatus] = useState("idle");
   const [weatherError, setWeatherError] = useState("");
+
+  const [forecast, setForecast] = useState(null);
+  const [forecastStatus, setForecastStatus] = useState("idle");
+  const [forecastError, setForecastError] = useState("");
 
   useEffect(() => {
     if (!selectedCity) {
@@ -56,18 +63,64 @@ function App() {
     };
   }, [selectedCity]);
 
-function handleCitySelect(city) {
-  const isSameCity = selectedCity?.id === city.id;
+  useEffect(() => {
+    if (!selectedCity) {
+      return;
+    }
 
-  if (isSameCity && weatherStatus !== "error") {
-    return;
+    let isActive = true;
+
+    async function loadForecast() {
+      try {
+        const forecastData = await getWeatherForecast(
+          selectedCity.latitude,
+          selectedCity.longitude
+        );
+
+        if (!isActive) {
+          return;
+        }
+
+        setForecast(forecastData);
+        setForecastStatus("success");
+      } catch (requestError) {
+        if (!isActive) {
+          return;
+        }
+
+        setForecast(null);
+        setForecastError(
+          requestError.message ||
+            "Unable to retrieve the weather forecast right now."
+        );
+        setForecastStatus("error");
+      }
+    }
+
+    loadForecast();
+
+    return () => {
+      isActive = false;
+    };
+  }, [selectedCity]);
+
+  function handleCitySelect(city) {
+    const isSameCity = selectedCity?.id === city.id;
+
+    if (isSameCity && weatherStatus !== "error") {
+      return;
+    }
+
+    setSelectedCity(city);
+
+    setWeather(null);
+    setWeatherError("");
+    setWeatherStatus("loading");
+
+    setForecast(null);
+    setForecastError("");
+    setForecastStatus("loading");
   }
-
-  setSelectedCity(city);
-  setWeather(null);
-  setWeatherError("");
-  setWeatherStatus("loading");
-}
 
   return (
     <main className="design-system">
@@ -105,6 +158,33 @@ function handleCitySelect(city) {
               <WeatherCard
                 city={selectedCity}
                 weather={weather}
+              />
+            )}
+
+            {forecastStatus === "loading" && (
+              <div className="search-state">
+                <p>
+                  Loading the 7-day forecast for{" "}
+                  {selectedCity.name}...
+                </p>
+              </div>
+            )}
+
+            {forecastStatus === "error" && (
+              <div
+                className="search-state search-state-error"
+                role="alert"
+              >
+                <h3>We couldn't load the forecast.</h3>
+
+                <p>{forecastError}</p>
+              </div>
+            )}
+
+            {forecastStatus === "success" && (
+              <WeatherForecast
+                city={selectedCity}
+                forecast={forecast}
               />
             )}
           </div>
