@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const PREFERENCE_OPTIONS = {
   climate: [
     "Warm",
@@ -19,57 +17,50 @@ const PREFERENCE_OPTIONS = {
   ],
 };
 
-function Preferences({ onPreferencesChange }) {
-  const [preferences, setPreferences] = useState({
-    climate: "",
-    lifestyle: "",
-    priorities: [],
-  });
+function Preferences({
+  value,
+  onPreferencesChange,
+}) {
+  const preferences = value;
 
   function handleClimateChange(event) {
     const climate = event.target.value;
 
-    const updatedPreferences = {
+    onPreferencesChange({
       ...preferences,
       climate,
-    };
-
-    setPreferences(updatedPreferences);
-    onPreferencesChange(updatedPreferences);
+    });
   }
 
   function handleLifestyleChange(event) {
     const lifestyle = event.target.value;
 
-    const updatedPreferences = {
+    onPreferencesChange({
       ...preferences,
       lifestyle,
-    };
-
-    setPreferences(updatedPreferences);
-    onPreferencesChange(updatedPreferences);
+    });
   }
 
   function handlePriorityChange(event) {
-    const { value, checked } = event.target;
+    const { value: priority, checked } = event.target;
 
-    const updatedPriorities = checked
-      ? [...preferences.priorities, value]
+    const priorities = checked
+      ? [...preferences.priorities, priority]
       : preferences.priorities.filter(
-          (priority) => priority !== value
+          (item) => item !== priority
         );
 
-    const updatedPreferences = {
+    onPreferencesChange({
       ...preferences,
-      priorities: updatedPriorities,
-    };
-
-    setPreferences(updatedPreferences);
-    onPreferencesChange(updatedPreferences);
+      priorities,
+    });
   }
 
   return (
-    <section className="preferences-section" id="preferences">
+    <section
+      className="preferences-section"
+      id="preferences"
+    >
       <div className="page-container">
         <div className="preferences-heading">
           <p className="eyebrow">Make it personal</p>
@@ -87,7 +78,9 @@ function Preferences({ onPreferencesChange }) {
 
         <div className="preferences-form">
           <fieldset className="preference-group">
-            <legend>What kind of climate do you prefer?</legend>
+            <legend>
+              What kind of climate do you prefer?
+            </legend>
 
             <div className="preference-options">
               {PREFERENCE_OPTIONS.climate.map((option) => (
@@ -110,7 +103,9 @@ function Preferences({ onPreferencesChange }) {
           </fieldset>
 
           <fieldset className="preference-group">
-            <legend>What kind of lifestyle suits you?</legend>
+            <legend>
+              What kind of lifestyle suits you?
+            </legend>
 
             <div className="preference-options">
               {PREFERENCE_OPTIONS.lifestyle.map((option) => (
@@ -122,7 +117,9 @@ function Preferences({ onPreferencesChange }) {
                     type="radio"
                     name="lifestyle"
                     value={option}
-                    checked={preferences.lifestyle === option}
+                    checked={
+                      preferences.lifestyle === option
+                    }
                     onChange={handleLifestyleChange}
                   />
 
@@ -133,7 +130,9 @@ function Preferences({ onPreferencesChange }) {
           </fieldset>
 
           <fieldset className="preference-group">
-            <legend>What are your priorities?</legend>
+            <legend>
+              What are your priorities?
+            </legend>
 
             <div className="preference-options preference-options-multiple">
               {PREFERENCE_OPTIONS.priorities.map((option) => (

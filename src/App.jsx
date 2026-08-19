@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import HowItWorks from "./components/HowItWorks";
 import CityPreview from "./components/CityPreview";
 import FinalCTA from "./components/FinalCTA";
+import Preferences from "./components/Preferences";
 import CitySearch from "./components/CitySearch";
 import WeatherCard from "./components/WeatherCard";
 import WeatherForecast from "./components/WeatherForecast";
@@ -13,6 +14,12 @@ import { getWeatherForecast } from "./services/forecastApi";
 
 function App() {
   const [selectedCity, setSelectedCity] = useState(null);
+
+  const [preferences, setPreferences] = useState({
+    climate: "",
+    lifestyle: "",
+    priorities: [],
+  });
 
   const [weather, setWeather] = useState(null);
   const [weatherStatus, setWeatherStatus] = useState("idle");
@@ -104,6 +111,10 @@ function App() {
     };
   }, [selectedCity]);
 
+  function handlePreferencesChange(updatedPreferences) {
+    setPreferences(updatedPreferences);
+  }
+
   function handleCitySelect(city) {
     const isSameCity = selectedCity?.id === city.id;
 
@@ -127,6 +138,11 @@ function App() {
       <Nav />
 
       <Hero />
+
+      <Preferences
+        value={preferences}
+        onPreferencesChange={handlePreferencesChange}
+      />
 
       <CitySearch onCitySelect={handleCitySelect} />
 
