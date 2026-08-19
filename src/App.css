@@ -1776,3 +1776,248 @@
     padding: var(--space-5);
   }
 }
+
+/*Saved Cities*/
+
+.saved-cities {
+  padding: 96px 0 112px;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+}
+
+.saved-cities-heading {
+  max-width: 720px;
+  margin-bottom: 40px;
+}
+
+.saved-cities-heading h2 {
+  margin: 8px 0 12px;
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #111827;
+}
+
+.saved-cities-heading p:last-child {
+  margin: 0;
+  max-width: 620px;
+  color: #64748b;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+
+/*Empty State*/
+
+.saved-cities-empty {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 32px;
+  text-align: center;
+  background: #f7f9f8;
+  border: 1px solid #e2e8e5;
+  border-radius: 24px;
+}
+
+.saved-cities-empty h3 {
+  margin: 0 0 12px;
+  color: #111827;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.saved-cities-empty p {
+  margin: 0;
+  max-width: 440px;
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+
+/*Saved City Grid*/
+
+.saved-cities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+
+/*Saved City Card*/
+
+.saved-city-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  padding: 28px;
+  background: #f7f9f8;
+  border: 1px solid #e2e8e5;
+  border-radius: 24px;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.saved-city-card:hover {
+  transform: translateY(-3px);
+  border-color: #b8cfc2;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+}
+
+
+/*Card Header*/
+
+.saved-city-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8e5;
+}
+
+.saved-city-country {
+  margin: 0 0 8px;
+  color: #398d62;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.saved-city-card-header h3 {
+  margin: 0;
+  color: #111827;
+  font-size: 1.65rem;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.saved-city-code {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 10px;
+  border-radius: 50%;
+  background: #3f9466;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+
+/*Location*/
+
+.saved-city-location {
+  padding: 20px 0;
+}
+
+.saved-city-location p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+
+/*Coordinates*/
+
+.saved-city-coordinates {
+  display: grid;
+  gap: 8px;
+  padding: 18px 0;
+  border-top: 1px solid #e2e8e5;
+}
+
+.saved-city-coordinates span {
+  color: #64748b;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+
+/*Actions*/
+
+.saved-city-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.saved-city-actions .button {
+  flex: 1;
+  min-height: 46px;
+}
+
+
+/*Responsive*/
+
+@media (max-width: 1000px) {
+  .saved-cities {
+    padding: 80px 0 96px;
+  }
+
+  .saved-cities-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+@media (max-width: 700px) {
+  .saved-cities {
+    padding: 64px 0 80px;
+  }
+
+  .saved-cities-heading {
+    margin-bottom: 28px;
+  }
+
+  .saved-cities-empty {
+    min-height: 220px;
+    padding: 36px 24px;
+    border-radius: 20px;
+  }
+
+  .saved-cities-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .saved-city-card {
+    min-height: auto;
+    padding: 24px;
+    border-radius: 20px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .saved-cities-heading h2 {
+    font-size: 2.25rem;
+  }
+
+  .saved-city-card-header {
+    gap: 12px;
+  }
+
+  .saved-city-card-header h3 {
+    font-size: 1.4rem;
+  }
+
+  .saved-city-actions {
+    flex-direction: column;
+  }
+
+  .saved-city-actions .button {
+    width: 100%;
+  }
+}
