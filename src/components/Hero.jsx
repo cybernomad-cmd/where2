@@ -16,19 +16,19 @@ function Hero() {
         "(prefers-reduced-motion: reduce)"
       ).matches;
 
+      const animatedElements = [
+        ".hero-eyebrow",
+        ".hero-heading",
+        ".hero-description",
+        ".hero-buttons",
+        ".hero-feature-pills",
+        ".hero-city-card",
+      ];
+
       if (prefersReducedMotion) {
-        gsap.set(
-          [
-            ".hero-eyebrow",
-            ".hero-heading",
-            ".hero-description",
-            ".hero-buttons",
-            ".hero-city-card",
-          ],
-          {
-            clearProps: "all",
-          }
-        );
+        gsap.set(animatedElements, {
+          clearProps: "all",
+        });
 
         return;
       }
@@ -73,14 +73,23 @@ function Hero() {
           "-=0.35"
         )
         .from(
+          ".hero-feature-pills",
+          {
+            y: 18,
+            opacity: 0,
+            duration: 0.5,
+          },
+          "-=0.3"
+        )
+        .from(
           ".hero-city-card",
           {
-            y: 40,
+            y: 30,
             opacity: 0,
-            scale: 0.96,
-            duration: 0.9,
+            scale: 0.97,
+            duration: 0.8,
           },
-          "-=0.35"
+          "-=0.25"
         );
     }, hero);
 
@@ -89,51 +98,144 @@ function Hero() {
     };
   }, []);
 
+  const features = [
+    {
+      icon: "☀",
+      label: "Live Weather",
+    },
+    {
+      icon: "◉",
+      label: "Cost of Living",
+    },
+    {
+      icon: "♡",
+      label: "Lifestyle",
+    },
+    {
+      icon: "✓",
+      label: "Safety",
+    },
+    {
+      icon: "▣",
+      label: "Career",
+    },
+  ];
+
+  function handleDiscoverCities() {
+    document
+      .getElementById("city-search")
+      ?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+  }
+
+  function handleExploreHowItWorks() {
+    document
+      .getElementById("how-it-works")
+      ?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+  }
+
   return (
-    <section ref={heroRef} className="hero-section">
+    <section
+      ref={heroRef}
+      className="hero-section"
+      aria-labelledby="hero-heading"
+    >
+      {/* Hero background image */}
+      <div className="hero-background" aria-hidden="true">
+        <img
+          src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=2200&q=85"
+          alt=""
+        />
+      </div>
+
+      {/* Dark overlay for text readability */}
+      <div
+        className="hero-overlay"
+        aria-hidden="true"
+      />
+
       <div className="page-container hero-container">
         <div className="hero-content">
           <p className="eyebrow hero-eyebrow">
             Find the place that fits your life
           </p>
 
-          <h1 className="display-heading hero-heading">
-            Where could you live that fits your life?
+          <h1
+            id="hero-heading"
+            className="display-heading hero-heading"
+          >
+            Where could you
+            <br />
+            live better?
           </h1>
 
           <p className="lead-text hero-description">
-            WHERE2 helps you discover and compare cities based
-            on your lifestyle, budget, career goals, climate
-            preferences, and personal priorities.
+            Find the place that fits your life, your income,
+            your priorities, and the way you want to live.
           </p>
 
           <div className="button-group hero-buttons">
             <button
               type="button"
               className="button button-primary"
+              onClick={handleDiscoverCities}
             >
-              Discover your cities
+              Discover My Cities →
             </button>
 
             <button
               type="button"
               className="button button-secondary"
+              onClick={handleExploreHowItWorks}
             >
-              Explore how it works
+              Explore How It Works
             </button>
+          </div>
+
+          <div
+            className="hero-feature-pills"
+            aria-label="WHERE2 features"
+          >
+            {features.map((feature) => (
+              <span
+                className="hero-feature-pill"
+                key={feature.label}
+              >
+                <span
+                  className="hero-feature-icon"
+                  aria-hidden="true"
+                >
+                  {feature.icon}
+                </span>
+
+                {feature.label}
+              </span>
+            ))}
           </div>
         </div>
 
-        <div className="hero-visual" aria-hidden="true">
+        <div
+          className="hero-visual"
+          aria-hidden="true"
+        >
           <div className="hero-city-card">
             <span className="hero-city-label">
               YOUR NEXT CITY
             </span>
 
-            <strong>Could be anywhere.</strong>
+            <strong>
+              Could be
+              <br />
+              anywhere.
+            </strong>
 
             <div className="hero-location">
-              <span>◉</span>
+              <span>●</span>
               <span>Worldwide</span>
             </div>
           </div>
