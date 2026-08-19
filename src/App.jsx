@@ -3,6 +3,7 @@ import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import HowItWorks from "./components/HowItWorks";
 import CityPreview from "./components/CityPreview";
+import FinalCTA from "./components/FinalCTA";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Hero />
       <HowItWorks />
       <CityPreview />
+      <FinalCTA />
 
       <section className="component-section">
         <div className="page-container">
