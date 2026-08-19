@@ -53,10 +53,12 @@ function CityDetails({ city }) {
           <article className="city-detail-card">
             <span>Country</span>
 
-            <strong>{city.country || "Not available"}</strong>
+            <strong>
+              {city.country || "Not available"}
+            </strong>
 
-            {city.country_code && (
-              <small>{city.country_code}</small>
+            {city.countryCode && (
+              <small>{city.countryCode}</small>
             )}
           </article>
 
@@ -64,14 +66,16 @@ function CityDetails({ city }) {
             <span>Region</span>
 
             <strong>
-              {city.admin1 || "Not available"}
+              {city.region || "Not available"}
             </strong>
           </article>
 
           <article className="city-detail-card">
             <span>Population</span>
 
-            <strong>{formatNumber(population)}</strong>
+            <strong>
+              {formatNumber(population)}
+            </strong>
           </article>
 
           <article className="city-detail-card">

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import HowItWorks from "./components/HowItWorks";
@@ -10,11 +11,16 @@ import CitySearch from "./components/CitySearch";
 import WeatherCard from "./components/WeatherCard";
 import WeatherForecast from "./components/WeatherForecast";
 import CityComparison from "./components/CityComparison";
+import CityDetails from "./components/CityDetails";
+
 import { getCurrentWeather } from "./services/weatherApi";
 import { getWeatherForecast } from "./services/forecastApi";
+import { getCityDetails } from "./services/cityDetailsService";
+
 import {
   calculateRecommendation,
 } from "./services/recommendationService";
+
 import {
   compareCities,
   getComparisonWinner,
@@ -73,10 +79,12 @@ function App() {
         }
 
         setWeather(null);
+
         setWeatherError(
           requestError.message ||
             "Unable to retrieve the weather data right now."
         );
+
         setWeatherStatus("error");
       }
     }
@@ -114,10 +122,12 @@ function App() {
         }
 
         setForecast(null);
+
         setForecastError(
           requestError.message ||
             "Unable to retrieve the weather forecast right now."
         );
+
         setForecastStatus("error");
       }
     }
@@ -158,10 +168,12 @@ function App() {
         }
 
         setComparisonWeather(null);
+
         setComparisonWeatherError(
           requestError.message ||
             "Unable to retrieve comparison weather right now."
         );
+
         setComparisonWeatherStatus("error");
       }
     }
@@ -237,6 +249,10 @@ function App() {
       ? getComparisonWinner(comparison)
       : null;
 
+  const cityDetails = selectedCity
+    ? getCityDetails(selectedCity)
+    : null;
+
   return (
     <main className="design-system">
       <Nav />
@@ -256,7 +272,8 @@ function App() {
             {weatherStatus === "loading" && (
               <div className="search-state">
                 <p>
-                  Loading weather for {selectedCity.name}...
+                  Loading weather for{" "}
+                  {selectedCity.name}...
                 </p>
               </div>
             )}
@@ -307,7 +324,9 @@ function App() {
 
                     {recommendation.reasons.length > 0 && (
                       <div className="recommendation-reasons">
-                        <h3>Why it may suit you</h3>
+                        <h3>
+                          Why it may suit you
+                        </h3>
 
                         <ul>
                           {recommendation.reasons.map(
@@ -338,7 +357,9 @@ function App() {
                 className="search-state search-state-error"
                 role="alert"
               >
-                <h3>We couldn't load the forecast.</h3>
+                <h3>
+                  We couldn't load the forecast.
+                </h3>
 
                 <p>{forecastError}</p>
               </div>
@@ -352,7 +373,8 @@ function App() {
             )}
 
             {comparisonCity &&
-              comparisonWeatherStatus === "loading" && (
+              comparisonWeatherStatus ===
+                "loading" && (
                 <div className="search-state">
                   <p>
                     Loading weather for{" "}
@@ -362,24 +384,33 @@ function App() {
               )}
 
             {comparisonCity &&
-              comparisonWeatherStatus === "error" && (
+              comparisonWeatherStatus ===
+                "error" && (
                 <div
                   className="search-state search-state-error"
                   role="alert"
                 >
                   <h3>
-                    We couldn't load the comparison weather.
+                    We couldn't load the comparison
+                    weather.
                   </h3>
 
-                  <p>{comparisonWeatherError}</p>
+                  <p>
+                    {comparisonWeatherError}
+                  </p>
                 </div>
               )}
 
-            {comparison && comparisonWinner && (
-              <CityComparison
-                comparison={comparison}
-                winner={comparisonWinner}
-              />
+            {comparison &&
+              comparisonWinner && (
+                <CityComparison
+                  comparison={comparison}
+                  winner={comparisonWinner}
+                />
+              )}
+
+            {cityDetails && (
+              <CityDetails city={cityDetails} />
             )}
           </div>
         </section>
@@ -394,9 +425,13 @@ function App() {
       <section className="component-section">
         <div className="page-container">
           <div className="section-heading">
-            <p className="eyebrow">Foundation</p>
+            <p className="eyebrow">
+              Foundation
+            </p>
 
-            <h2>WHERE2 design system</h2>
+            <h2>
+              WHERE2 design system
+            </h2>
           </div>
 
           <div className="component-grid">
@@ -406,8 +441,9 @@ function App() {
               <h3>Primary</h3>
 
               <p>
-                The main WHERE2 brand color used for important
-                actions and highlights.
+                The main WHERE2 brand color used
+                for important actions and
+                highlights.
               </p>
             </article>
 
@@ -417,8 +453,9 @@ function App() {
               <h3>Primary Light</h3>
 
               <p>
-                A soft supporting color for backgrounds,
-                highlights, and selected states.
+                A soft supporting color for
+                backgrounds, highlights, and
+                selected states.
               </p>
             </article>
 
@@ -428,8 +465,9 @@ function App() {
               <h3>Surface</h3>
 
               <p>
-                Used for cards, sections, and subtle
-                separation from the main background.
+                Used for cards, sections, and
+                subtle separation from the main
+                background.
               </p>
             </article>
           </div>
