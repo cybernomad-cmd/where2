@@ -1436,3 +1436,239 @@
     font-size: 1.25rem;
   }
 }
+
+/* City Comparison */
+
+.city-comparison {
+  padding-block: var(--space-16);
+  background: var(--color-background);
+}
+
+.city-comparison-heading {
+  max-width: 760px;
+  margin-bottom: var(--space-8);
+}
+
+.city-comparison-heading h2 {
+  margin-top: var(--space-2);
+  color: var(--color-heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+}
+
+.city-comparison-heading > p:last-child {
+  max-width: 680px;
+  margin-top: var(--space-4);
+  color: var(--color-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Recommendation */
+
+.comparison-winner {
+  margin-bottom: var(--space-8);
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-primary-light);
+  border-radius: var(--radius-lg);
+}
+
+.comparison-winner .eyebrow {
+  margin-bottom: var(--space-2);
+}
+
+.comparison-winner h3 {
+  color: var(--color-heading);
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+/* Comparison grid */
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+/* Comparison cards */
+
+.comparison-card {
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.comparison-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-primary-light);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
+/* Card header */
+
+.comparison-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.comparison-label {
+  margin-bottom: var(--space-2);
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.comparison-card-header h3 {
+  max-width: 420px;
+  color: var(--color-heading);
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+/* Score */
+
+.comparison-score {
+  display: inline-flex;
+  min-width: 52px;
+  min-height: 52px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: var(--color-primary);
+  border-radius: var(--radius-pill);
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+/* Current condition */
+
+.comparison-condition {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-6);
+}
+
+.comparison-condition span {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.comparison-condition strong {
+  color: var(--color-heading);
+  font-size: 2rem;
+  letter-spacing: -0.04em;
+}
+
+/* Weather details */
+
+.comparison-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.comparison-details > div {
+  min-width: 0;
+  padding: var(--space-4);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.comparison-details span,
+.comparison-fit span {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.comparison-details strong {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-heading);
+  font-size: 1rem;
+}
+
+/* Personalized fit */
+
+.comparison-fit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+.comparison-fit strong {
+  color: var(--color-primary);
+  font-size: 0.95rem;
+  text-align: right;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .city-comparison {
+    padding-block: var(--space-12);
+  }
+
+  .comparison-card {
+    padding: var(--space-5);
+  }
+
+  .comparison-card-header {
+    flex-direction: column;
+  }
+
+  .comparison-score {
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  .comparison-condition {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .comparison-details {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-fit {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .comparison-fit strong {
+    text-align: left;
+  }
+}

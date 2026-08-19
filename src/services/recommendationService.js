@@ -14,20 +14,41 @@ const CLIMATE_RANGES = {
 };
 
 const LIFESTYLE_SCORES = {
-  quiet: 1,
-  balanced: 2,
-  vibrant: 3,
+  quiet: {
+    weather: 1,
+  },
+  balanced: {
+    weather: 2,
+  },
+  vibrant: {
+    weather: 3,
+  },
 };
 
 const PRIORITY_WEIGHTS = {
   affordability: 1,
-  "career opportunities": 1,
-  "outdoor activities": 1,
-  "culture and entertainment": 1,
+  career: 1,
+  outdoors: 1,
+  culture: 1,
 };
 
-function normalizePreference(value) {
-  return value.trim().toLowerCase();
+const PRIORITY_KEYS = {
+  Affordability: "affordability",
+  "Career opportunities": "career",
+  "Outdoor activities": "outdoors",
+  "Culture and entertainment": "culture",
+};
+
+function normalizeClimate(climate) {
+  return climate?.toLowerCase();
+}
+
+function normalizeLifestyle(lifestyle) {
+  return lifestyle?.toLowerCase();
+}
+
+function normalizePriority(priority) {
+  return PRIORITY_KEYS[priority];
 }
 
 export function calculateRecommendation(
@@ -42,6 +63,9 @@ export function calculateRecommendation(
     };
   }
 
+  let score = 0;
+  const reasons = [];
+
   const temperature = Number(weather.temperature_2m);
 
   if (!Number.isFinite(temperature)) {
@@ -52,19 +76,10 @@ export function calculateRecommendation(
     };
   }
 
-  let score = 0;
-  const reasons = [];
+  const climate = normalizeClimate(preferences.climate);
 
-  const climatePreference = normalizePreference(
-    preferences.climate || ""
-  );
-
-  const lifestylePreference = normalizePreference(
-    preferences.lifestyle || ""
-  );
-
-  if (climatePreference) {
-    const range = CLIMATE_RANGES[climatePreference];
+  if (climate) {
+    const range = CLIMATE_RANGES[climate];
 
     if (
       range &&
@@ -74,20 +89,24 @@ export function calculateRecommendation(
       score += 3;
 
       reasons.push(
-        `The current temperature fits your ${climatePreference} climate preference.`
+        `The current temperature fits your ${climate} climate preference.`
       );
     }
   }
 
-  if (lifestylePreference) {
+  const lifestyle = normalizeLifestyle(
+    preferences.lifestyle
+  );
+
+  if (lifestyle) {
     const lifestyleScore =
-      LIFESTYLE_SCORES[lifestylePreference];
+      LIFESTYLE_SCORES[lifestyle];
 
     if (lifestyleScore) {
-      score += lifestyleScore;
+      score += lifestyleScore.weather;
 
       reasons.push(
-        `The current conditions are being considered against your ${lifestylePreference} lifestyle preference.`
+        `The current conditions are being considered against your ${lifestyle} lifestyle preference.`
       );
     }
   }
@@ -95,9 +114,9 @@ export function calculateRecommendation(
   if (Array.isArray(preferences.priorities)) {
     preferences.priorities.forEach((priority) => {
       const normalizedPriority =
-        normalizePreference(priority);
+        normalizePriority(priority);
 
-      if (PRIORITY_WEIGHTS[normalizedPriority]) {
+      if (normalizedPriority) {
         score += PRIORITY_WEIGHTS[normalizedPriority];
       }
     });

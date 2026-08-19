@@ -9,14 +9,20 @@ import Preferences from "./components/Preferences";
 import CitySearch from "./components/CitySearch";
 import WeatherCard from "./components/WeatherCard";
 import WeatherForecast from "./components/WeatherForecast";
+import CityComparison from "./components/CityComparison";
 import { getCurrentWeather } from "./services/weatherApi";
 import { getWeatherForecast } from "./services/forecastApi";
 import {
   calculateRecommendation,
 } from "./services/recommendationService";
+import {
+  compareCities,
+  getComparisonWinner,
+} from "./services/comparisonService";
 
 function App() {
   const [selectedCity, setSelectedCity] = useState(null);
+  const [comparisonCity, setComparisonCity] = useState(null);
 
   const [preferences, setPreferences] = useState({
     climate: "",
@@ -31,6 +37,15 @@ function App() {
   const [forecast, setForecast] = useState(null);
   const [forecastStatus, setForecastStatus] = useState("idle");
   const [forecastError, setForecastError] = useState("");
+
+  const [comparisonWeather, setComparisonWeather] =
+    useState(null);
+
+  const [comparisonWeatherStatus, setComparisonWeatherStatus] =
+    useState("idle");
+
+  const [comparisonWeatherError, setComparisonWeatherError] =
+    useState("");
 
   useEffect(() => {
     if (!selectedCity) {
@@ -60,7 +75,7 @@ function App() {
         setWeather(null);
         setWeatherError(
           requestError.message ||
-            "Unable to retrieve weather data right now."
+            "Unable to retrieve the weather data right now."
         );
         setWeatherStatus("error");
       }
@@ -114,32 +129,113 @@ function App() {
     };
   }, [selectedCity]);
 
+  useEffect(() => {
+    if (!comparisonCity) {
+      return;
+    }
+
+    let isActive = true;
+
+    async function loadComparisonWeather() {
+      setComparisonWeatherStatus("loading");
+      setComparisonWeatherError("");
+
+      try {
+        const currentWeather = await getCurrentWeather(
+          comparisonCity.latitude,
+          comparisonCity.longitude
+        );
+
+        if (!isActive) {
+          return;
+        }
+
+        setComparisonWeather(currentWeather);
+        setComparisonWeatherStatus("success");
+      } catch (requestError) {
+        if (!isActive) {
+          return;
+        }
+
+        setComparisonWeather(null);
+        setComparisonWeatherError(
+          requestError.message ||
+            "Unable to retrieve comparison weather right now."
+        );
+        setComparisonWeatherStatus("error");
+      }
+    }
+
+    loadComparisonWeather();
+
+    return () => {
+      isActive = false;
+    };
+  }, [comparisonCity]);
+
   function handlePreferencesChange(updatedPreferences) {
     setPreferences(updatedPreferences);
   }
 
   function handleCitySelect(city) {
-    const isSameCity = selectedCity?.id === city.id;
+    const isSelectedCity = selectedCity?.id === city.id;
+    const isComparisonCity = comparisonCity?.id === city.id;
 
-    if (isSameCity && weatherStatus !== "error") {
+    if (isSelectedCity || isComparisonCity) {
       return;
     }
 
-    setSelectedCity(city);
+    if (!selectedCity) {
+      setSelectedCity(city);
 
-    setWeather(null);
-    setWeatherError("");
-    setWeatherStatus("loading");
+      setWeather(null);
+      setWeatherError("");
+      setWeatherStatus("loading");
 
-    setForecast(null);
-    setForecastError("");
-    setForecastStatus("loading");
+      setForecast(null);
+      setForecastError("");
+      setForecastStatus("loading");
+
+      return;
+    }
+
+    if (!comparisonCity) {
+      setComparisonCity(city);
+
+      setComparisonWeather(null);
+      setComparisonWeatherError("");
+      setComparisonWeatherStatus("loading");
+
+      return;
+    }
+
+    setComparisonCity(city);
+
+    setComparisonWeather(null);
+    setComparisonWeatherError("");
+    setComparisonWeatherStatus("loading");
   }
 
   const recommendation = calculateRecommendation(
     preferences,
     weather
   );
+
+  const comparison =
+    comparisonWeatherStatus === "success"
+      ? compareCities(
+          selectedCity,
+          weather,
+          comparisonCity,
+          comparisonWeather,
+          preferences
+        )
+      : null;
+
+  const comparisonWinner =
+    comparison
+      ? getComparisonWinner(comparison)
+      : null;
 
   return (
     <main className="design-system">
@@ -252,6 +348,37 @@ function App() {
               <WeatherForecast
                 city={selectedCity}
                 forecast={forecast}
+              />
+            )}
+
+            {comparisonCity &&
+              comparisonWeatherStatus === "loading" && (
+                <div className="search-state">
+                  <p>
+                    Loading weather for{" "}
+                    {comparisonCity.name}...
+                  </p>
+                </div>
+              )}
+
+            {comparisonCity &&
+              comparisonWeatherStatus === "error" && (
+                <div
+                  className="search-state search-state-error"
+                  role="alert"
+                >
+                  <h3>
+                    We couldn't load the comparison weather.
+                  </h3>
+
+                  <p>{comparisonWeatherError}</p>
+                </div>
+              )}
+
+            {comparison && comparisonWinner && (
+              <CityComparison
+                comparison={comparison}
+                winner={comparisonWinner}
               />
             )}
           </div>
