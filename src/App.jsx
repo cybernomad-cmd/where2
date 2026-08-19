@@ -12,6 +12,7 @@ import WeatherCard from "./components/WeatherCard";
 import WeatherForecast from "./components/WeatherForecast";
 import CityComparison from "./components/CityComparison";
 import CityDetails from "./components/CityDetails";
+import SavedCities from "./components/SavedCities";
 
 import { getCurrentWeather } from "./services/weatherApi";
 import { getWeatherForecast } from "./services/forecastApi";
@@ -26,9 +27,20 @@ import {
   getComparisonWinner,
 } from "./services/comparisonService";
 
+import {
+  getSavedCities,
+  isCitySaved,
+  toggleSavedCity,
+  removeSavedCity,
+} from "./services/savedCitiesService";
+
 function App() {
   const [selectedCity, setSelectedCity] = useState(null);
   const [comparisonCity, setComparisonCity] = useState(null);
+
+  const [savedCities, setSavedCities] = useState(
+    getSavedCities
+  );
 
   const [preferences, setPreferences] = useState({
     climate: "",
@@ -228,6 +240,40 @@ function App() {
     setComparisonWeatherStatus("loading");
   }
 
+  function handleSaveCity(city) {
+    const updatedCities = toggleSavedCity(city);
+
+    setSavedCities(updatedCities);
+  }
+
+  function handleRemoveCity(cityId) {
+    const updatedCities = removeSavedCity(cityId);
+
+    setSavedCities(updatedCities);
+  }
+
+  function handleSavedCitySelect(city) {
+    setSelectedCity(city);
+    setComparisonCity(null);
+
+    setWeather(null);
+    setWeatherError("");
+    setWeatherStatus("loading");
+
+    setForecast(null);
+    setForecastError("");
+    setForecastStatus("loading");
+
+    setComparisonWeather(null);
+    setComparisonWeatherError("");
+    setComparisonWeatherStatus("idle");
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
   const recommendation = calculateRecommendation(
     preferences,
     weather
@@ -253,6 +299,10 @@ function App() {
     ? getCityDetails(selectedCity)
     : null;
 
+  const selectedCityIsSaved = selectedCity
+    ? isCitySaved(selectedCity.id)
+    : false;
+
   return (
     <main className="design-system">
       <Nav />
@@ -265,6 +315,12 @@ function App() {
       />
 
       <CitySearch onCitySelect={handleCitySelect} />
+
+      <SavedCities
+        cities={savedCities}
+        onRemoveCity={handleRemoveCity}
+        onSelectCity={handleSavedCitySelect}
+      />
 
       {selectedCity && (
         <section className="weather-section">
@@ -292,10 +348,26 @@ function App() {
             )}
 
             {weatherStatus === "success" && (
-              <WeatherCard
-                city={selectedCity}
-                weather={weather}
-              />
+              <>
+                <WeatherCard
+                  city={selectedCity}
+                  weather={weather}
+                />
+
+                <div className="city-save-action">
+                  <button
+                    type="button"
+                    className="button button-primary"
+                    onClick={() =>
+                      handleSaveCity(selectedCity)
+                    }
+                  >
+                    {selectedCityIsSaved
+                      ? "Remove from saved cities"
+                      : "Save this city"}
+                  </button>
+                </div>
+              </>
             )}
 
             {weatherStatus === "success" &&
