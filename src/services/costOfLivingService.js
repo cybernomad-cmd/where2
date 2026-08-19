@@ -1,67 +1,25 @@
 const COST_OF_LIVING_API_URL =
-  "https://getwherenext.com/api/data/city-prices";
+  "https://getwherenext.com/api/data/cost-of-living";
 
-function normalizeCityName(cityName) {
-  return cityName
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, " ");
-}
+function findCountryRecord(records, countryCode) {
+  const normalizedCode = countryCode?.trim().toUpperCase();
 
-function getCityName(item) {
-  return String(
-    item.city ??
-      item.name ??
-      item.city_name ??
-      ""
-  ).trim();
-}
+  if (!normalizedCode) {
+    return null;
+  }
 
-function matchesCity(item, cityName) {
   return (
-    normalizeCityName(getCityName(item)) ===
-    normalizeCityName(cityName)
+    records.find(
+      (record) =>
+        String(record.country_code ?? "").toUpperCase() ===
+        normalizedCode
+    ) ?? null
   );
 }
 
-function normalizePriceItem(item) {
-  return {
-    name:
-      item.item ??
-      item.name ??
-      item.category ??
-      "Unknown item",
-
-    category:
-      item.category ??
-      "Other",
-
-    usd:
-      Number(
-        item.usd ??
-          item.price_usd ??
-          item.price
-      ),
-
-    local:
-      Number(
-        item.local ??
-          item.price_local ??
-          item.local_price
-      ),
-
-    currency:
-      item.currency ??
-      item.currency_code ??
-      null,
-  };
-}
-
-export async function getCostOfLiving(cityName) {
-  const trimmedCityName = cityName.trim();
-
-  if (!trimmedCityName) {
-    throw new Error("Please provide a city name.");
+export async function getCostOfLiving(city) {
+  if (!city?.name) {
+    throw new Error("Please provide a city.");
   }
 
   const response = await fetch(
@@ -74,47 +32,47 @@ export async function getCostOfLiving(cityName) {
     );
   }
 
-  const data = await response.json();
+  const payload = await response.json();
 
-  const records = Array.isArray(data)
-    ? data
-    : Array.isArray(data.data)
-      ? data.data
+  const records = Array.isArray(payload)
+    ? payload
+    : Array.isArray(payload.data)
+      ? payload.data
       : [];
 
-  const cityRecords = records.filter((item) =>
-    matchesCity(item, trimmedCityName)
+  const record = findCountryRecord(
+    records,
+    city.country_code
   );
 
-  if (cityRecords.length === 0) {
+  if (!record) {
     throw new Error(
-      `No cost-of-living data found for ${trimmedCityName}.`
+      `No cost-of-living data found for ${city.name}.`
     );
   }
 
-  const firstRecord = cityRecords[0];
-
-  const prices = cityRecords
-    .map(normalizePriceItem)
-    .filter(
-      (item) =>
-        Number.isFinite(item.usd) ||
-        Number.isFinite(item.local)
-    );
-
   return {
-    city: getCityName(firstRecord),
+    city: city.name,
+    country: record.country,
+    countryCode: record.country_code,
+    region: record.region,
 
-    country:
-      firstRecord.country ??
-      firstRecord.country_name ??
-      null,
+    costIndex: Number(record.cost_index),
 
-    currency:
-      firstRecord.currency ??
-      firstRecord.currency_code ??
-      null,
+    monthlyEstimateUsd: Number(
+      record.monthly_estimate_usd
+    ),
 
-    prices,
+    groceryIndex: Number(record.grocery_index),
+
+    rentIndex: Number(record.rent_index),
+
+    utilitiesIndex: Number(
+      record.utilities_index
+    ),
+
+    transportIndex: Number(
+      record.transport_index
+    ),
   };
 }
