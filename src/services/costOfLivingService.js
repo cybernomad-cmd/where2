@@ -1,78 +1,95 @@
 const COST_OF_LIVING_API_URL =
   "https://getwherenext.com/api/data/cost-of-living";
 
-function findCountryRecord(records, countryCode) {
-  const normalizedCode = countryCode?.trim().toUpperCase();
-
-  if (!normalizedCode) {
-    return null;
-  }
-
-  return (
-    records.find(
-      (record) =>
-        String(record.country_code ?? "").toUpperCase() ===
-        normalizedCode
-    ) ?? null
-  );
-}
-
 export async function getCostOfLiving(city) {
-  if (!city?.name) {
-    throw new Error("Please provide a city.");
-  }
-
-  const response = await fetch(
-    COST_OF_LIVING_API_URL
-  );
-
-  if (!response.ok) {
+  if (!city) {
     throw new Error(
-      "Unable to load cost-of-living data right now."
+      "A city is required to load cost-of-living information."
     );
   }
 
-  const payload = await response.json();
+  try {
+    const response = await fetch(
+      COST_OF_LIVING_API_URL,
+      {
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
 
-  const records = Array.isArray(payload)
-    ? payload
-    : Array.isArray(payload.data)
-      ? payload.data
-      : [];
+    if (!response.ok) {
+      throw new Error(
+        `Cost-of-living service returned HTTP ${response.status}.`
+      );
+    }
 
-  const record = findCountryRecord(
-    records,
-    city.country_code
-  );
+    const payload = await response.json();
 
-  if (!record) {
+    if (
+      !payload ||
+      !Array.isArray(payload.data)
+    ) {
+      throw new Error(
+        "The cost-of-living service returned an unexpected response."
+      );
+    }
+
+    const cityCountryCode =
+      city.country_code?.toUpperCase();
+
+    if (!cityCountryCode) {
+      throw new Error(
+        `No country code is available for ${city.name}.`
+      );
+    }
+
+    const record = payload.data.find(
+      (item) =>
+        item.country_code?.toUpperCase() ===
+        cityCountryCode
+    );
+
+    if (!record) {
+      throw new Error(
+        `No cost-of-living data found for ${city.name}.`
+      );
+    }
+
+    return {
+      city: city.name,
+      country: record.country,
+      country_code: record.country_code,
+      region: record.region,
+
+      estimated_monthly_cost:
+        Number(record.monthly_estimate_usd),
+
+      cost_index:
+        Number(record.cost_index),
+
+      groceries:
+        Number(record.grocery_index),
+
+      rent:
+        Number(record.rent_index),
+
+      utilities:
+        Number(record.utilities_index),
+
+      transport:
+        Number(record.transport_index),
+    };
+  } catch (error) {
+    if (error instanceof Error && error.message) {
+      throw error;
+    }
+
     throw new Error(
-      `No cost-of-living data found for ${city.name}.`
+      "Unable to load cost-of-living data right now.",
+      {
+        cause: error,
+      }
     );
   }
-
-  return {
-    city: city.name,
-    country: record.country,
-    countryCode: record.country_code,
-    region: record.region,
-
-    costIndex: Number(record.cost_index),
-
-    monthlyEstimateUsd: Number(
-      record.monthly_estimate_usd
-    ),
-
-    groceryIndex: Number(record.grocery_index),
-
-    rentIndex: Number(record.rent_index),
-
-    utilitiesIndex: Number(
-      record.utilities_index
-    ),
-
-    transportIndex: Number(
-      record.transport_index
-    ),
-  };
 }
