@@ -1,6 +1,18 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import gsap from "gsap";
-import { ArrowRight, MapPin } from "lucide-react";
+import {
+  ArrowRight,
+  LoaderCircle,
+  MapPin,
+  Search,
+  X,
+} from "lucide-react";
+
 import { searchCities } from "../services/geocodingApi";
 
 function CitySearch({ onCitySelect }) {
@@ -10,29 +22,37 @@ function CitySearch({ onCitySelect }) {
   const [error, setError] = useState("");
 
   const resultsRef = useRef(null);
+  const inputRef = useRef(null);
+  const requestIdRef = useRef(0);
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    const trimmedQuery = query.trim();
+  async function performSearch(searchQuery) {
+    const trimmedQuery = searchQuery.trim();
 
     if (!trimmedQuery) {
-      setCities([]);
-      setError("Please enter a city name.");
-      setStatus("error");
       return;
     }
 
+    const requestId = ++requestIdRef.current;
+
     setStatus("loading");
     setError("");
-    setCities([]);
 
     try {
       const results = await searchCities(trimmedQuery);
 
+      if (requestId !== requestIdRef.current) {
+        return;
+      }
+
       setCities(results);
-      setStatus(results.length > 0 ? "success" : "empty");
+      setStatus(
+        results.length > 0 ? "success" : "empty"
+      );
     } catch (requestError) {
+      if (requestId !== requestIdRef.current) {
+        return;
+      }
+
       setCities([]);
       setError(
         requestError.message ||
@@ -40,6 +60,40 @@ function CitySearch({ onCitySelect }) {
       );
       setStatus("error");
     }
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    performSearch(query);
+  }
+
+  function handleInputChange(event) {
+    const nextQuery = event.target.value;
+
+    setQuery(nextQuery);
+
+    if (!nextQuery.trim()) {
+      requestIdRef.current += 1;
+      setCities([]);
+      setError("");
+      setStatus("idle");
+      return;
+    }
+
+    setStatus("idle");
+    setError("");
+  }
+
+  function handleClear() {
+    requestIdRef.current += 1;
+
+    setQuery("");
+    setCities([]);
+    setError("");
+    setStatus("idle");
+
+    inputRef.current?.focus();
   }
 
   function handleCitySelect(city) {
@@ -54,6 +108,22 @@ function CitySearch({ onCitySelect }) {
         });
     }, 120);
   }
+
+  useEffect(() => {
+    const trimmedQuery = query.trim();
+
+    if (!trimmedQuery) {
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      performSearch(trimmedQuery);
+    }, 500);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [query]);
 
   useLayoutEffect(() => {
     if (!resultsRef.current || cities.length === 0) {
@@ -72,14 +142,14 @@ function CitySearch({ onCitySelect }) {
       gsap.fromTo(
         ".search-city-card",
         {
-          y: 28,
+          y: 24,
           opacity: 0,
         },
         {
           y: 0,
           opacity: 1,
-          duration: 0.65,
-          stagger: 0.08,
+          duration: 0.55,
+          stagger: 0.07,
           ease: "power3.out",
         }
       );
@@ -91,10 +161,15 @@ function CitySearch({ onCitySelect }) {
   }, [cities]);
 
   return (
-    <section className="city-search" id="city-search">
+    <section
+      className="city-search"
+      id="city-search"
+    >
       <div className="page-container">
         <div className="city-search-heading">
-          <p className="eyebrow">Discover your possibilities</p>
+          <p className="eyebrow">
+            Discover your possibilities
+          </p>
 
           <h2 className="section-title">
             Where could you live?
@@ -110,33 +185,89 @@ function CitySearch({ onCitySelect }) {
         <form
           className="city-search-form"
           onSubmit={handleSubmit}
+          role="search"
         >
           <label htmlFor="city-search-input">
             Search for a city
           </label>
 
           <div className="city-search-input-group">
-            <input
-              id="city-search-input"
-              type="search"
-              value={query}
-              onChange={(event) =>
-                setQuery(event.target.value)
-              }
-              placeholder="Try Nairobi, Lisbon, or Tokyo"
-              autoComplete="off"
-            />
+            <div className="city-search-input-wrapper">
+              <Search
+                className="city-search-input-icon"
+                size={20}
+                strokeWidth={1.8}
+                aria-hidden="true"
+              />
+
+              <input
+                ref={inputRef}
+                id="city-search-input"
+                type="search"
+                value={query}
+                onChange={handleInputChange}
+                placeholder="Try Nairobi, Lisbon, or Tokyo"
+                autoComplete="off"
+                spellCheck="false"
+                aria-describedby="city-search-help"
+                aria-busy={status === "loading"}
+              />
+
+              {query && (
+                <button
+                  type="button"
+                  className="city-search-clear"
+                  onClick={handleClear}
+                  aria-label="Clear city search"
+                >
+                  <X
+                    size={18}
+                    strokeWidth={2}
+                  />
+                </button>
+              )}
+            </div>
 
             <button
               type="submit"
-              className="button button-primary"
-              disabled={status === "loading"}
+              className="button button-primary city-search-submit"
+              disabled={
+                status === "loading" ||
+                !query.trim()
+              }
             >
-              {status === "loading"
-                ? "Searching..."
-                : "Search cities"}
+              {status === "loading" ? (
+                <>
+                  <LoaderCircle
+                    className="city-search-spinner"
+                    size={18}
+                    strokeWidth={2}
+                    aria-hidden="true"
+                  />
+
+                  <span>Searching...</span>
+                </>
+              ) : (
+                <>
+                  <span>Search cities</span>
+
+                  <ArrowRight
+                    size={17}
+                    strokeWidth={2}
+                    aria-hidden="true"
+                  />
+                </>
+              )}
             </button>
           </div>
+
+          <p
+            id="city-search-help"
+            className="city-search-help"
+          >
+            Start typing to search automatically, or press
+            Enter to search.
+          </p>
         </form>
 
         <div
@@ -147,7 +278,15 @@ function CitySearch({ onCitySelect }) {
           {status === "loading" && (
             <div className="search-state search-state-loading">
               <div className="loading-pulse" />
-              <p>Finding cities...</p>
+
+              <div>
+                <strong>Finding cities...</strong>
+
+                <p>
+                  Searching locations that match "
+                  {query.trim()}"
+                </p>
+              </div>
             </div>
           )}
 
@@ -156,18 +295,62 @@ function CitySearch({ onCitySelect }) {
               className="search-state search-state-error"
               role="alert"
             >
-              <h3>We couldn't complete that search.</h3>
+              <h3>
+                We couldn't complete that search.
+              </h3>
+
               <p>{error}</p>
+
+              <button
+                type="button"
+                className="button button-secondary"
+                onClick={() => performSearch(query)}
+              >
+                Try again
+              </button>
             </div>
           )}
 
           {status === "empty" && (
-            <div className="search-state">
-              <h3>No cities found.</h3>
+            <div className="search-state search-state-empty">
+              <div className="search-empty-icon">
+                <MapPin
+                  size={24}
+                  strokeWidth={1.7}
+                  aria-hidden="true"
+                />
+              </div>
 
-              <p>
-                Try another city name or check your spelling.
-              </p>
+              <div>
+                <h3>No cities found.</h3>
+
+                <p>
+                  Try another city name or check your
+                  spelling.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {status === "success" && (
+            <div className="city-search-results-header">
+              <div>
+                <p className="eyebrow">
+                  Search results
+                </p>
+
+                <h3>
+                  {cities.length}{" "}
+                  {cities.length === 1
+                    ? "city"
+                    : "cities"}{" "}
+                  found
+                </h3>
+              </div>
+
+              <span>
+                Showing matches for "{query.trim()}"
+              </span>
             </div>
           )}
 
@@ -183,13 +366,23 @@ function CitySearch({ onCitySelect }) {
                       {city.country}
                     </span>
 
-                    <span className="city-country-code">
-                      {city.country_code}
-                    </span>
+                    {city.country_code && (
+                      <span className="city-country-code">
+                        {city.country_code}
+                      </span>
+                    )}
                   </div>
 
                   <div className="search-city-location">
-                    <MapPin size={18} strokeWidth={1.8} />
+                    <span
+                      className="search-city-location-icon"
+                      aria-hidden="true"
+                    >
+                      <MapPin
+                        size={19}
+                        strokeWidth={1.8}
+                      />
+                    </span>
 
                     <div>
                       <h3>{city.name}</h3>
@@ -204,27 +397,32 @@ function CitySearch({ onCitySelect }) {
 
                   <div className="search-city-coordinates">
                     <span>
-                      Latitude:{" "}
-                      {city.latitude.toFixed(4)}
+                      <strong>LAT</strong>{" "}
+                      {Number(city.latitude).toFixed(4)}
                     </span>
 
                     <span>
-                      Longitude:{" "}
-                      {city.longitude.toFixed(4)}
+                      <strong>LON</strong>{" "}
+                      {Number(city.longitude).toFixed(4)}
                     </span>
                   </div>
 
                   <button
                     type="button"
                     className="weather-tab"
-                    onClick={() => handleCitySelect(city)}
+                    onClick={() =>
+                      handleCitySelect(city)
+                    }
                     aria-label={`View weather for ${city.name}`}
                   >
-                    <span>View Weather</span>
+                    <span>
+                      Explore {city.name}
+                    </span>
 
                     <ArrowRight
                       size={17}
                       strokeWidth={2}
+                      aria-hidden="true"
                     />
                   </button>
                 </article>
