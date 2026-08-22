@@ -17,8 +17,11 @@ function rankCityResults(results, cityName) {
       return bExact - aExact;
     }
 
-    const aCapital = a.feature_code === "PPLC" ? 1 : 0;
-    const bCapital = b.feature_code === "PPLC" ? 1 : 0;
+    const aCapital =
+      a.feature_code === "PPLC" ? 1 : 0;
+
+    const bCapital =
+      b.feature_code === "PPLC" ? 1 : 0;
 
     if (aCapital !== bCapital) {
       return bCapital - aCapital;
@@ -37,7 +40,8 @@ function filterCityResults(results, cityName) {
     .toLowerCase();
 
   return results.filter((city) => {
-    const cityNameValue = city.name?.toLowerCase() || "";
+    const cityNameValue =
+      city.name?.toLowerCase() || "";
 
     return (
       cityNameValue === normalizedQuery ||
@@ -56,7 +60,11 @@ export async function searchCities(cityName) {
   const url = new URL(GEOCODING_API_URL);
 
   url.searchParams.set("name", trimmedCityName);
-  url.searchParams.set("count", "10");
+
+  // Increased from 10 to 20 so client-side
+  // filters have a larger result set to work with.
+  url.searchParams.set("count", "20");
+
   url.searchParams.set("language", "en");
   url.searchParams.set("format", "json");
 
@@ -71,6 +79,7 @@ export async function searchCities(cityName) {
   const data = await response.json();
 
   const results = data.results ?? [];
+
   const filteredResults = filterCityResults(
     results,
     trimmedCityName

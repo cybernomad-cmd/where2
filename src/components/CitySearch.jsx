@@ -1,12 +1,17 @@
 import {
   useEffect,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
+
 import gsap from "gsap";
+
 import {
   ArrowRight,
+  ChevronDown,
+  Filter,
   LoaderCircle,
   MapPin,
   Search,
@@ -20,6 +25,18 @@ function CitySearch({ onCitySelect }) {
   const [cities, setCities] = useState([]);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
+
+  const [countryFilter, setCountryFilter] =
+    useState("all");
+
+  const [regionFilter, setRegionFilter] =
+    useState("all");
+
+  const [capitalOnly, setCapitalOnly] =
+    useState(false);
+
+  const [filtersOpen, setFiltersOpen] =
+    useState(false);
 
   const resultsRef = useRef(null);
   const inputRef = useRef(null);
@@ -38,7 +55,8 @@ function CitySearch({ onCitySelect }) {
     setError("");
 
     try {
-      const results = await searchCities(trimmedQuery);
+      const results =
+        await searchCities(trimmedQuery);
 
       if (requestId !== requestIdRef.current) {
         return;
@@ -46,7 +64,9 @@ function CitySearch({ onCitySelect }) {
 
       setCities(results);
       setStatus(
-        results.length > 0 ? "success" : "empty"
+        results.length > 0
+          ? "success"
+          : "empty"
       );
     } catch (requestError) {
       if (requestId !== requestIdRef.current) {
@@ -54,10 +74,12 @@ function CitySearch({ onCitySelect }) {
       }
 
       setCities([]);
+
       setError(
         requestError.message ||
           "Unable to search for cities right now."
       );
+
       setStatus("error");
     }
   }
@@ -75,9 +97,11 @@ function CitySearch({ onCitySelect }) {
 
     if (!nextQuery.trim()) {
       requestIdRef.current += 1;
+
       setCities([]);
       setError("");
       setStatus("idle");
+
       return;
     }
 
@@ -93,7 +117,17 @@ function CitySearch({ onCitySelect }) {
     setError("");
     setStatus("idle");
 
+    setCountryFilter("all");
+    setRegionFilter("all");
+    setCapitalOnly(false);
+
     inputRef.current?.focus();
+  }
+
+  function clearFilters() {
+    setCountryFilter("all");
+    setRegionFilter("all");
+    setCapitalOnly(false);
   }
 
   function handleCitySelect(city) {
@@ -125,14 +159,70 @@ function CitySearch({ onCitySelect }) {
     };
   }, [query]);
 
+  const countries = useMemo(() => {
+    return [...new Set(
+      cities
+        .map((city) => city.country)
+        .filter(Boolean)
+    )].sort((a, b) =>
+      a.localeCompare(b)
+    );
+  }, [cities]);
+
+  const regions = useMemo(() => {
+    return [...new Set(
+      cities
+        .map((city) => city.admin1)
+        .filter(Boolean)
+    )].sort((a, b) =>
+      a.localeCompare(b)
+    );
+  }, [cities]);
+
+  const filteredCities = useMemo(() => {
+    return cities.filter((city) => {
+      const matchesCountry =
+        countryFilter === "all" ||
+        city.country === countryFilter;
+
+      const matchesRegion =
+        regionFilter === "all" ||
+        city.admin1 === regionFilter;
+
+      const matchesCapital =
+        !capitalOnly ||
+        city.feature_code === "PPLC";
+
+      return (
+        matchesCountry &&
+        matchesRegion &&
+        matchesCapital
+      );
+    });
+  }, [
+    cities,
+    countryFilter,
+    regionFilter,
+    capitalOnly,
+  ]);
+
+  const activeFilterCount =
+    (countryFilter !== "all" ? 1 : 0) +
+    (regionFilter !== "all" ? 1 : 0) +
+    (capitalOnly ? 1 : 0);
+
   useLayoutEffect(() => {
-    if (!resultsRef.current || cities.length === 0) {
+    if (
+      !resultsRef.current ||
+      filteredCities.length === 0
+    ) {
       return undefined;
     }
 
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    const prefersReducedMotion =
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
 
     if (prefersReducedMotion) {
       return undefined;
@@ -158,7 +248,7 @@ function CitySearch({ onCitySelect }) {
     return () => {
       context.revert();
     };
-  }, [cities]);
+  }, [filteredCities]);
 
   return (
     <section
@@ -176,9 +266,9 @@ function CitySearch({ onCitySelect }) {
           </h2>
 
           <p className="section-description">
-            Search for a city and start exploring the
-            information that could help you decide if it
-            fits your life.
+            Search for a city and start exploring
+            the information that could help you
+            decide if it fits your life.
           </p>
         </div>
 
@@ -210,7 +300,9 @@ function CitySearch({ onCitySelect }) {
                 autoComplete="off"
                 spellCheck="false"
                 aria-describedby="city-search-help"
-                aria-busy={status === "loading"}
+                aria-busy={
+                  status === "loading"
+                }
               />
 
               {query && (
@@ -245,11 +337,15 @@ function CitySearch({ onCitySelect }) {
                     aria-hidden="true"
                   />
 
-                  <span>Searching...</span>
+                  <span>
+                    Searching...
+                  </span>
                 </>
               ) : (
                 <>
-                  <span>Search cities</span>
+                  <span>
+                    Search cities
+                  </span>
 
                   <ArrowRight
                     size={17}
@@ -265,8 +361,8 @@ function CitySearch({ onCitySelect }) {
             id="city-search-help"
             className="city-search-help"
           >
-            Start typing to search automatically, or press
-            Enter to search.
+            Start typing to search automatically,
+            or press Enter to search.
           </p>
         </form>
 
@@ -280,7 +376,9 @@ function CitySearch({ onCitySelect }) {
               <div className="loading-pulse" />
 
               <div>
-                <strong>Finding cities...</strong>
+                <strong>
+                  Finding cities...
+                </strong>
 
                 <p>
                   Searching locations that match "
@@ -296,7 +394,8 @@ function CitySearch({ onCitySelect }) {
               role="alert"
             >
               <h3>
-                We couldn't complete that search.
+                We couldn't complete that
+                search.
               </h3>
 
               <p>{error}</p>
@@ -304,7 +403,9 @@ function CitySearch({ onCitySelect }) {
               <button
                 type="button"
                 className="button button-secondary"
-                onClick={() => performSearch(query)}
+                onClick={() =>
+                  performSearch(query)
+                }
               >
                 Try again
               </button>
@@ -322,112 +423,328 @@ function CitySearch({ onCitySelect }) {
               </div>
 
               <div>
-                <h3>No cities found.</h3>
+                <h3>
+                  No cities found.
+                </h3>
 
                 <p>
-                  Try another city name or check your
-                  spelling.
+                  Try another city name or
+                  check your spelling.
                 </p>
               </div>
             </div>
           )}
 
           {status === "success" && (
-            <div className="city-search-results-header">
-              <div>
-                <p className="eyebrow">
-                  Search results
-                </p>
+            <>
+              <div className="city-search-results-header">
+                <div>
+                  <p className="eyebrow">
+                    Search results
+                  </p>
 
-                <h3>
-                  {cities.length}{" "}
-                  {cities.length === 1
-                    ? "city"
-                    : "cities"}{" "}
-                  found
-                </h3>
+                  <h3>
+                    {filteredCities.length}{" "}
+                    {filteredCities.length === 1
+                      ? "city"
+                      : "cities"}{" "}
+                    found
+                  </h3>
+                </div>
+
+                <span>
+                  Showing matches for "
+                  {query.trim()}"
+                </span>
               </div>
 
-              <span>
-                Showing matches for "{query.trim()}"
-              </span>
-            </div>
-          )}
-
-          {status === "success" && (
-            <div className="city-search-grid">
-              {cities.map((city) => (
-                <article
-                  className="search-city-card"
-                  key={city.id}
+              <div className="city-search-filter-bar">
+                <button
+                  type="button"
+                  className={`city-search-filter-toggle ${
+                    filtersOpen
+                      ? "is-open"
+                      : ""
+                  }`}
+                  onClick={() =>
+                    setFiltersOpen(
+                      (current) =>
+                        !current
+                    )
+                  }
+                  aria-expanded={
+                    filtersOpen
+                  }
+                  aria-controls="city-search-filters"
                 >
-                  <div className="search-city-card-top">
-                    <span className="city-country">
-                      {city.country}
+                  <Filter
+                    size={17}
+                    strokeWidth={1.8}
+                    aria-hidden="true"
+                  />
+
+                  <span>
+                    Filters
+                  </span>
+
+                  {activeFilterCount > 0 && (
+                    <span className="city-search-filter-count">
+                      {activeFilterCount}
                     </span>
+                  )}
 
-                    {city.country_code && (
-                      <span className="city-country-code">
-                        {city.country_code}
-                      </span>
-                    )}
-                  </div>
+                  <ChevronDown
+                    className="city-search-filter-chevron"
+                    size={17}
+                    strokeWidth={1.8}
+                    aria-hidden="true"
+                  />
+                </button>
 
-                  <div className="search-city-location">
-                    <span
-                      className="search-city-location-icon"
-                      aria-hidden="true"
-                    >
-                      <MapPin
-                        size={19}
-                        strokeWidth={1.8}
-                      />
-                    </span>
-
-                    <div>
-                      <h3>{city.name}</h3>
-
-                      <p>
-                        {city.admin1
-                          ? `${city.admin1}, ${city.country}`
-                          : city.country}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="search-city-coordinates">
-                    <span>
-                      <strong>LAT</strong>{" "}
-                      {Number(city.latitude).toFixed(4)}
-                    </span>
-
-                    <span>
-                      <strong>LON</strong>{" "}
-                      {Number(city.longitude).toFixed(4)}
-                    </span>
-                  </div>
-
+                {activeFilterCount > 0 && (
                   <button
                     type="button"
-                    className="weather-tab"
-                    onClick={() =>
-                      handleCitySelect(city)
-                    }
-                    aria-label={`View weather for ${city.name}`}
+                    className="city-search-clear-filters"
+                    onClick={clearFilters}
                   >
-                    <span>
-                      Explore {city.name}
-                    </span>
+                    Clear filters
+                  </button>
+                )}
+              </div>
 
-                    <ArrowRight
-                      size={17}
-                      strokeWidth={2}
+              {filtersOpen && (
+                <div
+                  id="city-search-filters"
+                  className="city-search-filters"
+                >
+                  <div className="city-search-filter-field">
+                    <label htmlFor="country-filter">
+                      Country
+                    </label>
+
+                    <select
+                      id="country-filter"
+                      value={countryFilter}
+                      onChange={(event) =>
+                        setCountryFilter(
+                          event.target.value
+                        )
+                      }
+                    >
+                      <option value="all">
+                        All countries
+                      </option>
+
+                      {countries.map(
+                        (country) => (
+                          <option
+                            key={country}
+                            value={country}
+                          >
+                            {country}
+                          </option>
+                        )
+                      )}
+                    </select>
+                  </div>
+
+                  <div className="city-search-filter-field">
+                    <label htmlFor="region-filter">
+                      Region
+                    </label>
+
+                    <select
+                      id="region-filter"
+                      value={regionFilter}
+                      onChange={(event) =>
+                        setRegionFilter(
+                          event.target.value
+                        )
+                      }
+                    >
+                      <option value="all">
+                        All regions
+                      </option>
+
+                      {regions.map(
+                        (region) => (
+                          <option
+                            key={region}
+                            value={region}
+                          >
+                            {region}
+                          </option>
+                        )
+                      )}
+                    </select>
+                  </div>
+
+                  <label className="city-search-capital-filter">
+                    <input
+                      type="checkbox"
+                      checked={capitalOnly}
+                      onChange={(event) =>
+                        setCapitalOnly(
+                          event.target.checked
+                        )
+                      }
+                    />
+
+                    <span>
+                      <strong>
+                        Capital cities only
+                      </strong>
+
+                      <small>
+                        Show only official
+                        capital locations
+                      </small>
+                    </span>
+                  </label>
+                </div>
+              )}
+
+              {filteredCities.length === 0 ? (
+                <div className="search-state search-state-empty search-filter-empty">
+                  <div className="search-empty-icon">
+                    <Filter
+                      size={24}
+                      strokeWidth={1.7}
                       aria-hidden="true"
                     />
-                  </button>
-                </article>
-              ))}
-            </div>
+                  </div>
+
+                  <div>
+                    <h3>
+                      No cities match these
+                      filters.
+                    </h3>
+
+                    <p>
+                      Try changing your filters
+                      or clear them to see all
+                      search results.
+                    </p>
+
+                    <button
+                      type="button"
+                      className="button button-secondary"
+                      onClick={
+                        clearFilters
+                      }
+                    >
+                      Clear filters
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="city-search-grid">
+                  {filteredCities.map(
+                    (city) => (
+                      <article
+                        className="search-city-card"
+                        key={city.id}
+                      >
+                        <div className="search-city-card-top">
+                          <span className="city-country">
+                            {city.country}
+                          </span>
+
+                          {city.country_code && (
+                            <span className="city-country-code">
+                              {
+                                city.country_code
+                              }
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="search-city-location">
+                          <span
+                            className="search-city-location-icon"
+                            aria-hidden="true"
+                          >
+                            <MapPin
+                              size={19}
+                              strokeWidth={1.8}
+                            />
+                          </span>
+
+                          <div>
+                            <h3>
+                              {city.name}
+                            </h3>
+
+                            <p>
+                              {city.admin1
+                                ? `${city.admin1}, ${city.country}`
+                                : city.country}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="search-city-badges">
+                          {city.feature_code ===
+                            "PPLC" && (
+                            <span className="search-city-badge">
+                              Capital
+                            </span>
+                          )}
+
+                          {city.admin1 && (
+                            <span className="search-city-badge search-city-badge-muted">
+                              {city.admin1}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="search-city-coordinates">
+                          <span>
+                            <strong>
+                              LAT
+                            </strong>{" "}
+                            {Number(
+                              city.latitude
+                            ).toFixed(4)}
+                          </span>
+
+                          <span>
+                            <strong>
+                              LON
+                            </strong>{" "}
+                            {Number(
+                              city.longitude
+                            ).toFixed(4)}
+                          </span>
+                        </div>
+
+                        <button
+                          type="button"
+                          className="weather-tab"
+                          onClick={() =>
+                            handleCitySelect(
+                              city
+                            )
+                          }
+                          aria-label={`View weather for ${city.name}`}
+                        >
+                          <span>
+                            Explore{" "}
+                            {city.name}
+                          </span>
+
+                          <ArrowRight
+                            size={17}
+                            strokeWidth={2}
+                            aria-hidden="true"
+                          />
+                        </button>
+                      </article>
+                    )
+                  )}
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
