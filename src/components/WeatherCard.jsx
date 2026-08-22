@@ -1,4 +1,5 @@
 import { getWeatherCondition } from "../services/weatherConditions";
+import WeatherIcon from "./WeatherIcon";
 
 function WeatherCard({ city, weather }) {
   if (!city || !weather) {
@@ -6,6 +7,8 @@ function WeatherCard({ city, weather }) {
   }
 
   const condition = getWeatherCondition(weather.weather_code);
+
+  const isDay = weather.is_day === 1;
 
   return (
     <article className="weather-card">
@@ -22,8 +25,20 @@ function WeatherCard({ city, weather }) {
           </p>
         </div>
 
-        <span className="weather-temperature">
+        <WeatherIcon
+          code={weather.weather_code}
+          isDay={isDay}
+          size={112}
+        />
+      </div>
+
+      <div className="weather-temperature-row">
+        <strong className="weather-temperature">
           {Math.round(weather.temperature_2m)}°C
+        </strong>
+
+        <span className="weather-temperature-label">
+          Current temperature
         </span>
       </div>
 

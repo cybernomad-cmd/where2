@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ArrowRight, MapPin } from "lucide-react";
 import { searchCities } from "../services/geocodingApi";
 
 function CitySearch({ onCitySelect }) {
@@ -6,6 +8,8 @@ function CitySearch({ onCitySelect }) {
   const [cities, setCities] = useState([]);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
+
+  const resultsRef = useRef(null);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -40,7 +44,51 @@ function CitySearch({ onCitySelect }) {
 
   function handleCitySelect(city) {
     onCitySelect(city);
+
+    window.setTimeout(() => {
+      document
+        .getElementById("weather-section")
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+    }, 120);
   }
+
+  useLayoutEffect(() => {
+    if (!resultsRef.current || cities.length === 0) {
+      return undefined;
+    }
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) {
+      return undefined;
+    }
+
+    const context = gsap.context(() => {
+      gsap.fromTo(
+        ".search-city-card",
+        {
+          y: 28,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.65,
+          stagger: 0.08,
+          ease: "power3.out",
+        }
+      );
+    }, resultsRef);
+
+    return () => {
+      context.revert();
+    };
+  }, [cities]);
 
   return (
     <section className="city-search" id="city-search">
@@ -94,10 +142,12 @@ function CitySearch({ onCitySelect }) {
         <div
           className="city-search-results"
           aria-live="polite"
+          ref={resultsRef}
         >
           {status === "loading" && (
-            <div className="search-state">
-              <p>Searching for cities...</p>
+            <div className="search-state search-state-loading">
+              <div className="loading-pulse" />
+              <p>Finding cities...</p>
             </div>
           )}
 
@@ -124,11 +174,9 @@ function CitySearch({ onCitySelect }) {
           {status === "success" && (
             <div className="city-search-grid">
               {cities.map((city) => (
-                <button
-                  type="button"
+                <article
                   className="search-city-card"
                   key={city.id}
-                  onClick={() => handleCitySelect(city)}
                 >
                   <div className="search-city-card-top">
                     <span className="city-country">
@@ -140,28 +188,46 @@ function CitySearch({ onCitySelect }) {
                     </span>
                   </div>
 
-                  <h3>{city.name}</h3>
+                  <div className="search-city-location">
+                    <MapPin size={18} strokeWidth={1.8} />
 
-                  <p>
-                    {city.admin1
-                      ? `${city.admin1}, ${city.country}`
-                      : city.country}
-                  </p>
+                    <div>
+                      <h3>{city.name}</h3>
+
+                      <p>
+                        {city.admin1
+                          ? `${city.admin1}, ${city.country}`
+                          : city.country}
+                      </p>
+                    </div>
+                  </div>
 
                   <div className="search-city-coordinates">
                     <span>
-                      Latitude: {city.latitude.toFixed(4)}
+                      Latitude:{" "}
+                      {city.latitude.toFixed(4)}
                     </span>
 
                     <span>
-                      Longitude: {city.longitude.toFixed(4)}
+                      Longitude:{" "}
+                      {city.longitude.toFixed(4)}
                     </span>
                   </div>
 
-                  <span className="search-city-action">
-                    View weather →
-                  </span>
-                </button>
+                  <button
+                    type="button"
+                    className="weather-tab"
+                    onClick={() => handleCitySelect(city)}
+                    aria-label={`View weather for ${city.name}`}
+                  >
+                    <span>View Weather</span>
+
+                    <ArrowRight
+                      size={17}
+                      strokeWidth={2}
+                    />
+                  </button>
+                </article>
               ))}
             </div>
           )}
