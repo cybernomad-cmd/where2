@@ -12,23 +12,18 @@ function SavedCities({
       >
         <div className="page-container">
           <div className="saved-cities-heading">
-            <p className="eyebrow">Your shortlist</p>
+            <div>
+              <p className="eyebrow">Your shortlist</p>
 
-            <h2>Saved cities</h2>
+              <h2>Saved cities</h2>
 
-            <p>
-              Save cities you're considering so you can
-              come back to them later.
-            </p>
-          </div>
+              <p>
+                Save cities you're considering so you can come back to them
+                later.
+              </p>
+            </div>
 
-          <div className="saved-cities-empty">
-            <h3>No saved cities yet.</h3>
-
-            <p>
-              Search for a city and save it to build your
-              shortlist.
-            </p>
+            <span className="saved-cities-count">0 saved</span>
           </div>
         </div>
       </section>
