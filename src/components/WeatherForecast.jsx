@@ -16,17 +16,21 @@ function WeatherForecast({ city, forecast }) {
     return null;
   }
 
-  const forecastDays = forecast.time.map((date, index) => ({
-    date,
-    weatherCode: forecast.weather_code[index],
-    condition: getWeatherCondition(
-      forecast.weather_code[index]
-    ),
-    maxTemperature: forecast.temperature_2m_max[index],
-    minTemperature: forecast.temperature_2m_min[index],
-    precipitationProbability:
-      forecast.precipitation_probability_max[index],
-  }));
+  const forecastDays = forecast.time.map(
+    (date, index) => ({
+      date,
+      weatherCode: forecast.weather_code[index],
+      condition: getWeatherCondition(
+        forecast.weather_code[index]
+      ),
+      maxTemperature:
+        forecast.temperature_2m_max[index],
+      minTemperature:
+        forecast.temperature_2m_min[index],
+      precipitationProbability:
+        forecast.precipitation_probability_max[index],
+    })
+  );
 
   return (
     <section className="weather-forecast">
@@ -38,8 +42,8 @@ function WeatherForecast({ city, forecast }) {
         </div>
 
         <p>
-          See how the weather could change in {city.name} over
-          the next week.
+          See how the weather could change in{" "}
+          {city.name} over the next week.
         </p>
       </div>
 
@@ -53,10 +57,13 @@ function WeatherForecast({ city, forecast }) {
               {formatForecastDate(day.date)}
             </p>
 
-            <div className="forecast-icon">
+            <div
+              className="forecast-icon"
+              aria-hidden="true"
+            >
               <WeatherIcon
                 code={day.weatherCode}
-                size={58}
+                size={82}
               />
             </div>
 

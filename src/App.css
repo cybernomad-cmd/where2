@@ -3764,3 +3764,553 @@ html {
     height: 50px;
   }
 }
+
+/* =========================================
+   METEOCONS WEATHER ICONS
+   ========================================= */
+
+.weather-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 0;
+  overflow: visible;
+}
+
+.weather-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Current weather icon */
+
+.weather-card .weather-icon {
+  width: 110px;
+  height: 110px;
+}
+
+/* Forecast weather icons */
+
+.forecast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 72px;
+  margin: 8px 0 10px;
+}
+
+.forecast-icon .weather-icon {
+  width: 58px;
+  height: 58px;
+}
+
+/* Give the animated weather visuals a little breathing room */
+
+.weather-icon-clear-day,
+.weather-icon-partly-cloudy-day {
+  transform-origin: center;
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .weather-icon *,
+  .weather-icon img {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* =========================================================
+   REALISTIC ANIMATED WEATHER ICONS
+   ========================================================= */
+
+.weather-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.weather-icon-image {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform-origin: center;
+  filter:
+    drop-shadow(0 8px 12px rgba(15, 23, 42, 0.12))
+    drop-shadow(0 2px 4px rgba(15, 23, 42, 0.08));
+}
+
+/* Soft atmospheric glow behind the weather artwork */
+
+.weather-icon-glow {
+  position: absolute;
+  z-index: 0;
+  width: 72%;
+  height: 72%;
+  border-radius: 50%;
+  opacity: 0.35;
+  filter: blur(22px);
+  pointer-events: none;
+  transform: scale(0.8);
+}
+
+/* ---------------------------------------------------------
+   Clear sky
+   --------------------------------------------------------- */
+
+.weather-icon-clear-day .weather-icon-glow {
+  background: rgba(255, 190, 50, 0.55);
+  animation: weather-sun-glow 4s ease-in-out infinite;
+}
+
+.weather-icon-clear-day .weather-icon-image {
+  animation: weather-sun-float 5s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------
+   Partly cloudy
+   --------------------------------------------------------- */
+
+.weather-icon-partly-cloudy-day .weather-icon-glow {
+  background: rgba(255, 194, 74, 0.35);
+  animation: weather-cloud-glow 5s ease-in-out infinite;
+}
+
+.weather-icon-partly-cloudy-day .weather-icon-image {
+  animation: weather-cloud-float 6s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------
+   Cloudy / overcast
+   --------------------------------------------------------- */
+
+.weather-icon-overcast .weather-icon-glow,
+.weather-icon-fog .weather-icon-glow {
+  background: rgba(148, 163, 184, 0.3);
+}
+
+.weather-icon-overcast .weather-icon-image {
+  animation: weather-cloud-drift 7s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------
+   Fog
+   --------------------------------------------------------- */
+
+.weather-icon-fog .weather-icon-image {
+  animation: weather-fog-drift 6s ease-in-out infinite;
+  filter:
+    blur(0.2px)
+    drop-shadow(0 8px 14px rgba(71, 85, 105, 0.12));
+}
+
+/* ---------------------------------------------------------
+   Rain
+   --------------------------------------------------------- */
+
+.weather-icon-rain .weather-icon-glow,
+.weather-icon-drizzle .weather-icon-glow {
+  background: rgba(59, 130, 246, 0.28);
+}
+
+.weather-icon-rain .weather-icon-image,
+.weather-icon-drizzle .weather-icon-image {
+  animation: weather-rain-cloud 4s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------
+   Snow
+   --------------------------------------------------------- */
+
+.weather-icon-snow .weather-icon-glow {
+  background: rgba(147, 197, 253, 0.32);
+}
+
+.weather-icon-snow .weather-icon-image {
+  animation: weather-snow-cloud 5s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------
+   Thunderstorms
+   --------------------------------------------------------- */
+
+.weather-icon-thunderstorms .weather-icon-glow,
+.weather-icon-thunderstorms-extreme .weather-icon-glow {
+  background: rgba(96, 165, 250, 0.22);
+}
+
+.weather-icon-thunderstorms .weather-icon-image,
+.weather-icon-thunderstorms-extreme .weather-icon-image {
+  animation: weather-storm-cloud 4s ease-in-out infinite;
+}
+
+/* =========================================================
+   PARTICLES
+   ========================================================= */
+
+.weather-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Rain */
+
+.weather-rain-particles span,
+.weather-drizzle-particles span {
+  position: absolute;
+  top: 55%;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to bottom,
+    rgba(96, 165, 250, 0),
+    rgba(59, 130, 246, 0.9)
+  );
+  transform: rotate(15deg);
+  animation: rain-fall 1.4s linear infinite;
+}
+
+.weather-rain-particles span:nth-child(1) {
+  left: 25%;
+  height: 13px;
+  animation-delay: 0s;
+}
+
+.weather-rain-particles span:nth-child(2) {
+  left: 39%;
+  height: 16px;
+  animation-delay: 0.25s;
+}
+
+.weather-rain-particles span:nth-child(3) {
+  left: 52%;
+  height: 12px;
+  animation-delay: 0.5s;
+}
+
+.weather-rain-particles span:nth-child(4) {
+  left: 65%;
+  height: 15px;
+  animation-delay: 0.75s;
+}
+
+.weather-rain-particles span:nth-child(5) {
+  left: 76%;
+  height: 11px;
+  animation-delay: 1s;
+}
+
+/* Drizzle */
+
+.weather-drizzle-particles span {
+  height: 8px;
+  width: 1.5px;
+  animation-duration: 1.8s;
+}
+
+.weather-drizzle-particles span:nth-child(1) {
+  left: 32%;
+}
+
+.weather-drizzle-particles span:nth-child(2) {
+  left: 50%;
+  animation-delay: 0.4s;
+}
+
+.weather-drizzle-particles span:nth-child(3) {
+  left: 68%;
+  animation-delay: 0.8s;
+}
+
+/* Snow */
+
+.weather-snow-particles span {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 12px;
+  text-shadow:
+    0 1px 4px rgba(59, 130, 246, 0.35);
+  animation: snow-fall 3s linear infinite;
+}
+
+.weather-snow-particles span:nth-child(1) {
+  left: 25%;
+  top: 55%;
+  animation-delay: 0s;
+}
+
+.weather-snow-particles span:nth-child(2) {
+  left: 42%;
+  top: 60%;
+  animation-delay: 0.8s;
+}
+
+.weather-snow-particles span:nth-child(3) {
+  left: 58%;
+  top: 52%;
+  animation-delay: 1.4s;
+}
+
+.weather-snow-particles span:nth-child(4) {
+  left: 72%;
+  top: 58%;
+  animation-delay: 2s;
+}
+
+/*Lightning*/
+
+.weather-lightning-flash {
+  position: absolute;
+  z-index: 4;
+  left: 52%;
+  top: 53%;
+  width: 4px;
+  height: 30px;
+  background: #facc15;
+  clip-path: polygon(
+    55% 0,
+    100% 0,
+    60% 42%,
+    100% 42%,
+    25% 100%,
+    38% 56%,
+    0 56%
+  );
+  filter:
+    drop-shadow(0 0 5px rgba(250, 204, 21, 0.8))
+    drop-shadow(0 0 12px rgba(250, 204, 21, 0.5));
+  opacity: 0;
+  animation: lightning-flash 4s infinite;
+}
+
+/*Forecast Icon Container*/
+
+.forecast-icon {
+  position: relative;
+  width: 100%;
+  height: 104px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 4px 0 2px;
+}
+
+.forecast-icon .weather-icon {
+  width: 82px;
+  height: 82px;
+}
+
+/*Current Weather Icon*/
+
+.weather-card-icon {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.weather-card-icon .weather-icon {
+  width: 120px;
+  height: 120px;
+}
+
+/*Hover*/
+
+.forecast-card:hover .weather-icon-image {
+  transform: scale(1.05);
+}
+
+.forecast-card:hover .weather-icon-glow {
+  opacity: 0.5;
+}
+
+/*Animations*/
+
+@keyframes weather-sun-glow {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+}
+
+@keyframes weather-sun-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-3px) rotate(1deg);
+  }
+}
+
+@keyframes weather-cloud-glow {
+  0%,
+  100% {
+    transform: scale(0.8);
+    opacity: 0.25;
+  }
+
+  50% {
+    transform: scale(0.95);
+    opacity: 0.4;
+  }
+}
+
+@keyframes weather-cloud-float {
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+
+  50% {
+    transform: translateX(3px) translateY(-2px);
+  }
+}
+
+@keyframes weather-cloud-drift {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes weather-fog-drift {
+  0%,
+  100% {
+    transform: translateX(-2px);
+  }
+
+  50% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes weather-rain-cloud {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes weather-snow-cloud {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes weather-storm-cloud {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-3px);
+  }
+}
+
+@keyframes rain-fall {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px) rotate(15deg);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(35px) rotate(15deg);
+  }
+}
+
+@keyframes snow-fall {
+  0% {
+    opacity: 0;
+    transform: translateY(-4px) translateX(0);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(20px) translateX(5px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(42px) translateX(-3px);
+  }
+}
+
+@keyframes lightning-flash {
+  0%,
+  84%,
+  100% {
+    opacity: 0;
+  }
+
+  86% {
+    opacity: 1;
+  }
+
+  87% {
+    opacity: 0;
+  }
+
+  89% {
+    opacity: 1;
+  }
+
+  91% {
+    opacity: 0;
+  }
+}
+
+/*Accessibility*/
+
+@media (prefers-reduced-motion: reduce) {
+  .weather-icon-image,
+  .weather-icon-glow,
+  .weather-particles span,
+  .weather-lightning-flash {
+    animation: none !important;
+  }
+}
