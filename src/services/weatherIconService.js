@@ -1,47 +1,47 @@
 const WEATHER_TYPES = {
   clear: {
     label: "Clear sky",
-    type: "clear",
+    icon: "clear-day",
   },
 
   partlyCloudy: {
     label: "Partly cloudy",
-    type: "partlyCloudy",
+    icon: "partly-cloudy-day",
   },
 
   cloudy: {
-    label: "Cloudy",
-    type: "cloudy",
+    label: "Overcast",
+    icon: "overcast",
   },
 
   fog: {
     label: "Fog",
-    type: "fog",
+    icon: "fog",
   },
 
   drizzle: {
     label: "Drizzle",
-    type: "drizzle",
+    icon: "drizzle",
   },
 
   rain: {
     label: "Rain",
-    type: "rain",
+    icon: "rain",
   },
 
   snow: {
     label: "Snow",
-    type: "snow",
+    icon: "snow",
   },
 
   storm: {
     label: "Thunderstorm",
-    type: "storm",
+    icon: "thunderstorms",
   },
 
   stormExtreme: {
     label: "Severe thunderstorm",
-    type: "stormExtreme",
+    icon: "thunderstorms-extreme",
   },
 };
 
