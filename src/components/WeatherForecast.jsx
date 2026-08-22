@@ -1,4 +1,5 @@
 import { getWeatherCondition } from "../services/weatherConditions";
+import WeatherIcon from "./WeatherIcon";
 
 function formatForecastDate(dateString) {
   const date = new Date(`${dateString}T12:00:00`);
@@ -17,6 +18,7 @@ function WeatherForecast({ city, forecast }) {
 
   const forecastDays = forecast.time.map((date, index) => ({
     date,
+    weatherCode: forecast.weather_code[index],
     condition: getWeatherCondition(
       forecast.weather_code[index]
     ),
@@ -50,6 +52,13 @@ function WeatherForecast({ city, forecast }) {
             <p className="forecast-date">
               {formatForecastDate(day.date)}
             </p>
+
+            <div className="forecast-icon">
+              <WeatherIcon
+                code={day.weatherCode}
+                size={58}
+              />
+            </div>
 
             <p className="forecast-condition">
               {day.condition}
