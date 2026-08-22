@@ -3575,3 +3575,192 @@ html {
     height: 48px;
   }
 }
+
+/* =========================================
+   WEATHER FORECAST ICONS
+   ========================================= */
+
+.forecast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 78px;
+  margin: 18px 0 8px;
+}
+
+.forecast-icon .weather-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  transition:
+    transform 0.35s ease,
+    background-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* Give the icons a little more presence */
+.forecast-icon svg {
+  display: block;
+}
+
+/* Hover interaction */
+.forecast-card:hover .forecast-icon .weather-icon {
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Clear sky */
+.weather-icon-sun {
+  animation: weather-sun-pulse 4s ease-in-out infinite;
+}
+
+/* Partly cloudy */
+.weather-icon-cloud-sun {
+  animation: weather-cloud-drift 5s ease-in-out infinite;
+}
+
+/* Cloudy */
+.weather-icon-cloud {
+  animation: weather-cloud-drift 6s ease-in-out infinite;
+}
+
+/* Fog */
+.weather-icon-cloud-fog {
+  animation: weather-fog-drift 5s ease-in-out infinite;
+}
+
+/* Rain */
+.weather-icon-cloud-rain,
+.weather-icon-droplets {
+  animation: weather-rain-move 2.8s ease-in-out infinite;
+}
+
+/* Thunderstorm */
+.weather-icon-cloud-lightning {
+  animation: weather-storm-pulse 3.5s ease-in-out infinite;
+}
+
+/* Snow */
+.weather-icon-snowflake {
+  animation: weather-snow-float 4s ease-in-out infinite;
+}
+
+
+/*Weather Animations*/
+
+@keyframes weather-sun-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes weather-cloud-drift {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes weather-fog-drift {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.85;
+  }
+
+  50% {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+}
+
+@keyframes weather-rain-move {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+@keyframes weather-storm-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  8% {
+    transform: scale(1.08);
+  }
+
+  16% {
+    transform: scale(1);
+  }
+
+  24% {
+    transform: scale(1.05);
+  }
+
+  32%,
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes weather-snow-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-4px) rotate(8deg);
+  }
+}
+
+
+/*Accessibility*/
+
+@media (prefers-reduced-motion: reduce) {
+  .forecast-icon .weather-icon {
+    animation: none;
+    transition: none;
+  }
+
+  .forecast-card:hover .forecast-icon .weather-icon {
+    transform: none;
+  }
+}
+
+
+/* Mobile Forecast Icons*/
+
+@media (max-width: 768px) {
+  .forecast-icon {
+    min-height: 68px;
+    margin: 14px 0 6px;
+  }
+
+  .forecast-icon .weather-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .forecast-icon svg {
+    width: 50px;
+    height: 50px;
+  }
+}
