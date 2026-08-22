@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import gsap from "gsap";
 import "./App.css";
 
 import Nav from "./components/Nav";
@@ -19,6 +18,7 @@ import CostOfLiving from "./components/CostOfLiving";
 import { getCurrentWeather } from "./services/weatherApi";
 import { getWeatherForecast } from "./services/forecastApi";
 import { getCityDetails } from "./services/cityDetailsService";
+import { getCostOfLiving } from "./services/costOfLivingService";
 
 import {
   calculateRecommendation,
@@ -50,16 +50,34 @@ function App() {
     priorities: [],
   });
 
+  /*Current Weather*/
+
   const [weather, setWeather] = useState(null);
   const [weatherStatus, setWeatherStatus] =
     useState("idle");
-  const [weatherError, setWeatherError] = useState("");
+  const [weatherError, setWeatherError] =
+    useState("");
+
+  /*7-Day Forecast*/
 
   const [forecast, setForecast] = useState(null);
   const [forecastStatus, setForecastStatus] =
     useState("idle");
   const [forecastError, setForecastError] =
     useState("");
+
+  /*Cost of Living*/
+
+  const [costOfLiving, setCostOfLiving] =
+    useState(null);
+
+  const [costOfLivingStatus, setCostOfLivingStatus] =
+    useState("idle");
+
+  const [costOfLivingError, setCostOfLivingError] =
+    useState("");
+
+  /* Comparison Weather*/
 
   const [comparisonWeather, setComparisonWeather] =
     useState(null);
@@ -74,7 +92,7 @@ function App() {
     setComparisonWeatherError,
   ] = useState("");
 
-  /*Current Weather*/
+  /*Current Weather API*/
 
   useEffect(() => {
     if (!selectedCity) {
@@ -97,6 +115,7 @@ function App() {
 
         setWeather(currentWeather);
         setWeatherStatus("success");
+        setWeatherError("");
       } catch (requestError) {
         if (!isActive) {
           return;
@@ -120,7 +139,7 @@ function App() {
     };
   }, [selectedCity]);
 
-  /*Weather Forecast*/
+  /*7-Day Forecast API*/
 
   useEffect(() => {
     if (!selectedCity) {
@@ -143,6 +162,7 @@ function App() {
 
         setForecast(forecastData);
         setForecastStatus("success");
+        setForecastError("");
       } catch (requestError) {
         if (!isActive) {
           return;
@@ -166,90 +186,55 @@ function App() {
     };
   }, [selectedCity]);
 
-  /*Weather Section Animation*
-   * Animates the weather section whenever a new city
-   * is selected.
-   *
-   * Also respects the user's reduced-motion preference.
-   */
+  /*Cost of Living API*/
 
   useEffect(() => {
     if (!selectedCity) {
       return;
     }
 
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    let isActive = true;
 
-    if (prefersReducedMotion) {
-      return;
+    async function loadCostOfLiving() {
+      setCostOfLiving(null);
+      setCostOfLivingError("");
+      setCostOfLivingStatus("loading");
+
+      try {
+        const data =
+          await getCostOfLiving(selectedCity);
+
+        if (!isActive) {
+          return;
+        }
+
+        setCostOfLiving(data);
+        setCostOfLivingStatus("success");
+        setCostOfLivingError("");
+      } catch (requestError) {
+        if (!isActive) {
+          return;
+        }
+
+        setCostOfLiving(null);
+
+        setCostOfLivingError(
+          requestError.message ||
+            "Unable to retrieve cost-of-living information right now."
+        );
+
+        setCostOfLivingStatus("error");
+      }
     }
 
-    const context = gsap.context(() => {
-      gsap.fromTo(
-        ".weather-section",
-        {
-          opacity: 0,
-          y: 35,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-        }
-      );
-    });
+    loadCostOfLiving();
 
     return () => {
-      context.revert();
+      isActive = false;
     };
   }, [selectedCity]);
 
-  /*Weather Card Animation*
-   * Adds a subtle staggered entrance to the weather
-   * information after it loads*/
-
-  useEffect(() => {
-    if (
-      !selectedCity ||
-      weatherStatus !== "success"
-    ) {
-      return;
-    }
-
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if (prefersReducedMotion) {
-      return;
-    }
-
-    const context = gsap.context(() => {
-      gsap.fromTo(
-        ".weather-section .weather-card",
-        {
-          opacity: 0,
-          y: 20,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          delay: 0.15,
-          ease: "power2.out",
-        }
-      );
-    });
-
-    return () => {
-      context.revert();
-    };
-  }, [selectedCity, weatherStatus]);
-
-  /*Comparison Weather*/
+  /*Comparison Weather API*/
 
   useEffect(() => {
     if (!comparisonCity) {
@@ -306,7 +291,7 @@ function App() {
     setPreferences(updatedPreferences);
   }
 
-  /*City Selection*/
+/*City Selection*/
 
   function handleCitySelect(city) {
     const isSelectedCity =
@@ -319,9 +304,8 @@ function App() {
       return;
     }
 
-    /*
-     * First city selected
-     */
+    /*First City*/
+
     if (!selectedCity) {
       setSelectedCity(city);
 
@@ -333,12 +317,15 @@ function App() {
       setForecastError("");
       setForecastStatus("loading");
 
+      setCostOfLiving(null);
+      setCostOfLivingError("");
+      setCostOfLivingStatus("loading");
+
       return;
     }
 
-    /*
-     * Second city becomes comparison city
-     */
+    /*Second City For Comparison */
+
     if (!comparisonCity) {
       setComparisonCity(city);
 
@@ -349,9 +336,8 @@ function App() {
       return;
     }
 
-    /*
-     * Replace comparison city
-     */
+    /*Replace Comparison City*/
+
     setComparisonCity(city);
 
     setComparisonWeather(null);
@@ -359,7 +345,7 @@ function App() {
     setComparisonWeatherStatus("loading");
   }
 
-  /*Saved Cities*/
+  /*Save City*/
 
   function handleSaveCity(city) {
     const updatedCities = toggleSavedCity(city);
@@ -367,8 +353,11 @@ function App() {
     setSavedCities(updatedCities);
   }
 
+  /*Remove Saved City*/
+
   function handleRemoveCity(cityId) {
-    const updatedCities = removeSavedCity(cityId);
+    const updatedCities =
+      removeSavedCity(cityId);
 
     setSavedCities(updatedCities);
   }
@@ -387,6 +376,10 @@ function App() {
     setForecastError("");
     setForecastStatus("loading");
 
+    setCostOfLiving(null);
+    setCostOfLivingError("");
+    setCostOfLivingStatus("loading");
+
     setComparisonWeather(null);
     setComparisonWeatherError("");
     setComparisonWeatherStatus("idle");
@@ -399,10 +392,11 @@ function App() {
 
   /*Recommendation*/
 
-  const recommendation = calculateRecommendation(
-    preferences,
-    weather
-  );
+  const recommendation =
+    calculateRecommendation(
+      preferences,
+      weather
+    );
 
   /*City Comparison*/
 
@@ -417,34 +411,31 @@ function App() {
         )
       : null;
 
-  const comparisonWinner = comparison
-    ? getComparisonWinner(comparison)
-    : null;
+  const comparisonWinner =
+    comparison
+      ? getComparisonWinner(comparison)
+      : null;
 
-  /*City Details*/
+/*City Details*/
 
   const cityDetails = selectedCity
     ? getCityDetails(selectedCity)
     : null;
 
-  /*Saved City Status*/
+/*Saved City Status*/
 
   const selectedCityIsSaved = selectedCity
     ? isCitySaved(selectedCity.id)
     : false;
 
-  /*Render*/
+/*RENDER*/
 
   return (
     <main className="design-system">
-
-      {/* Navigation */}
       <Nav />
 
-      {/* Hero */}
       <Hero />
 
-      {/* User preferences */}
       <Preferences
         value={preferences}
         onPreferencesChange={
@@ -452,25 +443,24 @@ function App() {
         }
       />
 
-      {/* City search */}
       <CitySearch
         onCitySelect={handleCitySelect}
       />
 
-      {/* Saved cities */}
       <SavedCities
         cities={savedCities}
         onRemoveCity={handleRemoveCity}
         onSelectCity={handleSavedCitySelect}
       />
 
-      {/*Weather Experience*/}
+{/*SELECTED CITY WEATHER AREA*/}
 
       {selectedCity && (
         <section className="weather-section">
           <div className="page-container">
 
-            {/* Current weather loading */}
+{/*Current Weather Loading*/}
+
             {weatherStatus === "loading" && (
               <div className="search-state">
                 <p>
@@ -480,7 +470,8 @@ function App() {
               </div>
             )}
 
-            {/* Current weather error */}
+{/*Current Weather Error*/}
+
             {weatherStatus === "error" && (
               <div
                 className="search-state search-state-error"
@@ -494,7 +485,8 @@ function App() {
               </div>
             )}
 
-            {/* Current weather */}
+{/*Current Weather Success*/}
+
             {weatherStatus === "success" && (
               <>
                 <WeatherCard
@@ -502,13 +494,14 @@ function App() {
                   weather={weather}
                 />
 
-                {/* Save city */}
                 <div className="city-save-action">
                   <button
                     type="button"
                     className="button button-primary"
                     onClick={() =>
-                      handleSaveCity(selectedCity)
+                      handleSaveCity(
+                        selectedCity
+                      )
                     }
                   >
                     {selectedCityIsSaved
@@ -529,9 +522,7 @@ function App() {
                   aria-label="City recommendation"
                 >
                   <div className="recommendation-card">
-
                     <div className="recommendation-header">
-
                       <div>
                         <p className="eyebrow">
                           Your WHERE2 match
@@ -545,13 +536,11 @@ function App() {
                       <span className="recommendation-score">
                         {recommendation.score}
                       </span>
-
                     </div>
 
-                    {recommendation.reasons.length >
-                      0 && (
+                    {recommendation.reasons
+                      .length > 0 && (
                       <div className="recommendation-reasons">
-
                         <h3>
                           Why it may suit you
                         </h3>
@@ -565,15 +554,13 @@ function App() {
                             )
                           )}
                         </ul>
-
                       </div>
                     )}
-
                   </div>
                 </section>
               )}
 
-{/*FOrecast*/}
+{/*7-Day Forecast Loading*/}
 
             {forecastStatus === "loading" && (
               <div className="search-state">
@@ -583,6 +570,8 @@ function App() {
                 </p>
               </div>
             )}
+
+{/*7-Day Forecast Error*/}
 
             {forecastStatus === "error" && (
               <div
@@ -597,6 +586,8 @@ function App() {
               </div>
             )}
 
+{/*7-Day Forecast Success*/}
+
             {forecastStatus === "success" && (
               <WeatherForecast
                 city={selectedCity}
@@ -604,7 +595,46 @@ function App() {
               />
             )}
 
-{/*Comparison Weather Loading */}
+{/*Cost of Living*/}
+
+            {costOfLivingStatus === "loading" && (
+              <div className="search-state">
+                <p>
+                  Loading cost-of-living information
+                  for{" "}
+                  {selectedCity.name}...
+                </p>
+              </div>
+            )}
+
+{/*Cost of Living Error*/}
+
+            {costOfLivingStatus === "error" && (
+              <div
+                className="search-state search-state-error"
+                role="alert"
+              >
+                <h3>
+                  We couldn't load cost-of-living
+                  information.
+                </h3>
+
+                <p>
+                  {costOfLivingError}
+                </p>
+              </div>
+            )}
+
+{/*Cost of Living Success*/}
+
+            {costOfLivingStatus === "success" && (
+              <CostOfLiving
+                data={costOfLiving}
+                cityName={selectedCity.name}
+              />
+            )}
+
+{/*Comparison Weather Loading*/}
 
             {comparisonCity &&
               comparisonWeatherStatus ===
@@ -654,20 +684,11 @@ function App() {
                 city={cityDetails}
               />
             )}
-
-{/*Cost Of Living*/}
-
-            {weatherStatus === "success" && (
-              <CostOfLiving
-                city={selectedCity}
-              />
-            )}
-
           </div>
         </section>
       )}
 
-      {/*Lower Page Sections*/}
+{/*Static Page Sections*/}
 
       <HowItWorks />
 
@@ -675,11 +696,10 @@ function App() {
 
       <FinalCTA />
 
-  {/*Design System*/}
+{/*Design System*/}
 
       <section className="component-section">
         <div className="page-container">
-
           <div className="section-heading">
             <p className="eyebrow">
               Foundation
@@ -691,13 +711,10 @@ function App() {
           </div>
 
           <div className="component-grid">
-
             <article className="demo-card">
               <div className="color-sample color-primary" />
 
-              <h3>
-                Primary
-              </h3>
+              <h3>Primary</h3>
 
               <p>
                 The main WHERE2 brand color used
@@ -709,9 +726,7 @@ function App() {
             <article className="demo-card">
               <div className="color-sample color-light" />
 
-              <h3>
-                Primary Light
-              </h3>
+              <h3>Primary Light</h3>
 
               <p>
                 A soft supporting color for
@@ -723,9 +738,7 @@ function App() {
             <article className="demo-card">
               <div className="color-sample color-surface" />
 
-              <h3>
-                Surface
-              </h3>
+              <h3>Surface</h3>
 
               <p>
                 Used for cards, sections, and
@@ -733,11 +746,9 @@ function App() {
                 background.
               </p>
             </article>
-
           </div>
         </div>
       </section>
-
     </main>
   );
 }
