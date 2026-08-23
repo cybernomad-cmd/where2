@@ -124,7 +124,26 @@ function CitySearch({ onCitySelect }) {
     inputRef.current?.focus();
   }
 
-    /* Search keyboard shortcut */
+  function clearFilters() {
+    setCountryFilter("all");
+    setRegionFilter("all");
+    setCapitalOnly(false);
+  }
+
+  function handleCitySelect(city) {
+    onCitySelect(city);
+
+    window.setTimeout(() => {
+      document
+        .getElementById("weather-section")
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+    }, 120);
+  }
+
+  /*Search keyboard shortcut*/
 
   useEffect(() => {
     function handleSearchShortcut(event) {
@@ -168,25 +187,6 @@ function CitySearch({ onCitySelect }) {
       );
     };
   }, []);
-
-  function clearFilters() {
-    setCountryFilter("all");
-    setRegionFilter("all");
-    setCapitalOnly(false);
-  }
-
-  function handleCitySelect(city) {
-    onCitySelect(city);
-
-    window.setTimeout(() => {
-      document
-        .getElementById("weather-section")
-        ?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-    }, 120);
-  }
 
   useEffect(() => {
     const trimmedQuery = query.trim();
