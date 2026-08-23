@@ -143,6 +143,51 @@ function CitySearch({ onCitySelect }) {
     }, 120);
   }
 
+  /*Search keyboard shortcut*/
+
+  useEffect(() => {
+    function handleSearchShortcut(event) {
+      if (
+        event.key !== "/" ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      const target = event.target;
+
+      if (
+        target instanceof HTMLElement &&
+        (
+          target.isContentEditable ||
+          ["INPUT", "TEXTAREA", "SELECT"].includes(
+            target.tagName
+          )
+        )
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+
+      inputRef.current?.focus();
+    }
+
+    window.addEventListener(
+      "keydown",
+      handleSearchShortcut
+    );
+
+    return () => {
+      window.removeEventListener(
+        "keydown",
+        handleSearchShortcut
+      );
+    };
+  }, []);
+
   useEffect(() => {
     const trimmedQuery = query.trim();
 
