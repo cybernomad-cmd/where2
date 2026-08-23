@@ -505,53 +505,79 @@ const selectedCityIsSaved = selectedCity
               </>
             )}
 
-{/*Recommendation*/}
+{/* Personalized Recommendation */}
 
-            {weatherStatus === "success" &&
-              recommendation.label !==
-                "Not enough information" && (
-                <section
-                  className="recommendation-section"
-                  aria-label="City recommendation"
-                >
-                  <div className="recommendation-card">
-                    <div className="recommendation-header">
-                      <div>
-                        <p className="eyebrow">
-                          Your WHERE2 match
-                        </p>
+{weatherStatus === "success" &&
+  recommendation.label !== "Not enough information" && (
+    <section
+      className="recommendation-section"
+      aria-label="Personalized city recommendation"
+    >
+      <div className="recommendation-card">
+        <div className="recommendation-header">
+          <div className="recommendation-heading">
+            <p className="eyebrow">
+              Your WHERE2 match
+            </p>
 
-                        <h2>
-                          {recommendation.label}
-                        </h2>
-                      </div>
+            <h2>
+              {recommendation.label}
+            </h2>
 
-                      <span className="recommendation-score">
-                        {recommendation.score}
-                      </span>
-                    </div>
+            <p className="recommendation-intro">
+              This recommendation is based on your
+              preferences and the current weather
+              conditions in {selectedCity.name}.
+            </p>
+          </div>
 
-                    {recommendation.reasons
-                      .length > 0 && (
-                      <div className="recommendation-reasons">
-                        <h3>
-                          Why it may suit you
-                        </h3>
+          <div
+            className="recommendation-score-wrapper"
+            aria-label={`Recommendation score: ${recommendation.score}`}
+          >
+            <span className="recommendation-score">
+              {recommendation.score}
+            </span>
 
-                        <ul>
-                          {recommendation.reasons.map(
-                            (reason) => (
-                              <li key={reason}>
-                                {reason}
-                              </li>
-                            )
-                          )}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                </section>
+            <span className="recommendation-score-label">
+              match score
+            </span>
+          </div>
+        </div>
+
+        {recommendation.reasons.length > 0 && (
+          <div className="recommendation-reasons">
+            <div className="recommendation-reasons-heading">
+              <p className="eyebrow">
+                Why this city may suit you
+              </p>
+
+              <h3>
+                Your preferences and current conditions
+              </h3>
+            </div>
+
+            <ul>
+              {recommendation.reasons.map(
+                (reason) => (
+                  <li key={reason}>
+                    <span
+                      className="recommendation-check"
+                      aria-hidden="true"
+                    >
+                      ✓
+                    </span>
+
+                    <span>{reason}</span>
+                  </li>
+                )
               )}
+            </ul>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
 
 {/*7-Day Forecast Loading*/}
 
