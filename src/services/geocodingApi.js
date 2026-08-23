@@ -1,25 +1,40 @@
 const GEOCODING_API_URL =
   "https://geocoding-api.open-meteo.com/v1/search";
 
-function rankCityResults(results, cityName) {
-  const normalizedQuery = cityName
+function normalizeValue(value) {
+  return String(value || "")
     .trim()
     .toLowerCase();
+}
+
+function rankCityResults(results, cityName) {
+  const normalizedQuery =
+    normalizeValue(cityName);
 
   return [...results].sort((a, b) => {
-    const aExact =
-      a.name?.toLowerCase() === normalizedQuery ? 1 : 0;
+    const aName = normalizeValue(a.name);
+    const bName = normalizeValue(b.name);
 
+    const aExact =
+      aName === normalizedQuery ? 1 : 0;
     const bExact =
-      b.name?.toLowerCase() === normalizedQuery ? 1 : 0;
+      bName === normalizedQuery ? 1 : 0;
 
     if (aExact !== bExact) {
       return bExact - aExact;
     }
 
+    const aStartsWith =
+      aName.startsWith(normalizedQuery) ? 1 : 0;
+    const bStartsWith =
+      bName.startsWith(normalizedQuery) ? 1 : 0;
+
+    if (aStartsWith !== bStartsWith) {
+      return bStartsWith - aStartsWith;
+    }
+
     const aCapital =
       a.feature_code === "PPLC" ? 1 : 0;
-
     const bCapital =
       b.feature_code === "PPLC" ? 1 : 0;
 
@@ -27,21 +42,35 @@ function rankCityResults(results, cityName) {
       return bCapital - aCapital;
     }
 
-    const aPopulation = Number(a.population) || 0;
-    const bPopulation = Number(b.population) || 0;
+    const aPopulation =
+      Number(a.population) || 0;
+    const bPopulation =
+      Number(b.population) || 0;
 
-    return bPopulation - aPopulation;
+    if (aPopulation !== bPopulation) {
+      return bPopulation - aPopulation;
+    }
+
+    const aHasRegion =
+      a.admin1 ? 1 : 0;
+    const bHasRegion =
+      b.admin1 ? 1 : 0;
+
+    if (aHasRegion !== bHasRegion) {
+      return bHasRegion - aHasRegion;
+    }
+
+    return aName.localeCompare(bName);
   });
 }
 
 function filterCityResults(results, cityName) {
-  const normalizedQuery = cityName
-    .trim()
-    .toLowerCase();
+  const normalizedQuery =
+    normalizeValue(cityName);
 
   return results.filter((city) => {
     const cityNameValue =
-      city.name?.toLowerCase() || "";
+      normalizeValue(city.name);
 
     return (
       cityNameValue === normalizedQuery ||
@@ -51,24 +80,41 @@ function filterCityResults(results, cityName) {
 }
 
 export async function searchCities(cityName) {
-  const trimmedCityName = cityName.trim();
+  const trimmedCityName =
+    cityName.trim();
 
   if (!trimmedCityName) {
-    throw new Error("Please enter a city name.");
+    throw new Error(
+      "Please enter a city name."
+    );
   }
 
-  const url = new URL(GEOCODING_API_URL);
+  const url = new URL(
+    GEOCODING_API_URL
+  );
 
-  url.searchParams.set("name", trimmedCityName);
+  url.searchParams.set(
+    "name",
+    trimmedCityName
+  );
 
-  // Increased from 10 to 20 so client-side
-  // filters have a larger result set to work with.
-  url.searchParams.set("count", "20");
+  url.searchParams.set(
+    "count",
+    "20"
+  );
 
-  url.searchParams.set("language", "en");
-  url.searchParams.set("format", "json");
+  url.searchParams.set(
+    "language",
+    "en"
+  );
 
-  const response = await fetch(url);
+  url.searchParams.set(
+    "format",
+    "json"
+  );
+
+  const response =
+    await fetch(url);
 
   if (!response.ok) {
     throw new Error(
@@ -76,14 +122,17 @@ export async function searchCities(cityName) {
     );
   }
 
-  const data = await response.json();
+  const data =
+    await response.json();
 
-  const results = data.results ?? [];
+  const results =
+    data.results ?? [];
 
-  const filteredResults = filterCityResults(
-    results,
-    trimmedCityName
-  );
+  const filteredResults =
+    filterCityResults(
+      results,
+      trimmedCityName
+    );
 
   return rankCityResults(
     filteredResults,
