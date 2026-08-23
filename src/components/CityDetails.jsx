@@ -2,6 +2,7 @@ import { useState } from "react";
 
 function CityDetails({ city }) {
   const [copied, setCopied] = useState(false);
+  const [shared, setShared] = useState(false);
 
   if (!city) {
     return null;
@@ -47,6 +48,19 @@ function CityDetails({ city }) {
     return `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
   }
 
+  function getShareText() {
+    const coordinates = getCoordinateValue();
+
+    return [
+      `${city.name}, ${city.country}`,
+      city.region ? `Region: ${city.region}` : "",
+      city.timezone ? `Timezone: ${city.timezone}` : "",
+      coordinates ? `Coordinates: ${coordinates}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+  }
+
   async function handleCopyCoordinates() {
     const coordinates = getCoordinateValue();
 
@@ -69,6 +83,39 @@ function CityDetails({ city }) {
     }
   }
 
+  async function handleShareCity() {
+    const shareText = getShareText();
+
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: `${city.name}, ${city.country}`,
+          text: shareText,
+        });
+
+        setShared(true);
+
+        window.setTimeout(() => {
+          setShared(false);
+        }, 1800);
+
+        return;
+      }
+
+      await navigator.clipboard.writeText(
+        shareText
+      );
+
+      setShared(true);
+
+      window.setTimeout(() => {
+        setShared(false);
+      }, 1800);
+    } catch {
+      setShared(false);
+    }
+  }
+
   return (
     <section
       className="city-details"
@@ -78,7 +125,9 @@ function CityDetails({ city }) {
       <div className="page-container">
         <div className="city-details-heading">
           <div>
-            <p className="eyebrow">Location snapshot</p>
+            <p className="eyebrow">
+              Location snapshot
+            </p>
 
             <h2>
               {city.name}, {city.country}
@@ -96,6 +145,18 @@ function CityDetails({ city }) {
               {city.countryCode}
             </span>
           )}
+        </div>
+
+        <div className="city-details-actions">
+          <button
+            type="button"
+            className="button button-primary"
+            onClick={handleShareCity}
+          >
+            {shared
+              ? "City details copied"
+              : "Share this city"}
+          </button>
         </div>
 
         <div className="city-details-grid">

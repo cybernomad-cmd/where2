@@ -565,6 +565,16 @@
 /*How it Works—Mobile*/
 
 @media (max-width: 767px) {
+  .city-details-actions {
+    margin-bottom: var(--space-5);
+  }
+
+  .city-details-actions .button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
   .how-it-works {
     padding-block: var(--space-16);
   }
@@ -1755,6 +1765,14 @@
   gap: var(--space-8);
   max-width: 1100px;
   margin-bottom: var(--space-10);
+}
+
+.city-details-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: 1100px;
+  margin-bottom: var(--space-6);
 }
 
 .city-details-heading h2 {
