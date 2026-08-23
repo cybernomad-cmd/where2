@@ -9,6 +9,8 @@ import {
   getCountryMetadata,
 } from "../services/countryMetadata";
 
+import CityMap from "./CityMap";
+
 function CityDetails({ city }) {
   const [copied, setCopied] = useState(false);
   const [shared, setShared] = useState(false);
@@ -393,7 +395,9 @@ function CityDetails({ city }) {
               </button>
             )}
           </article>
-        </div>
+                </div>
+
+        <CityMap city={city} />
       </div>
     </section>
   );
