@@ -10,6 +10,7 @@ import Preferences from "./components/Preferences";
 import CitySearch from "./components/CitySearch";
 import WeatherCard from "./components/WeatherCard";
 import WeatherForecast from "./components/WeatherForecast";
+import CityWeatherInsights from "./components/CityWeatherInsights";
 import CityComparison from "./components/CityComparison";
 import CityDetails from "./components/CityDetails";
 import SavedCities from "./components/SavedCities";
@@ -478,7 +479,7 @@ const selectedCityIsSaved = selectedCity
               </div>
             )}
 
-{/*Current Weather Success*/}
+{/* Current Weather Success */}
 
             {weatherStatus === "success" && (
               <>
@@ -492,9 +493,7 @@ const selectedCityIsSaved = selectedCity
                     type="button"
                     className="button button-primary"
                     onClick={() =>
-                      handleSaveCity(
-                        selectedCity
-                      )
+                      handleSaveCity(selectedCity)
                     }
                   >
                     {selectedCityIsSaved
@@ -504,6 +503,17 @@ const selectedCityIsSaved = selectedCity
                 </div>
               </>
             )}
+
+{/* City Weather Insights */}
+
+            {weatherStatus === "success" &&
+              forecastStatus === "success" && (
+                <CityWeatherInsights
+                  city={selectedCity}
+                  weather={weather}
+                  forecast={forecast}
+                />
+              )}
 
 {/* Personalized Recommendation */}
 
@@ -575,11 +585,22 @@ const selectedCityIsSaved = selectedCity
             </ul>
           </div>
         )}
-      </div>
+           </div>
     </section>
   )}
 
-{/*7-Day Forecast Loading*/}
+{/* City Weather Insights */}
+
+            {weatherStatus === "success" &&
+              forecastStatus === "success" && (
+                <CityWeatherInsights
+                  city={selectedCity}
+                  weather={weather}
+                  forecast={forecast}
+                />
+              )}
+
+{/* 7-Day Forecast Loading */}
 
             {forecastStatus === "loading" && (
               <div className="search-state">
