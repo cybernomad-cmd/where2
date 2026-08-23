@@ -61,25 +61,66 @@ function CostOfLiving({ data, cityName }) {
   const breakdownMetrics = [
     {
       label: "Groceries",
-      value: formatIndex(groceries),
+      value: Number(groceries),
       description: "Grocery cost index",
     },
     {
       label: "Rent",
-      value: formatIndex(rent),
+      value: Number(rent),
       description: "Rent cost index",
     },
     {
       label: "Utilities",
-      value: formatIndex(utilities),
+      value: Number(utilities),
       description: "Utilities cost index",
     },
     {
       label: "Transport",
-      value: formatIndex(transport),
+      value: Number(transport),
       description: "Transport cost index",
     },
   ];
+
+  const validBreakdownMetrics =
+    breakdownMetrics.filter((metric) =>
+      Number.isFinite(metric.value)
+    );
+
+  const highestCostCategory =
+    validBreakdownMetrics.length > 0
+      ? validBreakdownMetrics.reduce(
+          (highest, metric) =>
+            metric.value > highest.value
+              ? metric
+              : highest
+        )
+      : null;
+
+  function getCostInsight() {
+    if (!highestCostCategory) {
+      return "Category cost information is currently unavailable.";
+    }
+
+    return `${highestCostCategory.label} has the highest cost index in the available data.`;
+  }
+
+  function getCostLevel() {
+    const numericIndex = Number(cost_index);
+
+    if (!Number.isFinite(numericIndex)) {
+      return "Unavailable";
+    }
+
+    if (numericIndex >= 70) {
+      return "Higher cost";
+    }
+
+    if (numericIndex >= 40) {
+      return "Moderate cost";
+    }
+
+    return "Lower cost";
+  }
 
   return (
     <section
@@ -122,46 +163,95 @@ function CostOfLiving({ data, cityName }) {
           ))}
         </div>
 
+        <div className="cost-insight-card">
+          <div>
+            <p className="eyebrow">
+              Cost insight
+            </p>
+
+            <h3>
+              {highestCostCategory
+                ? `${highestCostCategory.label} is the biggest cost pressure`
+                : "Cost pressure unavailable"}
+            </h3>
+
+            <p>
+              {getCostInsight()}
+            </p>
+          </div>
+
+          <div className="cost-insight-score">
+            <span>Overall level</span>
+
+            <strong>{getCostLevel()}</strong>
+          </div>
+        </div>
+
         <div className="cost-breakdown-header">
           <p className="eyebrow">
             Cost breakdown
           </p>
 
           <h3>Where your money goes</h3>
+
+          <p>
+            Compare the relative cost index across the
+            main categories.
+          </p>
         </div>
 
         <div className="cost-breakdown-grid">
-          {breakdownMetrics.map((metric) => (
-            <article
-              className="cost-breakdown-card"
-              key={metric.label}
-            >
-              <div className="cost-breakdown-top">
-                <span className="cost-card-label">
-                  {metric.label}
-                </span>
+          {breakdownMetrics.map((metric) => {
+            const hasValue =
+              Number.isFinite(metric.value);
 
-                <span
-                  className="cost-card-icon"
+            const barWidth = hasValue
+              ? `${Math.min(
+                  Math.max(metric.value, 0),
+                  100
+                )}%`
+              : "0%";
+
+            return (
+              <article
+                className="cost-breakdown-card"
+                key={metric.label}
+              >
+                <div className="cost-breakdown-top">
+                  <span className="cost-card-label">
+                    {metric.label}
+                  </span>
+
+                  <strong className="cost-breakdown-value">
+                    {hasValue
+                      ? formatIndex(metric.value)
+                      : "Unavailable"}
+                  </strong>
+                </div>
+
+                <div
+                  className="cost-breakdown-bar"
                   aria-hidden="true"
                 >
-                  +
-                </span>
-              </div>
+                  <span
+                    style={{
+                      width: barWidth,
+                    }}
+                  />
+                </div>
 
-              <strong className="cost-breakdown-value">
-                {metric.value}
-              </strong>
-
-              <p>{metric.description}</p>
-            </article>
-          ))}
+                <p>{metric.description}</p>
+              </article>
+            );
+          })}
         </div>
 
         <p className="cost-data-note">
           Cost estimates are provided in USD and are
           intended as a general comparison rather than a
-          personal monthly budget.
+          personal monthly budget. Available category
+          data may represent broader regional or country
+          estimates rather than exact individual expenses.
         </p>
       </div>
     </section>
