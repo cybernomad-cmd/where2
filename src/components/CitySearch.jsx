@@ -63,6 +63,7 @@ function CitySearch({ onCitySelect }) {
       }
 
       setCities(results);
+
       setStatus(
         results.length > 0
           ? "success"
@@ -124,6 +125,51 @@ function CitySearch({ onCitySelect }) {
     inputRef.current?.focus();
   }
 
+  /* Search keyboard shortcut */
+
+  useEffect(() => {
+    function handleSearchShortcut(event) {
+      if (
+        event.key !== "/" ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      const target = event.target;
+
+      if (
+        target instanceof HTMLElement &&
+        (
+          target.isContentEditable ||
+          ["INPUT", "TEXTAREA", "SELECT"].includes(
+            target.tagName
+          )
+        )
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+
+      inputRef.current?.focus();
+    }
+
+    window.addEventListener(
+      "keydown",
+      handleSearchShortcut
+    );
+
+    return () => {
+      window.removeEventListener(
+        "keydown",
+        handleSearchShortcut
+      );
+    };
+  }, []);
+
   function clearFilters() {
     setCountryFilter("all");
     setRegionFilter("all");
@@ -143,6 +189,8 @@ function CitySearch({ onCitySelect }) {
     }, 120);
   }
 
+  /* Debounced search */
+
   useEffect(() => {
     const trimmedQuery = query.trim();
 
@@ -160,21 +208,25 @@ function CitySearch({ onCitySelect }) {
   }, [query]);
 
   const countries = useMemo(() => {
-    return [...new Set(
-      cities
-        .map((city) => city.country)
-        .filter(Boolean)
-    )].sort((a, b) =>
+    return [
+      ...new Set(
+        cities
+          .map((city) => city.country)
+          .filter(Boolean)
+      ),
+    ].sort((a, b) =>
       a.localeCompare(b)
     );
   }, [cities]);
 
   const regions = useMemo(() => {
-    return [...new Set(
-      cities
-        .map((city) => city.admin1)
-        .filter(Boolean)
-    )].sort((a, b) =>
+    return [
+      ...new Set(
+        cities
+          .map((city) => city.admin1)
+          .filter(Boolean)
+      ),
+    ].sort((a, b) =>
       a.localeCompare(b)
     );
   }, [cities]);
@@ -211,6 +263,8 @@ function CitySearch({ onCitySelect }) {
     (regionFilter !== "all" ? 1 : 0) +
     (capitalOnly ? 1 : 0);
 
+  /* Animate search results */
+
   useLayoutEffect(() => {
     if (
       !resultsRef.current ||
@@ -228,48 +282,57 @@ function CitySearch({ onCitySelect }) {
       return undefined;
     }
 
-    const context = gsap.context(() => {
-      gsap.fromTo(
-        ".search-city-card",
-        {
-          y: 24,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.55,
-          stagger: 0.07,
-          ease: "power3.out",
-        }
+    const cards =
+      resultsRef.current.querySelectorAll(
+        ".search-result-card"
       );
-    }, resultsRef);
+
+    if (!cards.length) {
+      return undefined;
+    }
+
+    const animation = gsap.fromTo(
+      cards,
+      {
+        opacity: 0,
+        y: 18,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.45,
+        stagger: 0.06,
+        ease: "power2.out",
+      }
+    );
 
     return () => {
-      context.revert();
+      animation.kill();
     };
   }, [filteredCities]);
 
   return (
     <section
-      className="city-search"
+      className="city-search-section"
       id="city-search"
+      aria-labelledby="city-search-title"
     >
       <div className="page-container">
-        <div className="city-search-heading">
-          <p className="eyebrow">
-            Discover your possibilities
-          </p>
+        <div className="city-search-header">
+          <div>
+            <p className="eyebrow">
+              Find your next place
+            </p>
 
-          <h2 className="section-title">
-            Where could you live?
-          </h2>
+            <h2 id="city-search-title">
+              Search cities
+            </h2>
 
-          <p className="section-description">
-            Search for a city and start exploring
-            the information that could help you
-            decide if it fits your life.
-          </p>
+            <p className="city-search-description">
+              Explore cities around the world and
+              compare the places you're considering.
+            </p>
+          </div>
         </div>
 
         <form
@@ -277,476 +340,384 @@ function CitySearch({ onCitySelect }) {
           onSubmit={handleSubmit}
           role="search"
         >
-          <label htmlFor="city-search-input">
-            Search for a city
-          </label>
+          <div className="city-search-input-wrapper">
+            <Search
+              className="city-search-icon"
+              size={20}
+              aria-hidden="true"
+            />
 
-          <div className="city-search-input-group">
-            <div className="city-search-input-wrapper">
-              <Search
-                className="city-search-input-icon"
-                size={20}
-                strokeWidth={1.8}
-                aria-hidden="true"
-              />
+            <input
+              ref={inputRef}
+              type="search"
+              value={query}
+              onChange={handleInputChange}
+              placeholder="Search for a city..."
+              aria-label="Search for a city"
+              aria-keyshortcuts="Slash"
+              autoComplete="off"
+            />
 
-              <input
-                ref={inputRef}
-                id="city-search-input"
-                type="search"
-                value={query}
-                onChange={handleInputChange}
-                placeholder="Try Nairobi, Lisbon, or Tokyo"
-                autoComplete="off"
-                spellCheck="false"
-                aria-describedby="city-search-help"
-                aria-busy={
-                  status === "loading"
-                }
-              />
+            {query && (
+              <button
+                type="button"
+                className="city-search-clear"
+                onClick={handleClear}
+                aria-label="Clear city search"
+              >
+                <X
+                  size={18}
+                  aria-hidden="true"
+                />
+              </button>
+            )}
+          </div>
 
-              {query && (
-                <button
-                  type="button"
-                  className="city-search-clear"
-                  onClick={handleClear}
-                  aria-label="Clear city search"
-                >
-                  <X
-                    size={18}
-                    strokeWidth={2}
-                  />
-                </button>
-              )}
+          <button
+            type="submit"
+            className="button button-primary city-search-submit"
+            disabled={
+              status === "loading" ||
+              !query.trim()
+            }
+          >
+            {status === "loading" ? (
+              <>
+                <LoaderCircle
+                  size={18}
+                  className="city-search-spinner"
+                  aria-hidden="true"
+                />
+
+                Searching
+              </>
+            ) : (
+              <>
+                Search
+                <ArrowRight
+                  size={18}
+                  aria-hidden="true"
+                />
+              </>
+            )}
+          </button>
+        </form>
+
+        <div className="city-search-helper">
+          <span>
+            Search by city name, then refine the
+            results using the available filters.
+          </span>
+
+          <span className="city-search-shortcut">
+            Press <kbd>/</kbd> to focus search
+          </span>
+        </div>
+
+        {cities.length > 0 && (
+          <div className="city-search-toolbar">
+            <div className="city-search-results-count">
+              <strong>
+                {filteredCities.length}
+              </strong>
+
+              <span>
+                {filteredCities.length === 1
+                  ? "city"
+                  : "cities"}{" "}
+                found
+              </span>
             </div>
 
             <button
-              type="submit"
-              className="button button-primary city-search-submit"
-              disabled={
-                status === "loading" ||
-                !query.trim()
+              type="button"
+              className={`city-filter-toggle ${
+                filtersOpen
+                  ? "is-open"
+                  : ""
+              }`}
+              onClick={() =>
+                setFiltersOpen(
+                  (current) => !current
+                )
               }
+              aria-expanded={filtersOpen}
+              aria-controls="city-search-filters"
             >
-              {status === "loading" ? (
-                <>
-                  <LoaderCircle
-                    className="city-search-spinner"
-                    size={18}
-                    strokeWidth={2}
-                    aria-hidden="true"
-                  />
+              <Filter
+                size={17}
+                aria-hidden="true"
+              />
 
-                  <span>
-                    Searching...
-                  </span>
-                </>
-              ) : (
-                <>
-                  <span>
-                    Search cities
-                  </span>
+              Filters
 
-                  <ArrowRight
-                    size={17}
-                    strokeWidth={2}
-                    aria-hidden="true"
-                  />
-                </>
+              {activeFilterCount > 0 && (
+                <span className="city-filter-count">
+                  {activeFilterCount}
+                </span>
               )}
+
+              <ChevronDown
+                size={17}
+                aria-hidden="true"
+              />
             </button>
           </div>
+        )}
 
-          <p
-            id="city-search-help"
-            className="city-search-help"
+        {filtersOpen && cities.length > 0 && (
+          <div
+            className="city-search-filters"
+            id="city-search-filters"
           >
-            Start typing to search automatically,
-            or press Enter to search.
-          </p>
-        </form>
+            <div className="city-search-filter-group">
+              <label htmlFor="country-filter">
+                Country
+              </label>
 
-        <div
-          className="city-search-results"
-          aria-live="polite"
-          ref={resultsRef}
-        >
-          {status === "loading" && (
-            <div className="search-state search-state-loading">
-              <div className="loading-pulse" />
+              <select
+                id="country-filter"
+                value={countryFilter}
+                onChange={(event) =>
+                  setCountryFilter(
+                    event.target.value
+                  )
+                }
+              >
+                <option value="all">
+                  All countries
+                </option>
 
-              <div>
-                <strong>
-                  Finding cities...
-                </strong>
-
-                <p>
-                  Searching locations that match "
-                  {query.trim()}"
-                </p>
-              </div>
+                {countries.map((country) => (
+                  <option
+                    value={country}
+                    key={country}
+                  >
+                    {country}
+                  </option>
+                ))}
+              </select>
             </div>
-          )}
 
-          {status === "error" && (
-            <div
-              className="search-state search-state-error"
-              role="alert"
+            <div className="city-search-filter-group">
+              <label htmlFor="region-filter">
+                Region
+              </label>
+
+              <select
+                id="region-filter"
+                value={regionFilter}
+                onChange={(event) =>
+                  setRegionFilter(
+                    event.target.value
+                  )
+                }
+              >
+                <option value="all">
+                  All regions
+                </option>
+
+                {regions.map((region) => (
+                  <option
+                    value={region}
+                    key={region}
+                  >
+                    {region}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <label className="city-search-capital-filter">
+              <input
+                type="checkbox"
+                checked={capitalOnly}
+                onChange={(event) =>
+                  setCapitalOnly(
+                    event.target.checked
+                  )
+                }
+              />
+
+              <span>
+                Capital cities only
+              </span>
+            </label>
+
+            {activeFilterCount > 0 && (
+              <button
+                type="button"
+                className="button button-secondary city-search-clear-filters"
+                onClick={clearFilters}
+              >
+                Clear filters
+              </button>
+            )}
+          </div>
+        )}
+
+        {status === "loading" && (
+          <div
+            className="search-state"
+            role="status"
+            aria-live="polite"
+          >
+            <LoaderCircle
+              className="search-state-icon city-search-spinner"
+              size={28}
+              aria-hidden="true"
+            />
+
+            <p>
+              Searching for cities matching{" "}
+              <strong>{query}</strong>...
+            </p>
+          </div>
+        )}
+
+        {status === "error" && (
+          <div
+            className="search-state search-state-error"
+            role="alert"
+          >
+            <h3>
+              We couldn't complete the search.
+            </h3>
+
+            <p>{error}</p>
+
+            <button
+              type="button"
+              className="button button-secondary"
+              onClick={() =>
+                performSearch(query)
+              }
             >
+              Try again
+            </button>
+          </div>
+        )}
+
+        {status === "empty" && (
+          <div
+            className="search-state"
+            role="status"
+            aria-live="polite"
+          >
+            <Search
+              className="search-state-icon"
+              size={28}
+              aria-hidden="true"
+            />
+
+            <h3>
+              No cities found
+            </h3>
+
+            <p>
+              We couldn't find a city matching{" "}
+              <strong>{query}</strong>. Try a
+              different spelling or search term.
+            </p>
+          </div>
+        )}
+
+        {status === "success" &&
+          filteredCities.length === 0 && (
+            <div
+              className="search-state"
+              role="status"
+              aria-live="polite"
+            >
+              <Filter
+                className="search-state-icon"
+                size={28}
+                aria-hidden="true"
+              />
+
               <h3>
-                We couldn't complete that
-                search.
+                No cities match these filters
               </h3>
 
-              <p>{error}</p>
+              <p>
+                Try changing your filters or clear
+                them to see all search results.
+              </p>
 
               <button
                 type="button"
                 className="button button-secondary"
-                onClick={() =>
-                  performSearch(query)
-                }
+                onClick={clearFilters}
               >
-                Try again
+                Clear filters
               </button>
             </div>
           )}
 
-          {status === "empty" && (
-            <div className="search-state search-state-empty">
-              <div className="search-empty-icon">
-                <MapPin
-                  size={24}
-                  strokeWidth={1.7}
-                  aria-hidden="true"
-                />
-              </div>
-
-              <div>
-                <h3>
-                  No cities found.
-                </h3>
-
-                <p>
-                  Try another city name or
-                  check your spelling.
-                </p>
-              </div>
-            </div>
-          )}
-
-          {status === "success" && (
-            <>
-              <div className="city-search-results-header">
-                <div>
-                  <p className="eyebrow">
-                    Search results
-                  </p>
-
-                  <h3>
-                    {filteredCities.length}{" "}
-                    {filteredCities.length === 1
-                      ? "city"
-                      : "cities"}{" "}
-                    found
-                  </h3>
-                </div>
-
-                <span>
-                  Showing matches for "
-                  {query.trim()}"
-                </span>
-              </div>
-
-              <div className="city-search-filter-bar">
-                <button
-                  type="button"
-                  className={`city-search-filter-toggle ${
-                    filtersOpen
-                      ? "is-open"
-                      : ""
-                  }`}
-                  onClick={() =>
-                    setFiltersOpen(
-                      (current) =>
-                        !current
-                    )
-                  }
-                  aria-expanded={
-                    filtersOpen
-                  }
-                  aria-controls="city-search-filters"
-                >
-                  <Filter
-                    size={17}
-                    strokeWidth={1.8}
-                    aria-hidden="true"
-                  />
-
-                  <span>
-                    Filters
-                  </span>
-
-                  {activeFilterCount > 0 && (
-                    <span className="city-search-filter-count">
-                      {activeFilterCount}
-                    </span>
-                  )}
-
-                  <ChevronDown
-                    className="city-search-filter-chevron"
-                    size={17}
-                    strokeWidth={1.8}
-                    aria-hidden="true"
-                  />
-                </button>
-
-                {activeFilterCount > 0 && (
-                  <button
-                    type="button"
-                    className="city-search-clear-filters"
-                    onClick={clearFilters}
-                  >
-                    Clear filters
-                  </button>
-                )}
-              </div>
-
-              {filtersOpen && (
-                <div
-                  id="city-search-filters"
-                  className="city-search-filters"
-                >
-                  <div className="city-search-filter-field">
-                    <label htmlFor="country-filter">
-                      Country
-                    </label>
-
-                    <select
-                      id="country-filter"
-                      value={countryFilter}
-                      onChange={(event) =>
-                        setCountryFilter(
-                          event.target.value
-                        )
-                      }
-                    >
-                      <option value="all">
-                        All countries
-                      </option>
-
-                      {countries.map(
-                        (country) => (
-                          <option
-                            key={country}
-                            value={country}
-                          >
-                            {country}
-                          </option>
-                        )
-                      )}
-                    </select>
-                  </div>
-
-                  <div className="city-search-filter-field">
-                    <label htmlFor="region-filter">
-                      Region
-                    </label>
-
-                    <select
-                      id="region-filter"
-                      value={regionFilter}
-                      onChange={(event) =>
-                        setRegionFilter(
-                          event.target.value
-                        )
-                      }
-                    >
-                      <option value="all">
-                        All regions
-                      </option>
-
-                      {regions.map(
-                        (region) => (
-                          <option
-                            key={region}
-                            value={region}
-                          >
-                            {region}
-                          </option>
-                        )
-                      )}
-                    </select>
-                  </div>
-
-                  <label className="city-search-capital-filter">
-                    <input
-                      type="checkbox"
-                      checked={capitalOnly}
-                      onChange={(event) =>
-                        setCapitalOnly(
-                          event.target.checked
-                        )
-                      }
-                    />
-
-                    <span>
-                      <strong>
-                        Capital cities only
-                      </strong>
-
-                      <small>
-                        Show only official
-                        capital locations
-                      </small>
-                    </span>
-                  </label>
-                </div>
-              )}
-
-              {filteredCities.length === 0 ? (
-                <div className="search-state search-state-empty search-filter-empty">
-                  <div className="search-empty-icon">
-                    <Filter
-                      size={24}
-                      strokeWidth={1.7}
+        {filteredCities.length > 0 && (
+          <div
+            className="city-search-results"
+            ref={resultsRef}
+          >
+            {filteredCities.map((city) => (
+              <article
+                className="search-result-card"
+                key={city.id}
+              >
+                <div className="search-result-card-main">
+                  <div className="search-result-icon">
+                    <MapPin
+                      size={20}
                       aria-hidden="true"
                     />
                   </div>
 
-                  <div>
-                    <h3>
-                      No cities match these
-                      filters.
-                    </h3>
+                  <div className="search-result-content">
+                    <div className="search-result-heading">
+                      <h3>{city.name}</h3>
 
-                    <p>
-                      Try changing your filters
-                      or clear them to see all
-                      search results.
+                      {city.country_code && (
+                        <span className="search-result-country-code">
+                          {city.country_code}
+                        </span>
+                      )}
+                    </div>
+
+                    <p className="search-result-location">
+                      {city.admin1
+                        ? `${city.admin1}, ${city.country}`
+                        : city.country}
                     </p>
 
-                    <button
-                      type="button"
-                      className="button button-secondary"
-                      onClick={
-                        clearFilters
-                      }
-                    >
-                      Clear filters
-                    </button>
+                    <p className="search-result-coordinates">
+                      {Number(
+                        city.latitude
+                      ).toFixed(4)}
+                      ,{" "}
+                      {Number(
+                        city.longitude
+                      ).toFixed(4)}
+                    </p>
                   </div>
                 </div>
-              ) : (
-                <div className="city-search-grid">
-                  {filteredCities.map(
-                    (city) => (
-                      <article
-                        className="search-city-card"
-                        key={city.id}
-                      >
-                        <div className="search-city-card-top">
-                          <span className="city-country">
-                            {city.country}
-                          </span>
 
-                          {city.country_code && (
-                            <span className="city-country-code">
-                              {
-                                city.country_code
-                              }
-                            </span>
-                          )}
-                        </div>
-
-                        <div className="search-city-location">
-                          <span
-                            className="search-city-location-icon"
-                            aria-hidden="true"
-                          >
-                            <MapPin
-                              size={19}
-                              strokeWidth={1.8}
-                            />
-                          </span>
-
-                          <div>
-                            <h3>
-                              {city.name}
-                            </h3>
-
-                            <p>
-                              {city.admin1
-                                ? `${city.admin1}, ${city.country}`
-                                : city.country}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="search-city-badges">
-                          {city.feature_code ===
-                            "PPLC" && (
-                            <span className="search-city-badge">
-                              Capital
-                            </span>
-                          )}
-
-                          {city.admin1 && (
-                            <span className="search-city-badge search-city-badge-muted">
-                              {city.admin1}
-                            </span>
-                          )}
-                        </div>
-
-                        <div className="search-city-coordinates">
-                          <span>
-                            <strong>
-                              LAT
-                            </strong>{" "}
-                            {Number(
-                              city.latitude
-                            ).toFixed(4)}
-                          </span>
-
-                          <span>
-                            <strong>
-                              LON
-                            </strong>{" "}
-                            {Number(
-                              city.longitude
-                            ).toFixed(4)}
-                          </span>
-                        </div>
-
-                        <button
-                          type="button"
-                          className="weather-tab"
-                          onClick={() =>
-                            handleCitySelect(
-                              city
-                            )
-                          }
-                          aria-label={`View weather for ${city.name}`}
-                        >
-                          <span>
-                            Explore{" "}
-                            {city.name}
-                          </span>
-
-                          <ArrowRight
-                            size={17}
-                            strokeWidth={2}
-                            aria-hidden="true"
-                          />
-                        </button>
-                      </article>
-                    )
-                  )}
-                </div>
-              )}
-            </>
-          )}
-        </div>
+                <button
+                  type="button"
+                  className="button button-secondary search-result-action"
+                  onClick={() =>
+                    handleCitySelect(city)
+                  }
+                >
+                  Explore city
+                  <ArrowRight
+                    size={17}
+                    aria-hidden="true"
+                  />
+                </button>
+              </article>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
