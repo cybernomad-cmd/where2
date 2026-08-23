@@ -1,5 +1,14 @@
 import { useState } from "react";
 
+import {
+  Copy,
+  Share2,
+} from "lucide-react";
+
+import {
+  getCountryMetadata,
+} from "../services/countryMetadata";
+
 function CityDetails({ city }) {
   const [copied, setCopied] = useState(false);
   const [shared, setShared] = useState(false);
@@ -8,7 +17,9 @@ function CityDetails({ city }) {
     return null;
   }
 
-  const population = Number(city.population);
+  const countryMetadata =
+    getCountryMetadata(city.countryCode);
+    const population = Number(city.population);
 
   function formatNumber(value) {
     if (!Number.isFinite(value) || value <= 0) {
@@ -53,13 +64,65 @@ function CityDetails({ city }) {
 
     return [
       `${city.name}, ${city.country}`,
-      city.region ? `Region: ${city.region}` : "",
-      city.timezone ? `Timezone: ${city.timezone}` : "",
-      coordinates ? `Coordinates: ${coordinates}` : "",
+      city.region
+        ? `Region: ${city.region}`
+        : "",
+      city.timezone
+        ? `Timezone: ${city.timezone}`
+        : "",
+      coordinates
+        ? `Coordinates: ${coordinates}`
+        : "",
     ]
       .filter(Boolean)
       .join("\n");
   }
+
+  function getLocalTime() {
+    if (!city.timezone) {
+      return null;
+    }
+
+    try {
+      return new Intl.DateTimeFormat("en-US", {
+        timeZone: city.timezone,
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+      }).format(new Date());
+    } catch {
+      return null;
+    }
+  }
+
+  function getUtcOffset() {
+    if (!city.timezone) {
+      return null;
+    }
+
+    try {
+      const parts = new Intl.DateTimeFormat(
+        "en-US",
+        {
+          timeZone: city.timezone,
+          timeZoneName: "longOffset",
+          hour: "2-digit",
+          minute: "2-digit",
+        }
+      ).formatToParts(new Date());
+
+      const offset = parts.find(
+        (part) => part.type === "timeZoneName"
+      );
+
+      return offset?.value || null;
+    } catch {
+      return null;
+    }
+  }
+
+  const localTime = getLocalTime();
+  const utcOffset = getUtcOffset();
 
   async function handleCopyCoordinates() {
     const coordinates = getCoordinateValue();
@@ -130,13 +193,23 @@ function CityDetails({ city }) {
             </p>
 
             <h2>
-              {city.name}, {city.country}
+              {city.countryCode && (
+  <img
+    className="city-details-flag"
+    src={`https://flagcdn.com/32x24/${city.countryCode.toLowerCase()}.png`}
+    alt=""
+    aria-hidden="true"
+  />
+)}
+
+{city.name}, {city.country}
             </h2>
 
             <p>
-              Get a clearer picture of the place you're
-              exploring with essential geographic and
-              location information.
+              Get a clearer picture of the place
+              you're exploring with essential
+              geographic, location, and local
+              information.
             </p>
           </div>
 
@@ -153,6 +226,11 @@ function CityDetails({ city }) {
             className="button button-primary"
             onClick={handleShareCity}
           >
+            <Share2
+              size={17}
+              aria-hidden="true"
+            />
+
             {shared
               ? "City details copied"
               : "Share this city"}
@@ -166,8 +244,17 @@ function CityDetails({ city }) {
             </div>
 
             <strong>
-              {city.country || "Not available"}
-            </strong>
+  {city.countryCode && (
+    <img
+      className="city-detail-inline-flag"
+      src={`https://flagcdn.com/24x18/${city.countryCode.toLowerCase()}.png`}
+      alt=""
+      aria-hidden="true"
+    />
+  )}
+
+  {city.country || "Not available"}
+</strong>
 
             {city.countryCode && (
               <small>
@@ -232,6 +319,49 @@ function CityDetails({ city }) {
             </small>
           </article>
 
+          <article className="city-detail-card">
+            <div className="city-detail-card-label">
+              Local time
+            </div>
+
+            <strong>
+              {localTime || "Not available"}
+            </strong>
+
+            <small>
+              {utcOffset ||
+                "Local time unavailable"}
+            </small>
+          </article>
+
+          <article className="city-detail-card">
+            <div className="city-detail-card-label">
+              Currency
+            </div>
+
+            <strong>
+              {countryMetadata.currency}
+            </strong>
+
+            <small>
+              Local currency
+            </small>
+          </article>
+
+          <article className="city-detail-card">
+            <div className="city-detail-card-label">
+              Languages
+            </div>
+
+            <strong>
+              {countryMetadata.languages}
+            </strong>
+
+            <small>
+              Commonly spoken languages
+            </small>
+          </article>
+
           <article className="city-detail-card city-detail-card-coordinates">
             <div className="city-detail-card-label">
               Coordinates
@@ -252,6 +382,11 @@ function CityDetails({ city }) {
                 className="city-details-copy-button"
                 onClick={handleCopyCoordinates}
               >
+                <Copy
+                  size={15}
+                  aria-hidden="true"
+                />
+
                 {copied
                   ? "Coordinates copied"
                   : "Copy coordinates"}
