@@ -5366,3 +5366,71 @@ html {
     font-size: 13px;
   }
 }
+
+/*Saved Cities Actions*/
+
+.saved-cities-heading-content {
+  min-width: 0;
+}
+
+.saved-cities-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.saved-cities-clear {
+  white-space: nowrap;
+}
+
+.saved-cities-heading-empty {
+  align-items: center;
+}
+
+.saved-city-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.saved-city-actions .button {
+  flex: 1;
+}
+
+@media (max-width: 700px) {
+  .saved-cities-heading-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .saved-cities-heading-empty
+    .saved-cities-heading-actions {
+    width: auto;
+  }
+
+  .saved-city-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .saved-city-actions .button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .saved-cities-heading-actions {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .saved-cities-count {
+    align-self: flex-start;
+  }
+
+  .saved-cities-clear {
+    width: 100%;
+  }
+}

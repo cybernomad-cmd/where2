@@ -34,6 +34,7 @@ import {
   isCitySaved,
   toggleSavedCity,
   removeSavedCity,
+  clearSavedCities,
 } from "./services/savedCitiesService";
 
 function App() {
@@ -345,90 +346,81 @@ function App() {
     setComparisonWeatherStatus("loading");
   }
 
-  /*Save City*/
+/* Save City */
 
-  function handleSaveCity(city) {
-    const updatedCities = toggleSavedCity(city);
+function handleSaveCity(city) {
+  const updatedCities = toggleSavedCity(city);
 
-    setSavedCities(updatedCities);
-  }
+  setSavedCities(updatedCities);
+}
 
-  /*Remove Saved City*/
+/* Remove Saved City */
 
-  function handleRemoveCity(cityId) {
-    const updatedCities =
-      removeSavedCity(cityId);
+function handleRemoveCity(cityId) {
+  const updatedCities = removeSavedCity(cityId);
 
-    setSavedCities(updatedCities);
-  }
+  setSavedCities(updatedCities);
+}
 
-  /*Select Saved City*/
+/* Clear Saved Cities */
 
-  function handleSavedCitySelect(city) {
-    setSelectedCity(city);
-    setComparisonCity(null);
+function handleClearSavedCities() {
+  const updatedCities = clearSavedCities();
 
-    setWeather(null);
-    setWeatherError("");
-    setWeatherStatus("loading");
+  setSavedCities(updatedCities);
+}
 
-    setForecast(null);
-    setForecastError("");
-    setForecastStatus("loading");
+/* Select Saved City */
 
-    setCostOfLiving(null);
-    setCostOfLivingError("");
-    setCostOfLivingStatus("loading");
+function handleSavedCitySelect(city) {
+  setSelectedCity(city);
+  setComparisonCity(null);
 
-    setComparisonWeather(null);
-    setComparisonWeatherError("");
-    setComparisonWeatherStatus("idle");
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }
+/* Recommendation */
 
-  /*Recommendation*/
+const recommendation =
+  calculateRecommendation(
+    preferences,
+    weather
+  );
 
-  const recommendation =
-    calculateRecommendation(
-      preferences,
-      weather
-    );
+/* City Comparison */
 
-  /*City Comparison*/
-
-  const comparison =
-    comparisonWeatherStatus === "success"
-      ? compareCities(
-          selectedCity,
-          weather,
-          comparisonCity,
-          comparisonWeather,
-          preferences
-        )
-      : null;
-
-  const comparisonWinner =
-    comparison
-      ? getComparisonWinner(comparison)
-      : null;
-
-/*City Details*/
-
-  const cityDetails = selectedCity
-    ? getCityDetails(selectedCity)
+const comparison =
+  comparisonWeatherStatus === "success"
+    ? compareCities(
+        selectedCity,
+        weather,
+        comparisonCity,
+        comparisonWeather,
+        preferences
+      )
     : null;
 
-/*Saved City Status*/
+const comparisonWinner =
+  comparison
+    ? getComparisonWinner(comparison)
+    : null;
 
-  const selectedCityIsSaved = selectedCity
-    ? isCitySaved(selectedCity.id)
-    : false;
+/* City Details */
 
-/*RENDER*/
+const cityDetails = selectedCity
+  ? getCityDetails(selectedCity)
+  : null;
+
+/* Saved City Status */
+
+const selectedCityIsSaved = selectedCity
+  ? isCitySaved(selectedCity.id)
+  : false;
+
+/* RENDER */
 
   return (
     <main className="design-system">
@@ -447,11 +439,12 @@ function App() {
         onCitySelect={handleCitySelect}
       />
 
-      <SavedCities
-        cities={savedCities}
-        onRemoveCity={handleRemoveCity}
-        onSelectCity={handleSavedCitySelect}
-      />
+<SavedCities
+  cities={savedCities}
+  onRemoveCity={handleRemoveCity}
+  onSelectCity={handleSavedCitySelect}
+  onClearCities={handleClearSavedCities}
+/>
 
 {/*SELECTED CITY WEATHER AREA*/}
 
