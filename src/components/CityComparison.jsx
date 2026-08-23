@@ -1,168 +1,281 @@
+function Metric({ label, value }) {
+  return (
+    <div className="comparison-metric">
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
+  );
+}
+
 function CityComparison({
   comparison,
   winner,
+  selectedCity,
+  comparisonCity,
 }) {
-  if (!comparison) {
+  if (
+    !comparison ||
+    !selectedCity ||
+    !comparisonCity
+  ) {
     return null;
   }
 
-  const { cityA, cityB } = comparison;
+  const cityA = comparison.cityA;
+  const cityB = comparison.cityB;
 
-  function formatTemperature(value) {
-    return `${Math.round(Number(value))}°C`;
-  }
+  const cityAIsWinner =
+    winner?.cityId === selectedCity.id;
+
+  const cityBIsWinner =
+    winner?.cityId === comparisonCity.id;
 
   return (
     <section
       className="city-comparison"
-      aria-label="City comparison"
+      id="city-comparison"
+      aria-labelledby="city-comparison-title"
     >
       <div className="page-container">
         <div className="city-comparison-heading">
-          <p className="eyebrow">Compare cities</p>
+          <p className="eyebrow">City comparison</p>
 
-          <h2>Which city fits you better?</h2>
+          <h2 id="city-comparison-title">
+            Which city fits you better?
+          </h2>
 
           <p>
-            Compare the weather and personalized match for
-            the cities you're considering.
+            Compare your selected cities using current weather
+            conditions and your personal preferences.
           </p>
         </div>
 
         {winner && (
-          <div className="comparison-winner">
-            <p className="eyebrow">WHERE2 recommendation</p>
+          <div
+            className="comparison-winner"
+            role="status"
+            aria-live="polite"
+          >
+            <p className="eyebrow">
+              Personalized recommendation
+            </p>
 
-            <h3>{winner.label}</h3>
+            <h3>
+              {winner.cityName} is the better match for you.
+            </h3>
+
+            <p className="comparison-winner-reason">
+              {winner.reason}
+            </p>
           </div>
         )}
 
         <div className="comparison-grid">
-          <article className="comparison-card">
+          <article
+            className={[
+              "comparison-card",
+              cityAIsWinner
+                ? "comparison-card-winner"
+                : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
             <div className="comparison-card-header">
               <div>
                 <p className="comparison-label">
                   City A
                 </p>
 
-                <h3>
-                  {cityA.city.name}, {cityA.city.country}
-                </h3>
+                <h3>{cityA.name}</h3>
+
+                <p className="comparison-location">
+                  {cityA.admin1
+                    ? `${cityA.admin1}, ${cityA.country}`
+                    : cityA.country}
+                </p>
               </div>
 
-              <span className="comparison-score">
-                {cityA.recommendation.score}
-              </span>
+              <div
+                className="comparison-score"
+                aria-label={`${cityA.score} out of 100`}
+              >
+                {cityA.score}
+              </div>
             </div>
 
+            {cityAIsWinner && (
+              <div className="comparison-best-match">
+                Best match
+              </div>
+            )}
+
             <div className="comparison-condition">
-              <span>Current conditions</span>
+              <span>
+                Current conditions
+              </span>
 
               <strong>
-                {formatTemperature(
-                  cityA.weather.temperature_2m
-                )}
+                {cityA.weather?.temperature !==
+                undefined
+                  ? `${Math.round(
+                      cityA.weather.temperature
+                    )}°`
+                  : "Unavailable"}
               </strong>
             </div>
 
             <div className="comparison-details">
-              <div>
-                <span>Feels like</span>
+              <Metric
+                label="Feels like"
+                value={
+                  cityA.weather?.apparentTemperature !==
+                  undefined
+                    ? `${Math.round(
+                        cityA.weather.apparentTemperature
+                      )}°`
+                    : "Unavailable"
+                }
+              />
 
-                <strong>
-                  {formatTemperature(
-                    cityA.weather.apparent_temperature
-                  )}
-                </strong>
-              </div>
+              <Metric
+                label="Humidity"
+                value={
+                  cityA.weather?.relativeHumidity !==
+                  undefined
+                    ? `${Math.round(
+                        cityA.weather.relativeHumidity
+                      )}%`
+                    : "Unavailable"
+                }
+              />
 
-              <div>
-                <span>Humidity</span>
+              <Metric
+                label="Wind"
+                value={
+                  cityA.weather?.windSpeed !==
+                  undefined
+                    ? `${Math.round(
+                        cityA.weather.windSpeed
+                      )} km/h`
+                    : "Unavailable"
+                }
+              />
 
-                <strong>
-                  {cityA.weather.relative_humidity_2m}%
-                </strong>
-              </div>
-
-              <div>
-                <span>Wind</span>
-
-                <strong>
-                  {cityA.weather.wind_speed_10m} km/h
-                </strong>
-              </div>
+              <Metric
+                label="Personal fit"
+                value={`${cityA.score}/100`}
+              />
             </div>
 
-            <div className="comparison-fit">
-              <span>Personalized fit</span>
+            <div className="comparison-recommendation">
+              <span>Recommendation</span>
 
-              <strong>
-                {cityA.recommendation.label}
-              </strong>
+              <p>{cityA.recommendation}</p>
             </div>
           </article>
 
-          <article className="comparison-card">
+          <article
+            className={[
+              "comparison-card",
+              cityBIsWinner
+                ? "comparison-card-winner"
+                : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
             <div className="comparison-card-header">
               <div>
                 <p className="comparison-label">
                   City B
                 </p>
 
-                <h3>
-                  {cityB.city.name}, {cityB.city.country}
-                </h3>
+                <h3>{cityB.name}</h3>
+
+                <p className="comparison-location">
+                  {cityB.admin1
+                    ? `${cityB.admin1}, ${cityB.country}`
+                    : cityB.country}
+                </p>
               </div>
 
-              <span className="comparison-score">
-                {cityB.recommendation.score}
-              </span>
+              <div
+                className="comparison-score"
+                aria-label={`${cityB.score} out of 100`}
+              >
+                {cityB.score}
+              </div>
             </div>
 
+            {cityBIsWinner && (
+              <div className="comparison-best-match">
+                Best match
+              </div>
+            )}
+
             <div className="comparison-condition">
-              <span>Current conditions</span>
+              <span>
+                Current conditions
+              </span>
 
               <strong>
-                {formatTemperature(
-                  cityB.weather.temperature_2m
-                )}
+                {cityB.weather?.temperature !==
+                undefined
+                  ? `${Math.round(
+                      cityB.weather.temperature
+                    )}°`
+                  : "Unavailable"}
               </strong>
             </div>
 
             <div className="comparison-details">
-              <div>
-                <span>Feels like</span>
+              <Metric
+                label="Feels like"
+                value={
+                  cityB.weather?.apparentTemperature !==
+                  undefined
+                    ? `${Math.round(
+                        cityB.weather.apparentTemperature
+                      )}°`
+                    : "Unavailable"
+                }
+              />
 
-                <strong>
-                  {formatTemperature(
-                    cityB.weather.apparent_temperature
-                  )}
-                </strong>
-              </div>
+              <Metric
+                label="Humidity"
+                value={
+                  cityB.weather?.relativeHumidity !==
+                  undefined
+                    ? `${Math.round(
+                        cityB.weather.relativeHumidity
+                      )}%`
+                    : "Unavailable"
+                }
+              />
 
-              <div>
-                <span>Humidity</span>
+              <Metric
+                label="Wind"
+                value={
+                  cityB.weather?.windSpeed !==
+                  undefined
+                    ? `${Math.round(
+                        cityB.weather.windSpeed
+                      )} km/h`
+                    : "Unavailable"
+                }
+              />
 
-                <strong>
-                  {cityB.weather.relative_humidity_2m}%
-                </strong>
-              </div>
-
-              <div>
-                <span>Wind</span>
-
-                <strong>
-                  {cityB.weather.wind_speed_10m} km/h
-                </strong>
-              </div>
+              <Metric
+                label="Personal fit"
+                value={`${cityB.score}/100`}
+              />
             </div>
 
-            <div className="comparison-fit">
-              <span>Personalized fit</span>
+            <div className="comparison-recommendation">
+              <span>Recommendation</span>
 
-              <strong>
-                {cityB.recommendation.label}
-              </strong>
+              <p>{cityB.recommendation}</p>
             </div>
           </article>
         </div>

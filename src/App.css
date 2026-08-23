@@ -5434,3 +5434,136 @@ html {
     width: 100%;
   }
 }
+
+/*City Comparison Enhancements*/
+
+.comparison-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.comparison-card-winner {
+  border-color: var(--color-primary);
+  box-shadow:
+    0 16px 40px rgba(15, 23, 42, 0.08),
+    0 0 0 1px var(--color-primary-light);
+}
+
+.comparison-card-winner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  height: 3px;
+  background: var(--color-primary);
+}
+
+.comparison-location {
+  margin-top: var(--space-2);
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.comparison-best-match {
+  display: inline-flex;
+  align-items: center;
+  margin-top: var(--space-4);
+  padding: 6px 10px;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.comparison-winner {
+  position: relative;
+}
+
+.comparison-winner-reason {
+  max-width: 680px;
+  margin-top: var(--space-3);
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.comparison-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.comparison-metric span {
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+.comparison-metric strong {
+  color: var(--color-heading);
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.comparison-recommendation {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+.comparison-recommendation > span {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.comparison-recommendation p {
+  margin: 0;
+  color: var(--color-heading);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.comparison-condition {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-block: var(--space-6);
+  padding: var(--space-4);
+  background: var(--color-background);
+  border-radius: var(--radius-md);
+}
+
+.comparison-condition span {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+.comparison-condition strong {
+  color: var(--color-heading);
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.comparison-winner h3 {
+  margin-bottom: var(--space-2);
+}
+
+@media (max-width: 767px) {
+  .comparison-condition {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .comparison-best-match {
+    margin-top: var(--space-3);
+  }
+}
