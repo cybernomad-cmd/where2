@@ -1,13 +1,17 @@
 import { getWeatherCondition } from "../services/weatherConditions";
 import WeatherIcon from "./WeatherIcon";
 
-function formatForecastDate(dateString) {
-  const date = new Date(`${dateString}T12:00:00`);
+function getDayName(dateString, index) {
+  if (index === 0) {
+    return "Today";
+  }
+
+  const date = new Date(
+    `${dateString}T12:00:00`
+  );
 
   return new Intl.DateTimeFormat("en-US", {
     weekday: "short",
-    month: "short",
-    day: "numeric",
   }).format(date);
 }
 
@@ -19,6 +23,7 @@ function WeatherForecast({ city, forecast }) {
   const forecastDays = forecast.time.map(
     (date, index) => ({
       date,
+      dayName: getDayName(date, index),
       weatherCode: forecast.weather_code[index],
       condition: getWeatherCondition(
         forecast.weather_code[index]
@@ -33,45 +38,56 @@ function WeatherForecast({ city, forecast }) {
   );
 
   return (
-    <section className="weather-forecast">
-      <div className="weather-forecast-heading">
+    <section
+      className="weather-forecast-dashboard"
+      aria-label="Seven day weather forecast"
+    >
+      <div className="weather-forecast-dashboard-header">
         <div>
-          <p className="eyebrow">Looking ahead</p>
+          <p className="dashboard-eyebrow">
+            WEATHER OUTLOOK
+          </p>
 
-          <h2>7-day forecast</h2>
+          <h3>7-day forecast</h3>
         </div>
 
-        <p>
-          See how the weather could change in{" "}
-          {city.name} over the next week.
-        </p>
+        <button
+          type="button"
+          className="forecast-view-button"
+        >
+          View full forecast →
+        </button>
       </div>
 
-      <div className="forecast-grid">
-        {forecastDays.map((day) => (
+      <div className="forecast-dashboard-grid">
+        {forecastDays.map((day, index) => (
           <article
-            className="forecast-card"
+            className={`forecast-dashboard-card ${
+              index === 0
+                ? "forecast-dashboard-card-active"
+                : ""
+            }`}
             key={day.date}
           >
-            <p className="forecast-date">
-              {formatForecastDate(day.date)}
-            </p>
+            <span className="forecast-dashboard-day">
+              {day.dayName}
+            </span>
 
             <div
-              className="forecast-icon"
+              className="forecast-dashboard-icon"
               aria-hidden="true"
             >
               <WeatherIcon
                 code={day.weatherCode}
-                size={82}
+                size={48}
               />
             </div>
 
-            <p className="forecast-condition">
+            <span className="forecast-dashboard-condition">
               {day.condition}
-            </p>
+            </span>
 
-            <div className="forecast-temperatures">
+            <div className="forecast-dashboard-temperatures">
               <strong>
                 {Math.round(day.maxTemperature)}°
               </strong>
@@ -81,13 +97,9 @@ function WeatherForecast({ city, forecast }) {
               </span>
             </div>
 
-            <div className="forecast-rain">
-              <span>Rain chance</span>
-
-              <strong>
-                {day.precipitationProbability}%
-              </strong>
-            </div>
+            <span className="forecast-dashboard-rain">
+              {day.precipitationProbability}% rain
+            </span>
           </article>
         ))}
       </div>

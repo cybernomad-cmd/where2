@@ -481,95 +481,78 @@ const selectedCityIsSaved = selectedCity
 
 {/* Current Weather Success */}
 
-            {weatherStatus === "success" && (
-              <>
-                <WeatherCard
-                  city={selectedCity}
-                  weather={weather}
-                />
+{weatherStatus === "success" && (
+  <>
+    <WeatherCard
+      city={selectedCity}
+      weather={weather}
+      isSaved={selectedCityIsSaved}
+      onSave={handleSaveCity}
+    />
 
-                <div className="city-save-action">
-                  <button
-                    type="button"
-                    className="button button-primary"
-                    onClick={() =>
-                      handleSaveCity(selectedCity)
-                    }
-                  >
-                    {selectedCityIsSaved
-                      ? "Remove from saved cities"
-                      : "Save this city"}
-                  </button>
-                </div>
-              </>
-            )}
+    {/* City Weather Insights */}
 
-{/* City Weather Insights */}
+    {forecastStatus === "success" && (
+      <CityWeatherInsights
+        city={selectedCity}
+        weather={weather}
+        forecast={forecast}
+      />
+    )}
 
-            {weatherStatus === "success" &&
-              forecastStatus === "success" && (
-                <CityWeatherInsights
-                  city={selectedCity}
-                  weather={weather}
-                  forecast={forecast}
-                />
-              )}
+    {/* Personalized Recommendation */}
 
-{/* Personalized Recommendation */}
-
-{weatherStatus === "success" &&
-  recommendation.label !== "Not enough information" && (
-    <section
-      className="recommendation-section"
-      aria-label="Personalized city recommendation"
-    >
-      <div className="recommendation-card">
-        <div className="recommendation-header">
-          <div className="recommendation-heading">
-            <p className="eyebrow">
-              Your WHERE2 match
-            </p>
-
-            <h2>
-              {recommendation.label}
-            </h2>
-
-            <p className="recommendation-intro">
-              This recommendation is based on your
-              preferences and the current weather
-              conditions in {selectedCity.name}.
-            </p>
-          </div>
-
-          <div
-            className="recommendation-score-wrapper"
-            aria-label={`Recommendation score: ${recommendation.score}`}
-          >
-            <span className="recommendation-score">
-              {recommendation.score}
-            </span>
-
-            <span className="recommendation-score-label">
-              match score
-            </span>
-          </div>
-        </div>
-
-        {recommendation.reasons.length > 0 && (
-          <div className="recommendation-reasons">
-            <div className="recommendation-reasons-heading">
+    {recommendation.label !== "Not enough information" && (
+      <section
+        className="recommendation-section"
+        aria-label="Personalized city recommendation"
+      >
+        <div className="recommendation-card">
+          <div className="recommendation-header">
+            <div className="recommendation-heading">
               <p className="eyebrow">
-                Why this city may suit you
+                Your WHERE2 match
               </p>
 
-              <h3>
-                Your preferences and current conditions
-              </h3>
+              <h2>
+                {recommendation.label}
+              </h2>
+
+              <p className="recommendation-intro">
+                This recommendation is based on your
+                preferences and the current weather
+                conditions in {selectedCity.name}.
+              </p>
             </div>
 
-            <ul>
-              {recommendation.reasons.map(
-                (reason) => (
+            <div
+              className="recommendation-score-wrapper"
+              aria-label={`Recommendation score: ${recommendation.score}`}
+            >
+              <span className="recommendation-score">
+                {recommendation.score}
+              </span>
+
+              <span className="recommendation-score-label">
+                match score
+              </span>
+            </div>
+          </div>
+
+          {recommendation.reasons.length > 0 && (
+            <div className="recommendation-reasons">
+              <div className="recommendation-reasons-heading">
+                <p className="eyebrow">
+                  Why this city may suit you
+                </p>
+
+                <h3>
+                  Your preferences and current conditions
+                </h3>
+              </div>
+
+              <ul>
+                {recommendation.reasons.map((reason) => (
                   <li key={reason}>
                     <span
                       className="recommendation-check"
@@ -580,51 +563,50 @@ const selectedCityIsSaved = selectedCity
 
                     <span>{reason}</span>
                   </li>
-                )
-              )}
-            </ul>
-          </div>
-        )}
-           </div>
-    </section>
-  )}
-
-{/* City Weather Insights */}
-
-            {weatherStatus === "success" &&
-              forecastStatus === "success" && (
-                <CityWeatherInsights
-                  city={selectedCity}
-                  weather={weather}
-                  forecast={forecast}
-                />
-              )}
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+  </>
+)}
 
 {/* 7-Day Forecast Loading */}
 
-            {forecastStatus === "loading" && (
-              <div className="search-state">
-                <p>
-                  Loading the 7-day forecast for{" "}
-                  {selectedCity.name}...
-                </p>
-              </div>
-            )}
+{forecastStatus === "loading" && (
+  <div className="search-state">
+    <p>
+      Loading the 7-day forecast for{" "}
+      {selectedCity.name}...
+    </p>
+  </div>
+)}
 
-{/*7-Day Forecast Error*/}
+{/* 7-Day Forecast Error */}
 
-            {forecastStatus === "error" && (
-              <div
-                className="search-state search-state-error"
-                role="alert"
-              >
-                <h3>
-                  We couldn't load the forecast.
-                </h3>
+{forecastStatus === "error" && (
+  <div
+    className="search-state search-state-error"
+    role="alert"
+  >
+    <h3>
+      We couldn't load the forecast.
+    </h3>
 
-                <p>{forecastError}</p>
-              </div>
-            )}
+    <p>{forecastError}</p>
+  </div>
+)}
+
+{/* 7-Day Forecast Success */}
+
+{forecastStatus === "success" && (
+  <WeatherForecast
+    city={selectedCity}
+    forecast={forecast}
+  />
+)}
 
 {/*7-Day Forecast Success*/}
 
