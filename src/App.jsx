@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-import Nav from "./components/Nav";
 import Hero from "./components/Hero";
+import DashboardShell from "./components/DashboardShell";
 import HowItWorks from "./components/HowItWorks";
 import CityPreview from "./components/CityPreview";
 import FinalCTA from "./components/FinalCTA";
@@ -424,8 +424,8 @@ const selectedCityIsSaved = selectedCity
 /* RENDER */
 
   return (
-    <main className="design-system">
-      <Nav />
+    <DashboardShell>
+    <div className="where2-dashboard-sections">
 
       <Hero />
 
@@ -789,7 +789,8 @@ const selectedCityIsSaved = selectedCity
           </div>
         </div>
       </section>
-    </main>
+        </div>
+  </DashboardShell>
   );
 }
 
