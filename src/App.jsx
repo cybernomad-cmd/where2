@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-import Hero from "./components/Hero";
 import DashboardShell from "./components/DashboardShell";
-import HowItWorks from "./components/HowItWorks";
-import CityPreview from "./components/CityPreview";
-import FinalCTA from "./components/FinalCTA";
 import Preferences from "./components/Preferences";
 import CitySearch from "./components/CitySearch";
 import WeatherCard from "./components/WeatherCard";
@@ -40,7 +36,8 @@ import {
 
 function App() {
   const [selectedCity, setSelectedCity] = useState(null);
-  const [comparisonCity, setComparisonCity] = useState(null);
+  const [comparisonCity, setComparisonCity] =
+    useState(null);
 
   const [savedCities, setSavedCities] = useState(
     getSavedCities
@@ -52,15 +49,11 @@ function App() {
     priorities: [],
   });
 
-  /*Current Weather*/
-
   const [weather, setWeather] = useState(null);
   const [weatherStatus, setWeatherStatus] =
     useState("idle");
   const [weatherError, setWeatherError] =
     useState("");
-
-  /*7-Day Forecast*/
 
   const [forecast, setForecast] = useState(null);
   const [forecastStatus, setForecastStatus] =
@@ -68,21 +61,21 @@ function App() {
   const [forecastError, setForecastError] =
     useState("");
 
-  /*Cost of Living*/
-
   const [costOfLiving, setCostOfLiving] =
     useState(null);
+  const [
+    costOfLivingStatus,
+    setCostOfLivingStatus,
+  ] = useState("idle");
+  const [
+    costOfLivingError,
+    setCostOfLivingError,
+  ] = useState("");
 
-  const [costOfLivingStatus, setCostOfLivingStatus] =
-    useState("idle");
-
-  const [costOfLivingError, setCostOfLivingError] =
-    useState("");
-
-  /* Comparison Weather*/
-
-  const [comparisonWeather, setComparisonWeather] =
-    useState(null);
+  const [
+    comparisonWeather,
+    setComparisonWeather,
+  ] = useState(null);
 
   const [
     comparisonWeatherStatus,
@@ -94,198 +87,199 @@ function App() {
     setComparisonWeatherError,
   ] = useState("");
 
-  /*Current Weather API*/
+  /*
+   * CURRENT WEATHER
+   */
 
   useEffect(() => {
     if (!selectedCity) {
       return;
     }
 
-    let isActive = true;
+    let active = true;
 
     async function loadWeather() {
-      try {
-        const currentWeather =
-          await getCurrentWeather(
-            selectedCity.latitude,
-            selectedCity.longitude
-          );
+      setWeatherStatus("loading");
+      setWeatherError("");
 
-        if (!isActive) {
+      try {
+        const data = await getCurrentWeather(
+          selectedCity.latitude,
+          selectedCity.longitude
+        );
+
+        if (!active) {
           return;
         }
 
-        setWeather(currentWeather);
+        setWeather(data);
         setWeatherStatus("success");
-        setWeatherError("");
-      } catch (requestError) {
-        if (!isActive) {
+      } catch (error) {
+        if (!active) {
           return;
         }
 
         setWeather(null);
-
-        setWeatherError(
-          requestError.message ||
-            "Unable to retrieve the weather data right now."
-        );
-
         setWeatherStatus("error");
+        setWeatherError(
+          error.message ||
+            "Unable to load current weather."
+        );
       }
     }
 
     loadWeather();
 
     return () => {
-      isActive = false;
+      active = false;
     };
   }, [selectedCity]);
 
-  /*7-Day Forecast API*/
+  /*
+   * FORECAST
+   */
 
   useEffect(() => {
     if (!selectedCity) {
       return;
     }
 
-    let isActive = true;
+    let active = true;
 
     async function loadForecast() {
-      try {
-        const forecastData =
-          await getWeatherForecast(
-            selectedCity.latitude,
-            selectedCity.longitude
-          );
+      setForecastStatus("loading");
+      setForecastError("");
 
-        if (!isActive) {
+      try {
+        const data = await getWeatherForecast(
+          selectedCity.latitude,
+          selectedCity.longitude
+        );
+
+        if (!active) {
           return;
         }
 
-        setForecast(forecastData);
+        setForecast(data);
         setForecastStatus("success");
-        setForecastError("");
-      } catch (requestError) {
-        if (!isActive) {
+      } catch (error) {
+        if (!active) {
           return;
         }
 
         setForecast(null);
-
-        setForecastError(
-          requestError.message ||
-            "Unable to retrieve the weather forecast right now."
-        );
-
         setForecastStatus("error");
+        setForecastError(
+          error.message ||
+            "Unable to load the weather forecast."
+        );
       }
     }
 
     loadForecast();
 
     return () => {
-      isActive = false;
+      active = false;
     };
   }, [selectedCity]);
 
-  /*Cost of Living API*/
+  /*
+   * COST OF LIVING
+   */
 
   useEffect(() => {
     if (!selectedCity) {
       return;
     }
 
-    let isActive = true;
+    let active = true;
 
     async function loadCostOfLiving() {
-      setCostOfLiving(null);
-      setCostOfLivingError("");
       setCostOfLivingStatus("loading");
+      setCostOfLivingError("");
 
       try {
         const data =
           await getCostOfLiving(selectedCity);
 
-        if (!isActive) {
+        if (!active) {
           return;
         }
 
         setCostOfLiving(data);
         setCostOfLivingStatus("success");
-        setCostOfLivingError("");
-      } catch (requestError) {
-        if (!isActive) {
+      } catch (error) {
+        if (!active) {
           return;
         }
 
         setCostOfLiving(null);
-
-        setCostOfLivingError(
-          requestError.message ||
-            "Unable to retrieve cost-of-living information right now."
-        );
-
         setCostOfLivingStatus("error");
+        setCostOfLivingError(
+          error.message ||
+            "Unable to load cost-of-living information."
+        );
       }
     }
 
     loadCostOfLiving();
 
     return () => {
-      isActive = false;
+      active = false;
     };
   }, [selectedCity]);
 
-  /*Comparison Weather API*/
+  /*
+   * COMPARISON WEATHER
+   */
 
   useEffect(() => {
     if (!comparisonCity) {
       return;
     }
 
-    let isActive = true;
+    let active = true;
 
     async function loadComparisonWeather() {
       setComparisonWeatherStatus("loading");
       setComparisonWeatherError("");
 
       try {
-        const currentWeather =
-          await getCurrentWeather(
-            comparisonCity.latitude,
-            comparisonCity.longitude
-          );
+        const data = await getCurrentWeather(
+          comparisonCity.latitude,
+          comparisonCity.longitude
+        );
 
-        if (!isActive) {
+        if (!active) {
           return;
         }
 
-        setComparisonWeather(currentWeather);
+        setComparisonWeather(data);
         setComparisonWeatherStatus("success");
-      } catch (requestError) {
-        if (!isActive) {
+      } catch (error) {
+        if (!active) {
           return;
         }
 
         setComparisonWeather(null);
-
-        setComparisonWeatherError(
-          requestError.message ||
-            "Unable to retrieve comparison weather right now."
-        );
-
         setComparisonWeatherStatus("error");
+        setComparisonWeatherError(
+          error.message ||
+            "Unable to load comparison weather."
+        );
       }
     }
 
     loadComparisonWeather();
 
     return () => {
-      isActive = false;
+      active = false;
     };
   }, [comparisonCity]);
 
-  /*Preferences*/
+  /*
+   * HANDLERS
+   */
 
   function handlePreferencesChange(
     updatedPreferences
@@ -293,366 +287,413 @@ function App() {
     setPreferences(updatedPreferences);
   }
 
-/*City Selection*/
-
   function handleCitySelect(city) {
-    const isSelectedCity =
-      selectedCity?.id === city.id;
-
-    const isComparisonCity =
-      comparisonCity?.id === city.id;
-
-    if (isSelectedCity || isComparisonCity) {
+    if (!city) {
       return;
     }
-
-    /*First City*/
 
     if (!selectedCity) {
       setSelectedCity(city);
-
-      setWeather(null);
-      setWeatherError("");
-      setWeatherStatus("loading");
-
-      setForecast(null);
-      setForecastError("");
-      setForecastStatus("loading");
-
-      setCostOfLiving(null);
-      setCostOfLivingError("");
-      setCostOfLivingStatus("loading");
-
+      setComparisonCity(null);
+      setComparisonWeather(null);
+      setComparisonWeatherStatus("idle");
+      setComparisonWeatherError("");
       return;
     }
 
-    /*Second City For Comparison */
+    if (selectedCity.id === city.id) {
+      return;
+    }
 
     if (!comparisonCity) {
       setComparisonCity(city);
-
-      setComparisonWeather(null);
-      setComparisonWeatherError("");
-      setComparisonWeatherStatus("loading");
-
       return;
     }
 
-    /*Replace Comparison City*/
-
     setComparisonCity(city);
-
-    setComparisonWeather(null);
-    setComparisonWeatherError("");
-    setComparisonWeatherStatus("loading");
   }
 
-/* Save City */
+  function handleSaveCity(city) {
+    const updatedCities =
+      toggleSavedCity(city);
 
-function handleSaveCity(city) {
-  const updatedCities = toggleSavedCity(city);
+    setSavedCities(updatedCities);
+  }
 
-  setSavedCities(updatedCities);
-}
+  function handleRemoveCity(cityId) {
+    const updatedCities =
+      removeSavedCity(cityId);
 
-/* Remove Saved City */
+    setSavedCities(updatedCities);
+  }
 
-function handleRemoveCity(cityId) {
-  const updatedCities = removeSavedCity(cityId);
+  function handleClearSavedCities() {
+    const updatedCities =
+      clearSavedCities();
 
-  setSavedCities(updatedCities);
-}
+    setSavedCities(updatedCities);
+  }
 
-/* Clear Saved Cities */
+  function handleSavedCitySelect(city) {
+    setSelectedCity(city);
+    setComparisonCity(null);
+    setComparisonWeather(null);
+    setComparisonWeatherStatus("idle");
+    setComparisonWeatherError("");
 
-function handleClearSavedCities() {
-  const updatedCities = clearSavedCities();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
 
-  setSavedCities(updatedCities);
-}
+  /*
+   * DERIVED DATA
+   */
 
-/* Select Saved City */
+  const recommendation =
+    calculateRecommendation(
+      preferences,
+      weather
+    );
 
-function handleSavedCitySelect(city) {
-  setSelectedCity(city);
-  setComparisonCity(null);
+  const comparison =
+    comparisonWeatherStatus === "success"
+      ? compareCities(
+          selectedCity,
+          weather,
+          comparisonCity,
+          comparisonWeather,
+          preferences
+        )
+      : null;
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-}
+  const comparisonWinner =
+    comparison
+      ? getComparisonWinner(comparison)
+      : null;
 
-/* Recommendation */
-
-const recommendation =
-  calculateRecommendation(
-    preferences,
-    weather
-  );
-
-/* City Comparison */
-
-const comparison =
-  comparisonWeatherStatus === "success"
-    ? compareCities(
-        selectedCity,
-        weather,
-        comparisonCity,
-        comparisonWeather,
-        preferences
-      )
+  const cityDetails = selectedCity
+    ? getCityDetails(selectedCity)
     : null;
 
-const comparisonWinner =
-  comparison
-    ? getComparisonWinner(comparison)
-    : null;
+  const selectedCityIsSaved = selectedCity
+    ? isCitySaved(selectedCity.id)
+    : false;
 
-/* City Details */
-
-const cityDetails = selectedCity
-  ? getCityDetails(selectedCity)
-  : null;
-
-/* Saved City Status */
-
-const selectedCityIsSaved = selectedCity
-  ? isCitySaved(selectedCity.id)
-  : false;
-
-/* RENDER */
+  /*
+   * DASHBOARD
+   */
 
   return (
     <DashboardShell>
-    <div className="where2-dashboard-sections">
+      <div className="where2-dashboard-sections">
 
-      <Hero />
+        {/* Dashboard heading */}
 
-      <Preferences
-        value={preferences}
-        onPreferencesChange={
-          handlePreferencesChange
-        }
-      />
+        <section className="where2-dashboard-welcome">
+          <div>
+            <p className="eyebrow">
+              YOUR WHERE2 DASHBOARD
+            </p>
 
-      <CitySearch
-        onCitySelect={handleCitySelect}
-      />
+            <h1>
+              Find a city that fits your life.
+            </h1>
 
-<SavedCities
-  cities={savedCities}
-  onRemoveCity={handleRemoveCity}
-  onSelectCity={handleSavedCitySelect}
-  onClearCities={handleClearSavedCities}
-/>
-
-{/*SELECTED CITY WEATHER AREA*/}
-
-      {selectedCity && (
-        <section className="weather-section">
-          <div className="page-container">
-
-{/*Current Weather Loading*/}
-
-            {weatherStatus === "loading" && (
-              <div className="search-state">
-                <p>
-                  Loading weather for{" "}
-                  {selectedCity.name}...
-                </p>
-              </div>
-            )}
-
-{/*Current Weather Error*/}
-
-            {weatherStatus === "error" && (
-              <div
-                className="search-state search-state-error"
-                role="alert"
-              >
-                <h3>
-                  We couldn't load the weather.
-                </h3>
-
-                <p>{weatherError}</p>
-              </div>
-            )}
-
-{/* Current Weather Success */}
-
-{weatherStatus === "success" && (
-  <>
-    <WeatherCard
-      city={selectedCity}
-      weather={weather}
-      isSaved={selectedCityIsSaved}
-      onSave={handleSaveCity}
-    />
-
-    {/* City Weather Insights */}
-
-    {forecastStatus === "success" && (
-      <CityWeatherInsights
-        city={selectedCity}
-        weather={weather}
-        forecast={forecast}
-      />
-    )}
-
-    {/* Personalized Recommendation */}
-
-    {recommendation.label !== "Not enough information" && (
-      <section
-        className="recommendation-section"
-        aria-label="Personalized city recommendation"
-      >
-        <div className="recommendation-card">
-          <div className="recommendation-header">
-            <div className="recommendation-heading">
-              <p className="eyebrow">
-                Your WHERE2 match
-              </p>
-
-              <h2>
-                {recommendation.label}
-              </h2>
-
-              <p className="recommendation-intro">
-                This recommendation is based on your
-                preferences and the current weather
-                conditions in {selectedCity.name}.
-              </p>
-            </div>
-
-            <div
-              className="recommendation-score-wrapper"
-              aria-label={`Recommendation score: ${recommendation.score}`}
-            >
-              <span className="recommendation-score">
-                {recommendation.score}
-              </span>
-
-              <span className="recommendation-score-label">
-                match score
-              </span>
-            </div>
+            <p className="where2-dashboard-welcome-text">
+              Explore cities using your climate,
+              lifestyle, budget, weather, and
+              personal priorities.
+            </p>
           </div>
+        </section>
 
-          {recommendation.reasons.length > 0 && (
-            <div className="recommendation-reasons">
-              <div className="recommendation-reasons-heading">
-                <p className="eyebrow">
-                  Why this city may suit you
-                </p>
+        {/* Preferences */}
 
-                <h3>
-                  Your preferences and current conditions
-                </h3>
+        <Preferences
+          value={preferences}
+          onPreferencesChange={
+            handlePreferencesChange
+          }
+        />
+
+        {/* City search */}
+
+        <CitySearch
+          onCitySelect={handleCitySelect}
+        />
+
+        {/* Saved cities */}
+
+        <SavedCities
+          cities={savedCities}
+          onRemoveCity={handleRemoveCity}
+          onSelectCity={handleSavedCitySelect}
+          onClearCities={
+            handleClearSavedCities
+          }
+        />
+
+        {/* Selected city */}
+
+        {selectedCity && (
+          <section className="weather-section">
+            <div className="page-container">
+
+              <div className="where2-selected-city-header">
+                <div>
+                  <p className="eyebrow">
+                    CURRENT CITY
+                  </p>
+
+                  <h2>
+                    {selectedCity.name}
+                  </h2>
+
+                  <p>
+                    Weather, cost of living,
+                    insights, and recommendations
+                    for your selected city.
+                  </p>
+                </div>
+
+                {comparisonCity && (
+                  <div className="where2-comparison-badge">
+                    Comparing with{" "}
+                    <strong>
+                      {comparisonCity.name}
+                    </strong>
+                  </div>
+                )}
               </div>
 
-              <ul>
-                {recommendation.reasons.map((reason) => (
-                  <li key={reason}>
-                    <span
-                      className="recommendation-check"
-                      aria-hidden="true"
-                    >
-                      ✓
-                    </span>
+              {/* Current weather loading */}
 
-                    <span>{reason}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      </section>
-    )}
-  </>
-)}
+              {weatherStatus === "loading" && (
+                <div className="search-state">
+                  <p>
+                    Loading weather for{" "}
+                    {selectedCity.name}...
+                  </p>
+                </div>
+              )}
 
-{/* 7-Day Forecast Loading */}
+              {/* Current weather error */}
 
-{forecastStatus === "loading" && (
-  <div className="search-state">
-    <p>
-      Loading the 7-day forecast for{" "}
-      {selectedCity.name}...
-    </p>
-  </div>
-)}
+              {weatherStatus === "error" && (
+                <div
+                  className="search-state search-state-error"
+                  role="alert"
+                >
+                  <h3>
+                    We couldn't load the weather.
+                  </h3>
 
-{/* 7-Day Forecast Error */}
+                  <p>
+                    {weatherError}
+                  </p>
+                </div>
+              )}
 
-{forecastStatus === "error" && (
-  <div
-    className="search-state search-state-error"
-    role="alert"
-  >
-    <h3>
-      We couldn't load the forecast.
-    </h3>
+              {/* Current weather */}
 
-    <p>{forecastError}</p>
-  </div>
-)}
+              {weatherStatus === "success" && (
+                <WeatherCard
+                  city={selectedCity}
+                  weather={weather}
+                  isSaved={selectedCityIsSaved}
+                  onSave={handleSaveCity}
+                />
+              )}
 
-{/* 7-Day Forecast Success */}
+              {/* Weather insights */}
 
-{forecastStatus === "success" && (
-  <WeatherForecast
-    city={selectedCity}
-    forecast={forecast}
-  />
-)}
+              {weatherStatus === "success" &&
+                forecastStatus === "success" && (
+                  <CityWeatherInsights
+                    city={selectedCity}
+                    weather={weather}
+                    forecast={forecast}
+                  />
+                )}
 
+              {/* Recommendation */}
 
-{/*Cost of Living*/}
+              {weatherStatus === "success" &&
+                recommendation.label !==
+                  "Not enough information" && (
+                  <section
+                    className="recommendation-section"
+                    aria-label="Personalized city recommendation"
+                  >
+                    <div className="recommendation-card">
 
-            {costOfLivingStatus === "loading" && (
-              <div className="search-state">
-                <p>
-                  Loading cost-of-living information
-                  for{" "}
-                  {selectedCity.name}...
-                </p>
-              </div>
-            )}
+                      <div className="recommendation-header">
+                        <div className="recommendation-heading">
 
-{/*Cost of Living Error*/}
+                          <p className="eyebrow">
+                            YOUR WHERE2 MATCH
+                          </p>
 
-            {costOfLivingStatus === "error" && (
-              <div
-                className="search-state search-state-error"
-                role="alert"
-              >
-                <h3>
-                  We couldn't load cost-of-living
-                  information.
-                </h3>
+                          <h2>
+                            {recommendation.label}
+                          </h2>
 
-                <p>
-                  {costOfLivingError}
-                </p>
-              </div>
-            )}
+                          <p className="recommendation-intro">
+                            This recommendation is
+                            based on your preferences
+                            and current conditions in{" "}
+                            {selectedCity.name}.
+                          </p>
 
-{/*Cost of Living Success*/}
+                        </div>
 
-            {costOfLivingStatus === "success" && (
-              <CostOfLiving
-                data={costOfLiving}
-                cityName={selectedCity.name}
-              />
-            )}
+                        <div
+                          className="recommendation-score-wrapper"
+                          aria-label={`Recommendation score: ${recommendation.score}`}
+                        >
+                          <span className="recommendation-score">
+                            {recommendation.score}
+                          </span>
 
-{/*Comparison Weather Loading*/}
+                          <span className="recommendation-score-label">
+                            match score
+                          </span>
+                        </div>
+                      </div>
 
-            {comparisonCity &&
-              comparisonWeatherStatus ===
+                      {recommendation.reasons.length >
+                        0 && (
+                        <div className="recommendation-reasons">
+
+                          <div className="recommendation-reasons-heading">
+
+                            <p className="eyebrow">
+                              WHY THIS CITY MAY
+                              SUIT YOU
+                            </p>
+
+                            <h3>
+                              Your preferences
+                              and current
+                              conditions
+                            </h3>
+
+                          </div>
+
+                          <ul>
+                            {recommendation.reasons.map(
+                              (reason) => (
+                                <li key={reason}>
+                                  <span
+                                    className="recommendation-check"
+                                    aria-hidden="true"
+                                  >
+                                    ✓
+                                  </span>
+
+                                  <span>
+                                    {reason}
+                                  </span>
+                                </li>
+                              )
+                            )}
+                          </ul>
+
+                        </div>
+                      )}
+                    </div>
+                  </section>
+                )}
+
+              {/* Forecast loading */}
+
+              {forecastStatus === "loading" && (
+                <div className="search-state">
+                  <p>
+                    Loading the 7-day forecast
+                    for{" "}
+                    {selectedCity.name}...
+                  </p>
+                </div>
+              )}
+
+              {/* Forecast error */}
+
+              {forecastStatus === "error" && (
+                <div
+                  className="search-state search-state-error"
+                  role="alert"
+                >
+                  <h3>
+                    We couldn't load the
+                    forecast.
+                  </h3>
+
+                  <p>
+                    {forecastError}
+                  </p>
+                </div>
+              )}
+
+              {/* Forecast */}
+
+              {forecastStatus === "success" && (
+                <WeatherForecast
+                  city={selectedCity}
+                  forecast={forecast}
+                />
+              )}
+
+              {/* Cost of living loading */}
+
+              {costOfLivingStatus ===
                 "loading" && (
+                <div className="search-state">
+                  <p>
+                    Loading cost-of-living
+                    information for{" "}
+                    {selectedCity.name}...
+                  </p>
+                </div>
+              )}
+
+              {/* Cost of living error */}
+
+              {costOfLivingStatus ===
+                "error" && (
+                <div
+                  className="search-state search-state-error"
+                  role="alert"
+                >
+                  <h3>
+                    We couldn't load
+                    cost-of-living
+                    information.
+                  </h3>
+
+                  <p>
+                    {costOfLivingError}
+                  </p>
+                </div>
+              )}
+
+              {/* Cost of living */}
+
+              {costOfLivingStatus ===
+                "success" && (
+                <CostOfLiving
+                  data={costOfLiving}
+                  cityName={selectedCity.name}
+                />
+              )}
+
+              {/* Comparison loading */}
+
+              {comparisonCity &&
+                comparisonWeatherStatus ===
+                  "loading" && (
                 <div className="search-state">
                   <p>
                     Loading weather for{" "}
@@ -661,18 +702,18 @@ const selectedCityIsSaved = selectedCity
                 </div>
               )}
 
-{/*Comparison Weather Error*/}
+              {/* Comparison error */}
 
-            {comparisonCity &&
-              comparisonWeatherStatus ===
-                "error" && (
+              {comparisonCity &&
+                comparisonWeatherStatus ===
+                  "error" && (
                 <div
                   className="search-state search-state-error"
                   role="alert"
                 >
                   <h3>
-                    We couldn't load the comparison
-                    weather.
+                    We couldn't load the
+                    comparison weather.
                   </h3>
 
                   <p>
@@ -681,90 +722,63 @@ const selectedCityIsSaved = selectedCity
                 </div>
               )}
 
-{/*City Comparison*/}
+              {/* Comparison */}
 
-            {comparison &&
-              comparisonWinner && (
+              {comparison &&
+                comparisonWinner && (
                 <CityComparison
                   comparison={comparison}
                   winner={comparisonWinner}
                 />
               )}
 
-{/*City Details*/}
+              {/* City details */}
 
-            {cityDetails && (
-              <CityDetails
-                city={cityDetails}
-              />
-            )}
-          </div>
-        </section>
-      )}
+              {cityDetails && (
+                <CityDetails
+                  city={cityDetails}
+                />
+              )}
 
-{/*Static Page Sections*/}
+            </div>
+          </section>
+        )}
 
-      <HowItWorks />
+        {/* Empty dashboard */}
 
-      <CityPreview />
+        {!selectedCity && (
+          <section className="where2-dashboard-empty">
+            <div className="where2-dashboard-empty-card">
 
-      <FinalCTA />
+              <div className="where2-dashboard-empty-icon">
+                <span>W2</span>
+              </div>
 
-{/*Design System*/}
+              <div>
+                <p className="eyebrow">
+                  START EXPLORING
+                </p>
 
-      <section className="component-section">
-        <div className="page-container">
-          <div className="section-heading">
-            <p className="eyebrow">
-              Foundation
-            </p>
+                <h2>
+                  Which city could fit your life?
+                </h2>
 
-            <h2>
-              WHERE2 design system
-            </h2>
-          </div>
+                <p>
+                  Set your preferences and search
+                  for a city above. WHERE2 will
+                  bring together weather, cost of
+                  living, recommendations, and
+                  city information to help you
+                  make a more informed decision.
+                </p>
+              </div>
 
-          <div className="component-grid">
-            <article className="demo-card">
-              <div className="color-sample color-primary" />
+            </div>
+          </section>
+        )}
 
-              <h3>Primary</h3>
-
-              <p>
-                The main WHERE2 brand color used
-                for important actions and
-                highlights.
-              </p>
-            </article>
-
-            <article className="demo-card">
-              <div className="color-sample color-light" />
-
-              <h3>Primary Light</h3>
-
-              <p>
-                A soft supporting color for
-                backgrounds, highlights, and
-                selected states.
-              </p>
-            </article>
-
-            <article className="demo-card">
-              <div className="color-sample color-surface" />
-
-              <h3>Surface</h3>
-
-              <p>
-                Used for cards, sections, and
-                subtle separation from the main
-                background.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-        </div>
-  </DashboardShell>
+      </div>
+    </DashboardShell>
   );
 }
 
