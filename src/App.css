@@ -8267,3 +8267,92 @@ html {
     border-bottom: 1px solid #edf0f5;
   }
 }
+
+/*AI City Advisor - Live Context*/
+
+.where2-ai-context {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.where2-ai-context span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 8px;
+  border: 1px solid var(--where2-border);
+  border-radius: 999px;
+  background: #f7f9fc;
+  color: var(--where2-text);
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.where2-ai-empty {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px;
+  border: 1px dashed var(--where2-border);
+  border-radius: 9px;
+  color: var(--where2-muted);
+  background: #fafbfd;
+}
+
+.where2-ai-empty svg {
+  flex-shrink: 0;
+  color: var(--where2-blue);
+}
+
+.where2-ai-empty p {
+  margin: 0;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.where2-ai-results {
+  margin-top: 8px;
+}
+
+.where2-ai-response small {
+  display: block;
+  margin-top: 8px;
+  color: #8794aa;
+  font-size: 7px;
+}
+
+.where2-ai-loading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--where2-muted);
+}
+
+.where2-ai-loading svg {
+  color: var(--where2-blue);
+  animation: where2-ai-spin 1.2s linear infinite;
+}
+
+.where2-ai-loading span {
+  font-size: 9px;
+}
+
+.where2-ai-input button:disabled,
+.where2-ai-send:disabled,
+.where2-ai-suggestions button:disabled,
+.where2-ai-voice:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@keyframes where2-ai-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

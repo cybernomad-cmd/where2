@@ -423,8 +423,17 @@ const selectedCityIsSaved = selectedCity
 
 /* RENDER */
 
-  return (
-    <DashboardShell>
+return (
+  <DashboardShell
+    advisorContext={{
+      preferences,
+      selectedCity,
+      weather,
+      forecast,
+      costOfLiving,
+      savedCities,
+    }}
+  >
     <div className="where2-dashboard-sections">
 
       <Hero />

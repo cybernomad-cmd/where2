@@ -25,6 +25,7 @@ import AICityAdvisor from "./AICityAdvisor";
 function DashboardShell({
   children,
   aiAdvisor = true,
+  advisorContext = {},
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] =
     useState(false);
@@ -75,7 +76,6 @@ function DashboardShell({
 
   return (
     <div className="where2-dashboard">
-
       {/* Desktop Sidebar */}
 
       <aside
@@ -86,9 +86,6 @@ function DashboardShell({
         }`}
       >
         <div className="where2-sidebar-top">
-
-          {/* Brand */}
-
           <div className="where2-brand">
             <div className="where2-brand-mark">
               <Map
@@ -101,8 +98,6 @@ function DashboardShell({
               where<span>2</span>
             </span>
           </div>
-
-          {/* Mobile Close */}
 
           <button
             type="button"
@@ -151,9 +146,6 @@ function DashboardShell({
         {/* Sidebar Bottom */}
 
         <div className="where2-sidebar-bottom">
-
-          {/* Profile */}
-
           <div className="where2-profile-card">
             <div className="where2-avatar">
               JM
@@ -165,15 +157,12 @@ function DashboardShell({
               </strong>
 
               <span>
-                Premium{" "}
-                <Star size={11} />
+                Premium <Star size={11} />
               </span>
             </div>
 
             <ChevronDown size={16} />
           </div>
-
-          {/* Premium */}
 
           <div className="where2-premium-card">
             <div className="where2-premium-icon">
@@ -195,10 +184,7 @@ function DashboardShell({
             </button>
           </div>
 
-          {/* Sidebar Links */}
-
           <div className="where2-sidebar-links">
-
             <button type="button">
               <Moon size={17} />
 
@@ -226,10 +212,7 @@ function DashboardShell({
                 Help & Support
               </span>
             </button>
-
           </div>
-
-          {/* Footer */}
 
           <div className="where2-sidebar-footer">
             <span>
@@ -240,7 +223,6 @@ function DashboardShell({
               All rights reserved
             </span>
           </div>
-
         </div>
       </aside>
 
@@ -257,18 +239,13 @@ function DashboardShell({
         />
       )}
 
-      {/* Main Dashboard Area */}
+      {/* Main Area */}
 
       <div className="where2-dashboard-main">
-
         {/* Topbar */}
 
         <header className="where2-topbar">
-
-          {/* Mobile Brand */}
-
           <div className="where2-mobile-brand">
-
             <button
               type="button"
               className="where2-menu-button"
@@ -281,7 +258,6 @@ function DashboardShell({
             </button>
 
             <div className="where2-brand">
-
               <div className="where2-brand-mark">
                 <Map
                   size={18}
@@ -292,16 +268,12 @@ function DashboardShell({
               <span>
                 where<span>2</span>
               </span>
-
             </div>
           </div>
 
           {/* Topbar Actions */}
 
           <div className="where2-topbar-actions">
-
-            {/* Notifications */}
-
             <button
               type="button"
               className="where2-icon-button"
@@ -314,8 +286,6 @@ function DashboardShell({
               </span>
             </button>
 
-            {/* Saved Cities */}
-
             <button
               type="button"
               className="where2-icon-button"
@@ -323,8 +293,6 @@ function DashboardShell({
             >
               <Bookmark size={20} />
             </button>
-
-            {/* User */}
 
             <button
               type="button"
@@ -336,14 +304,12 @@ function DashboardShell({
 
               <ChevronDown size={16} />
             </button>
-
           </div>
         </header>
 
         {/* Dashboard Content */}
 
         <div className="where2-dashboard-content">
-
           {/* Main Column */}
 
           <section className="where2-main-column">
@@ -353,9 +319,27 @@ function DashboardShell({
           {/* AI City Advisor */}
 
           {aiAdvisor && (
-            <AICityAdvisor />
+            <AICityAdvisor
+              preferences={
+                advisorContext.preferences
+              }
+              selectedCity={
+                advisorContext.selectedCity
+              }
+              weather={
+                advisorContext.weather
+              }
+              forecast={
+                advisorContext.forecast
+              }
+              costOfLiving={
+                advisorContext.costOfLiving
+              }
+              savedCities={
+                advisorContext.savedCities
+              }
+            />
           )}
-
         </div>
       </div>
     </div>
