@@ -6656,6 +6656,66 @@ html {
   margin: 10px 0 0;
 }
 
+/* AI Advisor interaction states */
+
+.where2-ai-loading {
+  opacity: 0.75;
+}
+
+.where2-ai-loading p {
+  margin: 0;
+}
+
+.where2-ai-input .where2-ai-send:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.where2-ai-input input:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.where2-ai-header > button {
+  transition:
+    transform 160ms ease,
+    color 160ms ease;
+}
+
+.where2-ai-header > button:hover {
+  color: var(--where2-blue);
+  transform: rotate(45deg);
+}
+
+.where2-ai-send {
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.where2-ai-send:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.where2-ai-result {
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.where2-ai-result:hover {
+  background: #f8faff;
+}
+
+.where2-ai-suggestions button:focus-visible,
+.where2-ai-input button:focus-visible,
+.where2-ai-input input:focus-visible,
+.where2-ai-header > button:focus-visible,
+.where2-ai-voice:focus-visible {
+  outline: 2px solid var(--where2-blue);
+  outline-offset: 2px;
+}
+
 /* Responsive */
 
 @media (max-width: 1180px) {
