@@ -608,14 +608,6 @@ const selectedCityIsSaved = selectedCity
   />
 )}
 
-{/*7-Day Forecast Success*/}
-
-            {forecastStatus === "success" && (
-              <WeatherForecast
-                city={selectedCity}
-                forecast={forecast}
-              />
-            )}
 
 {/*Cost of Living*/}
 
