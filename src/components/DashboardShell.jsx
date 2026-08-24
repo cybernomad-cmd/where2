@@ -12,15 +12,15 @@ import {
   Lightbulb,
   Map,
   Menu,
-  MessageCircle,
   Moon,
-  RefreshCw,
   Settings,
   Sparkles,
   Star,
   WalletCards,
   X,
 } from "lucide-react";
+
+import AICityAdvisor from "./AICityAdvisor";
 
 function DashboardShell({
   children,
@@ -73,15 +73,9 @@ function DashboardShell({
     },
   ];
 
-  const advisorSuggestions = [
-    "Find warm cities under $1,500/month",
-    "Compare Cape Town vs Nairobi",
-    "Best cities for digital nomads",
-    "Where can I live near the beach?",
-  ];
-
   return (
     <div className="where2-dashboard">
+
       {/* Desktop Sidebar */}
 
       <aside
@@ -92,15 +86,23 @@ function DashboardShell({
         }`}
       >
         <div className="where2-sidebar-top">
+
+          {/* Brand */}
+
           <div className="where2-brand">
             <div className="where2-brand-mark">
-              <Map size={21} strokeWidth={2.5} />
+              <Map
+                size={21}
+                strokeWidth={2.5}
+              />
             </div>
 
             <span>
               where<span>2</span>
             </span>
           </div>
+
+          {/* Mobile Close */}
 
           <button
             type="button"
@@ -113,6 +115,8 @@ function DashboardShell({
             <X size={20} />
           </button>
         </div>
+
+        {/* Navigation */}
 
         <nav
           className="where2-sidebar-navigation"
@@ -144,21 +148,32 @@ function DashboardShell({
           )}
         </nav>
 
+        {/* Sidebar Bottom */}
+
         <div className="where2-sidebar-bottom">
+
+          {/* Profile */}
+
           <div className="where2-profile-card">
             <div className="where2-avatar">
               JM
             </div>
 
             <div className="where2-profile-info">
-              <strong>John Mwangi</strong>
+              <strong>
+                John Mwangi
+              </strong>
+
               <span>
-                Premium <Star size={11} />
+                Premium{" "}
+                <Star size={11} />
               </span>
             </div>
 
             <ChevronDown size={16} />
           </div>
+
+          {/* Premium */}
 
           <div className="where2-premium-card">
             <div className="where2-premium-icon">
@@ -170,9 +185,9 @@ function DashboardShell({
             </strong>
 
             <p>
-              Upgrade to Premium for advanced
-              analytics, alerts, and AI
-              recommendations.
+              Upgrade to Premium for
+              advanced analytics, alerts,
+              and AI recommendations.
             </p>
 
             <button type="button">
@@ -180,10 +195,16 @@ function DashboardShell({
             </button>
           </div>
 
+          {/* Sidebar Links */}
+
           <div className="where2-sidebar-links">
+
             <button type="button">
               <Moon size={17} />
-              <span>Dark mode</span>
+
+              <span>
+                Dark mode
+              </span>
 
               <span className="where2-toggle">
                 <span />
@@ -192,21 +213,38 @@ function DashboardShell({
 
             <button type="button">
               <Settings size={17} />
-              <span>Settings</span>
+
+              <span>
+                Settings
+              </span>
             </button>
 
             <button type="button">
               <Info size={17} />
-              <span>Help & Support</span>
+
+              <span>
+                Help & Support
+              </span>
             </button>
+
           </div>
 
+          {/* Footer */}
+
           <div className="where2-sidebar-footer">
-            <span>© 2025 where2</span>
-            <span>All rights reserved</span>
+            <span>
+              © 2025 where2
+            </span>
+
+            <span>
+              All rights reserved
+            </span>
           </div>
+
         </div>
       </aside>
+
+      {/* Mobile Sidebar Overlay */}
 
       {mobileMenuOpen && (
         <button
@@ -219,11 +257,18 @@ function DashboardShell({
         />
       )}
 
-      {/* Main Area */}
+      {/* Main Dashboard Area */}
 
       <div className="where2-dashboard-main">
+
+        {/* Topbar */}
+
         <header className="where2-topbar">
+
+          {/* Mobile Brand */}
+
           <div className="where2-mobile-brand">
+
             <button
               type="button"
               className="where2-menu-button"
@@ -236,6 +281,7 @@ function DashboardShell({
             </button>
 
             <div className="where2-brand">
+
               <div className="where2-brand-mark">
                 <Map
                   size={18}
@@ -246,10 +292,16 @@ function DashboardShell({
               <span>
                 where<span>2</span>
               </span>
+
             </div>
           </div>
 
+          {/* Topbar Actions */}
+
           <div className="where2-topbar-actions">
+
+            {/* Notifications */}
+
             <button
               type="button"
               className="where2-icon-button"
@@ -262,6 +314,8 @@ function DashboardShell({
               </span>
             </button>
 
+            {/* Saved Cities */}
+
             <button
               type="button"
               className="where2-icon-button"
@@ -269,6 +323,8 @@ function DashboardShell({
             >
               <Bookmark size={20} />
             </button>
+
+            {/* User */}
 
             <button
               type="button"
@@ -280,204 +336,26 @@ function DashboardShell({
 
               <ChevronDown size={16} />
             </button>
+
           </div>
         </header>
 
+        {/* Dashboard Content */}
+
         <div className="where2-dashboard-content">
+
+          {/* Main Column */}
+
           <section className="where2-main-column">
             {children}
           </section>
 
+          {/* AI City Advisor */}
+
           {aiAdvisor && (
-            <aside className="where2-ai-column">
-              <div className="where2-ai-card">
-                <div className="where2-ai-header">
-                  <div className="where2-ai-title">
-                    <Sparkles size={18} />
-
-                    <strong>
-                      AI City Advisor
-                    </strong>
-
-                    <span>BETA</span>
-
-                    <Info size={14} />
-                  </div>
-
-                  <button
-                    type="button"
-                    aria-label="Refresh advisor"
-                  >
-                    <RefreshCw size={17} />
-                  </button>
-                </div>
-
-                <div className="where2-ai-introduction">
-                  <h2>Hi John!</h2>
-
-                  <p>
-                    I'm your AI City Advisor.
-                    <br />
-                    How can I help you today?
-                  </p>
-                </div>
-
-                <div className="where2-ai-suggestions">
-                  {advisorSuggestions.map(
-                    (suggestion) => (
-                      <button
-                        type="button"
-                        key={suggestion}
-                      >
-                        {suggestion}
-                      </button>
-                    )
-                  )}
-                </div>
-
-                <div className="where2-ai-conversation">
-                  <div className="where2-ai-user-message">
-                    I want to live somewhere warm,
-                    affordable, safe, and with a
-                    good tech industry.
-                    <span>
-                      10:24 AM ✓✓
-                    </span>
-                  </div>
-
-                  <div className="where2-ai-response">
-                    <p>
-                      Great! I found cities that
-                      match your preferences.
-                    </p>
-
-                    <div className="where2-ai-result">
-                      <div className="where2-ai-result-image">
-                        N
-                      </div>
-
-                      <div>
-                        <strong>
-                          1. Nairobi, Kenya
-                        </strong>
-
-                        <span>
-                          91% match
-                        </span>
-
-                        <p>
-                          Warm, affordable,
-                          growing tech hub.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="where2-ai-result">
-                      <div className="where2-ai-result-image">
-                        C
-                      </div>
-
-                      <div>
-                        <strong>
-                          2. Cape Town, South Africa
-                        </strong>
-
-                        <span>
-                          87% match
-                        </span>
-
-                        <p>
-                          Great lifestyle and
-                          climate.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="where2-ai-result">
-                      <div className="where2-ai-result-image">
-                        L
-                      </div>
-
-                      <div>
-                        <strong>
-                          3. Lisbon, Portugal
-                        </strong>
-
-                        <span>
-                          83% match
-                        </span>
-
-                        <p>
-                          Strong tech ecosystem.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="where2-ai-result">
-                      <div className="where2-ai-result-image">
-                        B
-                      </div>
-
-                      <div>
-                        <strong>
-                          4. Bangkok, Thailand
-                        </strong>
-
-                        <span>
-                          78% match
-                        </span>
-
-                        <p>
-                          Affordable and vibrant.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="where2-ai-input">
-                  <input
-                    type="text"
-                    placeholder="Ask me anything..."
-                    aria-label="Ask AI City Advisor"
-                  />
-
-                  <button
-                    type="button"
-                    aria-label="Voice input"
-                  >
-                    <MessageCircle
-                      size={18}
-                    />
-                  </button>
-
-                  <button
-                    type="button"
-                    className="where2-ai-send"
-                    aria-label="Send message"
-                  >
-                    →
-                  </button>
-                </div>
-
-                <button
-                  type="button"
-                  className="where2-ai-voice"
-                >
-                  <Sparkles size={18} />
-
-                  <span>
-                    Speak with Where2
-                  </span>
-                </button>
-
-                <p className="where2-ai-disclaimer">
-                  AI responses can make mistakes.
-                  Learn more.
-                </p>
-              </div>
-            </aside>
+            <AICityAdvisor />
           )}
+
         </div>
       </div>
     </div>
