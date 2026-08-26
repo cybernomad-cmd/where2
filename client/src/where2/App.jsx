@@ -26,7 +26,10 @@ import {
 } from "./services/savedCitiesService";
 
 
-function App() {
+function App({
+  user,
+  onLogout,
+}) {
   /* =====================================================
      PREFERENCES
   ===================================================== */
@@ -91,8 +94,10 @@ function App() {
      COST OF LIVING
   ===================================================== */
 
-  const [costOfLiving, setCostOfLiving] =
-    useState(null);
+  const [
+    costOfLiving,
+    setCostOfLiving,
+  ] = useState(null);
 
   const [
     costOfLivingStatus,
@@ -517,9 +522,18 @@ function App() {
   ===================================================== */
 
   return (
-    <DashboardShell>
+    <DashboardShell
+      user={user}
+      onLogout={onLogout}
+      savedCities={savedCities}
+      preferences={preferences}
+      recommendation={recommendation}
+      onRemoveCity={handleRemoveCity}
+      onSelectSavedCity={handleSavedCitySelect}
+    >
 
       <DashboardHome
+
         preferences={
           preferences
         }
@@ -619,6 +633,7 @@ function App() {
         recommendation={
           recommendation
         }
+
       />
 
     </DashboardShell>

@@ -23,30 +23,46 @@ import {
 
 import AICityAdvisor from "./AICityAdvisor";
 
-
 function DashboardShell({
   children,
+  user,
+  onLogout,
   aiAdvisor = true,
   savedCities = [],
   preferences,
   recommendation,
   onRemoveCity,
   onSelectSavedCity,
-  user,
-  onLogout,
 }) {
-  const [mobileMenuOpen, setMobileMenuOpen] =
-    useState(false);
+  /* =====================================================
+     STATE
+  ===================================================== */
 
-  const [profileMenuOpen, setProfileMenuOpen] =
-    useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
+  /* =====================================================
+     USER INFORMATION
+  ===================================================== */
 
-  /*
-   * =====================================================
-   * NAVIGATION
-   * =====================================================
-   */
+  const username = user?.username || "User";
+  const email = user?.email || "";
+
+  function getInitials(name = "") {
+    return name
+      .trim()
+      .split(/\s+/)
+      .map((part) => part.charAt(0))
+      .join("")
+      .slice(0, 2)
+      .toUpperCase();
+  }
+
+  const initials = getInitials(username);
+
+  /* =====================================================
+     NAVIGATION
+  ===================================================== */
 
   const navigationItems = [
     {
@@ -92,42 +108,36 @@ function DashboardShell({
     },
   ];
 
-
-  /*
-   * =====================================================
-   * USER DISPLAY
-   * =====================================================
-   */
-
-  const username =
-    user?.username || "Leon";
-
-  const initials =
-    username
-      .slice(0, 2)
-      .toUpperCase();
-
-
-  /*
-   * =====================================================
-   * LOGOUT
-   * =====================================================
-   */
+  /* =====================================================
+     LOGOUT
+  ===================================================== */
 
   async function handleLogout() {
     setProfileMenuOpen(false);
+    setMobileMenuOpen(false);
 
-    if (onLogout) {
+    if (!onLogout) {
+      return;
+    }
+
+    try {
       await onLogout();
+    } catch (error) {
+      console.error("Logout failed:", error);
     }
   }
 
+  /* =====================================================
+     CLOSE MOBILE MENU
+  ===================================================== */
 
-  /*
-   * =====================================================
-   * RENDER
-   * =====================================================
-   */
+  function closeMobileMenu() {
+    setMobileMenuOpen(false);
+  }
+
+  /* =====================================================
+     RENDER
+  ===================================================== */
 
   return (
     <div className="where2-dashboard">
@@ -143,6 +153,10 @@ function DashboardShell({
             : ""
         }`}
       >
+
+        {/* =================================================
+            SIDEBAR TOP
+        ================================================= */}
 
         <div className="where2-sidebar-top">
 
@@ -163,22 +177,18 @@ function DashboardShell({
 
           </div>
 
-
           {/* Mobile Close */}
 
           <button
             type="button"
             className="where2-mobile-close"
             aria-label="Close navigation"
-            onClick={() =>
-              setMobileMenuOpen(false)
-            }
+            onClick={closeMobileMenu}
           >
             <X size={20} />
           </button>
 
         </div>
-
 
         {/* =================================================
             NAVIGATION
@@ -195,6 +205,7 @@ function DashboardShell({
               icon: Icon,
               active,
             }) => (
+
               <button
                 type="button"
                 key={label}
@@ -220,83 +231,89 @@ function DashboardShell({
 
         </nav>
 
-
         {/* =================================================
             SIDEBAR BOTTOM
         ================================================= */}
 
         <div className="where2-sidebar-bottom">
 
-          {/* Profile */}
+          {/* =================================================
+              PROFILE
+          ================================================= */}
 
-          <button
-            type="button"
-            className="where2-profile-card"
-            onClick={() =>
-              setProfileMenuOpen(
-                (current) => !current
-              )
-            }
-            aria-expanded={
-              profileMenuOpen
-            }
-          >
+          <div className="where2-profile-wrapper">
 
-            <div className="where2-avatar">
-              {initials}
-            </div>
+            <button
+              type="button"
+              className="where2-profile-card"
+              onClick={() =>
+                setProfileMenuOpen(
+                  (current) => !current
+                )
+              }
+              aria-expanded={profileMenuOpen}
+              aria-label="Open profile menu"
+            >
 
-            <div className="where2-profile-info">
+              <div className="where2-avatar">
+                {initials}
+              </div>
 
-              <strong>
-                {username}
-              </strong>
-
-              <span>
-                Premium{" "}
-                <Star size={11} />
-              </span>
-
-            </div>
-
-            <ChevronDown size={16} />
-
-          </button>
-
-
-          {/* Sidebar Profile Menu */}
-
-          {profileMenuOpen && (
-            <div className="where2-profile-menu">
-
-              <div className="where2-profile-menu-user">
+              <div className="where2-profile-info">
 
                 <strong>
                   {username}
                 </strong>
 
-                {user?.email && (
-                  <span>
-                    {user.email}
-                  </span>
-                )}
+                <span>
+                  Premium{" "}
+                  <Star size={11} />
+                </span>
 
               </div>
 
-              <button
-                type="button"
-                onClick={handleLogout}
-              >
-                <LogOut size={16} />
+              <ChevronDown size={16} />
 
-                <span>
-                  Log out
-                </span>
-              </button>
+            </button>
 
-            </div>
-          )}
+            {/* =================================================
+                SIDEBAR PROFILE DROPDOWN
+            ================================================= */}
 
+            {profileMenuOpen && (
+              <div className="where2-profile-menu">
+
+                <div className="where2-profile-menu-user">
+
+                  <strong>
+                    {username}
+                  </strong>
+
+                  {email && (
+                    <span>
+                      {email}
+                    </span>
+                  )}
+
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                >
+
+                  <LogOut size={16} />
+
+                  <span>
+                    Log out
+                  </span>
+
+                </button>
+
+              </div>
+            )}
+
+          </div>
 
           {/* =================================================
               PREMIUM
@@ -324,7 +341,6 @@ function DashboardShell({
 
           </div>
 
-
           {/* =================================================
               SIDEBAR LINKS
           ================================================= */}
@@ -345,7 +361,6 @@ function DashboardShell({
 
             </button>
 
-
             <button type="button">
 
               <Settings size={17} />
@@ -355,7 +370,6 @@ function DashboardShell({
               </span>
 
             </button>
-
 
             <button type="button">
 
@@ -368,7 +382,6 @@ function DashboardShell({
             </button>
 
           </div>
-
 
           {/* =================================================
               FOOTER
@@ -390,7 +403,6 @@ function DashboardShell({
 
       </aside>
 
-
       {/* =================================================
           MOBILE SIDEBAR OVERLAY
       ================================================= */}
@@ -400,12 +412,9 @@ function DashboardShell({
           type="button"
           className="where2-sidebar-overlay"
           aria-label="Close navigation"
-          onClick={() =>
-            setMobileMenuOpen(false)
-          }
+          onClick={closeMobileMenu}
         />
       )}
-
 
       {/* =================================================
           MAIN DASHBOARD AREA
@@ -413,15 +422,15 @@ function DashboardShell({
 
       <div className="where2-dashboard-main">
 
-
         {/* =================================================
             TOPBAR
         ================================================= */}
 
         <header className="where2-topbar">
 
-
-          {/* Mobile Brand */}
+          {/* =================================================
+              MOBILE BRAND
+          ================================================= */}
 
           <div className="where2-mobile-brand">
 
@@ -435,7 +444,6 @@ function DashboardShell({
             >
               <Menu size={21} />
             </button>
-
 
             <div className="where2-brand">
 
@@ -454,13 +462,11 @@ function DashboardShell({
 
           </div>
 
-
           {/* =================================================
               TOPBAR ACTIONS
           ================================================= */}
 
           <div className="where2-topbar-actions">
-
 
             {/* Notifications */}
 
@@ -478,7 +484,6 @@ function DashboardShell({
 
             </button>
 
-
             {/* Saved Cities */}
 
             <button
@@ -488,7 +493,6 @@ function DashboardShell({
             >
               <Bookmark size={20} />
             </button>
-
 
             {/* =================================================
                 USER PROFILE
@@ -504,9 +508,7 @@ function DashboardShell({
                     (current) => !current
                   )
                 }
-                aria-expanded={
-                  profileMenuOpen
-                }
+                aria-expanded={profileMenuOpen}
                 aria-label="Open user menu"
               >
 
@@ -518,8 +520,9 @@ function DashboardShell({
 
               </button>
 
-
-              {/* Topbar Profile Dropdown */}
+              {/* =================================================
+                  TOPBAR PROFILE DROPDOWN
+              ================================================= */}
 
               {profileMenuOpen && (
                 <div className="where2-user-dropdown">
@@ -536,9 +539,9 @@ function DashboardShell({
                         {username}
                       </strong>
 
-                      {user?.email && (
+                      {email && (
                         <span>
-                          {user.email}
+                          {email}
                         </span>
                       )}
 
@@ -546,9 +549,7 @@ function DashboardShell({
 
                   </div>
 
-
                   <div className="where2-user-dropdown-divider" />
-
 
                   <button
                     type="button"
@@ -573,13 +574,11 @@ function DashboardShell({
 
         </header>
 
-
         {/* =================================================
             DASHBOARD CONTENT
         ================================================= */}
 
         <div className="where2-dashboard-content">
-
 
           {/* Main Column */}
 
@@ -588,7 +587,6 @@ function DashboardShell({
             {children}
 
           </section>
-
 
           {/* Right Intelligence Sidebar */}
 
@@ -609,6 +607,5 @@ function DashboardShell({
     </div>
   );
 }
-
 
 export default DashboardShell;

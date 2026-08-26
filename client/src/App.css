@@ -1054,3 +1054,272 @@
     gap: 12px;
   }
 }
+
+/* =========================================================
+   WHERE2 USER PROFILE DROPDOWN
+   ========================================================= */
+
+.where2-topbar {
+  position: relative;
+  z-index: 100;
+  overflow: visible;
+}
+
+.where2-topbar-actions {
+  position: relative;
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.where2-user-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.where2-user-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.where2-user-button .where2-avatar {
+  flex-shrink: 0;
+}
+
+.where2-user-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+
+  width: 250px;
+  min-width: 250px;
+
+  background: #ffffff;
+  border: 1px solid #dfe5f2;
+  border-radius: 14px;
+
+  padding: 14px;
+
+  box-shadow:
+    0 18px 45px rgba(28, 43, 76, 0.14),
+    0 4px 12px rgba(28, 43, 76, 0.08);
+
+  z-index: 1000;
+}
+
+.where2-user-dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 4px 12px;
+}
+
+.where2-user-dropdown-header .where2-avatar {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #eaf0ff;
+  color: #3157e8;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.where2-user-dropdown-header > div:last-child {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.where2-user-dropdown-header strong {
+  color: #18223b;
+  font-size: 14px;
+  font-weight: 700;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.where2-user-dropdown-header span {
+  color: #7b879f;
+  font-size: 12px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.where2-user-dropdown-divider {
+  height: 1px;
+  background: #e8edf5;
+  margin: 2px 0 8px;
+}
+
+.where2-logout-button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: transparent;
+  color: #26365f;
+
+  padding: 10px 9px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  text-align: left;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+.where2-logout-button:hover {
+  background: #f3f6ff;
+  color: #3157e8;
+}
+
+.where2-logout-button svg {
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   SIDEBAR PROFILE DROPDOWN
+   ========================================================= */
+
+.where2-profile-wrapper {
+  position: relative;
+}
+
+.where2-profile-card {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: 0;
+  background: transparent;
+
+  padding: 8px;
+
+  cursor: pointer;
+  text-align: left;
+
+  font-family: inherit;
+}
+
+.where2-profile-card .where2-profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.where2-profile-menu {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 10px);
+
+  background: #ffffff;
+
+  border: 1px solid #dfe5f2;
+  border-radius: 14px;
+
+  padding: 10px;
+
+  box-shadow:
+    0 18px 45px rgba(28, 43, 76, 0.14),
+    0 4px 12px rgba(28, 43, 76, 0.08);
+
+  z-index: 1000;
+}
+
+.where2-profile-menu-user {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  padding: 8px 9px 10px;
+}
+
+.where2-profile-menu-user strong {
+  color: #18223b;
+  font-size: 14px;
+}
+
+.where2-profile-menu-user span {
+  color: #7b879f;
+  font-size: 12px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.where2-profile-menu > button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: transparent;
+
+  padding: 10px 9px;
+
+  color: #26365f;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  text-align: left;
+}
+
+.where2-profile-menu > button:hover {
+  background: #f3f6ff;
+  color: #3157e8;
+}
+
+/* =========================================================
+   KEEP DASHBOARD CONTENT BELOW THE TOPBAR
+   ========================================================= */
+
+.where2-dashboard-main {
+  min-width: 0;
+}
+
+.where2-dashboard-content {
+  position: relative;
+  z-index: 1;
+}

@@ -1,18 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  ArrowRight,
-  Check,
-  Eye,
-  EyeOff,
-  LockKeyhole,
-  Mail,
-  MapPinned,
-  Search,
-  Sparkles,
-  Heart,
-} from "lucide-react";
-
-import "./App.css";
+import "./AuthApp.css";
 
 import {
   getCurrentUser,
@@ -21,7 +8,7 @@ import {
   signup,
 } from "./api";
 
-function AuthApp() {
+function AuthApp({ onAuthenticated }) {
   const [user, setUser] = useState(null);
   const [mode, setMode] = useState("login");
 
@@ -31,8 +18,7 @@ function AuthApp() {
     password: "",
   });
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const [status, setStatus] = useState("loading");
   const [error, setError] = useState("");
@@ -46,9 +32,16 @@ function AuthApp() {
 
         setUser(currentUser);
         setStatus("ready");
+
+        if (currentUser && onAuthenticated) {
+          onAuthenticated(currentUser);
+        }
       })
       .catch((requestError) => {
-        console.error("Failed to restore session:", requestError);
+        console.error(
+          "Failed to restore authentication session:",
+          requestError
+        );
 
         if (!mounted) return;
 
@@ -59,7 +52,7 @@ function AuthApp() {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [onAuthenticated]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -68,21 +61,16 @@ function AuthApp() {
       ...currentForm,
       [name]: value,
     }));
-
-    if (error) {
-      setError("");
-    }
   }
 
   function switchMode(nextMode) {
     setMode(nextMode);
     setError("");
 
-    setForm({
+    setForm((currentForm) => ({
+      ...currentForm,
       username: "",
-      email: "",
-      password: "",
-    });
+    }));
   }
 
   async function handleSubmit(event) {
@@ -107,14 +95,24 @@ function AuthApp() {
         );
       }
 
+      /*
+       * Authentication is handled by the Flask API.
+       *
+       * The root App.jsx is responsible for switching
+       * from AuthApp to the authenticated WHERE2 dashboard.
+       */
       setUser(authenticatedUser);
       setStatus("ready");
+
+      if (onAuthenticated) {
+        onAuthenticated(authenticatedUser);
+      }
     } catch (requestError) {
       console.error("Authentication failed:", requestError);
 
       setError(
         requestError?.message ||
-          "Something went wrong. Please try again."
+          "Unable to complete authentication."
       );
 
       setStatus("ready");
@@ -125,293 +123,295 @@ function AuthApp() {
     try {
       await logout();
     } catch (requestError) {
-      console.error("Logout failed:", requestError);
+      console.error(
+        "Logout failed:",
+        requestError
+      );
     } finally {
       setUser(null);
     }
   }
 
+  function handleGoogleLogin() {
+    setError(
+      "Google sign-in will be connected after the core authentication flow is complete."
+    );
+  }
+
   if (status === "loading") {
     return (
-      <main className="where2-auth-loading">
-        <div className="where2-loading-mark">
-          <MapPinned size={28} />
-        </div>
+      <main className="auth-page">
+        <section className="auth-card">
+          <div className="auth-intro">
+            <div className="auth-brand">
+              <div className="auth-brand-mark">
+                <span>W</span>
+              </div>
 
-        <p>Loading Where2...</p>
+              <span className="auth-brand-name">
+                where<span>2</span>
+              </span>
+            </div>
+
+            <div className="auth-intro-content">
+              <p className="auth-eyebrow">
+                Where2
+              </p>
+
+              <h1 className="auth-heading">
+                Find your
+                <br />
+                next great
+                <br />
+                <span className="auth-heading-accent">
+                  place.
+                </span>
+              </h1>
+            </div>
+          </div>
+
+          <div className="auth-form-panel">
+            <div className="auth-form-container">
+              <div className="auth-form-header">
+                <h2>
+                  Loading your account
+                </h2>
+
+                <p>
+                  Connecting securely to Where2.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     );
   }
 
   if (user) {
     return (
-      <main className="where2-authenticated">
-        <section className="where2-authenticated-card">
-          <div className="where2-authenticated-icon">
-            <Check size={28} />
+      <main className="auth-page">
+        <section className="auth-card">
+          <div className="auth-intro">
+            <div className="auth-brand">
+              <div className="auth-brand-mark">
+                <span>W</span>
+              </div>
+
+              <span className="auth-brand-name">
+                where<span>2</span>
+              </span>
+            </div>
+
+            <div className="auth-intro-content">
+              <p className="auth-eyebrow">
+                Welcome back
+              </p>
+
+              <h1 className="auth-heading">
+                Ready to find
+                <br />
+                your next
+                <br />
+                <span className="auth-heading-accent">
+                  place?
+                </span>
+              </h1>
+
+              <p className="auth-description">
+                You're signed in and ready to
+                explore cities, compare places,
+                and discover where you could
+                live your best life.
+              </p>
+            </div>
           </div>
 
-          <p className="where2-auth-eyebrow">
-            WHERE2
-          </p>
+          <div className="auth-form-panel">
+            <div className="auth-form-container">
+              <div className="auth-form-header">
+                <h2>
+                  Welcome back,
+                  {" "}
+                  {user.username}.
+                </h2>
 
-          <h1>
-            Welcome back, {user.username}.
-          </h1>
+                <p>
+                  Your Where2 account is
+                  connected.
+                </p>
+              </div>
 
-          <p>
-            Your Where2 account is connected and ready.
-          </p>
+              <button
+                type="button"
+                className="auth-submit"
+                onClick={() => {
+                  if (onAuthenticated) {
+                    onAuthenticated(user);
+                  }
+                }}
+              >
+                Continue to Where2
+              </button>
 
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="where2-secondary-button"
-          >
-            Log out
-          </button>
+              <button
+                type="button"
+                className="auth-google"
+                onClick={handleLogout}
+              >
+                Log out
+              </button>
+            </div>
+          </div>
         </section>
       </main>
     );
   }
 
-  const isLogin = mode === "login";
-
   return (
-    <main className="where2-auth-page">
+    <main className="auth-page">
+      <section className="auth-card">
 
-      {/* ==================================================
-          LEFT EXPERIENCE
-      ================================================== */}
+        {/* =================================================
+            LEFT: WHERE2 PURPOSE
+            ================================================= */}
 
-      <section className="where2-auth-visual">
+        <div className="auth-intro">
 
-        <div className="where2-auth-image" />
-
-        <div className="where2-auth-overlay" />
-
-        <div className="where2-auth-visual-content">
-
-          {/* Logo */}
-
-          <div className="where2-auth-logo">
-            <div className="where2-auth-logo-mark">
-              <MapPinned
-                size={25}
-                strokeWidth={2.5}
-              />
+          <div className="auth-brand">
+            <div className="auth-brand-mark">
+              <span>W</span>
             </div>
 
-            <span>
+            <span className="auth-brand-name">
               where<span>2</span>
             </span>
           </div>
 
-          {/* Main message */}
+          <div className="auth-intro-content">
 
-          <div className="where2-auth-message">
-
-            <p className="where2-auth-kicker">
-              YOUR NEXT CHAPTER STARTS HERE
+            <p className="auth-eyebrow">
+              Find your place
             </p>
 
-            <h1>
-              Find your next
+            <h1 className="auth-heading">
+              Find your
               <br />
-              great <span>place</span>
+              next great
               <br />
-              to live.
+              <span className="auth-heading-accent">
+                place to live.
+              </span>
             </h1>
 
-            <p className="where2-auth-description">
-              Explore cities, compare cost of living,
-              discover weather insights, and find
-              the place that fits your lifestyle.
+            <p className="auth-description">
+              Discover and compare cities
+              around the world based on
+              cost of living, weather,
+              lifestyle, and what matters
+              most to you.
             </p>
 
-          </div>
-
-          {/* Feature highlights */}
-
-          <div className="where2-auth-features">
-
-            <div className="where2-auth-feature">
-              <div className="where2-feature-icon blue">
-                <Search size={19} />
-              </div>
-
-              <strong>
-                Explore
-              </strong>
+            <div className="auth-purpose">
+              <span className="auth-purpose-dot" />
 
               <span>
-                Cities worldwide
-              </span>
-            </div>
-
-            <div className="where2-auth-feature">
-              <div className="where2-feature-icon green">
-                <Sparkles size={19} />
-              </div>
-
-              <strong>
-                Compare
-              </strong>
-
-              <span>
-                What matters most
-              </span>
-            </div>
-
-            <div className="where2-auth-feature">
-              <div className="where2-feature-icon yellow">
-                <MapPinned size={19} />
-              </div>
-
-              <strong>
-                Discover
-              </strong>
-
-              <span>
-                Your perfect match
-              </span>
-            </div>
-
-            <div className="where2-auth-feature">
-              <div className="where2-feature-icon purple">
-                <Heart size={19} />
-              </div>
-
-              <strong>
-                Save
-              </strong>
-
-              <span>
-                Your favourite cities
+                Make a more informed decision
+                about where you live.
               </span>
             </div>
 
           </div>
-
-          {/* Bottom statement */}
-
-          <div className="where2-auth-quote">
-
-            <div className="where2-quote-icon">
-              <MapPinned size={20} />
-            </div>
-
-            <div>
-              <strong>
-                Not sure where to go?
-              </strong>
-
-              <span>
-                Where2 gives you the data
-                to choose with confidence.
-              </span>
-            </div>
-
-          </div>
-
         </div>
-      </section>
 
-      {/* ==================================================
-          RIGHT AUTH CARD
-      ================================================== */}
 
-      <section className="where2-auth-form-section">
+        {/* =================================================
+            RIGHT: AUTH FORM
+            ================================================= */}
 
-        <div className="where2-auth-form-card">
+        <div className="auth-form-panel">
 
-          {/* Mobile logo */}
+          <div className="auth-form-container">
 
-          <div className="where2-mobile-auth-logo">
-            <div className="where2-auth-logo-mark">
-              <MapPinned size={22} />
-            </div>
+            <div className="auth-form-header">
 
-            <span>
-              where<span>2</span>
-            </span>
-          </div>
-
-          {/* Header */}
-
-          <div className="where2-form-header">
-
-            <div className="where2-form-icon">
-              <MapPinned size={21} />
-            </div>
-
-            <div>
               <h2>
-                {isLogin
-                  ? "Welcome back"
-                  : "Create your account"}
+                {mode === "login"
+                  ? "Welcome back."
+                  : "Create your account."}
               </h2>
 
               <p>
-                {isLogin
-                  ? "Sign in to continue your journey."
-                  : "Start discovering places that fit your life."}
+                {mode === "login"
+                  ? "Sign in to continue exploring Where2."
+                  : "Create an account to save and personalize your city discoveries."}
               </p>
+
             </div>
 
-          </div>
 
-          {/* Tabs */}
+            {/* MODE SWITCHER */}
 
-          <div className="where2-auth-tabs">
-
-            <button
-              type="button"
-              className={
-                isLogin
-                  ? "where2-auth-tab active"
-                  : "where2-auth-tab"
-              }
-              onClick={() => switchMode("login")}
+            <div
+              className="auth-mode-switcher"
+              role="tablist"
+              aria-label="Authentication mode"
             >
-              Log in
-            </button>
 
-            <button
-              type="button"
-              className={
-                !isLogin
-                  ? "where2-auth-tab active"
-                  : "where2-auth-tab"
-              }
-              onClick={() => switchMode("signup")}
+              <button
+                type="button"
+                role="tab"
+                aria-selected={mode === "login"}
+                className={`auth-mode-button ${
+                  mode === "login"
+                    ? "active"
+                    : ""
+                }`}
+                onClick={() =>
+                  switchMode("login")
+                }
+              >
+                Log in
+              </button>
+
+              <button
+                type="button"
+                role="tab"
+                aria-selected={mode === "signup"}
+                className={`auth-mode-button ${
+                  mode === "signup"
+                    ? "active"
+                    : ""
+                }`}
+                onClick={() =>
+                  switchMode("signup")
+                }
+              >
+                Create account
+              </button>
+
+            </div>
+
+
+            {/* FORM */}
+
+            <form
+              className="auth-form"
+              onSubmit={handleSubmit}
             >
-              Create account
-            </button>
 
-          </div>
+              {mode === "signup" && (
+                <div className="auth-field">
 
-          {/* Form */}
-
-          <form
-            className="where2-auth-form"
-            onSubmit={handleSubmit}
-          >
-
-            {!isLogin && (
-              <label className="where2-input-group">
-
-                <span>
-                  Username
-                </span>
-
-                <div className="where2-input-wrapper">
-
-                  <Mail size={18} />
+                  <label htmlFor="username">
+                    Username
+                  </label>
 
                   <input
-                    type="text"
+                    id="username"
+                    className="auth-input"
                     name="username"
+                    type="text"
                     value={form.username}
                     onChange={handleChange}
                     placeholder="Choose a username"
@@ -420,56 +420,46 @@ function AuthApp() {
                   />
 
                 </div>
+              )}
 
-              </label>
-            )}
 
-            <label className="where2-input-group">
+              <div className="auth-field">
 
-              <span>
-                Email address
-              </span>
-
-              <div className="where2-input-wrapper">
-
-                <Mail size={18} />
+                <label htmlFor="email">
+                  Email
+                </label>
 
                 <input
-                  type="email"
+                  id="email"
+                  className="auth-input"
                   name="email"
+                  type="email"
                   value={form.email}
                   onChange={handleChange}
-                  placeholder="Enter your email"
+                  placeholder="you@example.com"
                   autoComplete="email"
                   required
                 />
 
               </div>
 
-            </label>
 
-            <label className="where2-input-group">
+              <div className="auth-field">
 
-              <span>
-                Password
-              </span>
-
-              <div className="where2-input-wrapper">
-
-                <LockKeyhole size={18} />
+                <label htmlFor="password">
+                  Password
+                </label>
 
                 <input
-                  type={
-                    showPassword
-                      ? "text"
-                      : "password"
-                  }
+                  id="password"
+                  className="auth-input"
                   name="password"
+                  type="password"
                   value={form.password}
                   onChange={handleChange}
                   placeholder="Enter your password"
                   autoComplete={
-                    isLogin
+                    mode === "login"
                       ? "current-password"
                       : "new-password"
                   }
@@ -477,163 +467,111 @@ function AuthApp() {
                   required
                 />
 
-                <button
-                  type="button"
-                  className="where2-password-toggle"
-                  aria-label={
-                    showPassword
-                      ? "Hide password"
-                      : "Show password"
-                  }
-                  onClick={() =>
-                    setShowPassword(
-                      (visible) => !visible
-                    )
-                  }
-                >
-                  {showPassword ? (
-                    <EyeOff size={18} />
-                  ) : (
-                    <Eye size={18} />
-                  )}
-                </button>
-
               </div>
 
-            </label>
 
-            {/* Login options */}
+              {mode === "login" && (
+                <div className="auth-form-options">
 
-            {isLogin && (
-              <div className="where2-form-options">
+                  <label className="auth-remember">
 
-                <label className="where2-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={rememberMe}
+                      onChange={(event) =>
+                        setRememberMe(
+                          event.target.checked
+                        )
+                      }
+                    />
 
-                  <input
-                    type="checkbox"
-                    checked={rememberMe}
-                    onChange={(event) =>
-                      setRememberMe(
-                        event.target.checked
+                    <span>
+                      Remember me
+                    </span>
+
+                  </label>
+
+                  <button
+                    type="button"
+                    className="auth-forgot"
+                    onClick={() =>
+                      setError(
+                        "Password recovery will be added in the next authentication step."
                       )
                     }
-                  />
+                  >
+                    Forgot password?
+                  </button>
 
-                  <span>
-                    Remember me
-                  </span>
+                </div>
+              )}
 
-                </label>
 
-                <button
-                  type="button"
-                  className="where2-forgot-password"
-                  onClick={() =>
-                    setError(
-                      "Password recovery will be available soon."
-                    )
-                  }
+              {error && (
+                <p
+                  className="auth-error"
+                  role="alert"
                 >
-                  Forgot password?
-                </button>
+                  {error}
+                </p>
+              )}
 
-              </div>
-            )}
 
-            {/* Error */}
-
-            {error && (
-              <div
-                className="where2-auth-error"
-                role="alert"
+              <button
+                className="auth-submit"
+                type="submit"
+                disabled={
+                  status === "submitting"
+                }
               >
-                {error}
-              </div>
-            )}
-
-            {/* Primary CTA */}
-
-            <button
-              type="submit"
-              className="where2-primary-button"
-              disabled={status === "submitting"}
-            >
-              <span>
                 {status === "submitting"
-                  ? "Please wait..."
-                  : isLogin
+                  ? "Connecting..."
+                  : mode === "login"
                     ? "Log in"
                     : "Create account"}
-              </span>
+              </button>
 
-              {status !== "submitting" && (
-                <ArrowRight size={19} />
-              )}
-            </button>
+            </form>
 
-          </form>
 
-          {/* Divider */}
+            {/* GOOGLE */}
 
-          <div className="where2-auth-divider">
-            <span />
-            <p>or</p>
-            <span />
-          </div>
-
-          {/* Google */}
-
-          <button
-            type="button"
-            className="where2-google-button"
-            onClick={() =>
-              setError(
-                "Google sign-in is coming soon."
-              )
-            }
-          >
-            <span className="where2-google-icon">
-              G
-            </span>
-
-            <span>
-              Continue with Google
-            </span>
-          </button>
-
-          {/* Footer */}
-
-          <p className="where2-auth-footer">
-
-            {isLogin
-              ? "Don't have an account?"
-              : "Already have an account?"}
+            <div className="auth-divider">
+              <span>or continue with</span>
+            </div>
 
             <button
               type="button"
-              onClick={() =>
-                switchMode(
-                  isLogin
-                    ? "signup"
-                    : "login"
-                )
-              }
+              className="auth-google"
+              onClick={handleGoogleLogin}
             >
-              {isLogin
-                ? "Create account"
-                : "Log in"}
+              <span className="auth-google-icon">
+                G
+              </span>
+
+              Continue with Google
             </button>
 
-          </p>
 
-          <p className="where2-auth-legal">
-            By continuing, you agree to Where2's
-            terms and privacy policy.
-          </p>
+            {/* TERMS */}
+
+            <p className="auth-terms">
+              By continuing, you agree to
+              Where2's{" "}
+              <strong>
+                Terms of Service
+              </strong>{" "}
+              and{" "}
+              <strong>
+                Privacy Policy
+              </strong>.
+            </p>
+
+          </div>
 
         </div>
-      </section>
 
+      </section>
     </main>
   );
 }
