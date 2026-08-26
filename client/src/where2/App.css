@@ -17711,3 +17711,421 @@ with a compact product/dashboard experience.*/
     font-size: 12px;
   }
 }
+
+/* =========================================================
+   WHERE2 TOPBAR PROFILE
+   ========================================================= */
+
+.where2-topbar {
+  position: relative;
+  z-index: 100;
+  overflow: visible;
+}
+
+.where2-topbar-actions {
+  position: relative;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  height: 100%;
+}
+
+.where2-topbar-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  z-index: 500;
+}
+
+.where2-topbar-profile-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  width: auto;
+  min-width: 48px;
+  height: 48px;
+
+  padding: 4px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: transparent;
+
+  color: #172554;
+
+  cursor: pointer;
+
+  font-family: inherit;
+}
+
+.where2-topbar-profile-button:hover {
+  background: #f3f6ff;
+}
+
+.where2-topbar-profile-button:focus-visible {
+  outline: 3px solid rgba(49, 87, 232, 0.2);
+  outline-offset: 2px;
+}
+
+.where2-topbar-avatar {
+  width: 40px;
+  height: 40px;
+
+  min-width: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #e6edff;
+  color: #3157e8;
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+
+  user-select: none;
+}
+
+.where2-topbar-profile-dropdown {
+  position: absolute;
+
+  top: calc(100% + 10px);
+  right: 0;
+
+  width: 270px;
+  min-width: 270px;
+
+  padding: 14px;
+
+  background: #ffffff;
+
+  border: 1px solid #dfe5f1;
+  border-radius: 16px;
+
+  box-shadow:
+    0 20px 45px rgba(24, 34, 59, 0.12),
+    0 4px 12px rgba(24, 34, 59, 0.06);
+
+  z-index: 9999;
+
+  box-sizing: border-box;
+}
+
+.where2-topbar-profile-header {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 4px 4px 12px;
+}
+
+.where2-topbar-profile-avatar {
+  width: 42px;
+  height: 42px;
+
+  min-width: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #e6edff;
+  color: #3157e8;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.where2-topbar-profile-information {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.where2-topbar-profile-information strong {
+  display: block;
+
+  color: #18223b;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.where2-topbar-profile-information span {
+  display: block;
+
+  max-width: 190px;
+
+  color: #7b879f;
+
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.4;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.where2-topbar-profile-divider {
+  width: 100%;
+  height: 1px;
+
+  margin: 2px 0 8px;
+
+  background: #e8edf5;
+}
+
+.where2-topbar-logout {
+  width: 100%;
+
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 11px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: transparent;
+
+  color: #263452;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.where2-topbar-logout:hover {
+  background: #f3f6ff;
+  color: #3157e8;
+}
+
+.where2-topbar-logout:focus-visible {
+  outline: 3px solid rgba(49, 87, 232, 0.18);
+  outline-offset: 1px;
+}
+
+
+/* =========================================================
+   SIDEBAR PROFILE
+   ========================================================= */
+
+.where2-profile-wrapper {
+  position: relative;
+  width: 100%;
+  z-index: 300;
+}
+
+.where2-profile-card {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 8px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: transparent;
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  text-align: left;
+}
+
+.where2-profile-card:hover {
+  background: #f3f6ff;
+}
+
+.where2-profile-card .where2-profile-info {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.where2-profile-card .where2-profile-info strong {
+  display: block;
+
+  color: #18223b;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.where2-profile-card .where2-profile-info span {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+
+  color: #ef9b3d;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.where2-profile-menu {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  bottom: calc(100% + 10px);
+
+  width: 100%;
+
+  padding: 10px;
+
+  background: #ffffff;
+
+  border: 1px solid #dfe5f1;
+  border-radius: 14px;
+
+  box-shadow:
+    0 18px 40px rgba(24, 34, 59, 0.12),
+    0 4px 12px rgba(24, 34, 59, 0.05);
+
+  z-index: 9999;
+
+  box-sizing: border-box;
+}
+
+.where2-profile-menu-user {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  padding: 7px 8px 10px;
+}
+
+.where2-profile-menu-user strong {
+  color: #18223b;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.where2-profile-menu-user span {
+  max-width: 100%;
+
+  color: #7b879f;
+
+  font-family: inherit;
+  font-size: 12px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.where2-profile-menu > button {
+  width: 100%;
+
+  min-height: 40px;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 9px 8px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: #263452;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.where2-profile-menu > button:hover {
+  background: #f3f6ff;
+  color: #3157e8;
+}
+
+
+/* =========================================================
+   TOPBAR RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .where2-topbar-profile-dropdown {
+    position: fixed;
+
+    top: 76px;
+    right: 16px;
+
+    width: min(270px, calc(100vw - 32px));
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .where2-topbar-actions {
+    gap: 6px;
+  }
+
+  .where2-topbar-profile-button {
+    min-width: 42px;
+    height: 42px;
+  }
+
+  .where2-topbar-avatar {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+  }
+
+  .where2-topbar-profile-dropdown {
+    top: 68px;
+    right: 12px;
+  }
+}
