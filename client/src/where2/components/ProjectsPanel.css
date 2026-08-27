@@ -1,0 +1,618 @@
+/* =========================================================
+   FOCUSFLOW PROJECTS
+   Uses the existing Where2 visual language.
+========================================================= */
+
+.focusflow-projects {
+  width: 100%;
+  margin-top: 34px;
+  padding: 32px;
+  border: 1px solid #dfe5f0;
+  border-radius: 22px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+
+.focusflow-projects-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+
+.focusflow-projects-header h2 {
+  margin: 4px 0 8px;
+  color: #18223b;
+  font-family: inherit;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+
+.focusflow-projects-header p:last-child {
+  margin: 0;
+  max-width: 620px;
+  color: #74819b;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+
+.focusflow-projects-add-button,
+.focusflow-primary-button,
+.focusflow-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 17px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+
+.focusflow-projects-add-button,
+.focusflow-primary-button {
+  border: 1px solid #3d5be8;
+  background: #3d5be8;
+  color: #ffffff;
+}
+
+
+.focusflow-projects-add-button:hover,
+.focusflow-primary-button:hover {
+  background: #3150db;
+  border-color: #3150db;
+}
+
+
+.focusflow-projects-add-button:active,
+.focusflow-primary-button:active,
+.focusflow-secondary-button:active {
+  transform: translateY(1px);
+}
+
+
+.focusflow-secondary-button {
+  border: 1px solid #d7dfed;
+  background: #ffffff;
+  color: #26385f;
+}
+
+
+.focusflow-secondary-button:hover {
+  background: #f5f7fb;
+  border-color: #cbd5e7;
+}
+
+
+.focusflow-primary-button:disabled,
+.focusflow-secondary-button:disabled,
+.focusflow-projects-add-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.focusflow-projects-error {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border: 1px solid #f0c8c8;
+  border-radius: 10px;
+  background: #fff7f7;
+  color: #b33d3d;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   CREATE FORM
+========================================================= */
+
+.focusflow-project-form {
+  margin-bottom: 26px;
+  padding: 24px;
+  border: 1px solid #dce4f2;
+  border-radius: 16px;
+  background: #f8faff;
+}
+
+
+.focusflow-project-form-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 22px;
+  color: #3157e8;
+}
+
+
+.focusflow-project-form-heading h3 {
+  margin: 0 0 5px;
+  color: #18223b;
+  font-family: inherit;
+  font-size: 19px;
+}
+
+
+.focusflow-project-form-heading p {
+  margin: 0;
+  color: #7b879f;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+.focusflow-form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 190px;
+  gap: 16px;
+}
+
+
+.focusflow-project-form label,
+.focusflow-project-card-editing label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+
+
+.focusflow-project-form label span,
+.focusflow-project-card-editing label span {
+  color: #26385f;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+.focusflow-project-form input,
+.focusflow-project-form textarea,
+.focusflow-project-form select,
+.focusflow-project-card-editing input,
+.focusflow-project-card-editing textarea,
+.focusflow-project-card-editing select {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d5ddeb;
+  border-radius: 9px;
+  outline: none;
+  background: #ffffff;
+  color: #18223b;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 11px 12px;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+
+.focusflow-project-form textarea,
+.focusflow-project-card-editing textarea {
+  resize: vertical;
+}
+
+
+.focusflow-project-form input:focus,
+.focusflow-project-form textarea:focus,
+.focusflow-project-form select:focus,
+.focusflow-project-card-editing input:focus,
+.focusflow-project-card-editing textarea:focus,
+.focusflow-project-card-editing select:focus {
+  border-color: #5a73e8;
+  box-shadow: 0 0 0 3px rgba(61, 91, 232, 0.09);
+}
+
+
+.focusflow-project-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+
+/* =========================================================
+   STATES
+========================================================= */
+
+.focusflow-projects-state,
+.focusflow-projects-empty {
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px dashed #d5deed;
+  border-radius: 16px;
+  background: #fbfcff;
+}
+
+
+.focusflow-projects-state {
+  gap: 10px;
+  color: #7b879f;
+}
+
+
+.focusflow-projects-state p,
+.focusflow-projects-empty p {
+  margin: 0 0 16px;
+  color: #7b879f;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+
+.focusflow-empty-icon {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 13px;
+  border-radius: 12px;
+  background: #edf2ff;
+  color: #315be8;
+}
+
+
+.focusflow-projects-empty h3 {
+  margin: 0 0 7px;
+  color: #18223b;
+  font-family: inherit;
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   PROJECT GRID
+========================================================= */
+
+.focusflow-project-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+
+.focusflow-project-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 235px;
+  padding: 20px;
+  border: 1px solid #dfe5f0;
+  border-radius: 16px;
+  background: #ffffff;
+  box-sizing: border-box;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+
+.focusflow-project-card:hover {
+  border-color: #ccd7ea;
+  box-shadow: 0 9px 28px rgba(38, 56, 95, 0.07);
+}
+
+
+.focusflow-project-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+
+.focusflow-project-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: #edf2ff;
+  color: #315be8;
+}
+
+
+.focusflow-project-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+
+.focusflow-status-active {
+  background: #edf8f2;
+  color: #32825b;
+}
+
+
+.focusflow-status-completed {
+  background: #edf2ff;
+  color: #315be8;
+}
+
+
+.focusflow-status-archived {
+  background: #f0f2f6;
+  color: #778198;
+}
+
+
+.focusflow-project-card-content {
+  flex: 1;
+  margin-top: 20px;
+}
+
+
+.focusflow-project-card-content h3 {
+  margin: 0 0 8px;
+  color: #18223b;
+  font-family: inherit;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+
+.focusflow-project-card-content p {
+  margin: 0;
+  color: #7b879f;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+
+.focusflow-project-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid #edf0f5;
+}
+
+
+.focusflow-project-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #315be8;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+
+.focusflow-project-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+
+.focusflow-project-actions button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e1e6ef;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #71809b;
+  cursor: pointer;
+}
+
+
+.focusflow-project-actions button:hover {
+  border-color: #cbd6ea;
+  background: #f7f9fd;
+  color: #315be8;
+}
+
+
+.focusflow-project-actions button:last-child:hover {
+  color: #c94c4c;
+}
+
+
+/* =========================================================
+   EDIT CARD
+========================================================= */
+
+.focusflow-project-card-editing {
+  grid-column: span 1;
+}
+
+
+.focusflow-project-edit-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: #315be8;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+.focusflow-project-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: auto;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.focusflow-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+
+.focusflow-pagination button {
+  min-height: 34px;
+  padding: 0 13px;
+  border: 1px solid #d9e1ee;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #3157e8;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+
+.focusflow-pagination button:hover:not(:disabled) {
+  background: #f3f6ff;
+}
+
+
+.focusflow-pagination button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+
+.focusflow-pagination span {
+  color: #7b879f;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   LOADING ANIMATION
+========================================================= */
+
+.focusflow-spin {
+  animation: focusflow-spin 0.8s linear infinite;
+}
+
+
+@keyframes focusflow-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 760px) {
+  .focusflow-projects {
+    padding: 22px;
+    border-radius: 17px;
+  }
+
+
+  .focusflow-projects-header {
+    flex-direction: column;
+  }
+
+
+  .focusflow-projects-add-button {
+    width: 100%;
+  }
+
+
+  .focusflow-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .focusflow-project-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .focusflow-project-card-editing {
+    grid-column: span 1;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .focusflow-projects {
+    padding: 18px;
+  }
+
+
+  .focusflow-projects-header h2 {
+    font-size: 27px;
+  }
+
+
+  .focusflow-project-form {
+    padding: 17px;
+  }
+
+
+  .focusflow-project-form-actions {
+    flex-direction: column-reverse;
+  }
+
+
+  .focusflow-project-form-actions button {
+    width: 100%;
+  }
+
+
+  .focusflow-project-card {
+    padding: 17px;
+  }
+}

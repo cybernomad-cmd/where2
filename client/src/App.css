@@ -1,0 +1,1551 @@
+/* =========================================================
+   WHERE2 AUTHENTICATION
+========================================================= */
+
+:root {
+  --where2-blue: #2463eb;
+  --where2-blue-dark: #174fc5;
+  --where2-blue-light: #eaf1ff;
+
+  --where2-navy: #14213d;
+  --where2-text: #172033;
+  --where2-muted: #68758b;
+
+  --where2-border: #dce3ed;
+  --where2-background: #f4f8fc;
+  --where2-white: #ffffff;
+
+  --where2-green: #8bcf38;
+  --where2-yellow: #f9b928;
+  --where2-purple: #7451e8;
+
+  --where2-radius: 28px;
+  --where2-shadow:
+    0 24px 70px rgba(24, 45, 82, 0.14);
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.where2-auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  background:
+    linear-gradient(
+      135deg,
+      #eef6ff 0%,
+      #f8fbff 50%,
+      #edf4ff 100%
+    );
+  color: var(--where2-text);
+}
+
+
+/* =========================================================
+   LEFT VISUAL
+========================================================= */
+
+.where2-auth-visual {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.where2-auth-image {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    url("/images/where2-auth-city.jpg");
+
+  background-size: cover;
+  background-position: center;
+  z-index: -3;
+
+  transform: scale(1.02);
+}
+
+.where2-auth-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(255, 255, 255, 0.88) 34%,
+      rgba(255, 255, 255, 0.44) 67%,
+      rgba(25, 93, 210, 0.20) 100%
+    );
+
+  z-index: -2;
+}
+
+.where2-auth-visual-content {
+  position: relative;
+
+  width: min(680px, 88%);
+  min-height: 100vh;
+
+  margin: 0 auto;
+
+  padding:
+    48px
+    44px
+    46px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.where2-auth-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1.4px;
+
+  color: var(--where2-blue);
+}
+
+.where2-auth-logo > span > span {
+  color: #163c94;
+}
+
+.where2-auth-logo-mark {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  color: white;
+  background: var(--where2-blue);
+
+  box-shadow:
+    0 10px 24px rgba(36, 99, 235, 0.28);
+}
+
+
+/* =========================================================
+   MAIN MESSAGE
+========================================================= */
+
+.where2-auth-message {
+  margin-top: auto;
+  margin-bottom: 38px;
+
+  max-width: 600px;
+}
+
+.where2-auth-kicker {
+  margin: 0 0 17px;
+
+  color: #357f4b;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.where2-auth-message h1 {
+  margin: 0;
+
+  color: var(--where2-navy);
+
+  font-size: clamp(52px, 5vw, 78px);
+  line-height: 0.98;
+
+  letter-spacing: -4px;
+
+  font-weight: 800;
+}
+
+.where2-auth-message h1 span {
+  color: var(--where2-blue);
+}
+
+.where2-auth-description {
+  max-width: 530px;
+
+  margin: 27px 0 0;
+
+  color: #40516b;
+
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.where2-auth-features {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 28px;
+}
+
+.where2-auth-feature {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.where2-feature-icon {
+  width: 42px;
+  height: 42px;
+
+  margin-bottom: 7px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  color: white;
+}
+
+.where2-feature-icon.blue {
+  background: var(--where2-blue);
+}
+
+.where2-feature-icon.green {
+  background: var(--where2-green);
+}
+
+.where2-feature-icon.yellow {
+  background: var(--where2-yellow);
+}
+
+.where2-feature-icon.purple {
+  background: var(--where2-purple);
+}
+
+.where2-auth-feature strong {
+  color: var(--where2-navy);
+
+  font-size: 14px;
+}
+
+.where2-auth-feature span {
+  color: #65748a;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   QUOTE CARD
+========================================================= */
+
+.where2-auth-quote {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  max-width: 460px;
+
+  padding: 17px 20px;
+
+  border-radius: 17px;
+
+  background:
+    rgba(15, 34, 67, 0.82);
+
+  backdrop-filter: blur(12px);
+
+  color: white;
+}
+
+.where2-quote-icon {
+  flex: 0 0 auto;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--where2-blue);
+}
+
+.where2-auth-quote div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.where2-auth-quote strong {
+  font-size: 14px;
+}
+
+.where2-auth-quote span {
+  color: rgba(255, 255, 255, 0.76);
+
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   RIGHT FORM SECTION
+========================================================= */
+
+.where2-auth-form-section {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 42px;
+}
+
+.where2-auth-form-card {
+  width: min(530px, 100%);
+
+  padding: 44px;
+
+  border:
+    1px solid rgba(214, 224, 238, 0.95);
+
+  border-radius: 28px;
+
+  background:
+    rgba(255, 255, 255, 0.97);
+
+  box-shadow: var(--where2-shadow);
+}
+
+
+/* =========================================================
+   MOBILE LOGO
+========================================================= */
+
+.where2-mobile-auth-logo {
+  display: none;
+}
+
+
+/* =========================================================
+   FORM HEADER
+========================================================= */
+
+.where2-form-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom: 28px;
+}
+
+.where2-form-icon {
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  color: var(--where2-blue);
+  background: var(--where2-blue-light);
+}
+
+.where2-form-header h2 {
+  margin: 0;
+
+  color: var(--where2-navy);
+
+  font-size: 27px;
+  letter-spacing: -0.7px;
+}
+
+.where2-form-header p {
+  margin: 4px 0 0;
+
+  color: var(--where2-muted);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.where2-auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  padding: 4px;
+
+  margin-bottom: 28px;
+
+  border-radius: 13px;
+
+  background: #edf2f7;
+}
+
+.where2-auth-tab {
+  height: 44px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: transparent;
+
+  color: #68758b;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.where2-auth-tab.active {
+  color: var(--where2-navy);
+
+  background: white;
+
+  box-shadow:
+    0 3px 10px rgba(20, 45, 80, 0.10);
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.where2-auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.where2-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.where2-input-group > span {
+  color: #27354b;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.where2-input-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.where2-input-wrapper > svg {
+  position: absolute;
+  left: 15px;
+
+  color: #7d8aa0;
+
+  pointer-events: none;
+}
+
+.where2-input-wrapper input {
+  width: 100%;
+  height: 52px;
+
+  padding:
+    0 45px
+    0 45px;
+
+  border:
+    1px solid var(--where2-border);
+
+  border-radius: 12px;
+
+  outline: none;
+
+  background: white;
+
+  color: var(--where2-text);
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.where2-input-wrapper input::placeholder {
+  color: #9aa5b5;
+}
+
+.where2-input-wrapper input:focus {
+  border-color: var(--where2-blue);
+
+  box-shadow:
+    0 0 0 4px rgba(36, 99, 235, 0.10);
+}
+
+
+/* =========================================================
+   PASSWORD
+========================================================= */
+
+.where2-password-toggle {
+  position: absolute;
+  right: 12px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #7d8aa0;
+
+  cursor: pointer;
+}
+
+.where2-password-toggle:hover {
+  background: #f1f5f9;
+}
+
+
+/* =========================================================
+   OPTIONS
+========================================================= */
+
+.where2-form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: -3px;
+}
+
+.where2-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #65748a;
+
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+.where2-checkbox input {
+  width: 17px;
+  height: 17px;
+
+  accent-color: var(--where2-blue);
+}
+
+.where2-forgot-password {
+  border: 0;
+
+  background: transparent;
+
+  color: var(--where2-blue);
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.where2-auth-error {
+  padding: 12px 14px;
+
+  border:
+    1px solid #f0c5c0;
+
+  border-radius: 10px;
+
+  background: #fff5f3;
+
+  color: #b94032;
+
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.where2-primary-button {
+  width: 100%;
+  height: 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  margin-top: 2px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2f72f2,
+      #1458df
+    );
+
+  color: white;
+
+  font-size: 15px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 12px 25px rgba(36, 99, 235, 0.24);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.where2-primary-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 16px 30px rgba(36, 99, 235, 0.30);
+}
+
+.where2-primary-button:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.where2-auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  margin: 25px 0 17px;
+}
+
+.where2-auth-divider span {
+  flex: 1;
+
+  height: 1px;
+
+  background: #e1e6ee;
+}
+
+.where2-auth-divider p {
+  margin: 0;
+
+  color: #8b96a7;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   GOOGLE
+========================================================= */
+
+.where2-google-button {
+  width: 100%;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border:
+    1px solid #dce3ed;
+
+  border-radius: 12px;
+
+  background: white;
+
+  color: var(--where2-navy);
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.where2-google-button:hover {
+  background: #f8fbff;
+
+  border-color: #c6d2e2;
+}
+
+.where2-google-icon {
+  width: 22px;
+  height: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  color: #4285f4;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.where2-auth-footer {
+  margin: 25px 0 0;
+
+  text-align: center;
+
+  color: #68758b;
+
+  font-size: 13px;
+}
+
+.where2-auth-footer button {
+  margin-left: 5px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: var(--where2-blue);
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.where2-auth-legal {
+  margin: 17px auto 0;
+
+  max-width: 360px;
+
+  text-align: center;
+
+  color: #9aa5b5;
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.where2-auth-loading,
+.where2-authenticated {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eef6ff,
+      #f8fbff
+    );
+}
+
+.where2-auth-loading {
+  flex-direction: column;
+  gap: 14px;
+
+  color: var(--where2-muted);
+}
+
+.where2-loading-mark {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 18px;
+
+  color: white;
+  background: var(--where2-blue);
+
+  box-shadow:
+    0 15px 30px rgba(36, 99, 235, 0.22);
+}
+
+
+/* =========================================================
+   AUTHENTICATED STATE
+========================================================= */
+
+.where2-authenticated-card {
+  width: min(500px, calc(100% - 32px));
+
+  padding: 50px;
+
+  text-align: center;
+
+  border-radius: 28px;
+
+  background: white;
+
+  box-shadow: var(--where2-shadow);
+}
+
+.where2-authenticated-icon {
+  width: 60px;
+  height: 60px;
+
+  margin: 0 auto 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: white;
+  background: var(--where2-blue);
+}
+
+.where2-auth-eyebrow {
+  margin: 0 0 8px;
+
+  color: var(--where2-blue);
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.where2-authenticated-card h1 {
+  margin: 0;
+
+  color: var(--where2-navy);
+
+  font-size: 32px;
+}
+
+.where2-authenticated-card p:not(.where2-auth-eyebrow) {
+  color: var(--where2-muted);
+
+  line-height: 1.6;
+}
+
+.where2-secondary-button {
+  margin-top: 18px;
+
+  height: 48px;
+  padding: 0 25px;
+
+  border: 1px solid var(--where2-border);
+  border-radius: 10px;
+
+  background: white;
+
+  color: var(--where2-navy);
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .where2-auth-page {
+    grid-template-columns: 1fr;
+  }
+
+  .where2-auth-visual {
+    min-height: 500px;
+  }
+
+  .where2-auth-visual-content {
+    min-height: 500px;
+
+    padding: 40px;
+  }
+
+  .where2-auth-message {
+    margin-top: auto;
+  }
+
+  .where2-auth-form-section {
+    min-height: auto;
+
+    padding:
+      40px
+      24px
+      60px;
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  .where2-auth-visual {
+    min-height: 470px;
+  }
+
+  .where2-auth-visual-content {
+    width: 100%;
+
+    padding:
+      28px
+      24px;
+  }
+
+  .where2-auth-message {
+    margin-top: auto;
+    margin-bottom: 24px;
+  }
+
+  .where2-auth-message h1 {
+    font-size: 47px;
+    letter-spacing: -2.8px;
+  }
+
+  .where2-auth-description {
+    font-size: 15px;
+  }
+
+  .where2-auth-features {
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+  }
+
+  .where2-auth-quote {
+    display: none;
+  }
+
+  .where2-auth-form-section {
+    padding: 20px;
+  }
+
+  .where2-auth-form-card {
+    padding: 28px 22px;
+
+    border-radius: 22px;
+  }
+
+  .where2-mobile-auth-logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 25px;
+
+    color: var(--where2-blue);
+
+    font-size: 22px;
+    font-weight: 800;
+  }
+
+  .where2-mobile-auth-logo .where2-auth-logo-mark {
+    width: 38px;
+    height: 38px;
+  }
+
+  .where2-form-header h2 {
+    font-size: 24px;
+  }
+}
+
+
+@media (max-width: 450px) {
+
+  .where2-auth-message h1 {
+    font-size: 39px;
+  }
+
+  .where2-auth-features {
+    gap: 12px;
+  }
+
+  .where2-feature-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .where2-auth-form-card {
+    padding: 24px 18px;
+  }
+
+  .where2-form-options {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* =========================================================
+   WHERE2 USER PROFILE DROPDOWN
+   ========================================================= */
+
+.where2-topbar {
+  position: relative;
+  z-index: 100;
+  overflow: visible;
+}
+
+.where2-topbar-actions {
+  position: relative;
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ---------------------------------------------------------
+   User menu wrapper
+   --------------------------------------------------------- */
+
+.where2-user-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* ---------------------------------------------------------
+   User button
+   --------------------------------------------------------- */
+
+.where2-user-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 4px;
+  margin: 0;
+
+  border: 0;
+  background: transparent;
+
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Prevent nested avatar styles from stretching */
+
+.where2-user-button .where2-avatar {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+}
+
+/* ---------------------------------------------------------
+   User dropdown
+   --------------------------------------------------------- */
+
+.where2-user-dropdown {
+  position: absolute;
+
+  top: calc(100% + 10px);
+  right: 0;
+
+  width: 260px;
+  min-width: 260px;
+
+  padding: 14px;
+
+  background: #ffffff;
+
+  border: 1px solid #dfe6f2;
+  border-radius: 16px;
+
+  box-shadow:
+    0 18px 45px rgba(25, 42, 80, 0.14),
+    0 4px 12px rgba(25, 42, 80, 0.08);
+
+  z-index: 2000;
+
+  box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------
+   Dropdown user information
+   --------------------------------------------------------- */
+
+.where2-user-dropdown-header {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  gap: 12px;
+
+  padding: 2px 2px 13px;
+
+  box-sizing: border-box;
+}
+
+/* Dropdown avatar */
+
+.where2-user-dropdown-header .where2-avatar {
+  flex: 0 0 42px;
+
+  width: 42px;
+  height: 42px;
+
+  min-width: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #e8efff;
+  color: #3157e8;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  box-sizing: border-box;
+}
+
+/* User information container */
+
+.where2-user-dropdown-header > div:last-child {
+  flex: 1 1 auto;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 3px;
+
+  overflow: hidden;
+}
+
+/* Username */
+
+.where2-user-dropdown-header strong {
+  display: block;
+
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  color: #18223b;
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+
+  line-height: 1.25;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Email */
+
+.where2-user-dropdown-header span {
+  display: block;
+
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  color: #7b879f;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+
+  line-height: 1.35;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------------------------------------------------------
+   Divider
+   --------------------------------------------------------- */
+
+.where2-user-dropdown-divider {
+  width: 100%;
+  height: 1px;
+
+  margin: 0 0 10px;
+
+  background: #e8edf5;
+}
+
+/* ---------------------------------------------------------
+   Logout button
+   --------------------------------------------------------- */
+
+.where2-logout-button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 9px;
+
+  min-height: 42px;
+
+  padding: 10px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  background: transparent;
+
+  color: #18223b;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.where2-logout-button:hover {
+  background: #f3f6ff;
+  border-color: #dbe4ff;
+  color: #3157e8;
+}
+
+.where2-logout-button:focus-visible {
+  outline: 2px solid #3157e8;
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------
+   Keep dropdown above dashboard content
+   --------------------------------------------------------- */
+
+.where2-dashboard {
+  position: relative;
+}
+
+.where2-dashboard-main {
+  position: relative;
+  z-index: 1;
+}
+
+.where2-topbar {
+  position: relative;
+  z-index: 100;
+}
+
+.where2-user-dropdown {
+  z-index: 9999;
+}
+
+/* ---------------------------------------------------------
+   Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .where2-user-dropdown {
+    right: -8px;
+
+    width: 240px;
+    min-width: 240px;
+
+    padding: 12px;
+  }
+
+  .where2-user-dropdown-header {
+    gap: 10px;
+  }
+
+  .where2-user-dropdown-header .where2-avatar {
+    flex-basis: 38px;
+
+    width: 38px;
+    height: 38px;
+  }
+}
+
+/* =========================================================
+   SIDEBAR PROFILE DROPDOWN
+   ========================================================= */
+
+.where2-profile-wrapper {
+  position: relative;
+}
+
+.where2-profile-card {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: 0;
+  background: transparent;
+
+  padding: 8px;
+
+  cursor: pointer;
+  text-align: left;
+
+  font-family: inherit;
+}
+
+.where2-profile-card .where2-profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.where2-profile-menu {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 10px);
+
+  background: #ffffff;
+
+  border: 1px solid #dfe5f2;
+  border-radius: 14px;
+
+  padding: 10px;
+
+  box-shadow:
+    0 18px 45px rgba(28, 43, 76, 0.14),
+    0 4px 12px rgba(28, 43, 76, 0.08);
+
+  z-index: 1000;
+}
+
+.where2-profile-menu-user {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  padding: 8px 9px 10px;
+}
+
+.where2-profile-menu-user strong {
+  color: #18223b;
+  font-size: 14px;
+}
+
+.where2-profile-menu-user span {
+  color: #7b879f;
+  font-size: 12px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.where2-profile-menu > button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: transparent;
+
+  padding: 10px 9px;
+
+  color: #26365f;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  text-align: left;
+}
+
+.where2-profile-menu > button:hover {
+  background: #f3f6ff;
+  color: #3157e8;
+}
+
+/* =========================================================
+   KEEP DASHBOARD CONTENT BELOW THE TOPBAR
+   ========================================================= */
+
+.where2-dashboard-main {
+  min-width: 0;
+}
+
+.where2-dashboard-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================================
+   PROFILE DROPDOWN DETAILS FIX
+   ========================================================= */
+
+.where2-user-dropdown-details {
+  flex: 1 1 auto;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 3px;
+
+  overflow: hidden;
+}
+
+.where2-user-dropdown-details strong {
+  display: block;
+
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  color: #18223b;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  line-height: 1.25;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.where2-user-dropdown-details span {
+  display: block;
+
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  color: #7b879f;
+
+  font-size: 12px;
+  font-weight: 400;
+
+  line-height: 1.35;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Keep the topbar avatar separate from the dropdown */
+
+.where2-user-menu {
+  position: relative;
+  z-index: 2000;
+}
+
+.where2-user-button {
+  position: relative;
+  z-index: 2001;
+}
+
+.where2-user-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+
+  z-index: 3000;
+}
