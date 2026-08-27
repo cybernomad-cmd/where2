@@ -3,6 +3,7 @@ import "./App.css";
 
 import DashboardShell from "./components/DashboardShell";
 import DashboardHome from "./components/DashboardHome";
+import ProjectsPanel from "./components/ProjectsPanel";
 
 import { getCurrentWeather } from "./services/weatherApi";
 import { getWeatherForecast } from "./services/forecastApi";
@@ -516,117 +517,42 @@ function Where2App({ user, onLogout }) {
      RENDER
   ===================================================== */
 
-  return (
-    <DashboardShell
-      user={user}
-      onLogout={onLogout}
-    >
+return (
+  <DashboardShell
+    user={user}
+    onLogout={onLogout}
+  >
+    <DashboardHome
+      preferences={preferences}
+      onPreferencesChange={handlePreferencesChange}
+      onCitySelect={handleCitySelect}
+      savedCities={savedCities}
+      onRemoveCity={handleRemoveCity}
+      onSelectSavedCity={handleSavedCitySelect}
+      selectedCity={selectedCity}
+      selectedCityIsSaved={selectedCityIsSaved}
+      onSaveCity={handleSaveCity}
+      weather={weather}
+      weatherStatus={weatherStatus}
+      weatherError={weatherError}
+      forecast={forecast}
+      forecastStatus={forecastStatus}
+      forecastError={forecastError}
+      costOfLiving={costOfLiving}
+      costOfLivingStatus={costOfLivingStatus}
+      costOfLivingError={costOfLivingError}
+      comparisonCity={comparisonCity}
+      comparisonWeatherStatus={comparisonWeatherStatus}
+      comparisonWeatherError={comparisonWeatherError}
+      comparison={comparison}
+      comparisonWinner={comparisonWinner}
+      cityDetails={cityDetails}
+      recommendation={recommendation}
+    />
 
-      <DashboardHome
-        preferences={
-          preferences
-        }
-
-        onPreferencesChange={
-          handlePreferencesChange
-        }
-
-        onCitySelect={
-          handleCitySelect
-        }
-
-        savedCities={
-          savedCities
-        }
-
-        onRemoveCity={
-          handleRemoveCity
-        }
-
-        onSelectSavedCity={
-          handleSavedCitySelect
-        }
-
-        selectedCity={
-          selectedCity
-        }
-
-        selectedCityIsSaved={
-          selectedCityIsSaved
-        }
-
-        onSaveCity={
-          handleSaveCity
-        }
-
-        weather={
-          weather
-        }
-
-        weatherStatus={
-          weatherStatus
-        }
-
-        weatherError={
-          weatherError
-        }
-
-        forecast={
-          forecast
-        }
-
-        forecastStatus={
-          forecastStatus
-        }
-
-        forecastError={
-          forecastError
-        }
-
-        costOfLiving={
-          costOfLiving
-        }
-
-        costOfLivingStatus={
-          costOfLivingStatus
-        }
-
-        costOfLivingError={
-          costOfLivingError
-        }
-
-        comparisonCity={
-          comparisonCity
-        }
-
-        comparisonWeatherStatus={
-          comparisonWeatherStatus
-        }
-
-        comparisonWeatherError={
-          comparisonWeatherError
-        }
-
-        comparison={
-          comparison
-        }
-
-        comparisonWinner={
-          comparisonWinner
-        }
-
-        cityDetails={
-          cityDetails
-        }
-
-        recommendation={
-          recommendation
-        }
-      />
-
-    </DashboardShell>
+    <ProjectsPanel />
+  </DashboardShell>
   );
 }
-
 
 export default Where2App;
