@@ -191,3 +191,64 @@ export async function deleteTask(taskId) {
     }
   );
 }
+
+/* =========================================================
+   SAVED CITIES
+========================================================= */
+
+export async function getSavedCities() {
+  return request("/api/saved-cities");
+}
+
+
+export async function getSavedCity(savedCityId) {
+  return request(
+    `/api/saved-cities/${savedCityId}`
+  );
+}
+
+
+export async function createSavedCity({
+  city_name,
+  country,
+  region = "",
+  latitude,
+  longitude,
+}) {
+  return request("/api/saved-cities", {
+    method: "POST",
+    body: JSON.stringify({
+      city_name,
+      country,
+      region,
+      latitude,
+      longitude,
+    }),
+  });
+}
+
+
+export async function updateSavedCity(
+  savedCityId,
+  updates
+) {
+  return request(
+    `/api/saved-cities/${savedCityId}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify(updates),
+    }
+  );
+}
+
+
+export async function deleteSavedCity(
+  savedCityId
+) {
+  return request(
+    `/api/saved-cities/${savedCityId}`,
+    {
+      method: "DELETE",
+    }
+  );
+}
