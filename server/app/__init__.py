@@ -1,10 +1,11 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, app
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
+
 
 load_dotenv()
 
@@ -49,9 +50,18 @@ def create_app():
     db.init_app(app)
     bcrypt.init_app(app)
 
+    # Import models so SQLAlchemy knows about all
+    # database tables and relationships.
+    from .models import Project, Task, User
+
+    # Register API blueprints.
     from .routes.auth import auth_bp
+    from .routes.projects import projects_bp
+    from .routes.tasks import tasks_bp
 
     app.register_blueprint(auth_bp)
+    app.register_blueprint(projects_bp)
+    app.register_blueprint(tasks_bp)
 
     CORS(
         app,
