@@ -52,7 +52,7 @@ def create_app():
 
     # Import models so SQLAlchemy knows about all
     # database tables and relationships.
-    from .models import Project, Task, User
+    from .models import Project, SavedCity, Task, User
 
     # Register API blueprints.
     from .routes.auth import auth_bp
