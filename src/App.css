@@ -1,3 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap');
+
+:root {
+  --where2-font: 'Inter', sans-serif;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+}
+
+html,
+body,
+#root,
+button,
+input,
+textarea,
+select {
+  font-family: var(--where2-font);
+}
+
+body {
+  font-weight: var(--font-medium);
+}
+
 #root {
   width: 100%;
   min-height: 100vh;
@@ -8266,4 +8289,49 @@ html {
     border-left: 0;
     border-bottom: 1px solid #edf0f5;
   }
+}
+
+/* =========================================================
+   WHERE2 — FINAL TYPOGRAPHY OVERRIDE
+   Inter only
+   ========================================================= */
+
+.where2-auth-page,
+.where2-auth-page *,
+.where2-auth-page *::before,
+.where2-auth-page *::after,
+.where2-authenticated,
+.where2-authenticated *,
+.where2-authenticated *::before,
+.where2-authenticated *::after {
+  font-family: 'Inter', Arial, sans-serif !important;
+}
+
+/* Inter Medium */
+.where2-auth-page p,
+.where2-auth-page span,
+.where2-auth-page input,
+.where2-auth-page textarea {
+  font-weight: 500 !important;
+}
+
+/* Inter SemiBold */
+.where2-auth-page button,
+.where2-auth-page label,
+.where2-auth-page strong {
+  font-weight: 600 !important;
+}
+
+/* Inter Bold */
+.where2-auth-page h1,
+.where2-auth-page h2,
+.where2-auth-page h3,
+.where2-authenticated h1 {
+  font-weight: 700 !important;
+}
+
+/* Remove unsupported weights */
+.where2-auth-page *,
+.where2-authenticated * {
+  font-synthesis: none !important;
 }

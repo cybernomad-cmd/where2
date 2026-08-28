@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap');
+
 #root {
   width: 100%;
   min-height: 100vh;
@@ -18128,4 +18130,87 @@ with a compact product/dashboard experience.*/
     top: 68px;
     right: 12px;
   }
+}
+
+/*WHERE2 — STRICT INTER TYPOGRAPHY*/
+
+.where2-auth-page,
+.where2-auth-page *,
+.where2-authenticated,
+.where2-authenticated * {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Inter Medium */
+.where2-auth-page p,
+.where2-auth-page span,
+.where2-auth-page input,
+.where2-auth-page input::placeholder {
+  font-weight: 500;
+}
+
+/* Inter SemiBold */
+.where2-auth-page button,
+.where2-auth-page label,
+.where2-auth-page .where2-auth-feature strong,
+.where2-auth-page .where2-auth-quote strong {
+  font-weight: 600;
+}
+
+/* Inter Bold */
+.where2-auth-page h1,
+.where2-auth-page h2,
+.where2-authenticated h1 {
+  font-weight: 700;
+}
+
+/* Remove weights outside the approved system */
+.where2-auth-page *,
+.where2-authenticated * {
+  font-synthesis: none;
+}
+
+/* =========================================================
+   WHERE2 — FINAL TYPOGRAPHY OVERRIDE
+   Inter only
+   ========================================================= */
+
+.where2-auth-page,
+.where2-auth-page *,
+.where2-auth-page *::before,
+.where2-auth-page *::after,
+.where2-authenticated,
+.where2-authenticated *,
+.where2-authenticated *::before,
+.where2-authenticated *::after {
+  font-family: 'Inter', Arial, sans-serif !important;
+}
+
+/* Inter Medium */
+.where2-auth-page p,
+.where2-auth-page span,
+.where2-auth-page input,
+.where2-auth-page textarea {
+  font-weight: 500 !important;
+}
+
+/* Inter SemiBold */
+.where2-auth-page button,
+.where2-auth-page label,
+.where2-auth-page strong {
+  font-weight: 600 !important;
+}
+
+/* Inter Bold */
+.where2-auth-page h1,
+.where2-auth-page h2,
+.where2-auth-page h3,
+.where2-authenticated h1 {
+  font-weight: 700 !important;
+}
+
+/* Remove unsupported weights */
+.where2-auth-page *,
+.where2-authenticated * {
+  font-synthesis: none !important;
 }
