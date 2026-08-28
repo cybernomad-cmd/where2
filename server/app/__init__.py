@@ -52,15 +52,17 @@ def create_app():
 
     # Import models so SQLAlchemy knows about all
     # database tables and relationships.
-    from .models import Project, Task, User
+    from .models import Project, SavedCity, Task, User
 
     # Register API blueprints.
     from .routes.auth import auth_bp
     from .routes.projects import projects_bp
+    from .routes.saved_cities import saved_cities_bp
     from .routes.tasks import tasks_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(projects_bp)
+    app.register_blueprint(saved_cities_bp)
     app.register_blueprint(tasks_bp)
 
     CORS(
