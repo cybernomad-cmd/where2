@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask, app
+from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -37,9 +37,18 @@ class Config:
         "http://localhost:5173,http://localhost:5174",
     )
 
+    # Session cookie configuration
     SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SAMESITE = "Lax"
-    SESSION_COOKIE_SECURE = False
+
+    SESSION_COOKIE_SAMESITE = os.getenv(
+        "SESSION_COOKIE_SAMESITE",
+        "Lax",
+    )
+
+    SESSION_COOKIE_SECURE = os.getenv(
+        "SESSION_COOKIE_SECURE",
+        "False",
+    ).lower() == "true"
 
 
 def create_app():
