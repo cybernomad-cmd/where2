@@ -1,138 +1,255 @@
-from app import create_app
+from app import db
+from app.models import Project
+
+from conftest import login
 
 
-app = create_app()
-
-
-with app.test_client() as client:
+def test_project_full_crud(client, user_a):
     # ---------------------------------------------------------
-    # Create/login as User A
+    # LOGIN
     # ---------------------------------------------------------
 
-    email_a = input("User A email: ")
-    password_a = input("User A password: ")
-
-    login_a = client.post(
-        "/api/auth/login",
-        json={
-            "email": email_a,
-            "password": password_a,
-        },
+    login_response = login(
+        client,
+        user_a["email"],
+        user_a["password"],
     )
 
-    print("\nUSER A LOGIN")
-    print("Status:", login_a.status_code)
-
-    if login_a.status_code != 200:
-        print(login_a.get_json())
-        raise SystemExit("User A login failed.")
-
-    user_a = login_a.get_json()["user"]
-
-    print("User A:", user_a)
+    assert login_response.get_json()["user"]["email"] == user_a["email"]
 
     # ---------------------------------------------------------
-    # Create a project owned by User A
+    # CREATE PROJECT - POST
     # ---------------------------------------------------------
 
-    create_a = client.post(
+    create_response = client.post(
         "/api/projects",
         json={
-            "name": "User A Private Project",
-            "description": "This project belongs to User A.",
+            "name": "My Test Project",
+            "description": "Testing project CRUD.",
             "status": "active",
         },
     )
 
-    print("\nUSER A PROJECT")
-    print("Status:", create_a.status_code)
-    print("Response:", create_a.get_json())
+    assert create_response.status_code == 201
 
-    if create_a.status_code != 201:
-        raise SystemExit("User A project creation failed.")
+    project = create_response.get_json()["project"]
 
-    project_a = create_a.get_json()["project"]
-    project_a_id = project_a["id"]
+    assert project["name"] == "My Test Project"
+    assert project["description"] == "Testing project CRUD."
+    assert project["status"] == "active"
+    assert project["user_id"] == user_a["id"]
+
+    project_id = project["id"]
 
     # ---------------------------------------------------------
-    # Logout User A
+    # GET PROJECT LIST
+    # ---------------------------------------------------------
+
+    list_response = client.get(
+        "/api/projects?page=1&per_page=10"
+    )
+
+    assert list_response.status_code == 200
+
+    list_data = list_response.get_json()
+
+    assert "projects" in list_data
+    assert "pagination" in list_data
+    assert list_data["pagination"]["page"] == 1
+
+    assert any(
+        item["id"] == project_id
+        for item in list_data["projects"]
+    )
+
+    # ---------------------------------------------------------
+    # GET SINGLE PROJECT
+    # ---------------------------------------------------------
+
+    get_response = client.get(
+        f"/api/projects/{project_id}"
+    )
+
+    assert get_response.status_code == 200
+
+    fetched_project = get_response.get_json()["project"]
+
+    assert fetched_project["id"] == project_id
+    assert fetched_project["name"] == "My Test Project"
+
+    # ---------------------------------------------------------
+    # UPDATE PROJECT - PATCH
+    # ---------------------------------------------------------
+
+    update_response = client.patch(
+        f"/api/projects/{project_id}",
+        json={
+            "name": "Updated Test Project",
+            "description": "Updated description.",
+            "status": "completed",
+        },
+    )
+
+    assert update_response.status_code == 200
+
+    updated_project = update_response.get_json()["project"]
+
+    assert updated_project["name"] == "Updated Test Project"
+    assert updated_project["description"] == "Updated description."
+    assert updated_project["status"] == "completed"
+
+    # ---------------------------------------------------------
+    # DELETE PROJECT - DELETE
+    # ---------------------------------------------------------
+
+    delete_response = client.delete(
+        f"/api/projects/{project_id}"
+    )
+
+    assert delete_response.status_code == 200
+
+    # ---------------------------------------------------------
+    # VERIFY DELETE
+    # ---------------------------------------------------------
+
+    verify_response = client.get(
+        f"/api/projects/{project_id}"
+    )
+
+    assert verify_response.status_code == 404
+
+
+def test_project_requires_authentication(client):
+    response = client.get("/api/projects")
+
+    assert response.status_code in (401, 403)
+
+
+def test_project_validation(client, user_a):
+    login(
+        client,
+        user_a["email"],
+        user_a["password"],
+    )
+
+    response = client.post(
+        "/api/projects",
+        json={
+            "name": "",
+            "description": "Invalid project",
+            "status": "active",
+        },
+    )
+
+    assert response.status_code == 400
+
+
+def test_project_ownership(
+    client,
+    app,
+    user_a,
+    user_b,
+):
+    # ---------------------------------------------------------
+    # USER A LOGIN
+    # ---------------------------------------------------------
+
+    login(
+        client,
+        user_a["email"],
+        user_a["password"],
+    )
+
+    # ---------------------------------------------------------
+    # USER A CREATES PROJECT
+    # ---------------------------------------------------------
+
+    create_response = client.post(
+        "/api/projects",
+        json={
+            "name": "Private User A Project",
+            "description": "This belongs to User A.",
+            "status": "active",
+        },
+    )
+
+    assert create_response.status_code == 201
+
+    project_id = create_response.get_json()["project"]["id"]
+
+    # ---------------------------------------------------------
+    # LOGOUT USER A
     # ---------------------------------------------------------
 
     client.post("/api/auth/logout")
 
     # ---------------------------------------------------------
-    # Create/login as User B
+    # USER B LOGIN
     # ---------------------------------------------------------
 
-    email_b = input("\nUser B email: ")
-    password_b = input("User B password: ")
-
-    login_b = client.post(
-        "/api/auth/login",
-        json={
-            "email": email_b,
-            "password": password_b,
-        },
+    login(
+        client,
+        user_b["email"],
+        user_b["password"],
     )
 
-    print("\nUSER B LOGIN")
-    print("Status:", login_b.status_code)
-
-    if login_b.status_code != 200:
-        print(login_b.get_json())
-        raise SystemExit("User B login failed.")
-
-    user_b = login_b.get_json()["user"]
-
-    print("User B:", user_b)
-
     # ---------------------------------------------------------
-    # User B tries to GET User A's project
+    # USER B CANNOT GET PROJECT
     # ---------------------------------------------------------
 
-    get_other_project = client.get(
-        f"/api/projects/{project_a_id}"
+    get_response = client.get(
+        f"/api/projects/{project_id}"
     )
 
-    print("\nUSER B GET USER A PROJECT")
-    print("Status:", get_other_project.status_code)
-    print("Response:", get_other_project.get_json())
+    assert get_response.status_code == 404
 
     # ---------------------------------------------------------
-    # User B tries to UPDATE User A's project
+    # USER B CANNOT UPDATE PROJECT
     # ---------------------------------------------------------
 
-    update_other_project = client.patch(
-        f"/api/projects/{project_a_id}",
+    update_response = client.patch(
+        f"/api/projects/{project_id}",
         json={
             "name": "HACKED PROJECT",
         },
     )
 
-    print("\nUSER B UPDATE USER A PROJECT")
-    print("Status:", update_other_project.status_code)
-    print("Response:", update_other_project.get_json())
+    assert update_response.status_code == 404
 
     # ---------------------------------------------------------
-    # User B tries to DELETE User A's project
+    # USER B CANNOT DELETE PROJECT
     # ---------------------------------------------------------
 
-    delete_other_project = client.delete(
-        f"/api/projects/{project_a_id}"
+    delete_response = client.delete(
+        f"/api/projects/{project_id}"
     )
 
-    print("\nUSER B DELETE USER A PROJECT")
-    print("Status:", delete_other_project.status_code)
-    print("Response:", delete_other_project.get_json())
+    assert delete_response.status_code == 404
 
     # ---------------------------------------------------------
-    # User B's project list should not contain User A's project
+    # USER B PROJECT LIST DOES NOT SHOW USER A PROJECT
     # ---------------------------------------------------------
 
-    list_projects = client.get(
+    list_response = client.get(
         "/api/projects?page=1&per_page=10"
     )
 
-    print("\nUSER B PROJECT LIST")
-    print("Status:", list_projects.status_code)
-    print("Response:", list_projects.get_json())
+    assert list_response.status_code == 200
+
+    projects = list_response.get_json()["projects"]
+
+    assert all(
+        project["id"] != project_id
+        for project in projects
+    )
+
+    # ---------------------------------------------------------
+    # CONFIRM PROJECT STILL EXISTS IN DATABASE
+    # ---------------------------------------------------------
+
+    with app.app_context():
+        project = db.session.get(Project, project_id)
+
+        assert project is not None
+        assert project.user_id == user_a["id"]
+        assert project.name == "Private User A Project"

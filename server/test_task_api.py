@@ -1,60 +1,63 @@
-from app import create_app
+from conftest import login
 
 
-app = create_app()
+def create_project(client):
+    response = client.post(
+        "/api/projects",
+        json={
+            "name": "Task Test Project",
+            "description": "Project for task testing.",
+            "status": "active",
+        },
+    )
+
+    assert response.status_code == 201
+
+    return response.get_json()["project"]["id"]
 
 
-with app.test_client() as client:
+def test_task_full_crud(client, user_a):
     # ---------------------------------------------------------
     # LOGIN
     # ---------------------------------------------------------
 
-    email = input("Login email: ")
-    password = input("Login password: ")
-
-    login_response = client.post(
-        "/api/auth/login",
-        json={
-            "email": email,
-            "password": password,
-        },
+    login(
+        client,
+        user_a["email"],
+        user_a["password"],
     )
 
-    print("\nLOGIN")
-    print("Status:", login_response.status_code)
-    print("Response:", login_response.get_json())
-
-    if login_response.status_code != 200:
-        raise SystemExit("Login failed.")
-
     # ---------------------------------------------------------
-    # CREATE TASK
+    # CREATE PROJECT
     # ---------------------------------------------------------
 
-    project_id = int(
-        input("\nProject ID for task: ")
-    )
+    project_id = create_project(client)
+
+    # ---------------------------------------------------------
+    # CREATE TASK - POST
+    # ---------------------------------------------------------
 
     create_response = client.post(
         f"/api/projects/{project_id}/tasks",
         json={
             "title": "Build Task Management",
-            "description": "Implement and test Task CRUD functionality.",
+            "description": "Implement Task CRUD.",
         },
     )
 
-    print("\nCREATE TASK")
-    print("Status:", create_response.status_code)
-    print("Response:", create_response.get_json())
-
-    if create_response.status_code != 201:
-        raise SystemExit("Task creation failed.")
+    assert create_response.status_code == 201
 
     task = create_response.get_json()["task"]
+
+    assert task["title"] == "Build Task Management"
+    assert task["description"] == "Implement Task CRUD."
+    assert task["completed"] is False
+    assert task["project_id"] == project_id
+
     task_id = task["id"]
 
     # ---------------------------------------------------------
-    # LIST TASKS
+    # LIST TASKS - GET
     # ---------------------------------------------------------
 
     list_response = client.get(
@@ -62,9 +65,18 @@ with app.test_client() as client:
         "?page=1&per_page=10"
     )
 
-    print("\nLIST TASKS")
-    print("Status:", list_response.status_code)
-    print("Response:", list_response.get_json())
+    assert list_response.status_code == 200
+
+    list_data = list_response.get_json()
+
+    assert "tasks" in list_data
+    assert "pagination" in list_data
+    assert list_data["pagination"]["page"] == 1
+
+    assert any(
+        item["id"] == task_id
+        for item in list_data["tasks"]
+    )
 
     # ---------------------------------------------------------
     # GET SINGLE TASK
@@ -74,12 +86,15 @@ with app.test_client() as client:
         f"/api/tasks/{task_id}"
     )
 
-    print("\nGET TASK")
-    print("Status:", get_response.status_code)
-    print("Response:", get_response.get_json())
+    assert get_response.status_code == 200
+
+    fetched_task = get_response.get_json()["task"]
+
+    assert fetched_task["id"] == task_id
+    assert fetched_task["title"] == "Build Task Management"
 
     # ---------------------------------------------------------
-    # UPDATE TASK
+    # UPDATE TASK - PATCH
     # ---------------------------------------------------------
 
     update_response = client.patch(
@@ -91,9 +106,13 @@ with app.test_client() as client:
         },
     )
 
-    print("\nUPDATE TASK")
-    print("Status:", update_response.status_code)
-    print("Response:", update_response.get_json())
+    assert update_response.status_code == 200
+
+    updated_task = update_response.get_json()["task"]
+
+    assert updated_task["title"] == "Build Task Management API"
+    assert updated_task["description"] == "Task CRUD is being tested."
+    assert updated_task["completed"] is True
 
     # ---------------------------------------------------------
     # DELETE TASK
@@ -103,9 +122,7 @@ with app.test_client() as client:
         f"/api/tasks/{task_id}"
     )
 
-    print("\nDELETE TASK")
-    print("Status:", delete_response.status_code)
-    print("Response:", delete_response.get_json())
+    assert delete_response.status_code == 200
 
     # ---------------------------------------------------------
     # VERIFY DELETE
@@ -115,6 +132,29 @@ with app.test_client() as client:
         f"/api/tasks/{task_id}"
     )
 
-    print("\nVERIFY DELETE")
-    print("Status:", verify_response.status_code)
-    print("Response:", verify_response.get_json())
+    assert verify_response.status_code == 404
+
+
+def test_task_requires_authentication(client):
+    response = client.get("/api/tasks/1")
+
+    assert response.status_code in (401, 403)
+
+
+def test_task_validation(client, user_a):
+    login(
+        client,
+        user_a["email"],
+        user_a["password"],
+    )
+
+    project_id = create_project(client)
+
+    response = client.post(
+        f"/api/projects/{project_id}/tasks",
+        json={
+            "title": "",
+        },
+    )
+
+    assert response.status_code == 400

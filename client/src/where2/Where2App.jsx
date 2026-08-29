@@ -4,6 +4,7 @@ import "./App.css";
 import DashboardShell from "./components/DashboardShell";
 import DashboardHome from "./components/DashboardHome";
 import ProjectsPanel from "./components/ProjectsPanel";
+import TasksPanel from "./components/TasksPanel";
 
 import { getCurrentWeather } from "./services/weatherApi";
 import { getWeatherForecast } from "./services/forecastApi";
@@ -53,6 +54,23 @@ function Where2App({ user, onLogout }) {
   ===================================================== */
 
   const [selectedCity, setSelectedCity] = useState(null);
+
+/* =====================================================
+   SELECTED PROJECT
+===================================================== */
+
+const [selectedProject, setSelectedProject] =
+  useState(null);
+
+
+function handleViewTasks(project) {
+  setSelectedProject(project);
+}
+
+
+function handleBackToProjects() {
+  setSelectedProject(null);
+}
 
 
   /* =====================================================
@@ -522,7 +540,7 @@ return (
     user={user}
     onLogout={onLogout}
   >
-    <DashboardHome
+        <DashboardHome
       preferences={preferences}
       onPreferencesChange={handlePreferencesChange}
       onCitySelect={handleCitySelect}
@@ -550,7 +568,16 @@ return (
       recommendation={recommendation}
     />
 
-    <ProjectsPanel />
+    {selectedProject ? (
+      <TasksPanel
+        project={selectedProject}
+        onBack={handleBackToProjects}
+      />
+    ) : (
+      <ProjectsPanel
+        onViewTasks={handleViewTasks}
+      />
+    )}
   </DashboardShell>
   );
 }
