@@ -18,8 +18,11 @@ import {
 } from "../../api";
 
 import "./ProjectsPanel.css";
-function ProjectsPanel() {
+
+
+function ProjectsPanel({ onViewTasks }) {
   const [projects, setProjects] = useState([]);
+
   const [pagination, setPagination] = useState({
     page: 1,
     pages: 1,
@@ -41,7 +44,8 @@ function ProjectsPanel() {
 
   const [submitting, setSubmitting] = useState(false);
 
-  const [editingProjectId, setEditingProjectId] = useState(null);
+  const [editingProjectId, setEditingProjectId] =
+    useState(null);
 
   const [editForm, setEditForm] = useState({
     name: "",
@@ -49,46 +53,52 @@ function ProjectsPanel() {
     status: "active",
   });
 
-  const [deletingProjectId, setDeletingProjectId] = useState(null);
+  const [deletingProjectId, setDeletingProjectId] =
+    useState(null);
 
-/* =========================================================
-   LOAD PROJECTS
-========================================================= */
 
-async function loadProjects(page = 1) {
-  try {
-    setLoading(true);
-    setError("");
+  /* =========================================================
+     LOAD PROJECTS
+  ========================================================= */
 
-    const data = await getProjects(page, 6);
+  async function loadProjects(page = 1) {
+    try {
+      setLoading(true);
+      setError("");
 
-    setProjects(data.projects || []);
+      const data = await getProjects(page, 6);
 
-    setPagination(
-      data.pagination || {
-        page: 1,
-        pages: 1,
-        total: 0,
-        has_next: false,
-        has_prev: false,
-      }
-    );
-  } catch (requestError) {
-    console.error("Failed to load projects:", requestError);
+      setProjects(data.projects || []);
 
-    setError(
-      requestError.message ||
-        "Unable to load your projects."
-    );
-  } finally {
-    setLoading(false);
+      setPagination(
+        data.pagination || {
+          page: 1,
+          pages: 1,
+          total: 0,
+          has_next: false,
+          has_prev: false,
+        }
+      );
+    } catch (requestError) {
+      console.error(
+        "Failed to load projects:",
+        requestError
+      );
+
+      setError(
+        requestError.message ||
+          "Unable to load your projects."
+      );
+    } finally {
+      setLoading(false);
+    }
   }
-}
 
-useEffect(() => {
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  loadProjects();
-}, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadProjects();
+  }, []);
 
 
   /* =========================================================
@@ -202,8 +212,7 @@ useEffect(() => {
         editingProjectId,
         {
           name: editForm.name.trim(),
-          description:
-            editForm.description.trim(),
+          description: editForm.description.trim(),
           status: editForm.status,
         }
       );
@@ -294,11 +303,10 @@ useEffect(() => {
 
         <button
           type="button"
-          className="focusflow-projects-add-button"
-          onClick={() => {
-            setShowForm((current) => !current);
-            setError("");
-          }}
+          className="focusflow-project-open"
+          onClick={() =>
+            setShowForm((current) => !current)
+          }
         >
           {showForm ? (
             <X size={17} />
@@ -405,7 +413,9 @@ useEffect(() => {
             <button
               type="button"
               className="focusflow-secondary-button"
-              onClick={() => setShowForm(false)}
+              onClick={() =>
+                setShowForm(false)
+              }
               disabled={submitting}
             >
               Cancel
@@ -468,7 +478,9 @@ useEffect(() => {
             <button
               type="button"
               className="focusflow-primary-button"
-              onClick={() => setShowForm(true)}
+              onClick={() =>
+                setShowForm(true)
+              }
             >
               <Plus size={16} />
 
@@ -485,6 +497,7 @@ useEffect(() => {
 
               const isDeleting =
                 deletingProjectId === project.id;
+
 
               if (isEditing) {
                 return (
@@ -586,6 +599,7 @@ useEffect(() => {
                 );
               }
 
+
               return (
                 <article
                   key={project.id}
@@ -603,6 +617,7 @@ useEffect(() => {
                     </span>
                   </div>
 
+
                   <div className="focusflow-project-card-content">
                     <h3>{project.name}</h3>
 
@@ -612,25 +627,22 @@ useEffect(() => {
                     </p>
                   </div>
 
+
                   <div className="focusflow-project-card-footer">
                     <button
                       type="button"
                       className="focusflow-project-open"
-                      onClick={() => {
-                        document
-                          .getElementById(
-                            "focusflow-tasks"
-                          )
-                          ?.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start",
-                          });
-                      }}
+                      onClick={() =>
+                        onViewTasks(project)
+                      }
                     >
-                      <span>View tasks</span>
+                      <span>
+                        View tasks
+                      </span>
 
                       <ArrowRight size={15} />
                     </button>
+
 
                     <div className="focusflow-project-actions">
                       <button
@@ -643,6 +655,7 @@ useEffect(() => {
                       >
                         <Pencil size={15} />
                       </button>
+
 
                       <button
                         type="button"
@@ -713,5 +726,6 @@ useEffect(() => {
     </section>
   );
 }
+
 
 export default ProjectsPanel;
