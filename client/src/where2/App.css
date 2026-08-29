@@ -64,7 +64,7 @@
 .brand {
   color: var(--color-heading);
   font-size: 1.25rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.03em;
 }
 
@@ -658,7 +658,7 @@
   background: var(--color-primary-light);
   border-radius: var(--radius-pill);
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .city-card-content {
@@ -785,7 +785,7 @@
   border-radius: 50%;
   color: var(--color-heading);
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.05em;
 }
 
@@ -1425,7 +1425,7 @@
   background: var(--color-primary);
   border-radius: 50%;
   font-size: 1.6rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.03em;
 }
 
@@ -1484,7 +1484,7 @@
   background: var(--color-primary-light);
   border-radius: 50%;
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 /* Recommendation responsive layout */
@@ -1633,7 +1633,7 @@
   background: var(--color-primary);
   border-radius: var(--radius-pill);
   font-size: 1.15rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 /* Current condition */
@@ -1814,7 +1814,7 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-pill);
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.08em;
 }
 
@@ -1850,7 +1850,7 @@
   margin-bottom: var(--space-5);
   color: var(--color-primary);
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -2494,7 +2494,7 @@
 .hero-city-label {
   color: #3d9663;
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.18em;
 }
 
@@ -2783,7 +2783,7 @@ NOT inside a separate column.*/
 
   font-size: 12px;
   line-height: 1.2;
-  font-weight: 800;
+  font-weight: 700;
 
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -2799,7 +2799,7 @@ NOT inside a separate column.*/
   font-size: clamp(3.8rem, 5.2vw, 5.7rem);
   line-height: 0.91;
 
-  font-weight: 800;
+  font-weight: 700;
 
   letter-spacing: -0.065em;
 
@@ -2916,7 +2916,7 @@ NOT inside a separate column.*/
   color: #469666;
 
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 700;
 
   letter-spacing: 0.18em;
 }
@@ -3193,7 +3193,7 @@ NOT inside a separate column.*/
   margin: 0 0 10px;
   color: #398d60;
   font-size: 0.78rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.14em;
   line-height: 1.2;
   text-transform: uppercase;
@@ -3203,7 +3203,7 @@ NOT inside a separate column.*/
   margin: 0;
   color: #111827;
   font-size: clamp(2.2rem, 4vw, 3.5rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 1.05;
 }
@@ -3269,7 +3269,7 @@ NOT inside a separate column.*/
   display: block;
   color: #111827;
   font-size: clamp(2.1rem, 4vw, 3.2rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 1;
 }
@@ -3284,7 +3284,7 @@ NOT inside a separate column.*/
   margin: 0;
   color: #111827;
   font-size: clamp(1.7rem, 3vw, 2.3rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.1;
 }
@@ -3341,7 +3341,7 @@ NOT inside a separate column.*/
   margin-top: auto;
   color: #111827;
   font-size: clamp(2rem, 3vw, 2.7rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 1;
 }
@@ -4788,9 +4788,7 @@ html {
     drop-shadow(0 0 25px rgba(250, 204, 21, 0.35));
 
   opacity: 0;
-
   transform-origin: center;
-
   animation: realistic-lightning 5.5s infinite;
 }
 
@@ -5630,7 +5628,7 @@ html {
   background: var(--color-primary-light);
   border-radius: var(--radius-pill);
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -5725,7 +5723,6 @@ html {
     margin-top: var(--space-3);
   }
 }
-
 /* City Weather Insights */
 
 .city-weather-insights {
@@ -6133,7 +6130,7 @@ html {
 
 .where2-brand {
   font-size: 25px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.8px;
   color: var(--where2-text);
 }
@@ -6216,7 +6213,7 @@ html {
   display: grid;
   place-items: center;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-profile-info {
@@ -6422,10 +6419,10 @@ html {
 }
 
 .where2-ai-card {
-  position: sticky;
-  top: 14px;
-  max-height: calc(100vh - 93px);
-  overflow-y: auto;
+  position: static;
+  top: auto;
+  max-height: none;
+  overflow-y: visible;
   background: #ffffff;
   border: 1px solid var(--where2-border);
   border-radius: 12px;
@@ -6457,7 +6454,7 @@ html {
   border-radius: 4px;
   padding: 3px 5px;
   font-size: 7px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-ai-title svg:last-child {
@@ -6572,7 +6569,7 @@ html {
   display: grid;
   place-items: center;
   color: var(--where2-blue);
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-ai-result strong {
@@ -6855,7 +6852,7 @@ html {
   color: #1f9d68;
   font-size: 11px;
   line-height: 1.2;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.12em;
 }
 
@@ -6866,7 +6863,7 @@ html {
   color: #101c3b;
   font-size: clamp(2.5rem, 4vw, 4.15rem);
   line-height: 0.98;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.055em;
 }
 
@@ -6985,7 +6982,7 @@ html {
   color: #419566;
 
   font-size: 9px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.16em;
 }
 
@@ -7163,7 +7160,7 @@ html {
   color: #299b68;
 
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.12em;
 }
 
@@ -7174,7 +7171,7 @@ html {
 
   font-size: 20px;
   line-height: 1.15;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.025em;
 }
 
@@ -7341,7 +7338,7 @@ html {
   color: #182441;
 
   font-size: 9px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .dashboard-saved-card-star {
@@ -7376,7 +7373,7 @@ html {
 
   font-size: 14px;
   line-height: 1.2;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .dashboard-saved-card-title p {
@@ -7426,7 +7423,7 @@ html {
   color: #172342;
 
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .dashboard-saved-card-weather small {
@@ -7584,7 +7581,7 @@ html {
   margin: 0 0 6px;
   color: #3f9d68;
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.12em;
 }
 
@@ -7705,7 +7702,7 @@ html {
   background: rgba(255, 255, 255, 0.94);
   color: #162451;
   font-size: 0.65rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .saved-city-match {
@@ -7720,7 +7717,7 @@ html {
 
   color: rgba(36, 84, 232, 0.7);
   font-size: 4.8rem;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: -0.08em;
 }
 
@@ -7828,7 +7825,7 @@ html {
   border-radius: 50%;
   color: #218454;
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 /*Actions*/
@@ -7990,7 +7987,7 @@ html {
   padding: 4px 8px;
   border-radius: 6px;
   font-size: 0.62rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .weather-country-code {
@@ -8158,7 +8155,7 @@ html {
   display: block;
   color: #53627f;
   font-size: 0.65rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .forecast-dashboard-icon {
@@ -8292,7 +8289,7 @@ with a compact product/dashboard experience.*/
   margin: 0 0 8px;
   color: #398f62;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -8525,7 +8522,7 @@ with a compact product/dashboard experience.*/
   padding: 0 5px;
   color: #27344a;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-choice-row {
@@ -8597,7 +8594,7 @@ with a compact product/dashboard experience.*/
   background: #f8fbff;
   color: #536781;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-empty-shortlist {
@@ -8678,7 +8675,7 @@ with a compact product/dashboard experience.*/
   background: #eaf1ff;
   color: #2860e8;
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .where2-shortlist-item > span {
@@ -8686,7 +8683,7 @@ with a compact product/dashboard experience.*/
   margin-top: 11px;
   color: #7d8ca1;
   font-size: 8px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -8710,7 +8707,7 @@ with a compact product/dashboard experience.*/
   color: #2860e8;
   font: inherit;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -8786,7 +8783,7 @@ with a compact product/dashboard experience.*/
   background: #e7f5ed;
   color: #2f7e54;
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .where2-match-card > p {
@@ -9013,7 +9010,7 @@ with a compact product/dashboard experience.*/
   margin: 0 0 8px;
   color: #398f62;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -9246,7 +9243,7 @@ with a compact product/dashboard experience.*/
   padding: 0 5px;
   color: #27344a;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-choice-row {
@@ -9318,7 +9315,7 @@ with a compact product/dashboard experience.*/
   background: #f8fbff;
   color: #536781;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-empty-shortlist {
@@ -9399,7 +9396,7 @@ with a compact product/dashboard experience.*/
   background: #eaf1ff;
   color: #2860e8;
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .where2-shortlist-item > span {
@@ -9407,7 +9404,7 @@ with a compact product/dashboard experience.*/
   margin-top: 11px;
   color: #7d8ca1;
   font-size: 8px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -9431,7 +9428,7 @@ with a compact product/dashboard experience.*/
   color: #2860e8;
   font: inherit;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -9507,7 +9504,7 @@ with a compact product/dashboard experience.*/
   background: #e7f5ed;
   color: #2f7e54;
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .where2-match-card > p {
@@ -9762,7 +9759,7 @@ with a compact product/dashboard experience.*/
 .where2-hero-content {
   position: relative;
   z-index: 2;
-  width: min(600px, 62%);
+  width: min(680px, 68%);
   padding: 48px 42px;
   color: #fff;
 }
@@ -9771,7 +9768,7 @@ with a compact product/dashboard experience.*/
   margin: 0 0 10px;
   color: #9ee0bb;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -9779,9 +9776,11 @@ with a compact product/dashboard experience.*/
 .where2-hero-content h1 {
   margin: 0;
   color: #fff;
-  font-size: clamp(38px, 4.3vw, 62px);
-  line-height: 0.98;
-  letter-spacing: -0.055em;
+  font-family: "Inter", sans-serif !important;
+  font-size: clamp(42px, 4vw, 56px);
+  font-weight: 700 !important;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
 }
 
 .where2-hero-description {
@@ -9804,7 +9803,7 @@ with a compact product/dashboard experience.*/
   color: #fff;
   font: inherit;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   transition:
     transform 150ms ease,
@@ -9860,7 +9859,7 @@ with a compact product/dashboard experience.*/
   margin-bottom: 2px;
   color: #7b899f;
   font-size: 8px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -10040,7 +10039,6 @@ with a compact product/dashboard experience.*/
   }
 }
 
-
 /* =========================================================
    WHERE2 DASHBOARD HERO
    ========================================================= */
@@ -10078,7 +10076,7 @@ with a compact product/dashboard experience.*/
   margin: 0 0 12px;
   color: #438f67;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.13em;
   line-height: 1.2;
   text-transform: uppercase;
@@ -10089,7 +10087,7 @@ with a compact product/dashboard experience.*/
   margin: 0;
   color: #111827;
   font-size: clamp(38px, 4vw, 62px);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.055em;
   line-height: 0.98;
 }
@@ -10116,7 +10114,7 @@ with a compact product/dashboard experience.*/
   cursor: pointer;
   font-family: inherit;
   font-size: 14px;
-  font-weight: 750;
+  font-weight: 700;
   transition:
     transform 160ms ease,
     background 160ms ease,
@@ -10434,7 +10432,7 @@ with a compact product/dashboard experience.*/
 
   font-size: 12px;
   line-height: 1.2;
-  font-weight: 800;
+  font-weight: 700;
 
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -10451,7 +10449,7 @@ with a compact product/dashboard experience.*/
   font-size: clamp(48px, 4vw, 64px);
   line-height: 0.98;
   letter-spacing: -0.045em;
-  font-weight: 800;
+  font-weight: 700;
 
   color: #111827;
 }
@@ -10765,7 +10763,7 @@ with a compact product/dashboard experience.*/
   font-size: 12px;
   line-height: 1.2;
 
-  font-weight: 800;
+  font-weight: 700;
 
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -10787,7 +10785,7 @@ with a compact product/dashboard experience.*/
 
   letter-spacing: -0.055em;
 
-  font-weight: 800;
+  font-weight: 700;
 
   color: #111827;
 
@@ -10841,7 +10839,7 @@ with a compact product/dashboard experience.*/
 
   font-size: 14px;
 
-  font-weight: 750;
+  font-weight: 700;
 
   cursor: pointer;
 
@@ -10900,7 +10898,7 @@ with a compact product/dashboard experience.*/
 
   font-size: 12px;
 
-  font-weight: 750;
+  font-weight: 700;
 
   box-shadow:
     0 6px 18px
@@ -11118,7 +11116,7 @@ with a compact product/dashboard experience.*/
   margin: 0 0 14px;
   color: #39845f;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 1.4px;
   line-height: 1.2;
   text-transform: uppercase;
@@ -11129,7 +11127,7 @@ with a compact product/dashboard experience.*/
   margin: 0;
   color: #111827;
   font-size: clamp(48px, 4.1vw, 76px);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -3.5px;
   line-height: 0.96;
 }
@@ -11275,7 +11273,7 @@ with a compact product/dashboard experience.*/
   font-size: clamp(52px, 4.5vw, 72px) !important;
   line-height: 0.96 !important;
   letter-spacing: -3.5px !important;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 /* DESCRIPTION */
@@ -11647,7 +11645,7 @@ with a compact product/dashboard experience.*/
 .city-search-embedded .city-country {
   color: #397451;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -12128,7 +12126,7 @@ with a compact product/dashboard experience.*/
   margin: 0 0 12px;
   color: #398d60;
   font-size: 0.78rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.14em;
   line-height: 1.2;
   text-transform: uppercase;
@@ -12138,7 +12136,7 @@ with a compact product/dashboard experience.*/
   margin: 0;
   color: #111827;
   font-size: clamp(2.5rem, 4.5vw, 4rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 1.04;
 }
@@ -12197,7 +12195,7 @@ with a compact product/dashboard experience.*/
   margin-top: 32px;
   color: #111827;
   font-size: clamp(2.5rem, 4vw, 3.6rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 1;
 }
@@ -12223,7 +12221,7 @@ with a compact product/dashboard experience.*/
   margin: 0 0 12px;
   color: #398d60;
   font-size: 0.78rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -12232,7 +12230,7 @@ with a compact product/dashboard experience.*/
   margin: 0;
   color: #111827;
   font-size: clamp(1.5rem, 2.5vw, 2rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.2;
 }
@@ -12258,7 +12256,7 @@ with a compact product/dashboard experience.*/
   margin-bottom: 8px;
   color: #66758b;
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -12280,7 +12278,7 @@ with a compact product/dashboard experience.*/
   margin: 0;
   color: #111827;
   font-size: clamp(1.8rem, 3vw, 2.5rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.15;
 }
@@ -12332,7 +12330,7 @@ with a compact product/dashboard experience.*/
   display: block;
   color: #111827;
   font-size: clamp(2rem, 3vw, 2.7rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
 }
@@ -12496,18 +12494,26 @@ with a compact product/dashboard experience.*/
 .where2-profile-section .eyebrow {
   font-size: 0.82rem;
   letter-spacing: 0.14em;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-profile-section h2 {
+  margin: 0;
+  font-family: "Inter", sans-serif !important;
   font-size: clamp(2rem, 3vw, 2.6rem);
+  font-weight: 700 !important;
   line-height: 1.1;
   letter-spacing: -0.035em;
+  color: var(--color-heading);
 }
 
 .where2-profile-section > p {
+  margin: 0;
+  font-family: "Inter", sans-serif !important;
   font-size: 1.05rem;
+  font-weight: 500 !important;
   line-height: 1.6;
+  color: var(--color-text);
 }
 
 /* Preference group labels */
@@ -12515,7 +12521,7 @@ with a compact product/dashboard experience.*/
 .where2-profile-section fieldset legend,
 .where2-preference-group legend {
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.3;
 }
 
@@ -12631,7 +12637,7 @@ with a compact product/dashboard experience.*/
 
 .where2-preferences .eyebrow {
   font-size: 0.85rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.14em;
   line-height: 1.3;
 }
@@ -12657,7 +12663,7 @@ with a compact product/dashboard experience.*/
 
 .where2-preference-group legend {
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.3;
 }
 
@@ -12908,7 +12914,7 @@ with a compact product/dashboard experience.*/
   background: #398d60;
   color: #ffffff;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1;
 }
 
@@ -12952,7 +12958,7 @@ with a compact product/dashboard experience.*/
 .where2-discovery-card .where2-section-heading .eyebrow {
   margin-bottom: 8px;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.12em;
 }
 
@@ -12960,7 +12966,7 @@ with a compact product/dashboard experience.*/
   margin: 0;
   font-size: 32px;
   line-height: 1.15;
-  font-weight: 750;
+  font-weight: 700;
   letter-spacing: -0.025em;
 }
 
@@ -13609,7 +13615,6 @@ with a compact product/dashboard experience.*/
 .cost-breakdown-value {
   font-size: 34px;
 }
-
 /* =========================================
    SAVED CITIES
    ========================================= */
@@ -13631,7 +13636,7 @@ with a compact product/dashboard experience.*/
   color: #4f8f68;
   font-size: 11px;
   line-height: 1;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.12em;
 }
 
@@ -13698,7 +13703,7 @@ with a compact product/dashboard experience.*/
   background: rgba(255, 255, 255, 0.94);
   color: #23345c;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-city-card-content {
@@ -13766,7 +13771,7 @@ with a compact product/dashboard experience.*/
   border-radius: 50%;
   color: #3f875d;
   font-size: 9px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-city-actions {
@@ -13854,7 +13859,7 @@ with a compact product/dashboard experience.*/
   color: #4f8f68;
 
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.25;
 
   letter-spacing: 0.12em;
@@ -13867,7 +13872,7 @@ with a compact product/dashboard experience.*/
   color: #64748b;
 
   font-size: 17px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.5;
 }
 
@@ -13887,7 +13892,7 @@ with a compact product/dashboard experience.*/
   color: #3155e7;
 
   font-size: 16px;
-  font-weight: 750;
+  font-weight: 700;
   line-height: 1.4;
 
   cursor: pointer;
@@ -14030,7 +14035,7 @@ with a compact product/dashboard experience.*/
   color: #19345f;
 
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
 
   line-height: 1;
 }
@@ -14050,7 +14055,7 @@ with a compact product/dashboard experience.*/
   color: #101828;
 
   font-size: 20px;
-  font-weight: 750;
+  font-weight: 700;
   line-height: 1.2;
 
   letter-spacing: -0.02em;
@@ -14108,7 +14113,7 @@ with a compact product/dashboard experience.*/
   color: #101828;
 
   font-size: 18px;
-  font-weight: 750;
+  font-weight: 700;
   line-height: 1.1;
 }
 
@@ -14164,7 +14169,7 @@ with a compact product/dashboard experience.*/
   color: #3f7e57;
 
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 
@@ -14310,7 +14315,7 @@ with a compact product/dashboard experience.*/
   color: #101828;
 
   font-size: 18px;
-  font-weight: 750;
+  font-weight: 700;
   line-height: 1.35;
 
   letter-spacing: -0.015em;
@@ -14324,7 +14329,7 @@ with a compact product/dashboard experience.*/
   color: #64748b;
 
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.5;
 }
 
@@ -14458,10 +14463,9 @@ with a compact product/dashboard experience.*/
 .where2-right-column {
   min-width: 0;
   display: grid;
-  gap: 12px;
+  gap: 16px;
   align-content: start;
-  position: sticky;
-  top: 16px;
+  position: static;
 }
 
 .where2-right-sidebar {
@@ -14494,7 +14498,7 @@ with a compact product/dashboard experience.*/
   margin: 0 0 5px;
   color: #398f62;
   font-size: 9px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.14em;
   line-height: 1.2;
   text-transform: uppercase;
@@ -14558,7 +14562,7 @@ with a compact product/dashboard experience.*/
   background: #edf3ff;
   color: #2860e8;
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .where2-sidebar-city-info {
@@ -14570,7 +14574,7 @@ with a compact product/dashboard experience.*/
   overflow: hidden;
   color: #1a2539;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.25;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -14606,7 +14610,7 @@ with a compact product/dashboard experience.*/
   background: #eff8f2;
   color: #2f7e54;
   font-size: 9px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .where2-sidebar-match-empty {
@@ -14646,7 +14650,7 @@ with a compact product/dashboard experience.*/
   color: #2860e8;
   font: inherit;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   text-align: left;
   cursor: pointer;
 }
@@ -14718,7 +14722,7 @@ with a compact product/dashboard experience.*/
 .where2-sidebar-preference > strong {
   color: #1d2a40;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-sidebar-preference-wide {
@@ -14744,7 +14748,7 @@ with a compact product/dashboard experience.*/
   background: #eff8f2;
   color: #2f7e54;
   font-size: 8px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-sidebar-outline-button {
@@ -14762,7 +14766,7 @@ with a compact product/dashboard experience.*/
   color: #2860e8;
   font: inherit;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   transition:
     border-color 150ms ease,
@@ -14830,7 +14834,7 @@ with a compact product/dashboard experience.*/
   display: block;
   color: #1d2a40;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.3;
 }
 
@@ -14988,7 +14992,7 @@ with a compact product/dashboard experience.*/
 .where2-ai-title strong {
   color: #172033;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.01em;
 }
 
@@ -15002,7 +15006,7 @@ with a compact product/dashboard experience.*/
   background: #edf3ff;
   color: #2860e8;
   font-size: 7px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.08em;
 }
 
@@ -15175,7 +15179,7 @@ with a compact product/dashboard experience.*/
   background: #edf3ff;
   color: #2860e8;
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .where2-ai-result > div:last-child {
@@ -15186,7 +15190,7 @@ with a compact product/dashboard experience.*/
   display: block;
   color: #1c293e;
   font-size: 9px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-ai-result span {
@@ -15194,7 +15198,7 @@ with a compact product/dashboard experience.*/
   margin-top: 2px;
   color: #398f62;
   font-size: 8px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-ai-result p {
@@ -15293,7 +15297,7 @@ with a compact product/dashboard experience.*/
   color: #2860e8;
   font: inherit;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -15359,7 +15363,7 @@ with a compact product/dashboard experience.*/
   margin: 0 0 4px;
   color: #398f62;
   font-size: 8px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.14em;
   line-height: 1.2;
   text-transform: uppercase;
@@ -15369,7 +15373,7 @@ with a compact product/dashboard experience.*/
   margin: 0;
   color: #182338;
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
@@ -15411,7 +15415,7 @@ with a compact product/dashboard experience.*/
   display: block;
   color: #1b273c;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-sidebar-empty p {
@@ -15465,7 +15469,7 @@ with a compact product/dashboard experience.*/
   background: #edf3ff;
   color: #2860e8;
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .where2-sidebar-saved-city-main > div:last-child {
@@ -15477,7 +15481,7 @@ with a compact product/dashboard experience.*/
   overflow: hidden;
   color: #1b273c;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.25;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -15533,7 +15537,7 @@ with a compact product/dashboard experience.*/
   color: #2860e8;
   font: inherit;
   font-size: 9px;
-  font-weight: 800;
+  font-weight: 700;
   text-align: left;
   cursor: pointer;
 }
@@ -15572,7 +15576,7 @@ with a compact product/dashboard experience.*/
 .where2-sidebar-preference-list strong {
   color: #26344b;
   font-size: 9px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-sidebar-edit-preferences {
@@ -15590,7 +15594,7 @@ with a compact product/dashboard experience.*/
   color: #2860e8;
   font: inherit;
   font-size: 9px;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -15624,7 +15628,7 @@ with a compact product/dashboard experience.*/
   margin: 0;
   color: #182338;
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-sidebar-match-score {
@@ -15638,7 +15642,7 @@ with a compact product/dashboard experience.*/
   background: #f0f8f3;
   color: #2f7e54;
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .where2-sidebar-match-description {
@@ -15670,7 +15674,6 @@ with a compact product/dashboard experience.*/
   margin-top: 1px;
   color: #398f62;
 }
-
 
 /* =========================================================
    QUICK ACTIONS
@@ -15723,7 +15726,7 @@ with a compact product/dashboard experience.*/
   display: block;
   color: #253149;
   font-size: 9px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.3;
 }
 
@@ -16446,7 +16449,7 @@ with a compact product/dashboard experience.*/
   color: #4f8f68;
   font-size: 13px;
   line-height: 1.2;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.12em;
 }
 
@@ -16455,7 +16458,7 @@ with a compact product/dashboard experience.*/
   color: #101828;
   font-size: 26px;
   line-height: 1.15;
-  font-weight: 750;
+  font-weight: 700;
   letter-spacing: -0.025em;
 }
 
@@ -16560,7 +16563,7 @@ with a compact product/dashboard experience.*/
 
   font-size: 18px;
   line-height: 1.3;
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .where2-empty-shortlist-content p {
@@ -16700,7 +16703,7 @@ with a compact product/dashboard experience.*/
   color: #23345c;
 
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 700;
 
   box-shadow:
     0 2px 8px rgba(15, 23, 42, 0.08);
@@ -16722,7 +16725,7 @@ with a compact product/dashboard experience.*/
 
   font-size: 18px;
   line-height: 1.25;
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .where2-city-card-title p {
@@ -16775,7 +16778,7 @@ with a compact product/dashboard experience.*/
 
   font-size: 17px;
   line-height: 1.1;
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .where2-weather-text span {
@@ -16829,7 +16832,7 @@ with a compact product/dashboard experience.*/
   color: #3f7e57;
 
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 
@@ -16995,13 +16998,13 @@ with a compact product/dashboard experience.*/
 .where2-ai-advisor-title {
   font-size: 21px !important;
   line-height: 1.3 !important;
-  font-weight: 750 !important;
+  font-weight: 700 !important;
 }
 
 .where2-ai-greeting {
   font-size: 28px !important;
   line-height: 1.2 !important;
-  font-weight: 750 !important;
+  font-weight: 700 !important;
 }
 
 .where2-ai-intro {
@@ -17066,7 +17069,7 @@ with a compact product/dashboard experience.*/
 .where2-saved-cities-title {
   font-size: 24px !important;
   line-height: 1.25 !important;
-  font-weight: 750 !important;
+  font-weight: 700 !important;
 }
 
 .where2-shortlist-subtitle,
@@ -17078,7 +17081,7 @@ with a compact product/dashboard experience.*/
 .where2-empty-shortlist strong {
   font-size: 17px !important;
   line-height: 1.4 !important;
-  font-weight: 750 !important;
+  font-weight: 700 !important;
 }
 
 .where2-empty-shortlist p {
@@ -17107,7 +17110,7 @@ with a compact product/dashboard experience.*/
 .where2-preferences-title {
   font-size: 24px !important;
   line-height: 1.25 !important;
-  font-weight: 750 !important;
+  font-weight: 700 !important;
 }
 
 .where2-preferences-subtitle {
@@ -17123,7 +17126,7 @@ with a compact product/dashboard experience.*/
 .where2-preference-value {
   font-size: 16px !important;
   line-height: 1.4 !important;
-  font-weight: 750 !important;
+  font-weight: 700 !important;
 }
 
 .where2-edit-preferences {
@@ -17140,13 +17143,13 @@ with a compact product/dashboard experience.*/
 .where2-quick-actions-title {
   font-size: 24px !important;
   line-height: 1.25 !important;
-  font-weight: 750 !important;
+  font-weight: 700 !important;
 }
 
 .where2-quick-action-title {
   font-size: 16px !important;
   line-height: 1.4 !important;
-  font-weight: 750 !important;
+  font-weight: 700 !important;
 }
 
 .where2-quick-action-description {
@@ -17167,7 +17170,7 @@ with a compact product/dashboard experience.*/
 .where2-shortlist-eyebrow {
   font-size: 13px !important;
   line-height: 1.3 !important;
-  font-weight: 800 !important;
+  font-weight: 700 !important;
   letter-spacing: 0.12em !important;
 }
 
@@ -17335,7 +17338,7 @@ with a compact product/dashboard experience.*/
   color: #3158e8;
 
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .where2-profile-info {
@@ -17350,7 +17353,7 @@ with a compact product/dashboard experience.*/
 
   font-size: 16px;
   line-height: 1.3;
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .where2-profile-info span {
@@ -17442,7 +17445,7 @@ with a compact product/dashboard experience.*/
 
   font-size: 16px;
   line-height: 1.35;
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .where2-premium-card p {
@@ -17468,7 +17471,7 @@ with a compact product/dashboard experience.*/
 
   font-size: 16px;
   line-height: 1.3;
-  font-weight: 750;
+  font-weight: 700;
 
   cursor: pointer;
 
@@ -18132,85 +18135,773 @@ with a compact product/dashboard experience.*/
   }
 }
 
-/*WHERE2 — STRICT INTER TYPOGRAPHY*/
+/* =========================================================
+   WHERE2 — FINAL TYPOGRAPHY + SPACING SYSTEM
+   Inter only / 500 / 600 / 700
+   Clean / Spacious / Minimal / Professional
+   ========================================================= */
 
-.where2-auth-page,
-.where2-auth-page *,
-.where2-authenticated,
-.where2-authenticated * {
-  font-family: 'Inter', sans-serif;
-}
+/* ---------------------------------------------------------
+   Global Inter foundation
+   --------------------------------------------------------- */
 
-/* Inter Medium */
-.where2-auth-page p,
-.where2-auth-page span,
-.where2-auth-page input,
-.where2-auth-page input::placeholder {
-  font-weight: 500;
-}
-
-/* Inter SemiBold */
-.where2-auth-page button,
-.where2-auth-page label,
-.where2-auth-page .where2-auth-feature strong,
-.where2-auth-page .where2-auth-quote strong {
-  font-weight: 600;
-}
-
-/* Inter Bold */
-.where2-auth-page h1,
-.where2-auth-page h2,
-.where2-authenticated h1 {
-  font-weight: 700;
-}
-
-/* Remove weights outside the approved system */
-.where2-auth-page *,
-.where2-authenticated * {
+#root,
+#root body,
+#root .where2-dashboard,
+#root .where2-dashboard *,
+#root .where2-auth-page,
+#root .where2-auth-page *,
+#root .where2-authenticated,
+#root .where2-authenticated * {
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
   font-synthesis: none;
 }
 
-/* =========================================================
-   WHERE2 — FINAL TYPOGRAPHY OVERRIDE
-   Inter only
-   ========================================================= */
-
-.where2-auth-page,
-.where2-auth-page *,
-.where2-auth-page *::before,
-.where2-auth-page *::after,
-.where2-authenticated,
-.where2-authenticated *,
-.where2-authenticated *::before,
-.where2-authenticated *::after {
-  font-family: 'Inter', Arial, sans-serif !important;
-}
-
-/* Inter Medium */
-.where2-auth-page p,
-.where2-auth-page span,
-.where2-auth-page input,
-.where2-auth-page textarea {
-  font-weight: 500 !important;
-}
-
-/* Inter SemiBold */
-.where2-auth-page button,
-.where2-auth-page label,
-.where2-auth-page strong {
-  font-weight: 600 !important;
-}
-
-/* Inter Bold */
-.where2-auth-page h1,
-.where2-auth-page h2,
-.where2-auth-page h3,
-.where2-authenticated h1 {
+/* Approved type weights */
+#root h1,
+#root h2,
+#root h3,
+#root h4,
+#root h5,
+#root h6,
+#root strong,
+#root b {
   font-weight: 700 !important;
 }
 
-/* Remove unsupported weights */
-.where2-auth-page *,
-.where2-authenticated * {
-  font-synthesis: none !important;
+#root p,
+#root li,
+#root small,
+#root input,
+#root textarea,
+#root select {
+  font-weight: 500 !important;
+}
+
+#root button,
+#root label,
+#root nav a {
+  font-weight: 600 !important;
+}
+
+/* ---------------------------------------------------------
+   Dashboard page spacing
+   --------------------------------------------------------- */
+
+#root .where2-redesign,
+#root .where2-dashboard-redesign {
+  padding: 24px 20px 48px;
+}
+
+/* Consistent rhythm between major sections */
+#root .where2-hero {
+  margin-bottom: 24px;
+}
+
+#root .where2-discovery-card,
+#root .where2-preferences-card,
+#root .where2-shortlist-card {
+  margin-bottom: 20px;
+  padding: 24px;
+}
+
+/* ---------------------------------------------------------
+   Sidebar + topbar
+   --------------------------------------------------------- */
+
+#root .where2-sidebar,
+#root .where2-topbar,
+#root .where2-sidebar-navigation,
+#root .where2-sidebar-links,
+#root .where2-sidebar-footer,
+#root .where2-profile-card,
+#root .where2-profile-menu,
+#root .where2-topbar-profile-dropdown {
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
+}
+
+#root .where2-nav-item,
+#root .where2-sidebar-links button,
+#root .where2-topbar-profile-button,
+#root .where2-topbar-logout,
+#root .where2-profile-card,
+#root .where2-profile-menu button {
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
+  font-weight: 600 !important;
+}
+
+#root .where2-brand,
+#root .where2-mobile-brand {
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
+  font-weight: 700 !important;
+}
+
+/* ---------------------------------------------------------
+   Hero typography
+   --------------------------------------------------------- */
+
+#root .where2-hero-content {
+  padding: 48px 44px;
+}
+
+#root .where2-hero-content h1,
+#root .where2-hero-title {
+  margin: 0;
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
+  font-size: clamp(48px, 4.5vw, 68px) !important;
+  font-weight: 700 !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.045em !important;
+}
+
+#root .where2-hero-eyebrow,
+#root .where2-redesign-eyebrow,
+#root .where2-profile-section .eyebrow,
+#root .where2-preferences .eyebrow {
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
+  font-size: 0.78rem;
+  font-weight: 700 !important;
+  line-height: 1.3;
+  letter-spacing: 0.12em;
+}
+
+#root .where2-hero-description {
+  margin-top: 20px;
+  margin-bottom: 24px;
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
+  font-size: 1rem;
+  font-weight: 500 !important;
+  line-height: 1.6;
+}
+
+/*Profile / preferences headings*/
+
+#root .where2-section-heading {
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+#root .where2-section-heading h2,
+#root .where2-profile-section h2,
+#root .where2-preferences h2 {
+  margin: 0;
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
+  font-size: clamp(2rem, 3vw, 2.6rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: var(--color-heading);
+}
+
+#root .where2-profile-section > p,
+#root .where2-preferences > div > p {
+  margin-top: 8px;
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  line-height: 1.6;
+}
+
+/*Preference controls */
+
+#root .where2-preference-group {
+  padding: 24px;
+}
+
+#root .where2-profile-section fieldset legend,
+#root .where2-preference-group legend {
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
+  font-size: 1rem;
+  font-weight: 700 !important;
+  line-height: 1.3;
+}
+
+#root .where2-profile-section .preference-option,
+#root .where2-profile-section .priority-option,
+#root .where2-preference-group label,
+#root .where2-preference-group-full label {
+  min-height: 48px;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
+  font-size: 1rem;
+  font-weight: 600 !important;
+  line-height: 1.4;
+}
+
+#root .where2-profile-section input + span,
+#root .where2-profile-section label span {
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
+  font-size: 1rem;
+  font-weight: 500 !important;
+}
+
+#root .where2-profile-section svg,
+#root .where2-preference-group label svg {
+  width: 20px;
+  height: 20px;
+}
+
+/*AI advisor + right sidebar cards*/
+
+#root .where2-ai-card,
+#root .where2-ai-card *,
+#root .where2-shortlist-card,
+#root .where2-shortlist-card *,
+#root .where2-preferences-card,
+#root .where2-preferences-card * {
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
+}
+
+#root .where2-ai-card h1,
+#root .where2-ai-card h2,
+#root .where2-ai-card h3,
+#root .where2-ai-card h4,
+#root .where2-shortlist-card h1,
+#root .where2-shortlist-card h2,
+#root .where2-shortlist-card h3,
+#root .where2-shortlist-card h4,
+#root .where2-preferences-card h1,
+#root .where2-preferences-card h2,
+#root .where2-preferences-card h3,
+#root .where2-preferences-card h4 {
+  font-weight: 700 !important;
+}
+
+/*Embedded search*/
+
+#root .where2-search-shell {
+  margin-top: 24px;
+}
+
+#root .where2-discovery-card .city-search-embedded .city-search-form {
+  padding: 24px;
+}
+
+#root .where2-discovery-card .city-search-form label {
+  margin-bottom: 12px;
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
+  font-weight: 600 !important;
+}
+
+/*Responsive spacing*/
+
+@media (max-width: 900px) {
+  #root .where2-redesign,
+  #root .where2-dashboard-redesign {
+    padding: 20px;
+    padding-bottom: 40px;
+  }
+
+  #root .where2-hero-content {
+    padding: 44px 32px;
+  }
+
+  #root .where2-discovery-card,
+  #root .where2-preferences-card,
+  #root .where2-shortlist-card {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 700px) {
+  #root .where2-redesign,
+  #root .where2-dashboard-redesign {
+    padding: 16px;
+    padding-bottom: 32px;
+  }
+
+  #root .where2-hero-content {
+    padding: 36px 24px;
+  }
+
+  #root .where2-hero-content h1,
+  #root .where2-hero-title {
+    font-size: clamp(42px, 12vw, 56px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.04em !important;
+  }
+
+  #root .where2-discovery-card,
+  #root .where2-preferences-card,
+  #root .where2-shortlist-card {
+    padding: 20px;
+  }
+
+  #root .where2-preference-group {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  #root .where2-redesign,
+  #root .where2-dashboard-redesign {
+    padding: 12px;
+    padding-bottom: 28px;
+  }
+
+  #root .where2-hero-content {
+    padding: 32px 20px;
+  }
+
+  #root .where2-discovery-card,
+  #root .where2-preferences-card,
+  #root .where2-shortlist-card {
+    padding: 18px;
+  }
+}
+
+/*Where2 — Final Sidebar Spacing Fix*/
+
+#root .where2-dashboard-content {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 320px !important;
+  gap: 24px !important;
+  width: 100% !important;
+  max-width: 1500px !important;
+  margin: 0 auto !important;
+  padding: 24px 20px 48px !important;
+  box-sizing: border-box !important;
+}
+
+#root .where2-main-column {
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+#root .where2-ai-column {
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+#root .where2-right-column {
+  min-width: 0 !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  position: static !important;
+}
+
+/* Keep every sidebar section inside its column */
+#root .where2-right-column > * {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/*Tablet / Narrow Desktop*/
+
+@media (max-width: 1100px) {
+  #root .where2-dashboard-content {
+    grid-template-columns: minmax(0, 1fr) 290px !important;
+    gap: 20px !important;
+  }
+}
+
+/*Mobile — Stack Everything*/
+
+@media (max-width: 900px) {
+  #root .where2-dashboard-content {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 20px !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  #root .where2-main-column,
+  #root .where2-right-column {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  #root .where2-right-column {
+    order: 2 !important;
+  }
+}
+
+/*Small Mobile*/
+
+@media (max-width: 600px) {
+  #root .where2-dashboard-content {
+    padding: 16px !important;
+    gap: 16px !important;
+  }
+}
+
+/* =========================================================
+   WHERE2 — SEARCH CITIES BUTTON
+   ========================================================= */
+
+#root .where2-discovery-card
+  .city-search-embedded
+  .city-search-submit {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 62px !important;
+
+  padding: 0 24px !important;
+
+  background: #0b8f5a !important;
+  color: #ffffff !important;
+
+  border: 1px solid #0b8f5a !important;
+  border-radius: 12px !important;
+
+  font-family: "Inter", sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+  box-sizing: border-box !important;
+
+  cursor: pointer !important;
+}
+
+#root .where2-discovery-card
+  .city-search-embedded
+  .city-search-submit:hover:not(:disabled) {
+  background: #087449 !important;
+  border-color: #087449 !important;
+}
+
+#root .where2-discovery-card
+  .city-search-embedded
+  .city-search-submit:disabled {
+  opacity: 0.55 !important;
+  cursor: not-allowed !important;
+}
+
+/* =========================================================
+   WHERE2 — DISCOVER SECTION SPACING REFINEMENT
+   Clean / Spacious / Minimal
+   ========================================================= */
+
+#root .where2-discovery-card {
+  padding: 28px 32px 32px !important;
+}
+
+#root .where2-discovery-card .where2-section-heading {
+  margin-bottom: 22px;
+}
+
+#root .where2-discovery-card .where2-section-heading h2 {
+  margin-bottom: 8px;
+}
+
+#root .where2-discovery-card .where2-section-heading p {
+  margin: 0;
+}
+
+#root .where2-discovery-card .city-search-embedded {
+  margin-top: 0;
+}
+
+#root .where2-discovery-card
+  .city-search-embedded
+  .city-search-form {
+  padding: 24px !important;
+}
+
+#root .where2-discovery-card
+  .city-search-embedded
+  .city-search-input-group {
+  gap: 14px;
+}
+
+#root .where2-discovery-card
+  .city-search-embedded
+  .city-search-help {
+  margin-top: 10px;
+}
+
+/* Results spacing */
+
+#root .where2-discovery-card
+  .city-search-embedded
+  .city-search-results {
+  margin-top: 24px !important;
+}
+
+#root .where2-discovery-card
+  .city-search-results-header {
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
+/* Filters */
+
+#root .where2-discovery-card
+  .city-search-filters {
+  margin-top: 14px;
+}
+
+/* Result cards */
+
+#root .where2-discovery-card
+  .city-search-grid {
+  margin-top: 20px;
+  gap: 16px;
+}
+
+/* Desktop */
+
+@media (min-width: 901px) {
+  #root .where2-discovery-card {
+    padding: 28px 32px 32px !important;
+  }
+
+  #root .where2-discovery-card
+    .city-search-embedded
+    .city-search-form {
+    padding: 22px 24px !important;
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  #root .where2-discovery-card {
+    padding: 24px !important;
+  }
+
+  #root .where2-discovery-card
+    .city-search-embedded
+    .city-search-form {
+    padding: 20px !important;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+  #root .where2-discovery-card {
+    padding: 20px !important;
+  }
+
+  #root .where2-discovery-card
+    .city-search-embedded
+    .city-search-form {
+    padding: 18px !important;
+  }
+}
+
+/* =========================================================
+   WHERE2 — LOCATION SNAPSHOT REFINEMENT
+   Clean contained layout with tighter spacing
+   ========================================================= */
+
+#root .city-details {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border: 1px solid #dfe6ee;
+  border-radius: 24px;
+}
+
+/* Header */
+
+#root .city-details-heading {
+  margin-bottom: 32px;
+}
+
+#root .city-details-heading h2 {
+  margin: 8px 0 14px;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+#root .city-details-heading p:last-child {
+  max-width: 680px;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Statistics container */
+
+#root .city-details-grid {
+  width: 100%;
+  max-width: none;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+
+  border: 1px solid #e1e7ef;
+  border-radius: 16px;
+  overflow: hidden;
+
+  background: #ffffff;
+}
+
+/* Individual statistic */
+
+#root .city-detail-card {
+  min-height: 0;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  padding: 24px 26px;
+
+  background: #ffffff;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+
+  box-sizing: border-box;
+}
+
+/* Vertical separators */
+
+#root .city-detail-card:not(:nth-child(3n)) {
+  border-right: 1px solid #e6ebf1;
+}
+
+/* Horizontal separators */
+
+#root .city-detail-card:nth-child(n + 4) {
+  border-top: 1px solid #e6ebf1;
+}
+
+/* Labels */
+
+#root .city-detail-card-label {
+  margin-bottom: 8px;
+
+  color: #4d8a68;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Main values */
+
+#root .city-detail-card strong {
+  color: var(--color-heading);
+  font-size: 1.25rem;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+}
+
+/* Supporting text */
+
+#root .city-detail-card small {
+  margin-top: 6px;
+  padding-top: 0;
+
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* Coordinates */
+
+#root .city-detail-card-coordinates strong {
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+/* Copy coordinates */
+
+#root .city-details-copy-button {
+  margin-top: 8px;
+}
+
+/* Remove hover lift from the information grid */
+
+#root .city-detail-card:hover {
+  transform: none;
+  border-color: inherit;
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   LOCATION SNAPSHOT → MAP SPACING
+   ========================================================= */
+
+#root .city-details + * {
+  margin-top: 40px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  #root .city-details {
+    padding: 28px;
+    border-radius: 20px;
+  }
+
+  #root .city-details-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #root .city-detail-card:not(:nth-child(3n)) {
+    border-right: 0;
+  }
+
+  #root .city-detail-card:nth-child(2n) {
+    border-right: 0;
+  }
+
+  #root .city-detail-card:nth-child(2n + 1) {
+    border-right: 1px solid #e6ebf1;
+  }
+
+  #root .city-detail-card:nth-child(n + 3) {
+    border-top: 1px solid #e6ebf1;
+  }
+}
+
+@media (max-width: 640px) {
+  #root .city-details {
+    padding: 22px;
+    border-radius: 16px;
+  }
+
+  #root .city-details-heading {
+    margin-bottom: 24px;
+  }
+
+  #root .city-details-heading h2 {
+    font-size: 2.25rem;
+  }
+
+  #root .city-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #root .city-detail-card {
+    padding: 20px;
+    border-right: 0 !important;
+  }
+
+  #root .city-detail-card + .city-detail-card {
+    border-top: 1px solid #e6ebf1;
+  }
 }

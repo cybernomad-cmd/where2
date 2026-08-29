@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap");
+
 :root {
   /* WHERE2 Brand Colors */
   --color-primary: #0b8f5a;
@@ -21,9 +23,11 @@
   --color-success: #039855;
 
   /* Typography */
-  --font-sans:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+  --font-sans: "Inter", sans-serif;
+
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
 
   /* Spacing */
   --space-1: 4px;
@@ -47,11 +51,8 @@
   --radius-pill: 999px;
 
   /* Shadows */
-  --shadow-sm:
-    0 2px 8px rgba(16, 24, 40, 0.05);
-
-  --shadow-md:
-    0 8px 24px rgba(16, 24, 40, 0.08);
+  --shadow-sm: 0 2px 8px rgba(16, 24, 40, 0.05);
+  --shadow-md: 0 8px 24px rgba(16, 24, 40, 0.08);
 
   /* Layout */
   --container-width: 1440px;
@@ -77,14 +78,21 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+
   background: var(--color-background);
+  color: var(--color-text);
+
+  font-family: var(--font-sans);
+  font-weight: var(--font-medium);
+  line-height: 1.5;
 }
 
 button,
 input,
 select,
 textarea {
-  font: inherit;
+  font-family: var(--font-sans);
+  font-weight: var(--font-medium);
 }
 
 button {
@@ -101,10 +109,111 @@ a {
   text-decoration: none;
 }
 
+/* Typography Hierarchy */
+
 h1,
 h2,
 h3,
-h4,
+h4 {
+  margin: 0;
+  color: var(--color-heading);
+  font-family: var(--font-sans);
+  font-weight: var(--font-bold);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
 p {
   margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-weight: var(--font-medium);
+  line-height: 1.6;
+}
+
+small {
+  font-family: var(--font-sans);
+  font-weight: var(--font-medium);
+  color: var(--color-muted);
+}
+
+label {
+  font-family: var(--font-sans);
+  font-weight: var(--font-semibold);
+  color: var(--color-heading);
+}
+
+button {
+  font-family: var(--font-sans);
+  font-weight: var(--font-semibold);
+}
+
+input,
+select,
+textarea {
+  font-family: var(--font-sans);
+  font-weight: var(--font-medium);
+}
+/* =========================================================
+   WHERE2 — FINAL DASHBOARD SPACING
+   Clean / Spacious / Minimal
+   ========================================================= */
+
+.where2-authenticated .where2-dashboard-redesign {
+  padding-top: 24px;
+  padding-bottom: 48px;
+}
+
+.where2-authenticated .where2-dashboard-content {
+  gap: 20px;
+}
+
+.where2-authenticated .where2-hero {
+  margin-bottom: 20px;
+}
+
+.where2-authenticated .where2-discovery-card,
+.where2-authenticated .where2-preferences-card,
+.where2-authenticated .where2-shortlist-card {
+  padding: 24px;
+}
+
+@media (max-width: 900px) {
+  .where2-authenticated .where2-dashboard-redesign {
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+
+  .where2-authenticated .where2-dashboard-content {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 700px) {
+  .where2-authenticated .where2-dashboard-redesign {
+    padding: 16px;
+    padding-bottom: 32px;
+  }
+
+  .where2-authenticated .where2-discovery-card,
+  .where2-authenticated .where2-preferences-card,
+  .where2-authenticated .where2-shortlist-card {
+    padding: 20px;
+  }
 }

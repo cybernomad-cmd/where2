@@ -1,66 +1,43 @@
-from app import create_app
+from conftest import login
 
 
-app = create_app()
-
-
-with app.test_client() as client:
+def test_task_ownership_protection(
+    client,
+    user_a,
+    user_b,
+):
     # ---------------------------------------------------------
     # USER A LOGIN
     # ---------------------------------------------------------
 
-    email_a = input("User A email: ")
-    password_a = input("User A password: ")
-
-    login_a = client.post(
-        "/api/auth/login",
-        json={
-            "email": email_a,
-            "password": password_a,
-        },
+    login(
+        client,
+        user_a["email"],
+        user_a["password"],
     )
 
-    print("\nUSER A LOGIN")
-    print("Status:", login_a.status_code)
-
-    if login_a.status_code != 200:
-        print(login_a.get_json())
-        raise SystemExit("User A login failed.")
-
-    user_a = login_a.get_json()["user"]
-
-    print("User A:", user_a)
-
     # ---------------------------------------------------------
-    # CREATE A PROJECT
+    # USER A CREATES PROJECT
     # ---------------------------------------------------------
 
-    create_project = client.post(
+    project_response = client.post(
         "/api/projects",
         json={
-            "name": "Task Ownership Test Project",
-            "description": "Temporary project for ownership testing.",
+            "name": "Private Task Project",
+            "description": "Temporary ownership test project.",
             "status": "active",
         },
     )
 
-    print("\nCREATE PROJECT")
-    print("Status:", create_project.status_code)
+    assert project_response.status_code == 201
 
-    if create_project.status_code != 201:
-        print(create_project.get_json())
-        raise SystemExit("Project creation failed.")
-
-    project = create_project.get_json()["project"]
-    project_id = project["id"]
-
-    print("Project:", project)
+    project_id = project_response.get_json()["project"]["id"]
 
     # ---------------------------------------------------------
-    # CREATE A TASK
+    # USER A CREATES TASK
     # ---------------------------------------------------------
 
-    create_task = client.post(
+    task_response = client.post(
         f"/api/projects/{project_id}/tasks",
         json={
             "title": "Private User A Task",
@@ -68,17 +45,9 @@ with app.test_client() as client:
         },
     )
 
-    print("\nCREATE USER A TASK")
-    print("Status:", create_task.status_code)
+    assert task_response.status_code == 201
 
-    if create_task.status_code != 201:
-        print(create_task.get_json())
-        raise SystemExit("Task creation failed.")
-
-    task = create_task.get_json()["task"]
-    task_id = task["id"]
-
-    print("Task:", task)
+    task_id = task_response.get_json()["task"]["id"]
 
     # ---------------------------------------------------------
     # LOGOUT USER A
@@ -90,45 +59,27 @@ with app.test_client() as client:
     # USER B LOGIN
     # ---------------------------------------------------------
 
-    email_b = input("\nUser B email: ")
-    password_b = input("User B password: ")
-
-    login_b = client.post(
-        "/api/auth/login",
-        json={
-            "email": email_b,
-            "password": password_b,
-        },
+    login(
+        client,
+        user_b["email"],
+        user_b["password"],
     )
 
-    print("\nUSER B LOGIN")
-    print("Status:", login_b.status_code)
-
-    if login_b.status_code != 200:
-        print(login_b.get_json())
-        raise SystemExit("User B login failed.")
-
-    user_b = login_b.get_json()["user"]
-
-    print("User B:", user_b)
-
     # ---------------------------------------------------------
-    # USER B GETS USER A'S TASK
+    # USER B CANNOT GET USER A'S TASK
     # ---------------------------------------------------------
 
-    get_task = client.get(
+    get_response = client.get(
         f"/api/tasks/{task_id}"
     )
 
-    print("\nUSER B GET USER A TASK")
-    print("Status:", get_task.status_code)
-    print("Response:", get_task.get_json())
+    assert get_response.status_code == 404
 
     # ---------------------------------------------------------
-    # USER B UPDATES USER A'S TASK
+    # USER B CANNOT UPDATE USER A'S TASK
     # ---------------------------------------------------------
 
-    update_task = client.patch(
+    update_response = client.patch(
         f"/api/tasks/{task_id}",
         json={
             "title": "Unauthorized Update",
@@ -136,31 +87,24 @@ with app.test_client() as client:
         },
     )
 
-    print("\nUSER B UPDATE USER A TASK")
-    print("Status:", update_task.status_code)
-    print("Response:", update_task.get_json())
+    assert update_response.status_code == 404
 
     # ---------------------------------------------------------
-    # USER B DELETES USER A'S TASK
+    # USER B CANNOT DELETE USER A'S TASK
     # ---------------------------------------------------------
 
-    delete_task = client.delete(
+    delete_response = client.delete(
         f"/api/tasks/{task_id}"
     )
 
-    print("\nUSER B DELETE USER A TASK")
-    print("Status:", delete_task.status_code)
-    print("Response:", delete_task.get_json())
+    assert delete_response.status_code == 404
 
     # ---------------------------------------------------------
-    # USER B TRIES TO LIST USER A'S PROJECT TASKS
+    # USER B CANNOT LIST USER A'S PROJECT TASKS
     # ---------------------------------------------------------
 
-    list_tasks = client.get(
+    list_response = client.get(
         f"/api/projects/{project_id}/tasks"
     )
 
-    print("\nUSER B LIST USER A PROJECT TASKS")
-    print("Status:", list_tasks.status_code)
-    print("Response:", list_tasks.get_json())
-    
+    assert list_response.status_code == 404
