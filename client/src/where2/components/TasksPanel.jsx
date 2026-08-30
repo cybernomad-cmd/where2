@@ -326,7 +326,7 @@ useEffect(() => {
             Back to projects
           </button>
 
-          <h2>Tasks</h2>
+          <h2>Destination Plans</h2>
 
           <p>
             Organize the work for{" "}

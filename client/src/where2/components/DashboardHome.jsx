@@ -12,6 +12,8 @@ import {
   Users,
 } from "lucide-react";
 
+import capeTownHero from "../assets/cape-town-auth.png";
+
 import CitySearch from "./CitySearch";
 import WeatherCard from "./WeatherCard";
 import WeatherForecast from "./WeatherForecast";
@@ -20,7 +22,7 @@ import CityComparison from "./CityComparison";
 import CityDetails from "./CityDetails";
 import CostOfLiving from "./CostOfLiving";
 
-const HERO_IMAGE = "/images/cape-town-hero.jpg";
+const HERO_IMAGE = capeTownHero;
 
 const climateOptions = [
   {
