@@ -18905,3 +18905,5777 @@ with a compact product/dashboard experience.*/
     border-top: 1px solid #e6ebf1;
   }
 }
+
+/* =========================================================
+   WHERE2 — UI DESIGN PASS 01
+   Dashboard Visual Foundation
+   Clean / Spacious / Premium
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Application background
+   --------------------------------------------------------- */
+
+#root .where2-dashboard {
+  background:
+    radial-gradient(
+      circle at 12% 8%,
+      rgba(49, 91, 234, 0.035),
+      transparent 28%
+    ),
+    #f6f8fb;
+}
+
+
+/* ---------------------------------------------------------
+   Main dashboard workspace
+   --------------------------------------------------------- */
+
+#root .where2-dashboard-content {
+  padding-top: 28px !important;
+  padding-bottom: 56px !important;
+}
+
+
+/* ---------------------------------------------------------
+   Main content column
+   --------------------------------------------------------- */
+
+#root .where2-main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+
+/* ---------------------------------------------------------
+   Primary content surfaces
+   --------------------------------------------------------- */
+
+#root .where2-main-column > section,
+#root .where2-main-column > div {
+  box-sizing: border-box;
+}
+
+
+/* ---------------------------------------------------------
+   Standard card treatment
+   --------------------------------------------------------- */
+
+#root .where2-discovery-card,
+#root .where2-preferences-card,
+#root .where2-shortlist-card {
+  background: #ffffff;
+
+  border: 1px solid #e4e9f1;
+  border-radius: 20px;
+
+  box-shadow:
+    0 8px 30px rgba(16, 24, 40, 0.035);
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+/* ---------------------------------------------------------
+   Card hover — extremely subtle
+   --------------------------------------------------------- */
+
+#root .where2-discovery-card:hover,
+#root .where2-preferences-card:hover,
+#root .where2-shortlist-card:hover {
+  border-color: #dce3ed;
+
+  box-shadow:
+    0 12px 36px rgba(16, 24, 40, 0.055);
+}
+
+
+/* ---------------------------------------------------------
+   Section headings
+   --------------------------------------------------------- */
+
+#root .where2-section-heading h2 {
+  color: #101828 !important;
+
+  font-size: clamp(
+    1.65rem,
+    2.2vw,
+    2.15rem
+  ) !important;
+
+  line-height: 1.12 !important;
+
+  letter-spacing: -0.045em !important;
+}
+
+
+#root .where2-section-heading p {
+  color: #667085;
+
+  font-size: 0.94rem;
+
+  line-height: 1.6;
+}
+
+
+/* ---------------------------------------------------------
+   Dashboard body text
+   --------------------------------------------------------- */
+
+#root .where2-main-column p {
+  color: #667085;
+}
+
+
+/* ---------------------------------------------------------
+   Primary interactive elements
+   --------------------------------------------------------- */
+
+#root .where2-main-column button {
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+
+/* ---------------------------------------------------------
+   Focus accessibility
+   --------------------------------------------------------- */
+
+#root .where2-main-column button:focus-visible,
+#root .where2-main-column input:focus-visible,
+#root .where2-main-column select:focus-visible,
+#root .where2-main-column textarea:focus-visible {
+  outline: 3px solid rgba(49, 91, 234, 0.16);
+  outline-offset: 2px;
+}
+
+
+/* ---------------------------------------------------------
+   RIGHT SIDEBAR
+   --------------------------------------------------------- */
+
+#root .where2-right-column {
+  gap: 18px !important;
+}
+
+
+/* ---------------------------------------------------------
+   AI / sidebar surfaces
+   --------------------------------------------------------- */
+
+#root .where2-right-column > * {
+  border-radius: 18px;
+}
+
+
+/* ---------------------------------------------------------
+   Desktop workspace breathing room
+   --------------------------------------------------------- */
+
+@media (min-width: 1200px) {
+  #root .where2-dashboard-content {
+    gap: 28px !important;
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+  }
+
+  #root .where2-main-column {
+    gap: 28px;
+  }
+
+  #root .where2-right-column {
+    gap: 20px !important;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Tablet
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  #root .where2-dashboard-content {
+    padding-top: 20px !important;
+    padding-bottom: 40px !important;
+  }
+
+  #root .where2-main-column {
+    gap: 20px;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 600px) {
+  #root .where2-dashboard-content {
+    padding: 16px !important;
+    padding-bottom: 32px !important;
+  }
+
+  #root .where2-main-column {
+    gap: 16px;
+  }
+
+  #root .where2-discovery-card,
+  #root .where2-preferences-card,
+  #root .where2-shortlist-card {
+    border-radius: 16px;
+  }
+}
+
+/* =========================================================
+   WHERE2 — UI DESIGN PASS 02
+   Premium Dashboard Hero
+   ========================================================= */
+
+#root .where2-hero {
+  position: relative;
+
+  min-height: 430px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(20, 32, 55, 0.10);
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      105deg,
+      rgba(8, 22, 44, 0.72) 0%,
+      rgba(8, 22, 44, 0.48) 38%,
+      rgba(8, 22, 44, 0.18) 72%,
+      rgba(8, 22, 44, 0.08) 100%
+    ),
+    var(--hero-image, none);
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  box-shadow:
+    0 18px 50px rgba(16, 24, 40, 0.08);
+}
+
+
+/* ---------------------------------------------------------
+   Hero image treatment
+   --------------------------------------------------------- */
+
+#root .where2-hero::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 16, 32, 0.10) 0%,
+      transparent 45%,
+      rgba(5, 16, 32, 0.30) 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   Hero content
+   --------------------------------------------------------- */
+
+#root .where2-hero-content {
+  position: relative;
+  z-index: 2;
+
+  min-height: 430px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 56px 52px !important;
+
+  box-sizing: border-box;
+}
+
+
+/* ---------------------------------------------------------
+   Hero eyebrow
+   --------------------------------------------------------- */
+
+#root .where2-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+
+  width: fit-content;
+
+  margin-bottom: 18px;
+
+  padding: 8px 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.10);
+
+  color: rgba(255, 255, 255, 0.90);
+
+  font-size: 11px !important;
+  font-weight: 700 !important;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+
+  backdrop-filter: blur(8px);
+}
+
+
+/* ---------------------------------------------------------
+   Hero heading
+   --------------------------------------------------------- */
+
+#root .where2-hero-content h1,
+#root .where2-hero-title {
+  max-width: 720px;
+
+  color: #ffffff !important;
+
+  font-size: clamp(
+    46px,
+    5.2vw,
+    72px
+  ) !important;
+
+  line-height: 0.98 !important;
+
+  font-weight: 700 !important;
+
+  letter-spacing: -0.065em !important;
+
+  text-wrap: balance;
+
+  text-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.20);
+}
+
+
+/* ---------------------------------------------------------
+   Hero description
+   --------------------------------------------------------- */
+
+#root .where2-hero-description {
+  max-width: 590px;
+
+  margin-top: 22px !important;
+
+  color: rgba(255, 255, 255, 0.84) !important;
+
+  font-size: 16px !important;
+
+  line-height: 1.65 !important;
+
+  text-shadow:
+    0 2px 14px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ---------------------------------------------------------
+   Hero action
+   --------------------------------------------------------- */
+
+#root .where2-hero .where2-primary-button,
+#root .where2-hero button {
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.16);
+}
+
+
+/* ---------------------------------------------------------
+   Hero location
+   --------------------------------------------------------- */
+
+#root .where2-hero-location {
+  position: absolute;
+
+  right: 28px;
+  bottom: 26px;
+
+  z-index: 3;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 9px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+
+  background: rgba(8, 22, 44, 0.42);
+
+  color: rgba(255, 255, 255, 0.90);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  backdrop-filter: blur(10px);
+}
+
+
+/* ---------------------------------------------------------
+   Hero hover
+   --------------------------------------------------------- */
+
+#root .where2-hero {
+  transition:
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+#root .where2-hero:hover {
+  box-shadow:
+    0 24px 60px rgba(16, 24, 40, 0.11);
+}
+
+
+/* ---------------------------------------------------------
+   Responsive hero
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  #root .where2-hero {
+    min-height: 400px;
+
+    border-radius: 20px;
+  }
+
+  #root .where2-hero-content {
+    min-height: 400px;
+
+    padding: 44px 34px !important;
+  }
+}
+
+
+@media (max-width: 600px) {
+  #root .where2-hero {
+    min-height: 380px;
+
+    border-radius: 16px;
+  }
+
+  #root .where2-hero-content {
+    min-height: 380px;
+
+    padding: 36px 24px !important;
+  }
+
+  #root .where2-hero-content h1,
+  #root .where2-hero-title {
+    font-size: clamp(
+      40px,
+      11vw,
+      54px
+    ) !important;
+  }
+
+  #root .where2-hero-description {
+    font-size: 14px !important;
+  }
+
+  #root .where2-hero-location {
+    right: 18px;
+    bottom: 18px;
+  }
+}
+
+/* =========================================================
+   WHERE2 — UI DESIGN PASS 03
+   Premium Dashboard Shell
+   Sidebar Refinement
+   ========================================================= */
+
+#root .where2-sidebar {
+  width: 232px;
+  min-width: 232px;
+
+  padding: 14px 14px 16px;
+
+  background: rgba(255, 255, 255, 0.98);
+
+  border-right: 1px solid #e7ebf2;
+
+  box-shadow:
+    4px 0 24px rgba(16, 24, 40, 0.025);
+}
+
+
+/* ---------------------------------------------------------
+   Brand
+   --------------------------------------------------------- */
+
+#root .where2-sidebar-top {
+  min-height: 58px;
+
+  padding: 0 4px;
+}
+
+
+#root .where2-brand {
+  gap: 10px;
+
+  font-size: 23px;
+
+  letter-spacing: -0.055em;
+}
+
+
+#root .where2-brand-mark {
+  width: 34px;
+  height: 34px;
+
+  border-radius: 11px;
+
+  box-shadow:
+    0 6px 16px rgba(20, 85, 245, 0.18);
+}
+
+
+/* ---------------------------------------------------------
+   Navigation
+   --------------------------------------------------------- */
+
+#root .where2-sidebar-navigation {
+  gap: 5px;
+
+  margin-top: 18px;
+}
+
+
+#root .where2-nav-item {
+  min-height: 42px;
+
+  border-radius: 11px;
+
+  padding: 0 12px;
+
+  gap: 12px;
+
+  color: #526078;
+
+  font-size: 13px;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+
+#root .where2-nav-item:hover {
+  background: #f2f6ff;
+
+  color: var(--where2-blue);
+
+  transform: translateX(1px);
+}
+
+
+#root .where2-nav-item-active {
+  background:
+    linear-gradient(
+      90deg,
+      #edf3ff 0%,
+      #f4f7ff 100%
+    );
+
+  color: var(--where2-blue);
+
+  font-weight: 700;
+
+  box-shadow:
+    inset 3px 0 0 var(--where2-blue);
+}
+
+
+/* ---------------------------------------------------------
+   Sidebar bottom area
+   --------------------------------------------------------- */
+
+#root .where2-sidebar-bottom {
+  padding-top: 18px;
+}
+
+
+/* ---------------------------------------------------------
+   Profile card
+   --------------------------------------------------------- */
+
+#root .where2-profile-card {
+  min-height: 64px;
+
+  padding: 9px;
+
+  margin-bottom: 12px;
+
+  border: 1px solid #e5eaf2;
+
+  border-radius: 13px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 5px 18px rgba(16, 24, 40, 0.035);
+}
+
+
+#root .where2-avatar {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+
+  background: #edf3ff;
+
+  color: var(--where2-blue);
+
+  font-size: 11px;
+}
+
+
+/* ---------------------------------------------------------
+   Premium card
+   --------------------------------------------------------- */
+
+#root .where2-premium-card {
+  padding: 15px;
+
+  margin-bottom: 12px;
+
+  border: 1px solid #e1e7f4;
+  border-radius: 14px;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(49, 91, 234, 0.09),
+      transparent 48%
+    ),
+    linear-gradient(
+      145deg,
+      #f7f5ff 0%,
+      #edf3ff 100%
+    );
+}
+
+
+#root .where2-premium-card strong {
+  font-size: 11px;
+
+  letter-spacing: -0.01em;
+}
+
+
+#root .where2-premium-card p {
+  font-size: 10px;
+
+  line-height: 1.55;
+}
+
+
+/* ---------------------------------------------------------
+   Sidebar footer
+   --------------------------------------------------------- */
+
+#root .where2-sidebar-footer {
+  padding: 4px;
+
+  color: #98a2b3;
+
+  font-size: 10px;
+}
+
+/* =========================================================
+   WHERE2 — HERO FINAL POLISH
+   Full-bleed cityscape with layered content
+   ========================================================= */
+
+.where2-dashboard-redesign .where2-hero {
+  position: relative;
+
+  width: 100%;
+  min-height: 500px;
+
+  display: block;
+
+  overflow: hidden;
+
+  border: 1px solid var(--where2-border);
+  border-radius: 20px;
+
+  background: #dfe5ed;
+}
+
+
+/* =========================================================
+   FULL-BLEED CITY IMAGE
+   ========================================================= */
+
+.where2-dashboard-redesign .where2-hero-background {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center center;
+
+  z-index: 0;
+}
+
+
+/* =========================================================
+   HERO OVERLAY
+   ========================================================= */
+
+.where2-dashboard-redesign .where2-hero-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 24, 48, 0.78) 0%,
+      rgba(7, 24, 48, 0.62) 25%,
+      rgba(7, 24, 48, 0.32) 52%,
+      rgba(7, 24, 48, 0.08) 78%,
+      rgba(7, 24, 48, 0.04) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(4, 15, 30, 0.12) 0%,
+      transparent 45%,
+      rgba(4, 15, 30, 0.28) 100%
+    );
+}
+
+
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+.where2-dashboard-redesign .where2-hero-content {
+  position: relative;
+
+  z-index: 3;
+
+  width: min(620px, 100%);
+
+  min-height: 500px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 56px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.where2-dashboard-redesign .where2-hero-eyebrow {
+  margin: 0 0 20px;
+
+  color: rgba(255, 255, 255, 0.88);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+
+  line-height: 1.2;
+
+  text-transform: uppercase;
+
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   HERO HEADING
+   ========================================================= */
+
+.where2-dashboard-redesign .where2-hero-content h1,
+.where2-dashboard-redesign .where2-hero-content h2 {
+  max-width: 570px;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(3.5rem, 5.2vw, 5.25rem);
+
+  line-height: 0.94;
+
+  font-weight: 700;
+
+  letter-spacing: -0.075em;
+
+  text-wrap: balance;
+
+  text-shadow:
+    0 4px 22px rgba(0, 0, 0, 0.30),
+    0 1px 4px rgba(0, 0, 0, 0.22);
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.where2-dashboard-redesign .where2-hero-description {
+  max-width: 520px;
+
+  margin: 25px 0 0;
+
+  color: rgba(255, 255, 255, 0.92);
+
+  font-size: 15px;
+
+  line-height: 1.65;
+
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.28);
+}
+
+
+/* =========================================================
+   HERO BUTTON
+   ========================================================= */
+
+.where2-dashboard-redesign .where2-hero-button {
+  position: relative;
+
+  z-index: 4;
+
+  margin-top: 30px;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.20);
+}
+
+
+/* =========================================================
+   LOCATION BADGE
+   ========================================================= */
+
+.where2-dashboard-redesign .where2-hero-location {
+  position: absolute;
+
+  right: 24px;
+  bottom: 24px;
+
+  z-index: 4;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 9px 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.20);
+
+  border-radius: 999px;
+
+  background: rgba(16, 24, 40, 0.66);
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .where2-dashboard-redesign .where2-hero {
+    min-height: 480px;
+  }
+
+  .where2-dashboard-redesign .where2-hero-content {
+    min-height: 480px;
+
+    padding: 46px;
+  }
+
+  .where2-dashboard-redesign .where2-hero-content h1,
+  .where2-dashboard-redesign .where2-hero-content h2 {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .where2-dashboard-redesign .where2-hero {
+    min-height: 520px;
+
+    border-radius: 16px;
+  }
+
+  .where2-dashboard-redesign .where2-hero-background {
+    object-position: center center;
+  }
+
+  .where2-dashboard-redesign .where2-hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(7, 24, 48, 0.34) 0%,
+        rgba(7, 24, 48, 0.56) 45%,
+        rgba(7, 24, 48, 0.78) 100%
+      );
+  }
+
+  .where2-dashboard-redesign .where2-hero-content {
+    min-height: 520px;
+
+    width: 100%;
+
+    justify-content: flex-end;
+
+    padding: 32px 28px 72px;
+  }
+
+  .where2-dashboard-redesign .where2-hero-content h1,
+  .where2-dashboard-redesign .where2-hero-content h2 {
+    max-width: 100%;
+
+    font-size: clamp(2.8rem, 12vw, 4rem);
+  }
+
+  .where2-dashboard-redesign .where2-hero-description {
+    max-width: 100%;
+
+    margin-top: 19px;
+
+    font-size: 14px;
+  }
+
+  .where2-dashboard-redesign .where2-hero-button {
+    margin-top: 24px;
+  }
+
+  .where2-dashboard-redesign .where2-hero-location {
+    right: 16px;
+    bottom: 16px;
+
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   WHERE2 — HERO FINAL OVERRIDE
+   Full image + content overlay
+   ========================================================= */
+
+.where2-dashboard-redesign .where2-hero {
+  position: relative !important;
+
+  display: block !important;
+
+  width: 100% !important;
+  min-height: 500px !important;
+
+  overflow: hidden !important;
+
+  background: transparent !important;
+
+  border-radius: 20px !important;
+}
+
+
+/* ---------------------------------------------------------
+   FULL-BLEED IMAGE
+   --------------------------------------------------------- */
+
+.where2-dashboard-redesign .where2-hero-background {
+  position: absolute !important;
+
+  inset: 0 !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  min-width: 100% !important;
+  min-height: 100% !important;
+
+  display: block !important;
+
+  object-fit: cover !important;
+  object-position: center center !important;
+
+  z-index: 0 !important;
+}
+
+
+/* ---------------------------------------------------------
+   DARK READABILITY OVERLAY
+   --------------------------------------------------------- */
+
+.where2-dashboard-redesign .where2-hero-overlay {
+  position: absolute !important;
+
+  inset: 0 !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  z-index: 1 !important;
+
+  pointer-events: none !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 25, 48, 0.76) 0%,
+      rgba(8, 25, 48, 0.60) 28%,
+      rgba(8, 25, 48, 0.32) 55%,
+      rgba(8, 25, 48, 0.10) 78%,
+      rgba(8, 25, 48, 0.04) 100%
+    ) !important;
+}
+
+
+/* ---------------------------------------------------------
+   CONTENT — FLOAT ABOVE IMAGE
+   --------------------------------------------------------- */
+
+.where2-dashboard-redesign .where2-hero-content {
+  position: relative !important;
+
+  z-index: 3 !important;
+
+  width: min(620px, 100%) !important;
+
+  min-height: 500px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+
+  padding: 56px !important;
+
+  box-sizing: border-box !important;
+
+  /* IMPORTANT:
+     remove the old white content background */
+  background: transparent !important;
+
+  border: 0 !important;
+}
+
+
+/* ---------------------------------------------------------
+   EYEBROW
+   --------------------------------------------------------- */
+
+.where2-dashboard-redesign .where2-hero-eyebrow {
+  position: relative !important;
+
+  z-index: 4 !important;
+
+  margin: 0 0 20px !important;
+
+  color: rgba(255, 255, 255, 0.90) !important;
+
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.30) !important;
+}
+
+
+/* ---------------------------------------------------------
+   HEADING
+   --------------------------------------------------------- */
+
+.where2-dashboard-redesign .where2-hero-content h1,
+.where2-dashboard-redesign .where2-hero-content h2 {
+  position: relative !important;
+
+  z-index: 4 !important;
+
+  max-width: 570px !important;
+
+  margin: 0 !important;
+
+  color: #ffffff !important;
+
+  font-weight: 700 !important;
+
+  letter-spacing: -0.075em !important;
+
+  line-height: 0.94 !important;
+
+  text-shadow:
+    0 4px 22px rgba(0, 0, 0, 0.38),
+    0 1px 5px rgba(0, 0, 0, 0.30) !important;
+}
+
+
+/* ---------------------------------------------------------
+   DESCRIPTION
+   --------------------------------------------------------- */
+
+.where2-dashboard-redesign .where2-hero-description {
+  position: relative !important;
+
+  z-index: 4 !important;
+
+  max-width: 520px !important;
+
+  margin: 25px 0 0 !important;
+
+  color: rgba(255, 255, 255, 0.94) !important;
+
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.35) !important;
+}
+
+
+/* ---------------------------------------------------------
+   BUTTON
+   --------------------------------------------------------- */
+
+.where2-dashboard-redesign .where2-hero-button {
+  position: relative !important;
+
+  z-index: 5 !important;
+
+  margin-top: 30px !important;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
+
+/* ---------------------------------------------------------
+   LOCATION
+   --------------------------------------------------------- */
+
+.where2-dashboard-redesign .where2-hero-location {
+  position: absolute !important;
+
+  right: 24px !important;
+  bottom: 24px !important;
+
+  z-index: 5 !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+
+  gap: 7px !important;
+
+  padding: 9px 14px !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+
+  border-radius: 999px !important;
+
+  background: rgba(16, 24, 40, 0.70) !important;
+
+  color: #ffffff !important;
+
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.20) !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .where2-dashboard-redesign .where2-hero {
+    min-height: 520px !important;
+  }
+
+  .where2-dashboard-redesign .where2-hero-content {
+    width: 100% !important;
+
+    min-height: 520px !important;
+
+    justify-content: flex-end !important;
+
+    padding: 32px 28px 72px !important;
+  }
+
+  .where2-dashboard-redesign .where2-hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(8, 25, 48, 0.28) 0%,
+        rgba(8, 25, 48, 0.52) 48%,
+        rgba(8, 25, 48, 0.78) 100%
+      ) !important;
+  }
+
+  .where2-dashboard-redesign .where2-hero-content h1,
+  .where2-dashboard-redesign .where2-hero-content h2 {
+    font-size: clamp(2.8rem, 12vw, 4rem) !important;
+  }
+
+  .where2-dashboard-redesign .where2-hero-location {
+    right: 16px !important;
+    bottom: 16px !important;
+  }
+}
+
+/* =========================================================
+   FOCUSFLOW TASKS
+   ========================================================= */
+
+.focusflow-tasks {
+  width: min(
+    calc(100% - 48px),
+    var(--container-width, 1180px)
+  );
+  margin: 0 auto;
+  padding: 48px 0 72px;
+  color: var(--where2-text, #10295f);
+}
+
+/* ---------------------------------------------------------
+   Header
+   --------------------------------------------------------- */
+
+.focusflow-tasks-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.focusflow-tasks-header > div {
+  min-width: 0;
+}
+
+.focusflow-task-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 22px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--where2-blue, #1455f5);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.focusflow-task-back-button:hover {
+  color: var(--where2-blue-dark, #10295f);
+  transform: translateX(-2px);
+}
+
+.focusflow-task-back-button:focus-visible {
+  outline: 3px solid rgba(20, 85, 245, 0.18);
+  outline-offset: 4px;
+  border-radius: 5px;
+}
+
+.focusflow-tasks-header h2 {
+  margin: 0;
+  color: var(--where2-text, #10295f);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.focusflow-tasks-header p {
+  margin: 12px 0 0;
+  color: var(--where2-muted, #64738b);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.focusflow-tasks-header p strong {
+  color: var(--where2-text, #10295f);
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------
+   Buttons
+   --------------------------------------------------------- */
+
+.focusflow-tasks-add-button,
+.focusflow-primary-button,
+.focusflow-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+.focusflow-tasks-add-button,
+.focusflow-primary-button {
+  color: #ffffff;
+  background: var(--where2-blue, #1455f5);
+  border: 1px solid var(--where2-blue, #1455f5);
+  box-shadow: 0 8px 20px rgba(20, 85, 245, 0.16);
+}
+
+.focusflow-tasks-add-button:hover,
+.focusflow-primary-button:hover {
+  background: #1049db;
+  border-color: #1049db;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(20, 85, 245, 0.22);
+}
+
+.focusflow-secondary-button {
+  color: var(--where2-text, #10295f);
+  background: #ffffff;
+  border: 1px solid var(--where2-border, #e4eaf3);
+}
+
+.focusflow-secondary-button:hover {
+  border-color: #c8d4e5;
+  background: #f8faff;
+  transform: translateY(-1px);
+}
+
+.focusflow-tasks-add-button:focus-visible,
+.focusflow-primary-button:focus-visible,
+.focusflow-secondary-button:focus-visible {
+  outline: 3px solid rgba(20, 85, 245, 0.18);
+  outline-offset: 3px;
+}
+
+.focusflow-tasks-add-button:disabled,
+.focusflow-primary-button:disabled,
+.focusflow-secondary-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ---------------------------------------------------------
+   Error
+   --------------------------------------------------------- */
+
+.focusflow-tasks-error {
+  margin-bottom: 24px;
+  padding: 14px 16px;
+  border: 1px solid rgba(239, 91, 103, 0.25);
+  border-radius: 10px;
+  color: #b4232f;
+  background: rgba(239, 91, 103, 0.06);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ---------------------------------------------------------
+   Create Task Form
+   --------------------------------------------------------- */
+
+.focusflow-task-form {
+  margin-bottom: 28px;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid var(--where2-border, #e4eaf3);
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(16, 41, 95, 0.05);
+}
+
+.focusflow-task-form-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin-bottom: 26px;
+}
+
+.focusflow-task-form-heading > svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  padding: 9px;
+  box-sizing: content-box;
+  border-radius: 10px;
+  color: var(--where2-blue, #1455f5);
+  background: var(--where2-blue-soft, #edf3ff);
+}
+
+.focusflow-task-form-heading h3 {
+  margin: 0;
+  color: var(--where2-text, #10295f);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.focusflow-task-form-heading p {
+  margin: 5px 0 0;
+  color: var(--where2-muted, #64738b);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.focusflow-task-form > label,
+.focusflow-task-edit-fields > label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.focusflow-task-form label > span,
+.focusflow-task-edit-fields label > span {
+  color: var(--where2-text, #10295f);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.focusflow-task-form input,
+.focusflow-task-form textarea,
+.focusflow-task-edit-fields input,
+.focusflow-task-edit-fields textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d7e0ed;
+  border-radius: 10px;
+  padding: 13px 14px;
+  color: var(--where2-text, #10295f);
+  background: #ffffff;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.focusflow-task-form input,
+.focusflow-task-edit-fields input {
+  min-height: 48px;
+}
+
+.focusflow-task-form textarea,
+.focusflow-task-edit-fields textarea {
+  min-height: 105px;
+  resize: vertical;
+}
+
+.focusflow-task-form input::placeholder,
+.focusflow-task-form textarea::placeholder,
+.focusflow-task-edit-fields input::placeholder,
+.focusflow-task-edit-fields textarea::placeholder {
+  color: #91a0b5;
+}
+
+.focusflow-task-form input:focus,
+.focusflow-task-form textarea:focus,
+.focusflow-task-edit-fields input:focus,
+.focusflow-task-edit-fields textarea:focus {
+  outline: none;
+  border-color: var(--where2-blue, #1455f5);
+  box-shadow: 0 0 0 3px rgba(20, 85, 245, 0.1);
+}
+
+.focusflow-task-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* ---------------------------------------------------------
+   Loading / Empty State
+   --------------------------------------------------------- */
+
+.focusflow-tasks-state,
+.focusflow-tasks-empty {
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  box-sizing: border-box;
+  text-align: center;
+  background: #ffffff;
+  border: 1px solid var(--where2-border, #e4eaf3);
+  border-radius: 16px;
+}
+
+.focusflow-tasks-state {
+  color: var(--where2-muted, #64738b);
+}
+
+.focusflow-tasks-state p {
+  margin: 14px 0 0;
+  font-size: 14px;
+}
+
+.focusflow-tasks-empty {
+  box-shadow: 0 12px 35px rgba(16, 41, 95, 0.04);
+}
+
+.focusflow-empty-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  color: var(--where2-blue, #1455f5);
+  background: var(--where2-blue-soft, #edf3ff);
+}
+
+.focusflow-tasks-empty h3 {
+  margin: 0;
+  color: var(--where2-text, #10295f);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.focusflow-tasks-empty p {
+  max-width: 430px;
+  margin: 9px 0 24px;
+  color: var(--where2-muted, #64738b);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ---------------------------------------------------------
+   Task List
+   --------------------------------------------------------- */
+
+.focusflow-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.focusflow-task-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 84px;
+  padding: 16px 18px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid var(--where2-border, #e4eaf3);
+  border-radius: 14px;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.focusflow-task-card:hover {
+  border-color: #ccd8e8;
+  box-shadow: 0 8px 24px rgba(16, 41, 95, 0.06);
+  transform: translateY(-1px);
+}
+
+.focusflow-task-check {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: #8b9ab0;
+  background: #f5f8fc;
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.focusflow-task-check:hover {
+  color: var(--where2-blue, #1455f5);
+  background: var(--where2-blue-soft, #edf3ff);
+  transform: scale(1.05);
+}
+
+.focusflow-task-check:focus-visible {
+  outline: 3px solid rgba(20, 85, 245, 0.16);
+  outline-offset: 2px;
+}
+
+.focusflow-task-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.focusflow-task-content h3 {
+  margin: 0;
+  color: var(--where2-text, #10295f);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.focusflow-task-content p {
+  margin: 5px 0 0;
+  color: var(--where2-muted, #64738b);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.focusflow-task-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+}
+
+.focusflow-task-actions button {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--where2-border, #e4eaf3);
+  border-radius: 9px;
+  color: #71819a;
+  background: #ffffff;
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.focusflow-task-actions button:hover {
+  color: var(--where2-blue, #1455f5);
+  border-color: #c9d8ee;
+  background: var(--where2-blue-soft, #edf3ff);
+}
+
+.focusflow-task-actions button:last-child:hover {
+  color: #d64755;
+  border-color: rgba(239, 91, 103, 0.22);
+  background: rgba(239, 91, 103, 0.06);
+}
+
+.focusflow-task-actions button:focus-visible {
+  outline: 3px solid rgba(20, 85, 245, 0.14);
+  outline-offset: 2px;
+}
+
+.focusflow-task-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Completed task */
+
+.focusflow-task-card-completed {
+  background: #fbfcfe;
+}
+
+.focusflow-task-card-completed .focusflow-task-check {
+  color: #ffffff;
+  background: var(--where2-success, #18a874);
+}
+
+.focusflow-task-card-completed .focusflow-task-content h3 {
+  color: #7d8ba0;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.focusflow-task-card-completed .focusflow-task-content p {
+  color: #9aa7b8;
+}
+
+/* ---------------------------------------------------------
+   Edit Task
+   --------------------------------------------------------- */
+
+.focusflow-task-card-editing {
+  align-items: flex-start;
+  padding: 22px;
+  border-color: rgba(20, 85, 245, 0.25);
+  background: #fbfdff;
+  box-shadow: 0 10px 30px rgba(20, 85, 245, 0.07);
+}
+
+.focusflow-task-edit-icon {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  color: var(--where2-blue, #1455f5);
+  background: var(--where2-blue-soft, #edf3ff);
+}
+
+.focusflow-task-edit-fields {
+  flex: 1;
+  min-width: 0;
+}
+
+.focusflow-task-edit-fields .focusflow-task-form-actions {
+  margin-top: 4px;
+}
+
+/* ---------------------------------------------------------
+   Pagination
+   --------------------------------------------------------- */
+
+.focusflow-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.focusflow-pagination button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--where2-border, #e4eaf3);
+  border-radius: 9px;
+  color: var(--where2-text, #10295f);
+  background: #ffffff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.focusflow-pagination button:hover:not(:disabled) {
+  border-color: #c8d7eb;
+  background: var(--where2-blue-soft, #edf3ff);
+}
+
+.focusflow-pagination button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.focusflow-pagination span {
+  color: var(--where2-muted, #64738b);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------
+   Loading Animation
+   --------------------------------------------------------- */
+
+.focusflow-spin {
+  animation: focusflow-spin 0.9s linear infinite;
+}
+
+@keyframes focusflow-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .focusflow-tasks {
+    width: min(
+      calc(100% - 32px),
+      var(--container-width, 1180px)
+    );
+    padding: 32px 0 48px;
+  }
+
+  .focusflow-tasks-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .focusflow-tasks-header h2 {
+    font-size: 2.5rem;
+  }
+
+  .focusflow-tasks-add-button {
+    width: 100%;
+  }
+
+  .focusflow-task-form {
+    padding: 20px;
+  }
+
+  .focusflow-task-form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .focusflow-task-form-actions button {
+    width: 100%;
+  }
+
+  .focusflow-task-card {
+    align-items: flex-start;
+    padding: 14px;
+  }
+
+  .focusflow-task-check {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+  }
+
+  .focusflow-task-actions {
+    flex-direction: column;
+  }
+
+  .focusflow-task-card-editing {
+    padding: 16px;
+  }
+
+  .focusflow-task-edit-icon {
+    display: none;
+  }
+
+  .focusflow-tasks-empty,
+  .focusflow-tasks-state {
+    min-height: 280px;
+  }
+
+  .focusflow-pagination {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .focusflow-tasks {
+    width: min(
+      calc(100% - 24px),
+      var(--container-width, 1180px)
+    );
+  }
+
+  .focusflow-tasks-header h2 {
+    font-size: 2.2rem;
+  }
+
+  .focusflow-tasks-header p {
+    font-size: 15px;
+  }
+
+  .focusflow-task-card {
+    flex-wrap: wrap;
+  }
+
+  .focusflow-task-content {
+    width: calc(100% - 54px);
+  }
+
+  .focusflow-task-actions {
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-left: 54px;
+  }
+
+  .focusflow-pagination span {
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   TASKS PAGE — UNIFIED CONTAINER
+   ========================================================= */
+
+.focusflow-tasks {
+  width: min(calc(100% - 48px), 1280px);
+  margin: 40px auto;
+  padding: 42px;
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border: 1px solid #e1e8f2;
+  border-radius: 24px;
+
+  box-shadow:
+    0 18px 50px rgba(16, 41, 95, 0.06);
+
+  color: var(--where2-text, #10295f);
+}
+
+/* Header stays inside the container */
+
+.focusflow-tasks-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+
+  border-bottom: 1px solid #edf1f6;
+}
+
+.focusflow-tasks-header > div {
+  min-width: 0;
+}
+
+/* Back link */
+
+.focusflow-task-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin: 0 0 22px;
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  color: #1455f5;
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.focusflow-task-back-button:hover {
+  color: #10295f;
+  transform: translateX(-3px);
+}
+
+/* Heading */
+
+.focusflow-tasks-header h2 {
+  margin: 0;
+
+  color: #10295f;
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.focusflow-tasks-header p {
+  margin: 12px 0 0;
+
+  color: #64738b;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.focusflow-tasks-header p strong {
+  color: #10295f;
+}
+
+/* Add task button */
+
+.focusflow-tasks-add-button {
+  flex-shrink: 0;
+  min-height: 48px;
+  padding: 0 20px;
+
+  border: 1px solid #1455f5;
+  border-radius: 11px;
+
+  color: #ffffff;
+  background: #1455f5;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  box-shadow: 0 8px 22px rgba(20, 85, 245, 0.18);
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+.focusflow-tasks-add-button:hover {
+  background: #1049db;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(20, 85, 245, 0.24);
+}
+
+/* Empty state */
+
+.focusflow-tasks-empty {
+  min-height: 360px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 48px 24px;
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fbfdff 0%,
+      #ffffff 100%
+    );
+
+  border: 1px solid #e1e8f2;
+  border-radius: 18px;
+
+  text-align: center;
+}
+
+/* Empty icon */
+
+.focusflow-empty-icon {
+  width: 60px;
+  height: 60px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 20px;
+
+  border-radius: 17px;
+
+  color: #1455f5;
+  background: #edf3ff;
+}
+
+/* Empty heading */
+
+.focusflow-tasks-empty h3 {
+  margin: 0;
+
+  color: #10295f;
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.focusflow-tasks-empty p {
+  max-width: 460px;
+
+  margin: 10px 0 24px;
+
+  color: #64738b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* First task button */
+
+.focusflow-primary-button {
+  min-height: 48px;
+  padding: 0 20px;
+
+  border: 1px solid #1455f5;
+  border-radius: 11px;
+
+  color: #ffffff;
+  background: #1455f5;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  box-shadow: 0 8px 22px rgba(20, 85, 245, 0.16);
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+.focusflow-primary-button:hover {
+  background: #1049db;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(20, 85, 245, 0.22);
+}
+
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+
+@media (max-width: 767px) {
+  .focusflow-tasks {
+    width: calc(100% - 28px);
+    margin: 20px auto;
+    padding: 24px;
+    border-radius: 18px;
+  }
+
+  .focusflow-tasks-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .focusflow-tasks-header h2 {
+    font-size: 2.5rem;
+  }
+
+  .focusflow-tasks-add-button {
+    width: 100%;
+  }
+
+  .focusflow-tasks-empty {
+    min-height: 300px;
+    padding: 36px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .focusflow-tasks {
+    width: calc(100% - 20px);
+    margin: 12px auto;
+    padding: 20px;
+  }
+
+  .focusflow-tasks-header {
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+
+  .focusflow-tasks-header h2 {
+    font-size: 2.2rem;
+  }
+
+  .focusflow-tasks-header p {
+    font-size: 15px;
+  }
+}
+
+/* =========================================================
+   WHERE2 PROFILE / PREFERENCES
+   ========================================================= */
+
+.where2-preferences {
+  margin-top: 24px;
+  padding: 32px;
+  background: #ffffff;
+  border: 1px solid #e1e8f2;
+  border-radius: 20px;
+  box-shadow: 0 14px 40px rgba(16, 41, 95, 0.05);
+}
+
+/* Header */
+
+.where2-preferences .where2-section-heading {
+  margin-bottom: 28px;
+}
+
+.where2-preferences .where2-section-heading h2 {
+  margin: 4px 0 0;
+  color: #10295f;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+}
+
+.where2-preferences .where2-section-heading p {
+  margin-top: 8px;
+  color: #64738b;
+  line-height: 1.5;
+}
+
+/* Preference layout */
+
+.where2-preference-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Individual groups */
+
+.where2-preference-group {
+  min-width: 0;
+  margin: 0;
+  padding: 24px;
+  border: 1px solid #e1e8f2;
+  border-radius: 16px;
+  background: #fbfcfe;
+}
+
+.where2-preference-group legend {
+  padding: 0 8px;
+  color: #10295f;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Choices */
+
+.where2-choice-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.where2-choice {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-height: 44px;
+  padding: 0 15px;
+
+  border: 1px solid #dce4ef;
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #40516f;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.where2-choice:hover {
+  border-color: #1455f5;
+  color: #1455f5;
+  transform: translateY(-1px);
+}
+
+.where2-choice-active {
+  border-color: #1455f5;
+  background: #edf3ff;
+  color: #1455f5;
+}
+
+/* Priorities span full width */
+
+.where2-preference-group-full {
+  grid-column: 1 / -1;
+}
+
+/* Priority checkboxes */
+
+.where2-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.where2-checkbox input {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  accent-color: #1455f5;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .where2-preferences {
+    padding: 26px;
+  }
+
+  .where2-preference-groups {
+    grid-template-columns: 1fr;
+  }
+
+  .where2-preference-group-full {
+    grid-column: auto;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 767px) {
+  .where2-preferences {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .where2-preferences .where2-section-heading {
+    margin-bottom: 22px;
+  }
+
+  .where2-preferences .where2-section-heading h2 {
+    font-size: 2rem;
+  }
+
+  .where2-preference-group {
+    padding: 20px;
+  }
+
+  .where2-choice-row {
+    gap: 8px;
+  }
+
+  .where2-choice {
+    min-height: 42px;
+    padding-inline: 13px;
+  }
+}
+
+/* =========================================================
+   WHERE2 — SAVED CITIES CONTAINER
+   ========================================================= */
+
+.where2-saved-cities {
+  margin-top: 24px;
+  padding: 32px;
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border: 1px solid #e1e8f2;
+  border-radius: 20px;
+
+  box-shadow: 0 14px 40px rgba(16, 41, 95, 0.05);
+}
+
+/* Header */
+
+.where2-saved-cities .where2-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+
+  margin-bottom: 26px;
+}
+
+.where2-saved-cities-heading {
+  min-width: 0;
+}
+
+.where2-section-eyebrow {
+  display: block;
+  margin-bottom: 6px;
+
+  color: #4f8b68;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.where2-saved-cities-title {
+  margin: 0;
+
+  color: #10295f;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+}
+
+.where2-section-subtitle {
+  margin: 8px 0 0;
+
+  color: #64738b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* View all */
+
+.where2-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  flex-shrink: 0;
+
+  border: 0;
+  background: transparent;
+
+  color: #1455f5;
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.where2-view-all:hover {
+  color: #10295f;
+  transform: translateX(2px);
+}
+
+/* Empty state */
+
+.where2-empty-shortlist {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  min-height: 126px;
+  padding: 24px 26px;
+  box-sizing: border-box;
+
+  background: #fbfcfe;
+  border: 1px solid #e1e8f2;
+  border-radius: 16px;
+}
+
+.where2-empty-shortlist-icon {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 17px;
+
+  color: #1455f5;
+  background: #edf3ff;
+}
+
+.where2-empty-shortlist-content {
+  min-width: 0;
+}
+
+.where2-empty-shortlist-content strong {
+  display: block;
+  margin-bottom: 5px;
+
+  color: #10295f;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.where2-empty-shortlist-content p {
+  margin: 0;
+
+  color: #64738b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Saved city cards */
+
+.where2-saved-cities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.where2-saved-city-card {
+  overflow: hidden;
+
+  background: #ffffff;
+  border: 1px solid #e1e8f2;
+  border-radius: 16px;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.where2-saved-city-card:hover {
+  transform: translateY(-3px);
+  border-color: #cbd8eb;
+  box-shadow: 0 12px 30px rgba(16, 41, 95, 0.08);
+}
+
+/* Feature strip */
+
+.where2-feature-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+
+  margin-top: 20px;
+
+  overflow: hidden;
+
+  border: 1px solid #e1e8f2;
+  border-radius: 16px;
+
+  background: #fbfcfe;
+}
+
+.where2-feature-strip article {
+  min-width: 0;
+  padding: 20px;
+
+  border-right: 1px solid #e1e8f2;
+}
+
+.where2-feature-strip article:last-child {
+  border-right: 0;
+}
+
+.where2-feature-strip article > div:first-child {
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 14px;
+
+  border-radius: 11px;
+
+  color: #1455f5;
+  background: #edf3ff;
+}
+
+.where2-feature-strip h3 {
+  margin: 0 0 6px;
+
+  color: #10295f;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.where2-feature-strip p {
+  margin: 0;
+
+  color: #64738b;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .where2-feature-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .where2-feature-strip article:nth-child(3) {
+    border-right: 0;
+  }
+
+  .where2-feature-strip article:nth-child(n + 4) {
+    border-top: 1px solid #e1e8f2;
+  }
+}
+
+@media (max-width: 900px) {
+  .where2-saved-cities {
+    padding: 26px;
+  }
+
+  .where2-saved-cities-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .where2-feature-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .where2-feature-strip article:nth-child(3) {
+    border-right: 1px solid #e1e8f2;
+  }
+
+  .where2-feature-strip article:nth-child(even) {
+    border-right: 0;
+  }
+
+  .where2-feature-strip article:nth-child(n + 3) {
+    border-top: 1px solid #e1e8f2;
+  }
+}
+
+@media (max-width: 767px) {
+  .where2-saved-cities {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .where2-saved-cities .where2-section-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .where2-saved-cities-title {
+    font-size: 1.9rem;
+  }
+
+  .where2-empty-shortlist {
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .where2-saved-cities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .where2-feature-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .where2-feature-strip article,
+  .where2-feature-strip article:nth-child(3),
+  .where2-feature-strip article:nth-child(even) {
+    border-right: 0;
+    border-top: 1px solid #e1e8f2;
+  }
+
+  .where2-feature-strip article:first-child {
+    border-top: 0;
+  }
+}
+
+/* =========================================================
+   WHERE2 — CITY INTELLIGENCE REFINEMENT
+   ========================================================= */
+
+.where2-selected-dashboard {
+  margin-top: 28px;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e4eaf3;
+  border-radius: 24px;
+  box-shadow: 0 18px 50px rgba(16, 41, 95, 0.06);
+}
+
+/* ---------------------------------------------------------
+   SECTION HEADER
+   --------------------------------------------------------- */
+
+.where2-selected-dashboard-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 0 24px;
+  padding: 0 2px;
+}
+
+.where2-selected-dashboard-heading h2 {
+  margin: 5px 0 0;
+  color: #10295f;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.where2-selected-dashboard-heading > div > p:last-child {
+  margin: 8px 0 0;
+  color: #64738b;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.where2-redesign-eyebrow {
+  margin: 0;
+  color: #1455f5;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  line-height: 1.2;
+}
+
+/* ---------------------------------------------------------
+   COMPARISON BADGE
+   --------------------------------------------------------- */
+
+.where2-comparison-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 13px;
+  color: #1455f5;
+  background: #edf3ff;
+  border: 1px solid #dbe6ff;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------
+   MAIN CITY / MATCH GRID
+   --------------------------------------------------------- */
+
+.where2-intelligence-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.75fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.where2-intelligence-primary {
+  min-width: 0;
+}
+
+/* ---------------------------------------------------------
+   CURRENT WEATHER CARD
+   --------------------------------------------------------- */
+
+.where2-selected-dashboard .weather-card {
+  height: 100%;
+  min-height: 310px;
+  box-sizing: border-box;
+  padding: 26px;
+  background: #ffffff;
+  border: 1px solid #e1e8f2;
+  border-radius: 18px;
+  box-shadow: none;
+}
+
+.where2-selected-dashboard .weather-card-header {
+  align-items: flex-start;
+  margin-bottom: 22px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #edf1f6;
+}
+
+.where2-selected-dashboard .weather-card-header h2 {
+  margin: 7px 0 4px;
+  color: #10295f;
+  font-size: 1.35rem;
+  letter-spacing: -0.025em;
+}
+
+.where2-selected-dashboard .weather-condition {
+  margin: 0;
+  color: #64738b;
+  font-size: 0.82rem;
+}
+
+/* Temperature */
+
+.where2-selected-dashboard .weather-temperature-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.where2-selected-dashboard .weather-temperature {
+  color: #10295f;
+  font-size: clamp(3rem, 6vw, 4.2rem);
+  font-weight: 700;
+  letter-spacing: -0.065em;
+  line-height: 0.95;
+}
+
+.where2-selected-dashboard .weather-temperature-label {
+  color: #8a98aa;
+  font-size: 0.75rem;
+}
+
+/* Weather metrics */
+
+.where2-selected-dashboard .weather-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: auto;
+}
+
+.where2-selected-dashboard .weather-detail {
+  min-height: 58px;
+  padding: 0 18px;
+  background: transparent;
+  border: 0;
+  border-left: 1px solid #e7ecf3;
+  border-radius: 0;
+}
+
+.where2-selected-dashboard .weather-detail:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.where2-selected-dashboard .weather-detail span {
+  display: block;
+  margin-bottom: 6px;
+  color: #7b899c;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.where2-selected-dashboard .weather-detail strong {
+  color: #10295f;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------
+   WHERE2 MATCH CARD
+   --------------------------------------------------------- */
+
+.where2-match-card {
+  min-height: 310px;
+  box-sizing: border-box;
+  padding: 26px;
+  background: #f8fbff;
+  border: 1px solid #dfe8f5;
+  border-radius: 18px;
+}
+
+.where2-match-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.where2-match-card h3 {
+  margin: 8px 0 0;
+  color: #10295f;
+  font-size: 1.25rem;
+  letter-spacing: -0.025em;
+}
+
+.where2-match-score {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  place-items: center;
+  color: #18764e;
+  background: #eaf7f0;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.where2-match-card > p {
+  margin: 24px 0;
+  color: #64738b;
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.where2-match-card ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 18px 0 0;
+  border-top: 1px solid #e2e9f2;
+  list-style: none;
+}
+
+.where2-match-card li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #53647b;
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.where2-match-card li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #18a874;
+}
+
+/* ---------------------------------------------------------
+   WEATHER OUTLOOK
+   --------------------------------------------------------- */
+
+.where2-selected-dashboard .weather-section {
+  margin-top: 18px;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e1e8f2;
+  border-radius: 18px;
+}
+
+.where2-selected-dashboard .weather-card + .weather-section {
+  margin-top: 18px;
+}
+
+/* ---------------------------------------------------------
+   WEATHER FORECAST
+   --------------------------------------------------------- */
+
+.where2-selected-dashboard .weather-forecast {
+  margin-top: 18px;
+  padding: 26px;
+  background: #ffffff;
+  border: 1px solid #e1e8f2;
+  border-radius: 18px;
+  box-shadow: none;
+}
+
+.where2-selected-dashboard .weather-forecast-heading {
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.where2-selected-dashboard .weather-forecast-heading h2 {
+  margin-top: 5px;
+  color: #10295f;
+  font-size: 1.45rem;
+  letter-spacing: -0.035em;
+}
+
+.where2-selected-dashboard .weather-forecast-heading > p {
+  max-width: 360px;
+  color: #718096;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  text-align: right;
+}
+
+/* Forecast cards */
+
+.where2-selected-dashboard .forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.where2-selected-dashboard .forecast-card {
+  min-height: 210px;
+  padding: 16px 10px;
+  box-sizing: border-box;
+  background: #f8faff;
+  border: 1px solid #e5ebf4;
+  border-radius: 13px;
+  text-align: center;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.where2-selected-dashboard .forecast-card:hover {
+  transform: translateY(-3px);
+  border-color: #cbd9f5;
+  box-shadow: 0 8px 24px rgba(16, 41, 95, 0.06);
+}
+
+.where2-selected-dashboard .forecast-date {
+  margin-bottom: 8px;
+  color: #425575;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.where2-selected-dashboard .forecast-icon {
+  min-height: 72px;
+  display: grid;
+  place-items: center;
+}
+
+.where2-selected-dashboard .forecast-condition {
+  min-height: 34px;
+  margin: 4px 0 12px;
+  color: #718096;
+  font-size: 0.65rem;
+  line-height: 1.35;
+}
+
+.where2-selected-dashboard .forecast-temperatures {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 5px;
+}
+
+.where2-selected-dashboard .forecast-temperatures strong {
+  color: #10295f;
+  font-size: 1rem;
+}
+
+.where2-selected-dashboard .forecast-temperatures span {
+  color: #91a0b3;
+  font-size: 0.72rem;
+}
+
+.where2-selected-dashboard .forecast-rain {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 8px;
+  color: #8a98aa;
+  font-size: 0.62rem;
+}
+
+.where2-selected-dashboard .forecast-rain strong {
+  color: #1455f5;
+}
+
+/* Highlight first forecast day */
+
+.where2-selected-dashboard .forecast-card:first-child {
+  background: #f1f5ff;
+  border-color: #bfd0ff;
+}
+
+/* ---------------------------------------------------------
+   LOADING / ERROR
+   --------------------------------------------------------- */
+
+.where2-selected-dashboard .where2-loading-card,
+.where2-selected-dashboard .where2-error-card {
+  margin-top: 18px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e1e8f2;
+  border-radius: 16px;
+}
+
+/* ---------------------------------------------------------
+   SECONDARY INTELLIGENCE ROW
+   --------------------------------------------------------- */
+
+.where2-selected-dashboard .where2-intelligence-grid-secondary {
+  margin-top: 18px;
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------- */
+
+@media (max-width: 1050px) {
+  .where2-intelligence-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .where2-match-card {
+    min-height: auto;
+  }
+
+  .where2-selected-dashboard .forecast-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .where2-selected-dashboard {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .where2-selected-dashboard-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 18px;
+  }
+
+  .where2-selected-dashboard .weather-card,
+  .where2-match-card,
+  .where2-selected-dashboard .weather-section,
+  .where2-selected-dashboard .weather-forecast {
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  .where2-selected-dashboard .weather-card-header {
+    flex-direction: column;
+  }
+
+  .where2-selected-dashboard .weather-details {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .where2-selected-dashboard .weather-detail {
+    min-height: auto;
+    padding: 12px 0 0;
+    border-top: 1px solid #e7ecf3;
+    border-left: 0;
+  }
+
+  .where2-selected-dashboard .weather-detail:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .where2-selected-dashboard .weather-forecast-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .where2-selected-dashboard .weather-forecast-heading > p {
+    text-align: left;
+  }
+
+  .where2-selected-dashboard .forecast-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .where2-selected-dashboard {
+    margin-top: 18px;
+    padding: 14px;
+  }
+
+  .where2-selected-dashboard-heading h2 {
+    font-size: 2rem;
+  }
+
+  .where2-selected-dashboard .forecast-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .where2-selected-dashboard .forecast-card {
+    min-height: 170px;
+  }
+}
+
+/* =========================================================
+   WHERE2 — WEATHER OUTLOOK
+   ========================================================= */
+
+.where2-weather-insights {
+  margin-top: 18px;
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #e1e8f2;
+  border-radius: 20px;
+  box-shadow: 0 14px 38px rgba(16, 41, 95, 0.045);
+}
+
+/* ---------------------------------------------------------
+   HEADER
+   --------------------------------------------------------- */
+
+.where2-weather-insights-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+  align-items: end;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.where2-weather-insights-header h2 {
+  margin: 7px 0 0;
+  color: #10295f;
+  font-size: clamp(2.1rem, 4vw, 3.15rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.where2-weather-insights-description {
+  max-width: 430px;
+  margin: 0;
+  color: #64738b;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ---------------------------------------------------------
+   FOUR METRIC COLUMNS
+   --------------------------------------------------------- */
+
+.where2-weather-insights-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.where2-weather-insight {
+  min-width: 0;
+  padding: 0 28px;
+  border-left: 1px solid #e6ebf2;
+}
+
+.where2-weather-insight:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.where2-weather-insight:last-child {
+  padding-right: 0;
+}
+
+/* ---------------------------------------------------------
+   LABEL
+   --------------------------------------------------------- */
+
+.where2-weather-insight-label {
+  margin: 0 0 18px;
+  color: #10295f;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+}
+
+/* ---------------------------------------------------------
+   ICON BADGE
+   --------------------------------------------------------- */
+
+.where2-weather-insight-icon {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+  border-radius: 50%;
+}
+
+.where2-weather-insight-icon-blue {
+  color: #1455f5;
+  background: #f0f5ff;
+  border: 1px solid #dce7ff;
+}
+
+.where2-weather-insight-icon-green {
+  color: #27a463;
+  background: #eef9f1;
+  border: 1px solid #d9efdf;
+}
+
+/* ---------------------------------------------------------
+   LARGE VALUE
+   --------------------------------------------------------- */
+
+.where2-weather-insight-value {
+  display: block;
+  margin: 0;
+  color: #10295f;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------
+   DESCRIPTION
+   --------------------------------------------------------- */
+
+.where2-weather-insight-description {
+  max-width: 240px;
+  margin: 24px 0 0;
+  color: #64738b;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+/* ---------------------------------------------------------
+   HOVER
+   --------------------------------------------------------- */
+
+.where2-weather-insight-icon {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.where2-weather-insight:hover
+  .where2-weather-insight-icon {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(20, 85, 245, 0.08);
+}
+
+/* ---------------------------------------------------------
+   TABLET
+   --------------------------------------------------------- */
+
+@media (max-width: 1000px) {
+  .where2-weather-insights-header {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .where2-weather-insights-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 30px;
+  }
+
+  .where2-weather-insight:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .where2-weather-insight:nth-child(3),
+  .where2-weather-insight:nth-child(4) {
+    padding-top: 4px;
+  }
+}
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 650px) {
+  .where2-weather-insights {
+    padding: 22px;
+    border-radius: 17px;
+  }
+
+  .where2-weather-insights-header {
+    margin-bottom: 26px;
+  }
+
+  .where2-weather-insights-header h2 {
+    font-size: 2.1rem;
+  }
+
+  .where2-weather-insights-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .where2-weather-insight,
+  .where2-weather-insight:nth-child(3),
+  .where2-weather-insight:nth-child(4) {
+    padding: 0 0 26px;
+    border-left: 0;
+    border-bottom: 1px solid #e6ebf2;
+  }
+
+  .where2-weather-insight:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .where2-weather-insight-value {
+    font-size: 2.25rem;
+  }
+}
+
+/* =========================================================
+   WHERE2 WEATHER OUTLOOK
+   FINAL DESIGN
+   ========================================================= */
+
+.where2-weather-outlook {
+  width: 100%;
+  margin-top: 20px;
+  padding: 32px 26px 28px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #edf0f5;
+  box-sizing: border-box;
+}
+
+/* HEADER */
+
+.where2-weather-outlook-header {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 32px;
+}
+
+.where2-weather-outlook-title p {
+  margin: 0 0 10px;
+  color: #214071;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.where2-weather-outlook-title h2 {
+  margin: 0;
+  color: #172f68;
+  font-size: 48px;
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.where2-weather-outlook-intro {
+  max-width: 510px;
+  margin: 0 0 2px;
+  color: #65738b;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+
+/* FOUR COLUMNS */
+
+.where2-weather-outlook-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+  width: 100%;
+}
+
+
+/* INDIVIDUAL COLUMN */
+
+.where2-weather-outlook-item {
+  position: relative;
+  min-width: 0;
+  padding: 0 26px;
+  box-sizing: border-box;
+}
+
+.where2-weather-outlook-item:first-child {
+  padding-left: 0;
+}
+
+.where2-weather-outlook-item:last-child {
+  padding-right: 0;
+}
+
+
+/* VERTICAL DIVIDERS */
+
+.where2-weather-outlook-item
+  + .where2-weather-outlook-item {
+  border-left: 1px solid #e7ebf2;
+}
+
+
+/* LABEL */
+
+.where2-weather-outlook-label {
+  margin: 0 0 18px;
+  color: #172f68;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+}
+
+
+/* ICON CIRCLE */
+
+.where2-weather-outlook-icon {
+  width: 62px;
+  height: 62px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 20px;
+
+  border-radius: 50%;
+
+  box-sizing: border-box;
+}
+
+.where2-weather-outlook-icon.blue {
+  color: #2162df;
+  background: #f1f6ff;
+  border: 1px solid #dce8ff;
+}
+
+.where2-weather-outlook-icon.green {
+  color: #31a463;
+  background: #eff9f2;
+  border: 1px solid #dcefe2;
+}
+
+
+/* LARGE NUMBER */
+
+.where2-weather-outlook-value {
+  display: block;
+
+  margin: 0;
+
+  color: #172f68;
+
+  font-size: 40px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: -0.045em;
+
+  white-space: nowrap;
+}
+
+.where2-weather-outlook-value.temperature {
+  font-size: 38px;
+}
+
+
+/* DESCRIPTION */
+
+.where2-weather-outlook-description {
+  max-width: 250px;
+
+  margin: 24px 0 0;
+
+  color: #65738b;
+
+  font-size: 17px;
+
+  line-height: 1.45;
+}
+
+
+/* HOVER */
+
+.where2-weather-outlook-item {
+  transition: transform 180ms ease;
+}
+
+.where2-weather-outlook-item:hover {
+  transform: translateY(-2px);
+}
+
+.where2-weather-outlook-icon {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.where2-weather-outlook-item:hover
+  .where2-weather-outlook-icon {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(33, 98, 223, 0.08);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .where2-weather-outlook-header {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .where2-weather-outlook-title h2 {
+    font-size: 40px;
+  }
+
+  .where2-weather-outlook-intro {
+    max-width: 600px;
+  }
+
+  .where2-weather-outlook-grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 32px;
+  }
+
+  .where2-weather-outlook-item:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .where2-weather-outlook-item:nth-child(3),
+  .where2-weather-outlook-item:nth-child(4) {
+    padding-top: 4px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  .where2-weather-outlook {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .where2-weather-outlook-title h2 {
+    font-size: 34px;
+  }
+
+  .where2-weather-outlook-intro {
+    font-size: 16px;
+  }
+
+  .where2-weather-outlook-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .where2-weather-outlook-item,
+  .where2-weather-outlook-item:first-child,
+  .where2-weather-outlook-item:last-child {
+    padding: 24px 0;
+    border-left: 0;
+    border-bottom: 1px solid #e7ebf2;
+  }
+
+  .where2-weather-outlook-item:first-child {
+    padding-top: 0;
+  }
+
+  .where2-weather-outlook-item:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .where2-weather-outlook-value {
+    font-size: 36px;
+  }
+
+  .where2-weather-outlook-value.temperature {
+    font-size: 34px;
+  }
+
+}
+
+/* =========================================================
+   WHERE2 — CITY WEATHER INSIGHTS
+   REFINED CONTAINER DESIGN
+   ========================================================= */
+
+.city-weather-insights {
+  width: 100%;
+  box-sizing: border-box;
+
+  margin-top: 28px;
+  padding: 32px;
+
+  background: #ffffff;
+  border: 1px solid #e1e7f0;
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 30px rgba(16, 41, 95, 0.045);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.city-weather-insights-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.65fr);
+
+  align-items: end;
+  gap: 48px;
+
+  padding-bottom: 30px;
+}
+
+.city-weather-insights-heading .eyebrow {
+  margin: 0 0 10px;
+
+  color: #64738b;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.city-weather-insights-heading h2 {
+  margin: 0;
+
+  color: #10295f;
+
+  font-size: clamp(2.4rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1;
+
+  letter-spacing: -0.055em;
+}
+
+.city-weather-insights-heading > p {
+  max-width: 500px;
+
+  margin: 0;
+
+  color: #64738b;
+
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   INSIGHTS CONTAINER
+   ========================================================= */
+
+.weather-insights-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  width: 100%;
+
+  border-top: 1px solid #edf0f5;
+}
+
+
+/* =========================================================
+   INDIVIDUAL WEATHER CARD
+   ========================================================= */
+
+.weather-insight-card {
+  position: relative;
+
+  min-width: 0;
+  min-height: 270px;
+
+  padding: 28px 26px 24px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease;
+}
+
+
+/* vertical separators */
+
+.weather-insight-card + .weather-insight-card {
+  border-left: 1px solid #edf0f5;
+}
+
+
+/* first and last card spacing */
+
+.weather-insight-card:first-child {
+  padding-left: 4px;
+}
+
+.weather-insight-card:last-child {
+  padding-right: 4px;
+}
+
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.weather-insight-card > span {
+  display: block;
+
+  margin: 0 0 34px;
+
+  color: #10295f;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   ICON SPACE
+   ========================================================= */
+
+/*
+   Your current JSX doesn't contain icons yet.
+   This reserves the visual space for them once we
+   add them back.
+*/
+
+.weather-insight-card::before {
+  content: "";
+
+  width: 54px;
+  height: 54px;
+
+  margin-bottom: 24px;
+
+  border-radius: 50%;
+
+  background: #f1f6ff;
+  border: 1px solid #dce7ff;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   VALUES
+   ========================================================= */
+
+.weather-insight-card > strong {
+  display: block;
+
+  margin: 0;
+
+  color: #10295f;
+
+  font-size: 40px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: -0.055em;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.weather-insight-card > p {
+  max-width: 245px;
+
+  margin: auto 0 0;
+  padding-top: 22px;
+
+  color: #64738b;
+
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.weather-insight-card:hover {
+  transform: translateY(-2px);
+}
+
+.weather-insight-card:hover::before {
+  box-shadow:
+    0 8px 20px rgba(33, 98, 223, 0.08);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .city-weather-insights {
+    padding: 28px;
+  }
+
+  .city-weather-insights-heading {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .city-weather-insights-heading h2 {
+    font-size: 2.5rem;
+  }
+
+  .weather-insights-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .weather-insight-card {
+    min-height: 250px;
+  }
+
+  .weather-insight-card:nth-child(3) {
+    padding-left: 4px;
+    border-left: 0;
+    border-top: 1px solid #edf0f5;
+  }
+
+  .weather-insight-card:nth-child(4) {
+    border-top: 1px solid #edf0f5;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  .city-weather-insights {
+    margin-top: 20px;
+    padding: 24px 20px;
+
+    border-radius: 16px;
+  }
+
+  .city-weather-insights-heading {
+    padding-bottom: 24px;
+  }
+
+  .city-weather-insights-heading h2 {
+    font-size: 2rem;
+  }
+
+  .city-weather-insights-heading > p {
+    font-size: 15px;
+  }
+
+  .weather-insights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .weather-insight-card,
+  .weather-insight-card:first-child,
+  .weather-insight-card:last-child {
+    min-height: auto;
+
+    padding: 26px 0;
+
+    border-left: 0;
+    border-bottom: 1px solid #edf0f5;
+  }
+
+  .weather-insight-card:first-child {
+    padding-top: 26px;
+  }
+
+  .weather-insight-card:last-child {
+    padding-bottom: 4px;
+    border-bottom: 0;
+  }
+
+  .weather-insight-card > span {
+    margin-bottom: 24px;
+  }
+
+  .weather-insight-card > strong {
+    font-size: 36px;
+  }
+
+  .weather-insight-card > p {
+    max-width: 100%;
+    font-size: 15px;
+  }
+}
+
+/* =========================================================
+   WEATHER INSIGHT ICONS
+   ========================================================= */
+
+.weather-insight-card::before {
+  display: none;
+}
+
+.weather-insight-icon {
+  width: 54px;
+  height: 54px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 24px;
+
+  border-radius: 50%;
+
+  box-sizing: border-box;
+}
+
+.weather-insight-icon.blue {
+  color: #2162df;
+  background: #f1f6ff;
+  border: 1px solid #dce7ff;
+}
+
+.weather-insight-icon.green {
+  color: #31a463;
+  background: #eff9f2;
+  border: 1px solid #dcefe2;
+}
+
+.weather-insight-icon svg {
+  display: block;
+}
+
+
+/* =========================================================
+   ICON HOVER
+   ========================================================= */
+
+.weather-insight-icon {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.weather-insight-card:hover .weather-insight-icon {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(33, 98, 223, 0.08);
+}
+
+
+/* =========================================================
+   MOBILE ICONS
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  .weather-insight-icon {
+    width: 50px;
+    height: 50px;
+
+    margin-bottom: 20px;
+  }
+
+}
+
+/* =========================================================
+   WHERE2 — COST OF LIVING FINAL WIDTH REFINEMENT
+   ========================================================= */
+
+/*
+   When there is no comparison city, Cost of Living
+   should use the entire dashboard content width instead
+   of remaining trapped inside the 1.2fr / 0.8fr grid.
+*/
+
+.where2-intelligence-grid-secondary-full {
+  grid-template-columns: 1fr !important;
+}
+
+
+/*
+   Make the Cost of Living column itself full width.
+*/
+
+.where2-intelligence-grid-secondary-full > div:first-child {
+  width: 100%;
+  min-width: 0;
+}
+
+
+/*
+   Cost of Living outer section.
+*/
+
+.where2-intelligence-grid-secondary-full
+  .cost-of-living-section {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+/*
+   Main visual container.
+
+   This creates the centered, proportional white panel
+   from the reference design.
+*/
+
+.where2-intelligence-grid-secondary-full
+  .cost-of-living-container {
+  width: 100%;
+  max-width: none;
+
+  margin: 0;
+
+  padding: 52px 58px 48px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #e1e7f0;
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 18px 45px rgba(31, 52, 84, 0.06);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.where2-intelligence-grid-secondary-full
+  .cost-of-living-header {
+  margin-bottom: 38px;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-of-living-header .eyebrow {
+  margin: 0 0 12px;
+
+  color: #5f718d;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-of-living-header h2 {
+  max-width: 760px;
+
+  margin: 0;
+
+  color: #17233d;
+
+  font-family: "Inter", sans-serif !important;
+
+  font-size: clamp(2.5rem, 4vw, 3.8rem);
+
+  line-height: 1.04;
+
+  font-weight: 700;
+
+  letter-spacing: -0.045em;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-of-living-intro {
+  max-width: 720px;
+
+  margin: 18px 0 0;
+
+  color: #65738b;
+
+  font-size: 17px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   PRIMARY METRICS
+   ========================================================= */
+
+.where2-intelligence-grid-secondary-full
+  .cost-primary-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 22px;
+
+  width: 100%;
+
+  margin-bottom: 38px;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-primary-card {
+  min-width: 0;
+
+  min-height: 176px;
+
+  padding: 28px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #e1e7ef;
+
+  border-radius: 22px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 12px 30px rgba(31, 52, 84, 0.05);
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-primary-card-primary {
+  background: #57966d;
+
+  border-color: #57966d;
+
+  box-shadow:
+    0 14px 30px rgba(67, 137, 94, 0.16);
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-card-label {
+  display: block;
+
+  color: #5f6f87;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+
+  font-weight: 600;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-primary-card-primary
+  .cost-card-label {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-primary-value {
+  display: block;
+
+  margin-top: 42px;
+
+  color: #17233d;
+
+  font-size: clamp(2.6rem, 4vw, 3.3rem);
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  letter-spacing: -0.045em;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-primary-card-primary
+  .cost-primary-value {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   COST INSIGHT
+   ========================================================= */
+
+.where2-intelligence-grid-secondary-full
+  .cost-insight-card {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 32px;
+
+  margin-bottom: 48px;
+
+  padding: 28px 30px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #dfe6df;
+
+  border-radius: 22px;
+
+  background: #f6f9f7;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-insight-card .eyebrow {
+  margin: 0 0 10px;
+
+  color: #5f718d;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-insight-card h3 {
+  margin: 0;
+
+  color: #17233d;
+
+  font-size: 22px;
+
+  line-height: 1.25;
+
+  letter-spacing: -0.025em;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-insight-card p:not(.eyebrow) {
+  max-width: 520px;
+
+  margin: 6px 0 0;
+
+  color: #65738b;
+
+  font-size: 15px;
+
+  line-height: 1.5;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-insight-score {
+  flex: 0 0 190px;
+
+  padding: 18px 20px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #dfe5e2;
+
+  border-radius: 18px;
+
+  background: #ffffff;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-insight-score span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #718097;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-insight-score strong {
+  color: #17233d;
+
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   BREAKDOWN
+   ========================================================= */
+
+.where2-intelligence-grid-secondary-full
+  .cost-breakdown-header {
+  margin-bottom: 24px;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-breakdown-header .eyebrow {
+  margin: 0 0 10px;
+
+  color: #5f718d;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-breakdown-header h3 {
+  margin: 0;
+
+  color: #17233d;
+
+  font-size: 32px;
+
+  line-height: 1.1;
+
+  letter-spacing: -0.035em;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-breakdown-header > p:last-child {
+  margin: 8px 0 0;
+
+  color: #65738b;
+
+  font-size: 16px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   BREAKDOWN CARDS
+   ========================================================= */
+
+.where2-intelligence-grid-secondary-full
+  .cost-breakdown-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 18px;
+
+  width: 100%;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-breakdown-card {
+  min-width: 0;
+
+  min-height: 176px;
+
+  padding: 24px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #e1e7ef;
+
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 10px 26px rgba(31, 52, 84, 0.045);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-breakdown-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 16px 30px rgba(31, 52, 84, 0.08);
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-breakdown-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-breakdown-value {
+  display: block;
+
+  margin-top: 20px;
+
+  color: #17233d;
+
+  font-size: 36px;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  letter-spacing: -0.035em;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-breakdown-bar {
+  width: 100%;
+
+  height: 6px;
+
+  margin-top: 24px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #e7ebef;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-breakdown-bar span {
+  display: block;
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #57966d;
+}
+
+.where2-intelligence-grid-secondary-full
+  .cost-breakdown-card p {
+  margin: 24px 0 0;
+
+  color: #65738b;
+
+  font-size: 14px;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   DISCLAIMER
+   ========================================================= */
+
+.where2-intelligence-grid-secondary-full
+  .cost-data-note {
+  max-width: 760px;
+
+  margin: 28px 0 0;
+
+  color: #718097;
+
+  font-size: 13px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .where2-intelligence-grid-secondary-full
+    .cost-of-living-container {
+    padding: 42px 36px;
+  }
+
+  .where2-intelligence-grid-secondary-full
+    .cost-primary-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .where2-intelligence-grid-secondary-full
+    .cost-primary-card:last-child {
+    grid-column: span 2;
+  }
+
+  .where2-intelligence-grid-secondary-full
+    .cost-breakdown-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .where2-intelligence-grid-secondary-full
+    .cost-of-living-container {
+    padding: 30px 22px;
+    border-radius: 20px;
+  }
+
+  .where2-intelligence-grid-secondary-full
+    .cost-of-living-header h2 {
+    font-size: 2.35rem;
+  }
+
+  .where2-intelligence-grid-secondary-full
+    .cost-primary-grid {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .where2-intelligence-grid-secondary-full
+    .cost-primary-card:last-child {
+    grid-column: auto;
+  }
+
+  .where2-intelligence-grid-secondary-full
+    .cost-primary-card {
+    min-height: 160px;
+
+    padding: 24px;
+  }
+
+  .where2-intelligence-grid-secondary-full
+    .cost-insight-card {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 22px;
+  }
+
+  .where2-intelligence-grid-secondary-full
+    .cost-insight-score {
+    width: 100%;
+
+    flex-basis: auto;
+  }
+
+  .where2-intelligence-grid-secondary-full
+    .cost-breakdown-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .where2-intelligence-grid-secondary-full
+    .cost-breakdown-card {
+    min-height: 160px;
+  }
+}
+
+/* =========================================================
+   WHERE2 — COST OF LIVING
+   FULL-WIDTH DESKTOP LAYOUT
+   ========================================================= */
+
+.where2-intelligence-grid-secondary {
+  display: block !important;
+  width: 100% !important;
+}
+
+.where2-intelligence-grid-secondary .cost-of-living-section {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 24px 0 0 !important;
+}
+
+.where2-intelligence-grid-secondary .cost-of-living-container {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+}
+
+/* Main heading */
+
+.where2-intelligence-grid-secondary .cost-of-living-header {
+  width: 100%;
+  margin-bottom: 34px;
+}
+
+.where2-intelligence-grid-secondary .cost-of-living-header h2 {
+  max-width: 900px;
+}
+
+/* Three main metrics */
+
+.where2-intelligence-grid-secondary .cost-primary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+/* Cost insight */
+
+.where2-intelligence-grid-secondary .cost-insight-card {
+  width: 100%;
+  margin-top: 28px;
+  box-sizing: border-box;
+}
+
+/* Breakdown */
+
+.where2-intelligence-grid-secondary .cost-breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+/* Make the breakdown cards use the available width */
+
+.where2-intelligence-grid-secondary .cost-breakdown-card {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Data note */
+
+.where2-intelligence-grid-secondary .cost-data-note {
+  max-width: 900px;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .where2-intelligence-grid-secondary .cost-primary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .where2-intelligence-grid-secondary .cost-breakdown-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+  .where2-intelligence-grid-secondary .cost-primary-grid,
+  .where2-intelligence-grid-secondary .cost-breakdown-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .where2-intelligence-grid-secondary .cost-of-living-section {
+    margin-top: 16px !important;
+  }
+}
+
+/* =========================================================
+   WHERE2 — COST OF LIVING BACKGROUND CLEANUP
+   Removes the grey bands surrounding the white container
+   ========================================================= */
+
+.cost-of-living-section {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.cost-of-living-container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 42px 48px 46px;
+
+  background: #ffffff;
+
+  border: 1px solid #e1e6ef;
+  border-radius: 24px;
+
+  box-sizing: border-box;
+}
+
+/* Make the area immediately around the component white */
+.where2-selected-dashboard,
+.where2-intelligence-grid-secondary,
+.where2-intelligence-grid-secondary > *,
+.where2-selected-dashboard > * {
+  background: #ffffff;
+}
+
+/* Prevent the dashboard wrapper from creating grey bands */
+.where2-selected-dashboard {
+  background: #ffffff;
+}
+
+/* Desktop */
+@media (min-width: 1101px) {
+  .cost-of-living-section {
+    background: #ffffff;
+  }
+
+  .cost-of-living-container {
+    max-width: 1180px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1100px) {
+  .cost-of-living-container {
+    max-width: 100%;
+    padding: 36px 32px 40px;
+    border-radius: 22px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .cost-of-living-container {
+    padding: 28px 20px 32px;
+    border-radius: 18px;
+  }
+}
+
+/* =========================================================
+   WHERE2 — MOBILE SIDEBAR VISIBILITY
+   Make AI Advisor + Sidebar readable on small screens
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  /* -----------------------------------------
+     SIDEBAR CARDS
+     ----------------------------------------- */
+
+  .where2-ai-card,
+  .where2-sidebar-shortlist,
+  .where2-sidebar-preferences,
+  .where2-sidebar-match,
+  .where2-sidebar-actions {
+    width: 100%;
+    padding: 20px;
+    border-radius: 16px;
+    box-sizing: border-box;
+  }
+
+
+  /* -----------------------------------------
+     AI CITY ADVISOR
+     ----------------------------------------- */
+
+  .where2-ai-header {
+    margin-bottom: 22px;
+  }
+
+  .where2-ai-title {
+    gap: 9px;
+  }
+
+  .where2-ai-title strong {
+    font-size: 17px;
+  }
+
+  .where2-ai-title span {
+    min-height: 19px;
+    padding: 0 7px;
+    font-size: 9px;
+  }
+
+  .where2-ai-title svg:last-child {
+    width: 16px;
+    height: 16px;
+  }
+
+
+  .where2-ai-introduction {
+    margin-bottom: 20px;
+  }
+
+  .where2-ai-introduction h2 {
+    margin-bottom: 8px;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .where2-ai-introduction p {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+
+  /* -----------------------------------------
+     AI SUGGESTION BUTTONS
+     ----------------------------------------- */
+
+  .where2-ai-suggestions {
+    gap: 9px;
+  }
+
+  .where2-ai-suggestions button {
+    min-height: 42px;
+    padding: 10px 13px;
+    font-size: 12px;
+    line-height: 1.4;
+    border-radius: 10px;
+  }
+
+
+  /* -----------------------------------------
+     AI INPUT
+     ----------------------------------------- */
+
+  .where2-ai-input,
+  .where2-ai-input-wrapper {
+    min-height: 54px;
+  }
+
+  .where2-ai-input input,
+  .where2-ai-input textarea {
+    font-size: 15px;
+  }
+
+
+  /* -----------------------------------------
+     SPEAK WITH WHERE2
+     ----------------------------------------- */
+
+  .where2-ai-speak-button {
+    min-height: 46px;
+    font-size: 15px;
+  }
+
+
+  /* -----------------------------------------
+     TRUST / DISCLAIMER
+     ----------------------------------------- */
+
+  .where2-sidebar-trust {
+    padding: 5px 2px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+
+  /* -----------------------------------------
+     SIDEBAR HEADERS
+     ----------------------------------------- */
+
+  .where2-sidebar-eyebrow {
+    margin-bottom: 6px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+
+  .where2-sidebar-card-header h3 {
+    font-size: 19px;
+    line-height: 1.25;
+  }
+
+  .where2-sidebar-card-header p:last-child {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+
+  /* -----------------------------------------
+     SAVED CITIES
+     ----------------------------------------- */
+
+  .where2-sidebar-empty {
+    gap: 12px;
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .where2-sidebar-empty-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .where2-sidebar-empty strong {
+    font-size: 13px;
+  }
+
+  .where2-sidebar-empty span,
+  .where2-sidebar-empty p {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+
+  /* -----------------------------------------
+     SAVED CITY ITEMS
+     ----------------------------------------- */
+
+  .where2-sidebar-city {
+    gap: 11px;
+    padding: 12px;
+    border-radius: 11px;
+  }
+
+  .where2-sidebar-city-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    font-size: 13px;
+  }
+
+  .where2-sidebar-city-info strong {
+    font-size: 14px;
+  }
+
+  .where2-sidebar-city-info span {
+    font-size: 11px;
+  }
+
+  .where2-sidebar-link {
+    margin-top: 12px;
+    font-size: 12px;
+  }
+
+
+  /* -----------------------------------------
+     PREFERENCES
+     ----------------------------------------- */
+
+  .where2-sidebar-preference-list {
+    gap: 8px;
+  }
+
+  .where2-sidebar-preference-list > div {
+    min-height: 42px;
+    padding: 9px 12px;
+    border-radius: 10px;
+  }
+
+  .where2-sidebar-preference-list strong {
+    font-size: 12px;
+  }
+
+  .where2-sidebar-preference-list span {
+    font-size: 12px;
+  }
+
+
+  /* -----------------------------------------
+     QUICK ACTIONS
+     ----------------------------------------- */
+
+  .where2-sidebar-quick-actions {
+    gap: 0;
+  }
+
+  .where2-sidebar-quick-actions > button {
+    min-height: 62px;
+    padding: 10px 2px;
+  }
+
+  .where2-sidebar-action-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  .where2-sidebar-action-text strong {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .where2-sidebar-action-text small {
+    margin-top: 3px;
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  .where2-sidebar-quick-actions > button > svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+
+/* =========================================================
+   EXTRA SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .where2-ai-card,
+  .where2-sidebar-shortlist,
+  .where2-sidebar-preferences,
+  .where2-sidebar-match,
+  .where2-sidebar-actions {
+    padding: 18px;
+  }
+
+  .where2-ai-title strong {
+    font-size: 16px;
+  }
+
+  .where2-ai-introduction h2 {
+    font-size: 23px;
+  }
+
+  .where2-ai-introduction p {
+    font-size: 14px;
+  }
+
+  .where2-ai-suggestions button {
+    min-height: 40px;
+    font-size: 11px;
+  }
+
+  .where2-sidebar-card-header h3 {
+    font-size: 18px;
+  }
+
+  .where2-sidebar-card-header p:last-child {
+    font-size: 11px;
+  }
+
+  .where2-sidebar-action-text strong {
+    font-size: 12px;
+  }
+
+  .where2-sidebar-action-text small {
+    font-size: 10px;
+  }
+}
+
+/* =========================================================
+   WHERE2 — SIDEBAR TYPOGRAPHY REFRESH
+   Slightly larger, clearer, more readable
+   ========================================================= */
+
+/* =========================================================
+   AI CITY ADVISOR
+   ========================================================= */
+
+.where2-ai-card {
+  padding: 20px !important;
+}
+
+.where2-ai-title strong {
+  font-size: 16px !important;
+}
+
+.where2-ai-title span {
+  min-height: 19px !important;
+  padding: 0 7px !important;
+  font-size: 9px !important;
+}
+
+.where2-ai-introduction h2 {
+  font-size: 23px !important;
+  line-height: 1.2 !important;
+}
+
+.where2-ai-introduction p {
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+}
+
+/* Suggestion buttons */
+
+.where2-ai-suggestions button {
+  min-height: 42px !important;
+  padding: 9px 12px !important;
+
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+}
+
+/* AI input */
+
+.where2-ai-input input,
+.where2-ai-input textarea {
+  font-size: 14px !important;
+}
+
+.where2-ai-input input::placeholder,
+.where2-ai-input textarea::placeholder {
+  font-size: 14px !important;
+}
+
+/* Speak button */
+
+.where2-ai-speak-button {
+  min-height: 44px !important;
+  font-size: 14px !important;
+}
+
+
+/* =========================================================
+   SIDEBAR SECTION HEADINGS
+   ========================================================= */
+
+.where2-sidebar-eyebrow {
+  font-size: 9px !important;
+  letter-spacing: 0.14em !important;
+}
+
+.where2-sidebar-card-header h3 {
+  font-size: 16px !important;
+  line-height: 1.25 !important;
+}
+
+.where2-sidebar-card-header p:last-child {
+  font-size: 11px !important;
+  line-height: 1.45 !important;
+}
+
+
+/* =========================================================
+   SAVED CITIES
+   ========================================================= */
+
+.where2-sidebar-empty strong {
+  font-size: 12px !important;
+}
+
+.where2-sidebar-empty span,
+.where2-sidebar-empty p {
+  font-size: 10px !important;
+  line-height: 1.45 !important;
+}
+
+.where2-sidebar-city-info strong {
+  font-size: 12px !important;
+}
+
+.where2-sidebar-city-info span {
+  font-size: 10px !important;
+}
+
+.where2-sidebar-link {
+  font-size: 11px !important;
+}
+
+
+/* =========================================================
+   PREFERENCES
+   ========================================================= */
+
+.where2-sidebar-preference-list > div {
+  min-height: 38px !important;
+  padding: 8px 10px !important;
+}
+
+.where2-sidebar-preference-list strong,
+.where2-sidebar-preference-list span {
+  font-size: 11px !important;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+   ========================================================= */
+
+.where2-sidebar-quick-actions > button {
+  min-height: 58px !important;
+  padding: 9px 2px !important;
+}
+
+.where2-sidebar-action-text strong {
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+}
+
+.where2-sidebar-action-text small {
+  margin-top: 3px !important;
+  font-size: 9px !important;
+  line-height: 1.4 !important;
+}
+
+.where2-sidebar-action-icon {
+  width: 34px !important;
+  height: 34px !important;
+}
+
+
+/* =========================================================
+   TRUST NOTE
+   ========================================================= */
+
+.where2-sidebar-trust {
+  font-size: 10px !important;
+  line-height: 1.45 !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  .where2-ai-card,
+  .where2-sidebar-shortlist,
+  .where2-sidebar-preferences,
+  .where2-sidebar-match,
+  .where2-sidebar-actions {
+    padding: 18px !important;
+  }
+
+  .where2-ai-title strong {
+    font-size: 16px !important;
+  }
+
+  .where2-ai-introduction h2 {
+    font-size: 22px !important;
+  }
+
+  .where2-ai-introduction p {
+    font-size: 14px !important;
+  }
+
+  .where2-ai-suggestions button {
+    min-height: 42px !important;
+    font-size: 11px !important;
+  }
+
+  .where2-sidebar-card-header h3 {
+    font-size: 17px !important;
+  }
+
+  .where2-sidebar-card-header p:last-child {
+    font-size: 11px !important;
+  }
+
+  .where2-sidebar-action-text strong {
+    font-size: 12px !important;
+  }
+
+  .where2-sidebar-action-text small {
+    font-size: 10px !important;
+  }
+}
+
+
+/* =========================================================
+   EXTRA SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .where2-ai-card,
+  .where2-sidebar-shortlist,
+  .where2-sidebar-preferences,
+  .where2-sidebar-match,
+  .where2-sidebar-actions {
+    padding: 16px !important;
+  }
+
+  .where2-ai-title strong {
+    font-size: 15px !important;
+  }
+
+  .where2-ai-introduction h2 {
+    font-size: 21px !important;
+  }
+
+  .where2-ai-suggestions button {
+    font-size: 11px !important;
+  }
+
+  .where2-sidebar-card-header h3 {
+    font-size: 16px !important;
+  }
+}
+
+/* =========================================================
+   WHERE2 — QUICK ACTIONS
+   Larger and more readable
+   ========================================================= */
+
+.where2-sidebar-actions {
+  padding: 20px !important;
+  border-radius: 16px !important;
+}
+
+.where2-sidebar-actions .where2-sidebar-eyebrow {
+  font-size: 10px !important;
+  margin-bottom: 6px !important;
+}
+
+.where2-sidebar-actions .where2-sidebar-card-header h3 {
+  font-size: 19px !important;
+  line-height: 1.25 !important;
+}
+
+/* Action rows */
+
+.where2-sidebar-quick-actions > button {
+  min-height: 72px !important;
+  padding: 12px 2px !important;
+  gap: 12px !important;
+}
+
+/* Bigger icons */
+
+.where2-sidebar-action-icon {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 11px !important;
+}
+
+/* Main action text */
+
+.where2-sidebar-action-text strong {
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+}
+
+/* Supporting text */
+
+.where2-sidebar-action-text small {
+  margin-top: 4px !important;
+  font-size: 10.5px !important;
+  line-height: 1.45 !important;
+}
+
+/* Arrow */
+
+.where2-sidebar-quick-actions > button > svg {
+  width: 19px !important;
+  height: 19px !important;
+}
+
+/* More breathing room between actions */
+
+.where2-sidebar-quick-actions {
+  margin-top: 5px;
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+  .where2-sidebar-actions {
+    padding: 18px !important;
+  }
+
+  .where2-sidebar-actions .where2-sidebar-card-header h3 {
+    font-size: 18px !important;
+  }
+
+  .where2-sidebar-quick-actions > button {
+    min-height: 70px !important;
+  }
+
+  .where2-sidebar-action-icon {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .where2-sidebar-action-text strong {
+    font-size: 12px !important;
+  }
+
+  .where2-sidebar-action-text small {
+    font-size: 10px !important;
+  }
+}
+
+/* =========================================================
+   WHERE2 — CITY SEARCH
+   Button color + spacing refinement
+   ========================================================= */
+
+.city-search-input-group {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+}
+
+/* Search button */
+
+.city-search-input-group button {
+  min-width: 250px;
+  min-height: 68px;
+
+  padding: 0 28px;
+
+  border: 1px solid #1455f5;
+  border-radius: 12px;
+
+  background: #1455f5;
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  box-shadow:
+    0 8px 18px rgba(20, 85, 245, 0.14);
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.city-search-input-group button:hover {
+  background: #1047d2;
+  border-color: #1047d2;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 10px 22px rgba(20, 85, 245, 0.18);
+}
+
+.city-search-input-group button:active {
+  transform: translateY(0);
+}
+
+/* Search input */
+
+.city-search-input-group input {
+  min-height: 68px;
+
+  padding: 0 22px;
+
+  border: 1px solid #d9e2ef;
+  border-radius: 34px;
+
+  background: #ffffff;
+
+  font-size: 17px;
+  color: #10295f;
+
+  box-sizing: border-box;
+}
+
+.city-search-input-group input::placeholder {
+  color: #71819a;
+  opacity: 1;
+}
+
+.city-search-input-group input:focus {
+  outline: none;
+  border-color: #1455f5;
+
+  box-shadow:
+    0 0 0 4px rgba(20, 85, 245, 0.08);
+}
+
+/* Search container */
+
+.city-search {
+  padding: 28px 34px;
+}
+
+/* Supporting text */
+
+.city-search-input-group + p {
+  margin-top: 14px;
+  color: #64738b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .city-search-input-group {
+    gap: 12px;
+  }
+
+  .city-search-input-group button {
+    min-width: 210px;
+  }
+
+  .city-search {
+    padding: 24px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .city-search {
+    padding: 22px 20px;
+  }
+
+  .city-search-input-group {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .city-search-input-group input,
+  .city-search-input-group button {
+    width: 100%;
+  }
+
+  .city-search-input-group button {
+    min-width: 0;
+    min-height: 58px;
+    border-radius: 12px;
+  }
+
+  .city-search-input-group input {
+    min-height: 58px;
+    font-size: 16px;
+  }
+}
+
+/* =========================================================
+   WHERE2 — QUICK ACTIONS
+   Larger / clearer sidebar card
+   ========================================================= */
+
+.where2-sidebar-actions {
+  padding: 22px !important;
+  border-radius: 18px !important;
+}
+
+/* Header */
+
+.where2-sidebar-actions .where2-sidebar-eyebrow {
+  margin-bottom: 7px !important;
+  font-size: 10px !important;
+}
+
+.where2-sidebar-actions .where2-sidebar-card-header h3 {
+  font-size: 20px !important;
+  line-height: 1.25 !important;
+}
+
+/* Action rows */
+
+.where2-sidebar-quick-actions {
+  margin-top: 8px !important;
+}
+
+.where2-sidebar-quick-actions > button {
+  min-height: 72px !important;
+
+  padding: 12px 0 !important;
+
+  gap: 13px !important;
+}
+
+/* Action icons */
+
+.where2-sidebar-action-icon {
+  width: 44px !important;
+  height: 44px !important;
+
+  min-width: 44px !important;
+
+  border-radius: 12px !important;
+}
+
+/* Main text */
+
+.where2-sidebar-action-text strong {
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+}
+
+/* Supporting text */
+
+.where2-sidebar-action-text small {
+  margin-top: 4px !important;
+
+  font-size: 10px !important;
+  line-height: 1.45 !important;
+}
+
+/* Arrow */
+
+.where2-sidebar-quick-actions > button > svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  .where2-sidebar-actions {
+    padding: 20px !important;
+    border-radius: 16px !important;
+  }
+
+  .where2-sidebar-actions .where2-sidebar-card-header h3 {
+    font-size: 19px !important;
+  }
+
+  .where2-sidebar-quick-actions > button {
+    min-height: 70px !important;
+  }
+
+  .where2-sidebar-action-icon {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+  }
+
+  .where2-sidebar-action-text strong {
+    font-size: 12.5px !important;
+  }
+
+  .where2-sidebar-action-text small {
+    font-size: 10px !important;
+  }
+}
+
+/* =========================================================
+   REMOVE EXTRA SEARCH CLEAR CONTROL
+   Keep the browser's native search clear button
+   ========================================================= */
+
+.city-search-clear {
+  display: none !important;
+}

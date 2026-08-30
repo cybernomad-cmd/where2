@@ -144,7 +144,7 @@ function ProjectsPanel({ onViewTasks }) {
       await loadProjects(1);
     } catch (requestError) {
       console.error(
-        "Failed to create project:",
+        "Failed to Add destination:",
         requestError
       );
 
@@ -290,14 +290,14 @@ function ProjectsPanel({ onViewTasks }) {
       <div className="focusflow-projects-header">
         <div>
           <p className="where2-redesign-eyebrow">
-            YOUR WORKSPACE
+            YOUR BUCKET LIST
           </p>
 
-          <h2>Projects</h2>
+          <h2>My Top Priority Destinations</h2>
 
           <p>
-            Organize the goals, plans and tasks you are
-            working toward.
+            Keep track of the places you want to explore,
+            experience, or potentially call home.
           </p>
         </div>
 
@@ -317,7 +317,7 @@ function ProjectsPanel({ onViewTasks }) {
           <span>
             {showForm
               ? "Close"
-              : "New project"}
+              : "Add City"}
           </span>
         </button>
       </div>
@@ -350,11 +350,11 @@ function ProjectsPanel({ onViewTasks }) {
             <FolderKanban size={20} />
 
             <div>
-              <h3>Create a project</h3>
+              <h3>Add destination</h3>
 
               <p>
-                Give your project a clear name and
-                describe what you want to accomplish.
+                Add a place you'd like to explore,
+                experience, or potentially call home.
               </p>
             </div>
           </div>
@@ -368,7 +368,7 @@ function ProjectsPanel({ onViewTasks }) {
                 name="name"
                 value={form.name}
                 onChange={handleFormChange}
-                placeholder="e.g. Launch my portfolio"
+                placeholder="e.g. Cape Town, Nairobi, Lisbon"
                 maxLength={120}
                 required
               />
@@ -439,7 +439,7 @@ function ProjectsPanel({ onViewTasks }) {
                 <>
                   <Plus size={16} />
 
-                  Create project
+                  Add destination
                 </>
               )}
             </button>
