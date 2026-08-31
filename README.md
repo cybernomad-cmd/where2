@@ -12,8 +12,6 @@ The application brings city discovery, weather, cost of living, preferences, sav
 
 ## Live Application
 
-## Live Application
-
 **Frontend:** https://where2-4n3a.vercel.app/
 
 **Backend API:** https://where2-4tcj.onrender.com/
