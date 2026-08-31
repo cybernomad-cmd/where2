@@ -14,7 +14,7 @@ The platform allows users to search for cities, explore geographic information, 
 
 ## Live Application
 
-**Website:** where2-4n3a.vercel.app
+**Website:** [(https://where2-4n3a.vercel.app/)](https://where2-4n3a.vercel.app/)
 
 ---
 
