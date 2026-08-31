@@ -4,31 +4,31 @@
 
 > Find the place that fits your life, your income, your priorities, and the way you want to live.
 
-WHERE2 is a React-based city discovery and relocation decision platform designed to help people make more informed decisions about where they could live.
+WHERE2 is a full-stack city discovery and relocation decision platform designed to help people research, compare, and shortlist cities before making a relocation decision.
 
-Instead of searching across multiple websites for information about different cities, WHERE2 brings important factors such as location, weather, cost of living, lifestyle, and personal preferences into one experience.
-
-The platform allows users to search for cities, explore geographic information, view weather conditions and forecasts, review cost-of-living information, save cities they are considering, and evaluate locations based on their preferences.
+The application brings city discovery, weather, cost of living, preferences, saved cities, comparisons, planning, and AI-assisted guidance into one authenticated experience.
 
 ---
 
 ## Live Application
 
-**Website:** https://where2-six.vercel.app/
+**Frontend:** https://where2-six.vercel.app/
+
+**Backend API:** https://where2-4tcj.onrender.com/
 
 ---
 
 ## GitHub Repository
 
-**Repository:** https://github.com/cybernomad-cmd/where2
+https://github.com/cybernomad-cmd/where2
 
 ---
 
-## Problem Statement
+## Project Overview
 
-Choosing a city to live in or relocate to can require researching information from many different sources.
+Choosing where to live often requires researching information across several different websites and services.
 
-Users may need to separately investigate:
+A user may need to investigate:
 
 - Weather
 - Cost of living
@@ -43,25 +43,51 @@ Users may need to separately investigate:
 
 This can make the relocation decision time-consuming and difficult.
 
-WHERE2 addresses this problem by bringing relevant city information together into a single platform and helping users explore locations according to their individual preferences.
+WHERE2 addresses this problem by bringing relevant city information together into one platform and helping users evaluate locations according to their individual priorities.
+
+---
+
+## Problem Statement
+
+People considering relocation often have to gather information from multiple sources before they can confidently compare possible destinations.
+
+The fragmented process creates several challenges:
+
+- Information is distributed across different platforms.
+- Important city factors are difficult to compare consistently.
+- Users can lose track of cities they previously researched.
+- Personal priorities may not be considered when evaluating locations.
+- Moving from research to an actual plan can be difficult.
+
+WHERE2 reduces this friction by combining discovery, comparison, saving, preferences, and planning into one authenticated application.
 
 ---
 
 ## Solution
 
-WHERE2 provides a centralized platform where users can search for cities and explore information that may influence their relocation decision.
+WHERE2 provides a centralized platform where users can:
 
-The application combines location data, weather information, cost-of-living information, and user preferences to create a more convenient city discovery experience.
+1. Search for cities anywhere in the world.
+2. Explore geographic information.
+3. View current weather and forecasts.
+4. Review cost-of-living information.
+5. Set personal preferences.
+6. Compare cities.
+7. Save cities to a personal shortlist.
+8. Create and manage projects and tasks.
+9. Receive AI-assisted city guidance.
 
-Instead of manually researching several websites, users can use WHERE2 to explore important information about potential destinations from one interface.
+The goal is to reduce research time and help users make better-informed relocation decisions.
 
 ---
 
-## Key Features
+# Core Features
 
-### City Search
+## Worldwide City Search
 
-Users can search for a city and retrieve geographic information including:
+Users can search for cities around the world.
+
+The search uses geocoding data to return information such as:
 
 - City name
 - Country
@@ -69,48 +95,51 @@ Users can search for a city and retrieve geographic information including:
 - Latitude
 - Longitude
 
-The city search functionality uses geographic coordinates to connect the selected location with other services such as weather information.
+Search results are ranked to prioritize exact and relevant city matches.
 
 ---
 
-### Weather Information
+## Weather Information
 
-WHERE2 uses weather data to provide information about a selected location.
+WHERE2 retrieves weather information for selected cities using their geographic coordinates.
 
-Users can access information such as:
+Users can view:
 
 - Current temperature
 - Weather conditions
 - Feels-like temperature
 - Humidity
-- Wind information
-- Weather forecasts
+- Wind speed
+- Weather outlook
+- Multi-day forecasts
 
-Weather information is retrieved dynamically based on the selected city's geographic coordinates.
+The application also provides simplified weather interpretations to make the information easier to understand.
 
 ---
 
-### Cost of Living
+## Cost of Living
 
-The application provides cost-of-living information for supported locations.
+The cost-of-living experience provides structured estimates and indexes for supported locations.
 
-The cost-of-living section includes:
+Information may include:
 
 - Estimated monthly cost
 - Overall cost index
 - Grocery index
 - Rent index
 - Utilities index
-- Transport index
+- Transportation index
 - Region
 
-The information is displayed using structured metric cards to make the data easier to understand.
+The information is presented through organized metric cards and comparison sections.
 
 ---
 
-### Personal Preferences
+## Personal Preferences
 
-Users can provide preferences that help WHERE2 evaluate locations according to factors such as:
+Users can define priorities that influence their city evaluation.
+
+Preference categories include factors such as:
 
 - Climate
 - Lifestyle
@@ -119,58 +148,179 @@ Users can provide preferences that help WHERE2 evaluate locations according to f
 - Outdoor activities
 - Culture and entertainment
 
-This allows users to explore cities based on what matters most to them.
+These preferences help personalize the recommendation experience.
 
 ---
 
-### City Recommendations
+## City Recommendations
 
-WHERE2 includes a recommendation scoring system that evaluates locations against user preferences.
+WHERE2 includes an application-level recommendation scoring system.
 
-The recommendation logic is handled within the application rather than relying on an external AI recommendation service.
+The scoring logic evaluates available city information against user preferences to produce a city match score.
 
-The system uses available city information and user preferences to help determine whether a location may be a suitable fit.
-
----
-
-### Saved Cities
-
-Users can save cities they are considering so they can return to them later.
-
-This allows users to create a shortlist of potential destinations while exploring different locations.
+This allows users to identify locations that may align more closely with what matters to them.
 
 ---
 
-### Responsive Design
+## Saved Cities
 
-The application was designed to work across different screen sizes, including:
+Authenticated users can save cities they are considering.
+
+Saved cities create a personal shortlist that users can revisit later.
+
+Users can manage their saved-city data through the application.
+
+---
+
+## City Comparison
+
+Users can compare selected cities to better understand differences between locations.
+
+Comparison areas include available weather, cost-of-living, and other city information.
+
+---
+
+## Projects and Planning
+
+WHERE2 also supports personal planning through projects and tasks.
+
+Authenticated users can:
+
+- Create projects
+- View projects
+- Update projects
+- Delete projects
+- Create tasks
+- Update tasks
+- Complete tasks
+- Delete tasks
+
+Projects and tasks are protected by authentication and ownership rules.
+
+---
+
+## AI City Advisor
+
+The application includes an AI-assisted city guidance experience designed to help users explore relocation questions and interpret available city information.
+
+The AI City Advisor supports the broader goal of helping users make more informed relocation decisions.
+
+---
+
+## Responsive Design
+
+The frontend is designed to work across:
 
 - Mobile phones
 - Tablets
 - Laptops
 - Desktop computers
 
-Responsive layouts, flexible grids, typography adjustments, and CSS media queries are used to adapt the interface to different devices.
+Responsive layouts use flexible grids, typography scaling, spacing adjustments, and media queries to adapt the interface to different screen sizes.
 
 ---
 
-## APIs and External Services
+## Light and Dark Mode
 
-WHERE2 integrates external APIs to provide dynamic information rather than relying entirely on hardcoded data.
+WHERE2 includes a user-controlled theme toggle that allows the dashboard interface to switch between light and dark presentation.
 
-### Open-Meteo Geocoding API
+The selected theme is persisted locally so the preference can remain after a page refresh.
 
-The Open-Meteo Geocoding API is used for city and location searches.
+---
 
-When a user searches for a city, the geocoding service converts the city name into geographic information such as:
+# Authentication and Security
 
-- City name
-- Country
-- Region
-- Latitude
-- Longitude
+Authentication is implemented using Flask sessions and bcrypt password hashing.
 
-**Endpoint:**
+The application supports:
+
+- User registration
+- Secure password hashing
+- Login
+- Session creation
+- Session restoration
+- Logout
+- Protected API routes
+- Ownership authorization
+
+Passwords are never stored as plain text.
+
+Protected resources are scoped to the authenticated user, preventing users from modifying resources owned by other accounts.
+
+The Flask application also configures secure session-cookie behavior and CORS for frontend/backend communication.
+
+---
+
+# Technology Stack
+
+## Frontend
+
+- React
+- React Router
+- Vite
+- JavaScript
+- React Hooks
+- Leaflet
+- React Leaflet
+- Lucide React
+- GSAP
+
+## Backend
+
+- Python
+- Flask
+- Flask-SQLAlchemy
+- Flask-Bcrypt
+- Flask-CORS
+- SQLAlchemy
+- Gunicorn
+
+## Database
+
+- PostgreSQL
+- Psycopg2
+
+## Testing
+
+- Pytest
+
+## Deployment
+
+- Vercel — React frontend
+- Render — Flask backend
+
+## Version Control
+
+- Git
+- GitHub
+
+---
+
+# Architecture
+
+WHERE2 follows a full-stack architecture with a React frontend communicating with a Flask REST API.
 
 ```text
-https://geocoding-api.open-meteo.com/v1/search
+USER
+  |
+  v
+REACT FRONTEND
+Vite + React
+  |
+  | HTTP / JSON
+  v
+FLASK REST API
+Authentication
+Validation
+CRUD
+Authorization
+  |
+  v
+SQLALCHEMY ORM
+  |
+  v
+POSTGRESQL
+User
+SavedCity
+Project
+Task
