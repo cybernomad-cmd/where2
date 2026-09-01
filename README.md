@@ -19,7 +19,6 @@ The application brings city discovery, weather, cost of living, preferences, sav
 ---
 
 ## Project 3 Pitch / Presentation
-
 [View the WHERE2 Project 3 Pitch Presentation](https://docs.google.com/presentation/d/1YuhPvvCloV9qIm_3dyg83eqZ3Wb_QgxlxmaXDOFXotQ/edit?usp=sharing)
 
 ---
