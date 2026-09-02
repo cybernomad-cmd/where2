@@ -18,6 +18,13 @@ The application brings city discovery, weather, cost of living, preferences, sav
 
 ---
 
+## Project Presentation
+
+**Project 3 Pitch:**  
+https://docs.google.com/presentation/d/1YuhPvvCloV9qIm_3dyg83eqZ3Wb_QgxlxmaXDOFXotQ/edit?usp=sharing
+
+---
+
 ## Project Overview
 
 Choosing where to live often requires researching information across several different websites and services.
