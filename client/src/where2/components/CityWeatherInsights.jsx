@@ -1,3 +1,11 @@
+import {
+  CloudRain,
+  Sparkles,
+  Thermometer,
+  Wind,
+} from "lucide-react";
+
+
 function CityWeatherInsights({ city, weather, forecast }) {
   if (!city || !weather || !forecast) {
     return null;
@@ -138,25 +146,41 @@ function CityWeatherInsights({ city, weather, forecast }) {
     >
       <div className="city-weather-insights-heading">
         <div>
-          <p className="eyebrow">
-            Weather outlook
-          </p>
+          <p className="eyebrow">Weather outlook</p>
 
-          <h2>
-            What the weather means
-          </h2>
+          <h2>What the weather means</h2>
         </div>
 
-        <p>
-          A simple interpretation of the current
-          conditions and the week ahead in{" "}
-          {city.name}.
-        </p>
+        <div className="city-weather-insights-context">
+          <p>
+            A simple interpretation of the current
+            conditions and the week ahead in{" "}
+            {city.name}.
+          </p>
+
+          <span className="city-weather-live">
+            <span
+              className="city-weather-live-dot"
+              aria-hidden="true"
+            />
+            Live weather
+          </span>
+        </div>
       </div>
 
       <div className="weather-insights-grid">
-        <article className="weather-insight-card">
-          <span>Rain outlook</span>
+        {/* Rain */}
+        <article className="weather-insight-card weather-insight-rain">
+          <div className="weather-insight-top">
+            <div className="weather-insight-icon">
+              <CloudRain
+                size={19}
+                aria-hidden="true"
+              />
+            </div>
+
+            <span>Rain outlook</span>
+          </div>
 
           <strong>
             {highestRainProbability !== null
@@ -164,11 +188,40 @@ function CityWeatherInsights({ city, weather, forecast }) {
               : "—"}
           </strong>
 
+          {highestRainProbability !== null && (
+            <div
+              className="weather-insight-progress"
+              aria-hidden="true"
+            >
+              <span
+                style={{
+                  width: `${Math.min(
+                    Math.max(
+                      highestRainProbability,
+                      0
+                    ),
+                    100
+                  )}%`,
+                }}
+              />
+            </div>
+          )}
+
           <p>{getRainInsight()}</p>
         </article>
 
-        <article className="weather-insight-card">
-          <span>Temperature</span>
+        {/* Temperature */}
+        <article className="weather-insight-card weather-insight-temperature">
+          <div className="weather-insight-top">
+            <div className="weather-insight-icon">
+              <Thermometer
+                size={19}
+                aria-hidden="true"
+              />
+            </div>
+
+            <span>Temperature</span>
+          </div>
 
           <strong>
             {highestTemperature !== null &&
@@ -181,11 +234,28 @@ function CityWeatherInsights({ city, weather, forecast }) {
               : "—"}
           </strong>
 
+          <div
+            className="weather-insight-temperature-range"
+            aria-hidden="true"
+          >
+            <span />
+          </div>
+
           <p>{getTemperatureInsight()}</p>
         </article>
 
-        <article className="weather-insight-card">
-          <span>Wind</span>
+        {/* Wind */}
+        <article className="weather-insight-card weather-insight-wind">
+          <div className="weather-insight-top">
+            <div className="weather-insight-icon">
+              <Wind
+                size={19}
+                aria-hidden="true"
+              />
+            </div>
+
+            <span>Wind</span>
+          </div>
 
           <strong>
             {Number.isFinite(
@@ -197,11 +267,44 @@ function CityWeatherInsights({ city, weather, forecast }) {
               : "—"}
           </strong>
 
+          {Number.isFinite(
+            Number(weather.wind_speed_10m)
+          ) && (
+            <div
+              className="weather-insight-wind-meter"
+              aria-hidden="true"
+            >
+              <span
+                style={{
+                  width: `${Math.min(
+                    Math.max(
+                      Number(
+                        weather.wind_speed_10m
+                      ),
+                      0
+                    ),
+                    40
+                  ) * 2.5}%`,
+                }}
+              />
+            </div>
+          )}
+
           <p>{getWindInsight()}</p>
         </article>
 
-        <article className="weather-insight-card">
-          <span>Comfort</span>
+        {/* Comfort */}
+        <article className="weather-insight-card weather-insight-comfort">
+          <div className="weather-insight-top">
+            <div className="weather-insight-icon">
+              <Sparkles
+                size={19}
+                aria-hidden="true"
+              />
+            </div>
+
+            <span>Comfort</span>
+          </div>
 
           <strong>
             {Number.isFinite(
@@ -212,6 +315,14 @@ function CityWeatherInsights({ city, weather, forecast }) {
                 )}°C`
               : "—"}
           </strong>
+
+          <div
+            className="weather-insight-comfort-status"
+            aria-hidden="true"
+          >
+            <span />
+            <span>Comfortable</span>
+          </div>
 
           <p>{getComfortInsight()}</p>
         </article>

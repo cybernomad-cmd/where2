@@ -25068,3 +25068,3029 @@ with a compact product/dashboard experience.*/
     transition: none;
   }
 }
+
+/* =========================================================
+   WHERE2 CITY INTELLIGENCE — PREMIUM DATA LAYER
+   ========================================================= */
+
+.where2-dashboard-redesign
+  .where2-selected-dashboard {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  border: 1px solid rgba(56, 84, 180, 0.10);
+  border-radius: 28px;
+
+  background:
+    radial-gradient(
+      circle at 92% 6%,
+      rgba(91, 104, 240, 0.08),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 4% 92%,
+      rgba(44, 191, 234, 0.07),
+      transparent 26%
+    ),
+    #ffffff;
+
+  box-shadow:
+    0 20px 60px rgba(39, 55, 105, 0.08);
+}
+
+/* Subtle intelligence glow */
+.where2-dashboard-redesign
+  .where2-selected-dashboard::before {
+  content: "";
+
+  position: absolute;
+  top: -120px;
+  right: -100px;
+
+  width: 280px;
+  height: 280px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(102, 113, 240, 0.12),
+      transparent 68%
+    );
+
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Section heading */
+.where2-dashboard-redesign
+  .where2-selected-dashboard-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+
+  margin-bottom: 28px;
+}
+
+.where2-dashboard-redesign
+  .where2-selected-dashboard-heading h2 {
+  margin: 5px 0 6px;
+
+  color: var(--where2-navy);
+
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1;
+  letter-spacing: -1.8px;
+}
+
+.where2-dashboard-redesign
+  .where2-selected-dashboard-heading p:not(.where2-redesign-eyebrow) {
+  max-width: 620px;
+
+  margin: 0;
+
+  color: var(--where2-muted);
+
+  line-height: 1.6;
+}
+
+/* Comparison indicator */
+.where2-dashboard-redesign
+  .where2-comparison-pill {
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 38px;
+  padding: 8px 13px;
+
+  border: 1px solid rgba(91, 104, 239, 0.14);
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(242, 244, 255, 0.95),
+      rgba(237, 249, 255, 0.95)
+    );
+
+  color: #5c68c9;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Intelligence grid spacing */
+.where2-dashboard-redesign
+  .where2-intelligence-grid {
+  gap: 20px;
+}
+
+/* Main weather card wrapper */
+.where2-dashboard-redesign
+  .where2-intelligence-primary,
+.where2-dashboard-redesign
+  .where2-match-card,
+.where2-dashboard-redesign
+  .where2-comparison-summary {
+  position: relative;
+
+  border: 1px solid rgba(73, 91, 145, 0.10);
+  border-radius: 22px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  box-shadow:
+    0 12px 32px rgba(37, 53, 105, 0.07);
+}
+
+/* Weather card hover */
+.where2-dashboard-redesign
+  .where2-intelligence-primary:hover,
+.where2-dashboard-redesign
+  .where2-match-card:hover,
+.where2-dashboard-redesign
+  .where2-comparison-summary:hover {
+  border-color: rgba(87, 101, 220, 0.18);
+  box-shadow:
+    0 18px 42px rgba(37, 53, 105, 0.10);
+}
+
+/* Match card becomes the visual accent */
+.where2-dashboard-redesign
+  .where2-match-card {
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(91, 104, 240, 0.13),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f7f8ff 58%,
+      #f2faff
+    );
+}
+
+/* Match score */
+.where2-dashboard-redesign
+  .where2-match-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 64px;
+  height: 64px;
+
+  flex: 0 0 auto;
+
+  border-radius: 20px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #5667ef,
+      #795ae9 55%,
+      #2dbde8
+    );
+
+  box-shadow:
+    0 12px 28px rgba(89, 101, 230, 0.24);
+
+  font-size: 22px;
+  font-weight: 800;
+}
+
+/* Match reasons */
+.where2-dashboard-redesign
+  .where2-match-card li {
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.where2-dashboard-redesign
+  .where2-match-card li:hover {
+  transform: translateX(3px);
+}
+
+/* Secondary intelligence grid */
+.where2-dashboard-redesign
+  .where2-intelligence-grid-secondary {
+  margin-top: 20px;
+}
+
+/* Comparison panel */
+.where2-dashboard-redesign
+  .where2-comparison-summary {
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #fafbff
+    );
+}
+
+.where2-dashboard-redesign
+  .where2-comparison-summary-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  margin-bottom: 14px;
+
+  border-radius: 13px;
+
+  color: #5d6df0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eef0ff,
+      #eafaff
+    );
+}
+
+/* Loading state */
+.where2-dashboard-redesign
+  .where2-loading-card {
+  border: 1px solid rgba(89, 105, 174, 0.10);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      110deg,
+      #f8f9fc 8%,
+      #eef1f8 18%,
+      #f8f9fc 33%
+    );
+
+  background-size: 220% 100%;
+
+  animation:
+    where2-intelligence-loading 1.5s
+    linear infinite;
+}
+
+/* Responsive heading */
+@media (max-width: 768px) {
+  .where2-dashboard-redesign
+    .where2-selected-dashboard-heading {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .where2-dashboard-redesign
+    .where2-selected-dashboard-heading h2 {
+    font-size: 32px;
+  }
+
+  .where2-dashboard-redesign
+    .where2-comparison-pill {
+    width: fit-content;
+  }
+
+  .where2-dashboard-redesign
+    .where2-match-score {
+    width: 56px;
+    height: 56px;
+
+    border-radius: 17px;
+
+    font-size: 19px;
+  }
+}
+
+@keyframes where2-intelligence-loading {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .where2-dashboard-redesign
+    .where2-loading-card {
+    animation: none;
+  }
+
+  .where2-dashboard-redesign
+    .where2-match-card li {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   WHERE2 SAVED CITIES — PREMIUM DESTINATION CARDS
+   ========================================================= */
+
+.where2-dashboard-redesign
+  .where2-saved-cities {
+  position: relative;
+}
+
+.where2-dashboard-redesign
+  .where2-saved-cities-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    4,
+    minmax(0, 1fr)
+  );
+
+  gap: 20px;
+}
+
+/* Card */
+.where2-dashboard-redesign
+  .where2-saved-city-card {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+
+  border: 1px solid rgba(67, 84, 145, 0.10);
+  border-radius: 22px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 12px 34px rgba(39, 55, 105, 0.07);
+
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.where2-dashboard-redesign
+  .where2-saved-city-card:hover {
+  transform: translateY(-7px);
+
+  border-color:
+    rgba(91, 106, 226, 0.20);
+
+  box-shadow:
+    0 22px 46px rgba(39, 55, 105, 0.13);
+}
+
+/* Image area */
+.where2-dashboard-redesign
+  .where2-city-image {
+  position: relative;
+
+  height: 190px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eef1ff,
+      #edfaff
+    );
+}
+
+.where2-dashboard-redesign
+  .where2-city-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.6s ease,
+    filter 0.45s ease;
+}
+
+.where2-dashboard-redesign
+  .where2-saved-city-card:hover
+  .where2-city-image img {
+  transform: scale(1.07);
+
+  filter:
+    saturate(1.08)
+    contrast(1.02);
+}
+
+/* Image overlay */
+.where2-dashboard-redesign
+  .where2-city-image::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(20, 32, 66, 0.02) 25%,
+      rgba(20, 32, 66, 0.34) 100%
+    );
+
+  pointer-events: none;
+}
+
+/* Country code */
+.where2-dashboard-redesign
+  .where2-country-code {
+  position: absolute;
+
+  top: 14px;
+  left: 14px;
+
+  z-index: 2;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 40px;
+  min-height: 28px;
+
+  padding: 5px 9px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.38);
+
+  border-radius: 999px;
+
+  background:
+    rgba(22, 35, 69, 0.62);
+
+  backdrop-filter: blur(10px);
+
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/* Content */
+.where2-dashboard-redesign
+  .where2-city-card-content {
+  display: flex;
+  flex: 1;
+
+  flex-direction: column;
+
+  padding: 20px;
+}
+
+/* City title */
+.where2-dashboard-redesign
+  .where2-city-card-title h3 {
+  margin: 0 0 4px;
+
+  color: var(--where2-navy);
+
+  font-size: 21px;
+  line-height: 1.1;
+
+  letter-spacing: -0.6px;
+}
+
+.where2-dashboard-redesign
+  .where2-city-card-title p {
+  margin: 0;
+
+  color: var(--where2-muted);
+
+  font-size: 12px;
+}
+
+/* Weather */
+.where2-dashboard-redesign
+  .where2-city-weather {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-top: 24px;
+  padding-top: 18px;
+
+  border-top:
+    1px solid rgba(73, 91, 145, 0.08);
+}
+
+.where2-dashboard-redesign
+  .where2-weather-summary {
+  display: flex;
+
+  align-items: center;
+
+  min-width: 0;
+
+  gap: 10px;
+
+  color: #f2ad3d;
+}
+
+.where2-dashboard-redesign
+  .where2-weather-text {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.where2-dashboard-redesign
+  .where2-weather-text strong {
+  color: var(--where2-navy);
+
+  font-size: 18px;
+  line-height: 1;
+}
+
+.where2-dashboard-redesign
+  .where2-weather-text span {
+  max-width: 120px;
+
+  margin-top: 5px;
+
+  overflow: hidden;
+
+  color: var(--where2-muted);
+
+  font-size: 11px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Match */
+.where2-dashboard-redesign
+  .where2-match {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 4px;
+}
+
+.where2-dashboard-redesign
+  .where2-match-ring {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 46px;
+  height: 46px;
+
+  border-radius: 50%;
+
+  color: #5364dd;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #ffffff 52%,
+      transparent 53%
+    ),
+    conic-gradient(
+      #6373ed 0deg,
+      #37c5e7 260deg,
+      #e9edfa 260deg,
+      #e9edfa 360deg
+    );
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.where2-dashboard-redesign
+  .where2-match > span:last-child {
+  color: #7a869c;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* Actions */
+.where2-dashboard-redesign
+  .where2-city-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.where2-dashboard-redesign
+  .where2-view-details {
+  flex: 1;
+
+  min-height: 40px;
+
+  border: 0;
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #5268ed,
+      #745de7
+    );
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 18px rgba(82, 103, 233, 0.20);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.where2-dashboard-redesign
+  .where2-view-details:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 12px 22px rgba(82, 103, 233, 0.28);
+}
+
+.where2-dashboard-redesign
+  .where2-remove-city {
+  min-height: 40px;
+
+  padding: 0 13px;
+
+  border:
+    1px solid rgba(73, 91, 145, 0.10);
+
+  border-radius: 11px;
+
+  background: #ffffff;
+
+  color: #7a869c;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.where2-dashboard-redesign
+  .where2-remove-city:hover {
+  border-color:
+    rgba(220, 79, 79, 0.18);
+
+  background: #fff7f7;
+
+  color: #cc4c4c;
+}
+
+/* Empty state */
+.where2-dashboard-redesign
+  .where2-empty-shortlist {
+  border:
+    1px dashed rgba(73, 91, 145, 0.18);
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(248, 250, 255, 0.88),
+      rgba(243, 251, 255, 0.88)
+    );
+}
+
+/* Tablet */
+@media (max-width: 1200px) {
+  .where2-dashboard-redesign
+    .where2-saved-cities-grid {
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .where2-dashboard-redesign
+    .where2-saved-cities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .where2-dashboard-redesign
+    .where2-city-image {
+    height: 210px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .where2-dashboard-redesign
+    .where2-saved-city-card,
+  .where2-dashboard-redesign
+    .where2-city-image img,
+  .where2-dashboard-redesign
+    .where2-view-details,
+  .where2-dashboard-redesign
+    .where2-remove-city {
+    transition: none;
+  }
+
+  .where2-dashboard-redesign
+    .where2-saved-city-card:hover {
+    transform: none;
+  }
+
+  .where2-dashboard-redesign
+    .where2-saved-city-card:hover
+    .where2-city-image img {
+    transform: none;
+  }
+}
+
+/* =========================================================
+   WHERE2 CITY DETAILS — LOCATION INTELLIGENCE
+   Final visual override layer
+   ========================================================= */
+
+.where2-selected-dashboard
+  .city-details {
+  position: relative;
+  overflow: hidden;
+
+  margin-top: 24px;
+
+  border: 1px solid rgba(67, 84, 145, 0.10);
+  border-radius: 28px;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(92, 106, 240, 0.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(46, 194, 232, 0.06),
+      transparent 28%
+    ),
+    #ffffff;
+
+  box-shadow:
+    0 18px 48px rgba(37, 53, 105, 0.07);
+}
+
+/* Heading */
+.where2-selected-dashboard
+  .city-details-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.where2-selected-dashboard
+  .city-details-heading .eyebrow {
+  margin-bottom: 10px;
+
+  color: #5f70d9;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.where2-selected-dashboard
+  .city-details-heading h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin: 0;
+
+  color: var(--where2-navy);
+
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+}
+
+.where2-selected-dashboard
+  .city-details-heading > div > p:last-child {
+  max-width: 680px;
+
+  margin: 10px 0 0;
+
+  color: var(--where2-muted);
+
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+/* Country flag */
+.where2-selected-dashboard
+  .city-details-flag {
+  width: 32px;
+  height: 24px;
+
+  flex: 0 0 auto;
+
+  border-radius: 4px;
+
+  object-fit: cover;
+
+  box-shadow:
+    0 3px 10px rgba(30, 42, 75, 0.12);
+}
+
+/* Country code pill */
+.where2-selected-dashboard
+  .city-details-country-code {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 42px;
+  min-height: 30px;
+
+  padding: 6px 10px;
+
+  border: 1px solid rgba(89, 104, 220, 0.14);
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f2f4ff,
+      #eefaff
+    );
+
+  color: #596bd8;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+/* Share action */
+.where2-selected-dashboard
+  .city-details-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-top: 20px;
+}
+
+.where2-selected-dashboard
+  .city-details-actions .button {
+  min-height: 42px;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 8px 20px rgba(76, 96, 219, 0.16);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.where2-selected-dashboard
+  .city-details-actions .button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 26px rgba(76, 96, 219, 0.22);
+}
+
+/* Detail grid */
+.where2-selected-dashboard
+  .city-details-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-top: 22px;
+}
+
+/* Individual detail card */
+.where2-selected-dashboard
+  .city-detail-card {
+  position: relative;
+
+  min-width: 0;
+  min-height: 150px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px;
+
+  border: 1px solid rgba(73, 91, 145, 0.09);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f8faff
+    );
+
+  box-shadow:
+    0 8px 24px rgba(39, 55, 105, 0.045);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.where2-selected-dashboard
+  .city-detail-card:hover {
+  transform: translateY(-4px);
+
+  border-color:
+    rgba(88, 103, 221, 0.18);
+
+  box-shadow:
+    0 15px 32px rgba(39, 55, 105, 0.09);
+}
+
+/* Decorative top accent */
+.where2-selected-dashboard
+  .city-detail-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 18px;
+  right: 18px;
+
+  height: 2px;
+
+  border-radius: 0 0 999px 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #596cf0,
+      #35bee8
+    );
+
+  opacity: 0.85;
+}
+
+/* Alternate accents */
+.where2-selected-dashboard
+  .city-detail-card:nth-child(3)::before,
+.where2-selected-dashboard
+  .city-detail-card:nth-child(7)::before {
+  background:
+    linear-gradient(
+      90deg,
+      #efac45,
+      #f0ca67
+    );
+}
+
+.where2-selected-dashboard
+  .city-detail-card:nth-child(4)::before,
+.where2-selected-dashboard
+  .city-detail-card:nth-child(8)::before {
+  background:
+    linear-gradient(
+      90deg,
+      #6c59dd,
+      #a06cec
+    );
+}
+
+/* Label */
+.where2-selected-dashboard
+  .city-detail-card-label {
+  margin-bottom: 13px;
+
+  color: #7a869c;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+/* Main value */
+.where2-selected-dashboard
+  .city-detail-card strong {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  min-width: 0;
+
+  margin: 0;
+
+  color: var(--where2-navy);
+
+  font-size: 18px;
+  line-height: 1.25;
+
+  overflow-wrap: anywhere;
+}
+
+/* Secondary text */
+.where2-selected-dashboard
+  .city-detail-card small {
+  display: block;
+
+  margin-top: auto;
+  padding-top: 12px;
+
+  color: #8994a8;
+
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+/* Inline flags */
+.where2-selected-dashboard
+  .city-detail-inline-flag {
+  width: 24px;
+  height: 18px;
+
+  flex: 0 0 auto;
+
+  border-radius: 3px;
+
+  object-fit: cover;
+
+  box-shadow:
+    0 2px 7px rgba(30, 42, 75, 0.10);
+}
+
+/* Coordinates card */
+.where2-selected-dashboard
+  .city-detail-card-coordinates {
+  grid-column: span 2;
+}
+
+/* Copy coordinates */
+.where2-selected-dashboard
+  .city-details-copy-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  width: fit-content;
+
+  margin-top: 14px;
+  padding: 8px 11px;
+
+  border: 1px solid rgba(77, 95, 175, 0.12);
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: #5d6ed9;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.where2-selected-dashboard
+  .city-details-copy-button:hover {
+  transform: translateY(-1px);
+
+  border-color:
+    rgba(77, 95, 175, 0.24);
+
+  background: #f5f7ff;
+}
+
+/* Map spacing */
+.where2-selected-dashboard
+  .city-details > .page-container > :last-child {
+  margin-top: 22px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1050px) {
+  .where2-selected-dashboard
+    .city-details-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .where2-selected-dashboard
+    .city-detail-card-coordinates {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 700px) {
+  .where2-selected-dashboard
+    .city-details-heading {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .where2-selected-dashboard
+    .city-details-heading h2 {
+    font-size: 30px;
+  }
+
+  .where2-selected-dashboard
+    .city-details-actions {
+    justify-content: flex-start;
+  }
+
+  .where2-selected-dashboard
+    .city-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .where2-selected-dashboard
+    .city-detail-card-coordinates {
+    grid-column: span 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .where2-selected-dashboard
+    .city-detail-card,
+  .where2-selected-dashboard
+    .city-details-actions .button,
+  .where2-selected-dashboard
+    .city-details-copy-button {
+    transition: none;
+  }
+
+  .where2-selected-dashboard
+    .city-detail-card:hover,
+  .where2-selected-dashboard
+    .city-details-actions .button:hover,
+  .where2-selected-dashboard
+    .city-details-copy-button:hover {
+    transform: none;
+  }
+}
+
+/* =========================================================
+   WHERE2 MAP EXPLORER — PREMIUM LOCATION EXPERIENCE
+   ========================================================= */
+
+.where2-selected-dashboard
+  .city-map-section {
+  position: relative;
+  overflow: hidden;
+
+  margin-top: 24px;
+
+  border: 1px solid rgba(67, 84, 145, 0.10);
+  border-radius: 28px;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(91, 105, 240, 0.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(43, 191, 232, 0.07),
+      transparent 28%
+    ),
+    #ffffff;
+
+  box-shadow:
+    0 18px 48px rgba(37, 53, 105, 0.08);
+}
+
+/* Map header */
+.where2-selected-dashboard
+  .city-map-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.where2-selected-dashboard
+  .city-map-header .eyebrow {
+  margin-bottom: 10px;
+
+  color: #5e70d8;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.where2-selected-dashboard
+  .city-map-header h2 {
+  margin: 0;
+
+  color: var(--where2-navy);
+
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1;
+  letter-spacing: -1.7px;
+}
+
+.where2-selected-dashboard
+  .city-map-header > div:first-child > p:last-child {
+  max-width: 600px;
+
+  margin: 10px 0 0;
+
+  color: var(--where2-muted);
+
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+/* Coordinates badge */
+.where2-selected-dashboard
+  .city-map-coordinates {
+  flex: 0 0 auto;
+
+  min-width: 170px;
+
+  padding: 13px 16px;
+
+  border: 1px solid rgba(87, 104, 220, 0.12);
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f3f5ff,
+      #eefaff
+    );
+
+  box-shadow:
+    0 8px 20px rgba(48, 65, 125, 0.05);
+}
+
+.where2-selected-dashboard
+  .city-map-coordinates span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #7b879e;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.where2-selected-dashboard
+  .city-map-coordinates strong {
+  display: block;
+
+  color: #5265cf;
+
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+/* Map wrapper */
+.where2-selected-dashboard
+  .city-map-wrapper {
+  position: relative;
+
+  overflow: hidden;
+
+  margin-top: 22px;
+
+  min-height: 430px;
+
+  border: 1px solid rgba(56, 73, 132, 0.12);
+  border-radius: 22px;
+
+  background: #e9eef6;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.30),
+    0 16px 36px rgba(30, 46, 93, 0.10);
+}
+
+/* Leaflet map */
+.where2-selected-dashboard
+  .city-map {
+  width: 100%;
+  height: 430px;
+
+  z-index: 1;
+}
+
+/* Slightly soften the map */
+.where2-selected-dashboard
+  .city-map-wrapper
+  .leaflet-tile-pane {
+  filter:
+    saturate(0.88)
+    contrast(0.97);
+}
+
+/* Make controls feel integrated */
+.where2-selected-dashboard
+  .city-map-wrapper
+  .leaflet-control-zoom {
+  overflow: hidden;
+
+  border: 1px solid rgba(52, 69, 125, 0.16) !important;
+  border-radius: 12px !important;
+
+  box-shadow:
+    0 8px 20px rgba(31, 47, 91, 0.12);
+}
+
+.where2-selected-dashboard
+  .city-map-wrapper
+  .leaflet-control-zoom a {
+  width: 34px !important;
+  height: 34px !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0 !important;
+
+  color: #5366d3 !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+.where2-selected-dashboard
+  .city-map-wrapper
+  .leaflet-control-zoom a:hover {
+  color: #ffffff !important;
+  background: #5d6ee0 !important;
+}
+
+/* Attribution */
+.where2-selected-dashboard
+  .city-map-wrapper
+  .leaflet-control-attribution {
+  padding: 4px 8px;
+
+  border-radius: 8px 0 0 0;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  font-size: 9px;
+}
+
+/* Custom city marker */
+.where2-selected-dashboard
+  .city-map-marker {
+  background: transparent;
+  border: 0;
+}
+
+.where2-selected-dashboard
+  .city-map-marker-pin {
+  position: relative;
+
+  width: 32px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 18px 18px 18px 4px;
+
+  transform: rotate(-45deg);
+
+  background:
+    linear-gradient(
+      135deg,
+      #5668ee,
+      #765ce8
+    );
+
+  box-shadow:
+    0 10px 22px rgba(80, 94, 219, 0.30);
+}
+
+.where2-selected-dashboard
+  .city-map-marker-pin::before {
+  content: "";
+
+  width: 13px;
+  height: 13px;
+
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+
+  background: transparent;
+}
+
+.where2-selected-dashboard
+  .city-map-marker-pin
+  span {
+  position: absolute;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+}
+
+/* Marker pulse */
+.where2-selected-dashboard
+  .city-map-marker-pin::after {
+  content: "";
+
+  position: absolute;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+
+  background: rgba(91, 106, 235, 0.13);
+
+  transform: rotate(45deg);
+
+  animation:
+    where2-map-marker-pulse 2.6s ease-out infinite;
+}
+
+/* Popup */
+.where2-selected-dashboard
+  .leaflet-popup-content-wrapper {
+  border-radius: 14px;
+
+  box-shadow:
+    0 14px 30px rgba(34, 49, 92, 0.16);
+}
+
+.where2-selected-dashboard
+  .leaflet-popup-content {
+  margin: 13px 15px;
+
+  color: var(--where2-navy);
+
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.where2-selected-dashboard
+  .leaflet-popup-content strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-size: 13px;
+}
+
+/* Footer */
+.where2-selected-dashboard
+  .city-map-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-top: 13px;
+
+  color: #7b879c;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.where2-selected-dashboard
+  .city-map-footer span {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 28px;
+
+  padding: 5px 10px;
+
+  border: 1px solid rgba(73, 91, 145, 0.08);
+  border-radius: 999px;
+
+  background: #f8faff;
+}
+
+/* Marker animation */
+@keyframes where2-map-marker-pulse {
+  0% {
+    opacity: 0.55;
+    transform: rotate(45deg) scale(0.72);
+  }
+
+  70% {
+    opacity: 0;
+    transform: rotate(45deg) scale(1.35);
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(45deg) scale(1.35);
+  }
+}
+
+/* =========================================================
+   MAP RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+  .where2-selected-dashboard
+    .city-map-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .where2-selected-dashboard
+    .city-map-coordinates {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .where2-selected-dashboard
+    .city-map-wrapper,
+  .where2-selected-dashboard
+    .city-map {
+    height: 360px;
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 550px) {
+  .where2-selected-dashboard
+    .city-map-wrapper,
+  .where2-selected-dashboard
+    .city-map {
+    height: 300px;
+    min-height: 300px;
+  }
+
+  .where2-selected-dashboard
+    .city-map-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .where2-selected-dashboard
+    .city-map-footer span {
+    width: fit-content;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .where2-selected-dashboard
+    .city-map-marker-pin::after {
+    animation: none;
+  }
+
+  .where2-selected-dashboard
+    .city-map-wrapper
+    .leaflet-control-zoom a {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   WHERE2 MAP EXPLORER — CONTENT SPACING REFINEMENT
+   ========================================================= */
+
+.where2-selected-dashboard
+  .city-map-section {
+  padding: 0;
+}
+
+/* Give the map section its own comfortable inner spacing */
+.where2-selected-dashboard
+  .city-map-section
+  > .page-container {
+  padding: 34px 36px 28px;
+  box-sizing: border-box;
+}
+
+/* Header breathing room */
+.where2-selected-dashboard
+  .city-map-header {
+  padding: 0;
+}
+
+/* Eyebrow */
+.where2-selected-dashboard
+  .city-map-header .eyebrow {
+  margin: 0 0 12px;
+}
+
+/* Main title */
+.where2-selected-dashboard
+  .city-map-header h2 {
+  margin: 0;
+
+  line-height: 1.05;
+}
+
+/* Description */
+.where2-selected-dashboard
+  .city-map-header > div:first-child > p:last-child {
+  margin-top: 14px;
+}
+
+/* Coordinate card alignment */
+.where2-selected-dashboard
+  .city-map-coordinates {
+  margin-top: 2px;
+}
+
+/* Add a little more separation before the map */
+.where2-selected-dashboard
+  .city-map-wrapper {
+  margin-top: 28px;
+}
+
+/* Footer gets breathing room too */
+.where2-selected-dashboard
+  .city-map-footer {
+  margin-top: 16px;
+}
+
+/* Tablet */
+@media (max-width: 800px) {
+  .where2-selected-dashboard
+    .city-map-section
+    > .page-container {
+    padding: 28px 24px 24px;
+  }
+
+  .where2-selected-dashboard
+    .city-map-wrapper {
+    margin-top: 22px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+  .where2-selected-dashboard
+    .city-map-section
+    > .page-container {
+    padding: 24px 18px 20px;
+  }
+}
+
+/* =========================================================
+   WHERE2 COST INTELLIGENCE — PREMIUM FINANCIAL LAYER
+   Final override layer
+   ========================================================= */
+
+.where2-selected-dashboard
+  .cost-of-living-section {
+  position: relative;
+  overflow: hidden;
+
+  margin-top: 24px;
+
+  border: 1px solid rgba(67, 84, 145, 0.10);
+  border-radius: 28px;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(89, 105, 240, 0.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(48, 194, 226, 0.06),
+      transparent 28%
+    ),
+    #ffffff;
+
+  box-shadow:
+    0 18px 50px rgba(37, 53, 105, 0.07);
+}
+
+/* Inner breathing room */
+.where2-selected-dashboard
+  .cost-of-living-container {
+  position: relative;
+  z-index: 1;
+
+  padding: 34px 36px 30px;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.where2-selected-dashboard
+  .cost-of-living-header {
+  margin-bottom: 28px;
+}
+
+.where2-selected-dashboard
+  .cost-of-living-header .eyebrow,
+.where2-selected-dashboard
+  .cost-breakdown-header .eyebrow,
+.where2-selected-dashboard
+  .cost-insight-card .eyebrow {
+  margin: 0 0 10px;
+
+  color: #5f70d9;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.where2-selected-dashboard
+  .cost-of-living-header h2 {
+  max-width: 850px;
+
+  margin: 0;
+
+  color: var(--where2-navy);
+
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1;
+  letter-spacing: -2.2px;
+}
+
+.where2-selected-dashboard
+  .cost-of-living-intro {
+  max-width: 760px;
+
+  margin: 13px 0 0;
+
+  color: var(--where2-muted);
+
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   PRIMARY METRICS
+   ========================================================= */
+
+.where2-selected-dashboard
+  .cost-primary-grid {
+  display: grid;
+
+  grid-template-columns:
+    1.15fr
+    0.95fr
+    0.95fr;
+
+  gap: 16px;
+}
+
+/* Base card */
+.where2-selected-dashboard
+  .cost-primary-card {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 170px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 24px;
+
+  border: 1px solid rgba(73, 91, 145, 0.09);
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f8faff
+    );
+
+  box-shadow:
+    0 10px 28px rgba(39, 55, 105, 0.05);
+
+  transition:
+    transform 0.26s ease,
+    box-shadow 0.26s ease,
+    border-color 0.26s ease;
+}
+
+.where2-selected-dashboard
+  .cost-primary-card:hover {
+  transform: translateY(-5px);
+
+  border-color:
+    rgba(87, 102, 220, 0.17);
+
+  box-shadow:
+    0 18px 38px rgba(39, 55, 105, 0.10);
+}
+
+/* Monthly cost featured card */
+.where2-selected-dashboard
+  .cost-primary-card-primary {
+  border-color: transparent;
+
+  color: #ffffff;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(255, 255, 255, 0.16),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #4c9369 0%,
+      #438d63 45%,
+      #3b7957 100%
+    );
+
+  box-shadow:
+    0 18px 38px rgba(64, 133, 93, 0.20);
+}
+
+.where2-selected-dashboard
+  .cost-primary-card-primary:hover {
+  border-color: transparent;
+
+  box-shadow:
+    0 22px 44px rgba(64, 133, 93, 0.27);
+}
+
+/* Decorative glow */
+.where2-selected-dashboard
+  .cost-primary-card-primary::after {
+  content: "";
+
+  position: absolute;
+
+  width: 150px;
+  height: 150px;
+
+  top: -55px;
+  right: -45px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.16),
+      transparent 68%
+    );
+
+  pointer-events: none;
+}
+
+/* Labels */
+.where2-selected-dashboard
+  .cost-card-label {
+  position: relative;
+  z-index: 1;
+
+  color: #68758d;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.where2-selected-dashboard
+  .cost-primary-card-primary
+  .cost-card-label {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+/* Values */
+.where2-selected-dashboard
+  .cost-primary-value {
+  position: relative;
+  z-index: 1;
+
+  display: block;
+
+  margin-top: 18px;
+
+  color: var(--where2-navy);
+
+  font-size: clamp(38px, 4vw, 58px);
+  line-height: 0.95;
+
+  letter-spacing: -2.5px;
+}
+
+.where2-selected-dashboard
+  .cost-primary-card-primary
+  .cost-primary-value {
+  color: #ffffff;
+}
+
+/* Region value */
+.where2-selected-dashboard
+  .cost-primary-card:not(
+    .cost-primary-card-primary
+  )
+  .cost-primary-value {
+  max-width: 100%;
+
+  font-size: clamp(34px, 3vw, 50px);
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   COST INSIGHT
+   ========================================================= */
+
+.where2-selected-dashboard
+  .cost-insight-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-top: 18px;
+  padding: 24px 26px;
+
+  border: 1px solid rgba(83, 104, 201, 0.11);
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f7f9ff 0%,
+      #f5fbff 100%
+    );
+
+  box-shadow:
+    0 10px 26px rgba(38, 53, 105, 0.045);
+}
+
+.where2-selected-dashboard
+  .cost-insight-card
+  > div:first-child {
+  min-width: 0;
+}
+
+.where2-selected-dashboard
+  .cost-insight-card h3 {
+  margin: 0;
+
+  color: var(--where2-navy);
+
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.15;
+  letter-spacing: -0.7px;
+}
+
+.where2-selected-dashboard
+  .cost-insight-card
+  p:not(.eyebrow) {
+  max-width: 680px;
+
+  margin: 7px 0 0;
+
+  color: #718097;
+
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* Overall level badge */
+.where2-selected-dashboard
+  .cost-insight-score {
+  flex: 0 0 auto;
+
+  min-width: 170px;
+
+  padding: 14px 17px;
+
+  border: 1px solid rgba(73, 91, 145, 0.10);
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 7px 18px rgba(39, 55, 105, 0.05);
+}
+
+.where2-selected-dashboard
+  .cost-insight-score span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #7d899d;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.where2-selected-dashboard
+  .cost-insight-score strong {
+  color: #3f865f;
+
+  font-size: 16px;
+  font-weight: 800;
+}
+
+/* =========================================================
+   BREAKDOWN
+   ========================================================= */
+
+.where2-selected-dashboard
+  .cost-breakdown-header {
+  margin-top: 34px;
+  margin-bottom: 18px;
+}
+
+.where2-selected-dashboard
+  .cost-breakdown-header h3 {
+  margin: 0;
+
+  color: var(--where2-navy);
+
+  font-size: clamp(28px, 3vw, 38px);
+  line-height: 1;
+  letter-spacing: -1.5px;
+}
+
+.where2-selected-dashboard
+  .cost-breakdown-header
+  > p:last-child {
+  max-width: 650px;
+
+  margin: 10px 0 0;
+
+  color: var(--where2-muted);
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Four category cards */
+.where2-selected-dashboard
+  .cost-breakdown-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.where2-selected-dashboard
+  .cost-breakdown-card {
+  position: relative;
+
+  min-width: 0;
+
+  padding: 20px;
+
+  border: 1px solid rgba(73, 91, 145, 0.09);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f8faff
+    );
+
+  box-shadow:
+    0 8px 24px rgba(39, 55, 105, 0.045);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.where2-selected-dashboard
+  .cost-breakdown-card:hover {
+  transform: translateY(-5px);
+
+  border-color:
+    rgba(85, 101, 220, 0.18);
+
+  box-shadow:
+    0 16px 32px rgba(39, 55, 105, 0.09);
+}
+
+/* Category label + number */
+.where2-selected-dashboard
+  .cost-breakdown-top {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.where2-selected-dashboard
+  .cost-breakdown-top
+  .cost-card-label {
+  padding-top: 5px;
+}
+
+.where2-selected-dashboard
+  .cost-breakdown-value {
+  color: var(--where2-navy);
+
+  font-size: 34px;
+  line-height: 1;
+
+  letter-spacing: -1.5px;
+}
+
+/* Progress track */
+.where2-selected-dashboard
+  .cost-breakdown-bar {
+  position: relative;
+
+  height: 7px;
+
+  overflow: hidden;
+
+  margin-top: 24px;
+
+  border-radius: 999px;
+
+  background: #e7ebf1;
+}
+
+/* Progress fill */
+.where2-selected-dashboard
+  .cost-breakdown-bar span {
+  display: block;
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #4b936a,
+      #5aac7e
+    );
+
+  box-shadow:
+    0 2px 8px rgba(76, 145, 105, 0.15);
+
+  transition:
+    width 0.8s ease;
+}
+
+/* Category variation */
+.where2-selected-dashboard
+  .cost-breakdown-card:nth-child(2)
+  .cost-breakdown-bar span {
+  background:
+    linear-gradient(
+      90deg,
+      #5d6ee2,
+      #7a60e9
+    );
+}
+
+.where2-selected-dashboard
+  .cost-breakdown-card:nth-child(3)
+  .cost-breakdown-bar span {
+  background:
+    linear-gradient(
+      90deg,
+      #5e7fe0,
+      #48bde7
+    );
+}
+
+.where2-selected-dashboard
+  .cost-breakdown-card:nth-child(4)
+  .cost-breakdown-bar span {
+  background:
+    linear-gradient(
+      90deg,
+      #d59c43,
+      #edbe60
+    );
+}
+
+/* Description */
+.where2-selected-dashboard
+  .cost-breakdown-card
+  > p {
+  margin: 16px 0 0;
+
+  color: #7c899e;
+
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   DATA NOTE
+   ========================================================= */
+
+.where2-selected-dashboard
+  .cost-data-note {
+  max-width: 920px;
+
+  margin: 22px 0 0;
+
+  color: #8792a5;
+
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .where2-selected-dashboard
+    .cost-primary-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .where2-selected-dashboard
+    .cost-primary-card-primary {
+    grid-column: span 2;
+  }
+
+  .where2-selected-dashboard
+    .cost-breakdown-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .where2-selected-dashboard
+    .cost-of-living-container {
+    padding: 28px 22px 24px;
+  }
+
+  .where2-selected-dashboard
+    .cost-primary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .where2-selected-dashboard
+    .cost-primary-card-primary {
+    grid-column: span 1;
+  }
+
+  .where2-selected-dashboard
+    .cost-insight-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .where2-selected-dashboard
+    .cost-insight-score {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .where2-selected-dashboard
+    .cost-breakdown-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .where2-selected-dashboard
+    .cost-primary-card,
+  .where2-selected-dashboard
+    .cost-insight-card,
+  .where2-selected-dashboard
+    .cost-breakdown-card,
+  .where2-selected-dashboard
+    .cost-breakdown-bar span {
+    transition: none;
+  }
+
+  .where2-selected-dashboard
+    .cost-primary-card:hover,
+  .where2-selected-dashboard
+    .cost-breakdown-card:hover {
+    transform: none;
+  }
+}
+
+/* =========================================================
+   WHERE2 WEATHER INTELLIGENCE — ENHANCED PRESENTATION
+   ========================================================= */
+
+.where2-selected-dashboard
+  .city-weather-insights {
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid rgba(67, 84, 145, 0.10);
+  border-radius: 28px;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(87, 105, 240, 0.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(44, 194, 229, 0.07),
+      transparent 28%
+    ),
+    #ffffff;
+
+  box-shadow:
+    0 18px 48px rgba(37, 53, 105, 0.07);
+}
+
+/* Heading */
+.where2-selected-dashboard
+  .city-weather-insights-heading {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+.where2-selected-dashboard
+  .city-weather-insights-heading h2 {
+  max-width: 560px;
+
+  margin: 0;
+
+  color: var(--where2-navy);
+
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 0.98;
+  letter-spacing: -2.4px;
+}
+
+.where2-selected-dashboard
+  .city-weather-insights-heading
+  .eyebrow {
+  margin: 0 0 11px;
+
+  color: #5d70d8;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+/* Right-side context */
+.where2-selected-dashboard
+  .city-weather-insights-context {
+  display: flex;
+
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 13px;
+
+  max-width: 430px;
+}
+
+.where2-selected-dashboard
+  .city-weather-insights-context > p {
+  margin: 0;
+
+  color: var(--where2-muted);
+
+  font-size: 14px;
+  line-height: 1.65;
+
+  text-align: right;
+}
+
+/* Live indicator */
+.where2-selected-dashboard
+  .city-weather-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  width: fit-content;
+
+  padding: 7px 11px;
+
+  border: 1px solid rgba(71, 151, 104, 0.14);
+  border-radius: 999px;
+
+  color: #4a8b66;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f3fbf6,
+      #eefaf8
+    );
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.city-weather-live-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #50a976;
+
+  box-shadow:
+    0 0 0 4px rgba(80, 169, 118, 0.10);
+
+  animation:
+    where2-weather-live-pulse 2.4s
+    ease-in-out infinite;
+}
+
+/* =========================================================
+   WEATHER CARDS
+   ========================================================= */
+
+.where2-selected-dashboard
+  .weather-insights-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  overflow: hidden;
+
+  margin-top: 32px;
+
+  border: 1px solid rgba(73, 91, 145, 0.08);
+  border-radius: 21px;
+
+  background: rgba(255, 255, 255, 0.88);
+}
+
+/* Base card */
+.where2-selected-dashboard
+  .weather-insight-card {
+  position: relative;
+
+  min-height: 245px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 27px 25px;
+
+  border-right: 1px solid rgba(73, 91, 145, 0.08);
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #fafbfe
+    );
+
+  transition:
+    transform 0.26s ease,
+    background 0.26s ease,
+    box-shadow 0.26s ease;
+}
+
+.where2-selected-dashboard
+  .weather-insight-card:last-child {
+  border-right: 0;
+}
+
+/* Accent bar */
+.where2-selected-dashboard
+  .weather-insight-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #45a9e9,
+      #5f70e6
+    );
+}
+
+.where2-selected-dashboard
+  .weather-insight-temperature::before {
+  background:
+    linear-gradient(
+      90deg,
+      #efa83d,
+      #f2c45e
+    );
+}
+
+.where2-selected-dashboard
+  .weather-insight-wind::before {
+  background:
+    linear-gradient(
+      90deg,
+      #5f6ee3,
+      #8a68e9
+    );
+}
+
+.where2-selected-dashboard
+  .weather-insight-comfort::before {
+  background:
+    linear-gradient(
+      90deg,
+      #51a477,
+      #70c28e
+    );
+}
+
+/* Top row */
+.where2-selected-dashboard
+  .weather-insight-top {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 24px;
+}
+
+.where2-selected-dashboard
+  .weather-insight-top > span {
+  color: #60708a;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+/* Icon */
+.where2-selected-dashboard
+  .weather-insight-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  color: #4d9fdc;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eef8ff,
+      #eef3ff
+    );
+
+  box-shadow:
+    0 6px 15px rgba(67, 107, 181, 0.07);
+}
+
+.where2-selected-dashboard
+  .weather-insight-temperature
+  .weather-insight-icon {
+  color: #e7a13b;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff8ea,
+      #fff4dc
+    );
+}
+
+.where2-selected-dashboard
+  .weather-insight-wind
+  .weather-insight-icon {
+  color: #6d61dd;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f3f0ff,
+      #eef1ff
+    );
+}
+
+.where2-selected-dashboard
+  .weather-insight-comfort
+  .weather-insight-icon {
+  color: #4e9a70;
+
+  background:
+    linear-gradient(
+      135deg,
+      #effbf4,
+      #eafaf8
+    );
+}
+
+/* Main value */
+.where2-selected-dashboard
+  .weather-insight-card
+  > strong {
+  display: block;
+
+  margin: 0;
+
+  color: var(--where2-navy);
+
+  font-size: clamp(34px, 3vw, 46px);
+  line-height: 1;
+
+  letter-spacing: -2px;
+
+  transition:
+    transform 0.25s ease;
+}
+
+/* Supporting description */
+.where2-selected-dashboard
+  .weather-insight-card
+  > p {
+  max-width: 260px;
+
+  margin:
+    auto
+    0
+    0;
+
+  color: #6e7b91;
+
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   PROGRESS INDICATORS
+   ========================================================= */
+
+.where2-selected-dashboard
+  .weather-insight-progress,
+.where2-selected-dashboard
+  .weather-insight-wind-meter {
+  width: 100%;
+
+  height: 6px;
+
+  overflow: hidden;
+
+  margin-top: 20px;
+
+  border-radius: 999px;
+
+  background: #e9edf3;
+}
+
+.where2-selected-dashboard
+  .weather-insight-progress > span,
+.where2-selected-dashboard
+  .weather-insight-wind-meter > span {
+  display: block;
+
+  width: 0;
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #49a9e8,
+      #6271e5
+    );
+
+  animation:
+    where2-weather-bar-grow 1s
+    0.15s ease-out forwards;
+}
+
+.where2-selected-dashboard
+  .weather-insight-wind-meter > span {
+  background:
+    linear-gradient(
+      90deg,
+      #6e63df,
+      #9a73e9
+    );
+}
+
+/* Temperature range */
+.where2-selected-dashboard
+  .weather-insight-temperature-range {
+  position: relative;
+
+  height: 6px;
+
+  margin-top: 20px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #6bbbe9 0%,
+      #9fdcda 38%,
+      #f1cf6b 72%,
+      #ee9c44 100%
+    );
+}
+
+.where2-selected-dashboard
+  .weather-insight-temperature-range
+  span {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 12px;
+  height: 12px;
+
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+
+  background: #5c70df;
+
+  box-shadow:
+    0 3px 10px rgba(81, 99, 209, 0.24);
+
+  transform:
+    translate(-50%, -50%);
+}
+
+/* Comfort status */
+.where2-selected-dashboard
+  .weather-insight-comfort-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-top: 20px;
+}
+
+.where2-selected-dashboard
+  .weather-insight-comfort-status
+  > span:first-child {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #54a578;
+}
+
+.where2-selected-dashboard
+  .weather-insight-comfort-status
+  > span:last-child {
+  color: #4e936b;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+/* =========================================================
+   CARD INTERACTION
+   ========================================================= */
+
+.where2-selected-dashboard
+  .weather-insight-card:hover {
+  z-index: 2;
+
+  transform: translateY(-5px);
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #f6f8ff
+    );
+
+  box-shadow:
+    0 17px 34px rgba(38, 54, 105, 0.10);
+}
+
+.where2-selected-dashboard
+  .weather-insight-card:hover
+  > strong {
+  transform: translateX(2px);
+}
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+@keyframes where2-weather-bar-grow {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+@keyframes where2-weather-live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.55;
+    transform: scale(0.82);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .where2-selected-dashboard
+    .weather-insights-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .where2-selected-dashboard
+    .weather-insight-card:nth-child(2) {
+    border-right: 0;
+  }
+
+  .where2-selected-dashboard
+    .weather-insight-card:nth-child(-n + 2) {
+    border-bottom:
+      1px solid rgba(73, 91, 145, 0.08);
+  }
+}
+
+@media (max-width: 720px) {
+  .where2-selected-dashboard
+    .city-weather-insights-heading {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 18px;
+  }
+
+  .where2-selected-dashboard
+    .city-weather-insights-context {
+    align-items: flex-start;
+  }
+
+  .where2-selected-dashboard
+    .city-weather-insights-context
+    > p {
+    text-align: left;
+  }
+
+  .where2-selected-dashboard
+    .weather-insights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .where2-selected-dashboard
+    .weather-insight-card {
+    min-height: 205px;
+
+    border-right: 0;
+    border-bottom:
+      1px solid rgba(73, 91, 145, 0.08);
+  }
+
+  .where2-selected-dashboard
+    .weather-insight-card:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .where2-selected-dashboard
+    .city-weather-live-dot,
+  .where2-selected-dashboard
+    .weather-insight-progress > span,
+  .where2-selected-dashboard
+    .weather-insight-wind-meter > span {
+    animation: none;
+  }
+
+  .where2-selected-dashboard
+    .weather-insight-card {
+    transition: none;
+  }
+
+  .where2-selected-dashboard
+    .weather-insight-card:hover {
+    transform: none;
+  }
+}
