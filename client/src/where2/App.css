@@ -28094,3 +28094,802 @@ with a compact product/dashboard experience.*/
     transform: none;
   }
 }
+
+/* =========================================================
+   WHERE2 DISCOVER — SEARCH BAR REFINEMENT
+   ========================================================= */
+
+.where2-dashboard-redesign
+  .city-search-form {
+  padding: 26px 28px;
+}
+
+/* Keep the search controls visually balanced */
+.where2-dashboard-redesign
+  .city-search-input-group {
+  grid-template-columns: minmax(0, 1fr) 180px;
+  align-items: stretch;
+}
+
+/* Search field */
+.where2-dashboard-redesign
+  .city-search-input-wrapper {
+  min-height: 58px;
+
+  box-sizing: border-box;
+}
+
+/* Search icon */
+.where2-dashboard-redesign
+  .city-search-input-icon {
+  width: 20px;
+  height: 20px;
+
+  margin-left: 18px;
+
+  flex: 0 0 auto;
+
+  color: #6072dd;
+}
+
+/* Input text */
+.where2-dashboard-redesign
+  .city-search-input-wrapper
+  input {
+  box-sizing: border-box;
+
+  min-height: 56px;
+
+  padding:
+    0 42px
+    0 10px;
+
+  font-size: 15px;
+}
+
+/* Keep clear button tucked into the field */
+.where2-dashboard-redesign
+  .city-search-clear {
+  right: 10px;
+
+  width: 30px;
+  height: 30px;
+}
+
+/* Search button */
+.where2-dashboard-redesign
+  .city-search-submit {
+  width: 180px;
+  min-width: 180px;
+  min-height: 58px;
+
+  padding: 0 20px;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #5369ee 0%,
+      #735ce6 58%,
+      #3bbde5 100%
+    );
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  box-shadow:
+    0 10px 22px rgba(79, 99, 226, 0.20);
+}
+
+/* Prevent the button from becoming overly large */
+.where2-dashboard-redesign
+  .city-search-submit
+  span {
+  white-space: nowrap;
+}
+
+/* Better focus state */
+.where2-dashboard-redesign
+  .city-search-input-wrapper:focus-within {
+  border-color:
+    rgba(82, 103, 232, 0.36);
+
+  box-shadow:
+    0 0 0 4px rgba(91, 105, 233, 0.07),
+    0 10px 24px rgba(39, 55, 105, 0.08);
+}
+
+/* Tablet */
+@media (max-width: 800px) {
+  .where2-dashboard-redesign
+    .city-search-input-group {
+    grid-template-columns: 1fr;
+  }
+
+  .where2-dashboard-redesign
+    .city-search-submit {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+  .where2-dashboard-redesign
+    .city-search-form {
+    padding: 20px;
+  }
+
+  .where2-dashboard-redesign
+    .city-search-input-wrapper
+    input {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   WHERE2 DISCOVER — SEARCH ICON / TEXT SPACING FIX
+   ========================================================= */
+
+.where2-dashboard-redesign
+  .city-search-input-wrapper {
+  position: relative;
+}
+
+/* Lock the search icon to the left */
+.where2-dashboard-redesign
+  .city-search-input-wrapper
+  .city-search-input-icon {
+  position: absolute;
+
+  left: 18px;
+  top: 50%;
+
+  width: 20px;
+  height: 20px;
+
+  margin: 0;
+
+  color: #6072dd;
+
+  pointer-events: none;
+
+  transform: translateY(-50%);
+}
+
+/* Reserve real space for the icon */
+.where2-dashboard-redesign
+  .city-search-input-wrapper
+  input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding-left: 56px !important;
+  padding-right: 48px !important;
+}
+
+/* Keep clear button separate */
+.where2-dashboard-redesign
+  .city-search-input-wrapper
+  .city-search-clear {
+  position: absolute;
+
+  right: 10px;
+  top: 50%;
+
+  z-index: 3;
+
+  transform: translateY(-50%);
+}
+
+/* =========================================================
+   WHERE2 DISCOVER — SEARCH RESULT CARD REFINEMENT
+   ========================================================= */
+
+.where2-dashboard-redesign
+  .search-city-card {
+  min-height: 300px;
+
+  padding: 22px;
+
+  border-radius: 22px;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(91, 104, 239, 0.07),
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      #ffffff 0%,
+      #f9fbff 100%
+    );
+
+  box-shadow:
+    0 10px 28px rgba(39, 55, 105, 0.055);
+
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.where2-dashboard-redesign
+  .search-city-card:hover {
+  transform: translateY(-7px);
+
+  border-color:
+    rgba(87, 102, 220, 0.20);
+
+  box-shadow:
+    0 20px 42px rgba(39, 55, 105, 0.12);
+}
+
+/* Top metadata */
+.where2-dashboard-redesign
+  .search-city-card-top {
+  min-height: 28px;
+}
+
+/* Country */
+.where2-dashboard-redesign
+  .search-city-card
+  .city-country {
+  color: #687790;
+
+  font-size: 11px;
+  font-weight: 750;
+}
+
+/* Country code */
+.where2-dashboard-redesign
+  .search-city-card
+  .city-country-code {
+  min-width: 38px;
+  min-height: 27px;
+
+  border:
+    1px solid rgba(84, 101, 220, 0.14);
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f0f3ff,
+      #ecfaff
+    );
+
+  color: #596bd8;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+}
+
+/* City identity */
+.where2-dashboard-redesign
+  .search-city-location {
+  margin-top: 25px;
+
+  gap: 13px;
+}
+
+.where2-dashboard-redesign
+  .search-city-location-icon {
+  width: 46px;
+  height: 46px;
+
+  border-radius: 14px;
+
+  color: #5c6fe2;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eef2ff,
+      #eafaff
+    );
+
+  box-shadow:
+    0 8px 18px rgba(68, 88, 177, 0.08);
+}
+
+.where2-dashboard-redesign
+  .search-city-location h3 {
+  font-size: 21px;
+
+  letter-spacing: -0.6px;
+}
+
+.where2-dashboard-redesign
+  .search-city-location p {
+  margin-top: 5px;
+
+  color: #7e8ba0;
+
+  font-size: 11px;
+}
+
+/* Badges */
+.where2-dashboard-redesign
+  .search-city-badges {
+  margin-top: 20px;
+
+  min-height: 24px;
+}
+
+.where2-dashboard-redesign
+  .search-city-badge {
+  min-height: 26px;
+
+  padding: 5px 9px;
+
+  border:
+    1px solid rgba(87, 104, 220, 0.08);
+
+  background:
+    #eef2ff;
+
+  color: #5869d2;
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.where2-dashboard-redesign
+  .search-city-badge-muted {
+  background:
+    #f3f5f8;
+
+  color: #748197;
+}
+
+/* Coordinates */
+.where2-dashboard-redesign
+  .search-city-coordinates {
+  gap: 9px;
+
+  margin-top: auto;
+
+  padding-top: 20px;
+}
+
+.where2-dashboard-redesign
+  .search-city-coordinates
+  span {
+  padding: 10px 11px;
+
+  border-radius: 11px;
+
+  background:
+    rgba(247, 249, 253, 0.95);
+
+  color: #758299;
+
+  font-size: 9px;
+}
+
+.where2-dashboard-redesign
+  .search-city-coordinates
+  strong {
+  color: #5b6dd8;
+
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.9px;
+}
+
+/* Explore button */
+.where2-dashboard-redesign
+  .search-city-card
+  .weather-tab {
+  min-height: 45px;
+
+  margin-top: 13px;
+
+  padding:
+    10px 13px;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #5369ee 0%,
+      #745ce7 58%,
+      #3bbce5 100%
+    );
+
+  box-shadow:
+    0 9px 20px rgba(80, 100, 226, 0.20);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.where2-dashboard-redesign
+  .search-city-card
+  .weather-tab:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 13px 26px rgba(80, 100, 226, 0.27);
+}
+
+/* Result-card keyboard accessibility */
+.where2-dashboard-redesign
+  .search-city-card
+  .weather-tab:focus-visible {
+  outline:
+    2px solid #6071df;
+
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   SEARCH RESULT RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1050px) {
+  .where2-dashboard-redesign
+    .search-city-card {
+    min-height: 290px;
+  }
+}
+
+@media (max-width: 720px) {
+  .where2-dashboard-redesign
+    .search-city-card {
+    min-height: 280px;
+
+    padding: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .where2-dashboard-redesign
+    .search-city-card {
+    border-radius: 18px;
+  }
+
+  .where2-dashboard-redesign
+    .search-city-location h3 {
+    font-size: 19px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .where2-dashboard-redesign
+    .search-city-card,
+  .where2-dashboard-redesign
+    .search-city-card
+    .weather-tab {
+    transition: none;
+  }
+
+  .where2-dashboard-redesign
+    .search-city-card:hover,
+  .where2-dashboard-redesign
+    .search-city-card
+    .weather-tab:hover {
+    transform: none;
+  }
+}
+
+/* =========================================================
+   WHERE2 DISCOVER — RESULTS SPACING + BUTTON CONTRAST
+   ========================================================= */
+
+/* Give the entire results area breathing room */
+.where2-dashboard-redesign
+  .city-search-results {
+  padding: 0 16px 24px;
+  box-sizing: border-box;
+}
+
+/* Keep the results header away from the edges */
+.where2-dashboard-redesign
+  .city-search-results-header {
+  padding: 0 2px;
+  box-sizing: border-box;
+}
+
+/* Keep filter controls aligned with the result cards */
+.where2-dashboard-redesign
+  .city-search-filter-bar {
+  padding: 0 2px;
+  box-sizing: border-box;
+}
+
+/* Add comfortable space around the result-card grid */
+.where2-dashboard-redesign
+  .city-search-grid {
+  padding: 0 2px;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   SEARCH BUTTON — HIGH CONTRAST
+   ========================================================= */
+
+.where2-dashboard-redesign
+  .city-search-submit {
+  color: #ffffff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #5369ee 0%,
+      #735ce7 58%,
+      #3bbde5 100%
+    ) !important;
+}
+
+.where2-dashboard-redesign
+  .city-search-submit span,
+.where2-dashboard-redesign
+  .city-search-submit svg {
+  color: #ffffff !important;
+}
+
+/* =========================================================
+   EXPLORE BUTTON — HIGH CONTRAST
+   ========================================================= */
+
+.where2-dashboard-redesign
+  .search-city-card
+  .weather-tab {
+  color: #ffffff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #5369ee 0%,
+      #735ce7 58%,
+      #3bbde5 100%
+    ) !important;
+}
+
+.where2-dashboard-redesign
+  .search-city-card
+  .weather-tab span,
+.where2-dashboard-redesign
+  .search-city-card
+  .weather-tab svg {
+  color: #ffffff !important;
+
+  fill: none;
+}
+
+/* Hover stays readable */
+.where2-dashboard-redesign
+  .search-city-card
+  .weather-tab:hover,
+.where2-dashboard-redesign
+  .search-city-submit:not(:disabled):hover {
+  color: #ffffff !important;
+}
+
+.where2-dashboard-redesign
+  .search-city-card
+  .weather-tab:hover span,
+.where2-dashboard-redesign
+  .search-city-card
+  .weather-tab:hover svg,
+.where2-dashboard-redesign
+  .city-search-submit:not(:disabled):hover span,
+.where2-dashboard-redesign
+  .city-search-submit:not(:disabled):hover svg {
+  color: #ffffff !important;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 720px) {
+  .where2-dashboard-redesign
+    .city-search-results {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+}
+
+@media (max-width: 500px) {
+  .where2-dashboard-redesign
+    .city-search-results {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+/* =========================================================
+   WHERE2 DISCOVER — FINAL RESULTS CONTAINER SPACING
+   ========================================================= */
+
+.where2-dashboard-redesign
+  .city-search-results {
+  width: 100% !important;
+  box-sizing: border-box;
+
+  padding: 0 28px 28px !important;
+}
+
+/* Keep header aligned with the same outer edge */
+.where2-dashboard-redesign
+  .city-search-results-header {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 0 !important;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Keep filters on the same alignment */
+.where2-dashboard-redesign
+  .city-search-filter-bar {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 0 !important;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Result grid uses the full padded content width */
+.where2-dashboard-redesign
+  .city-search-grid {
+  width: 100% !important;
+  box-sizing: border-box;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  gap: 18px;
+}
+
+/* Prevent cards from creating unexpected overflow */
+.where2-dashboard-redesign
+  .search-city-card {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Keep the outer result area from overflowing */
+.where2-dashboard-redesign
+  .city-search-results {
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+  .where2-dashboard-redesign
+    .city-search-results {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 720px) {
+  .where2-dashboard-redesign
+    .city-search-results {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .where2-dashboard-redesign
+    .city-search-results {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+/* =========================================================
+   WHERE2 CITY INTELLIGENCE — REMOVE EXTRA GRID CARD
+   Keep the grid layout, remove its visual container.
+   ========================================================= */
+
+.where2-dashboard-redesign
+  .where2-intelligence-grid {
+  display: grid;
+
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  overflow: visible !important;
+}
+
+/* Keep the real cards visually distinct */
+.where2-dashboard-redesign
+  .where2-intelligence-grid
+  > .where2-intelligence-primary,
+.where2-dashboard-redesign
+  .where2-intelligence-grid
+  > .where2-match-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* Remove any accidental wrapper spacing */
+.where2-dashboard-redesign
+  .where2-intelligence-grid
+  > * {
+  margin-top: 0;
+}
+
+/* =========================================================
+   WHERE2 CITY INTELLIGENCE — BLEND HEADER INTO BACKGROUND
+   ========================================================= */
+
+.where2-dashboard-redesign
+  .where2-selected-dashboard-heading {
+  background: transparent !important;
+  background-color: transparent !important;
+
+  border: 0 !important;
+  box-shadow: none !important;
+
+  border-radius: 0 !important;
+
+  /* Keep the spacing but remove the visible block */
+  padding: 0 !important;
+}
+
+/* Remove any white background from the heading content area */
+.where2-dashboard-redesign
+  .where2-selected-dashboard-heading
+  > div {
+  background: transparent !important;
+  background-color: transparent !important;
+
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Remove any pseudo-elements creating the white panel */
+.where2-dashboard-redesign
+  .where2-selected-dashboard-heading::before,
+.where2-dashboard-redesign
+  .where2-selected-dashboard-heading::after,
+.where2-dashboard-redesign
+  .where2-selected-dashboard-heading
+  > div::before,
+.where2-dashboard-redesign
+  .where2-selected-dashboard-heading
+  > div::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Keep the heading text itself strong */
+.where2-dashboard-redesign
+  .where2-selected-dashboard-heading
+  h2,
+.where2-dashboard-redesign
+  .where2-selected-dashboard-heading
+  p {
+  background: transparent !important;
+}
