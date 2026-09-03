@@ -404,7 +404,7 @@ function ProjectsPanel({ onViewTasks }) {
               name="description"
               value={form.description}
               onChange={handleFormChange}
-              placeholder="What is this project about?"
+              placeholder="What is your travel plan about?"
               rows={3}
             />
           </label>
@@ -467,11 +467,10 @@ function ProjectsPanel({ onViewTasks }) {
             <FolderKanban size={22} />
           </div>
 
-          <h3>No projects yet</h3>
+          <h3>No travel plans yet</h3>
 
           <p>
-            Create your first project to start
-            organizing your work.
+            Start planning your next destination and keep everything in one place.
           </p>
 
           {!showForm && (
@@ -484,7 +483,7 @@ function ProjectsPanel({ onViewTasks }) {
             >
               <Plus size={16} />
 
-              Create your first project
+              Plan Your First Trip
             </button>
           )}
         </div>
