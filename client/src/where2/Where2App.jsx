@@ -363,45 +363,31 @@ function handleBackToProjects() {
       return;
     }
 
-    /*
-     * No city selected yet.
-     * This becomes the primary city.
-     */
-
-    if (!selectedCity) {
-      setSelectedCity(city);
-      setComparisonCity(null);
-
+    // A new search becomes the primary city.
+    if (selectedCity?.id === city.id) {
       return;
     }
 
+    setSelectedCity(city);
 
-    /*
-     * Same city.
-     */
+    // Reset comparison state for the new primary city.
+    setComparisonCity(null);
+    setComparisonWeather(null);
+    setComparisonWeatherStatus("idle");
+    setComparisonWeatherError("");
 
-    if (selectedCity.id === city.id) {
-      return;
-    }
+    // Clear data belonging to the previous city.
+    setWeather(null);
+    setWeatherError("");
+    setWeatherStatus("loading");
 
+    setForecast(null);
+    setForecastError("");
+    setForecastStatus("loading");
 
-    /*
-     * If there is no comparison city,
-     * use this city as the comparison.
-     */
-
-    if (!comparisonCity) {
-      setComparisonCity(city);
-
-      return;
-    }
-
-
-    /*
-     * Otherwise replace the comparison city.
-     */
-
-    setComparisonCity(city);
+    setCostOfLiving(null);
+    setCostOfLivingError("");
+    setCostOfLivingStatus("loading");
   }
 
 
