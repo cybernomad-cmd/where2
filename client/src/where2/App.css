@@ -28893,3 +28893,32 @@ with a compact product/dashboard experience.*/
   p {
   background: transparent !important;
 }
+
+/* =========================================================
+   FOCUSFLOW PROJECTS / BUCKET LIST SPACING
+   Keep the section visually close to the feature strip.
+   ========================================================= */
+
+.focusflow-projects {
+  margin-top: 24px !important;
+}
+
+/* Remove extra spacing from the projects header/content
+   when it inherits spacing from another dashboard section. */
+.focusflow-projects-header {
+  margin-top: 0 !important;
+}
+
+/* Desktop */
+@media (min-width: 1101px) {
+  .focusflow-projects {
+    margin-top: 24px !important;
+  }
+}
+
+/* Tablet / mobile */
+@media (max-width: 1100px) {
+  .focusflow-projects {
+    margin-top: 20px !important;
+  }
+}
