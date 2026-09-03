@@ -1,3 +1,7 @@
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import {
   ArrowRight,
   Check,
@@ -21,6 +25,8 @@ import CityWeatherInsights from "./CityWeatherInsights";
 import CityComparison from "./CityComparison";
 import CityDetails from "./CityDetails";
 import CostOfLiving from "./CostOfLiving";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const HERO_IMAGE = capeTownHero;
 
@@ -103,6 +109,129 @@ function DashboardHome({
   cityDetails,
   recommendation,
 }) {
+
+  const dashboardRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const root = dashboardRef.current;
+
+    if (!root) {
+      return undefined;
+    }
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion) {
+      return undefined;
+    }
+
+    const ctx = gsap.context(() => {
+      const animateSections = () => {
+        const sections = root.querySelectorAll(
+          [
+            ".where2-preferences",
+            ".where2-discovery-card",
+            ".where2-saved-cities",
+            ".where2-selected-dashboard",
+            ".where2-feature-strip",
+          ].join(", ")
+        );
+
+        sections.forEach((section) => {
+          if (section.dataset.gsapAnimated === "true") {
+            return;
+          }
+
+          section.dataset.gsapAnimated = "true";
+
+          gsap.fromTo(
+            section,
+            {
+              autoAlpha: 0,
+              y: 40,
+            },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: section,
+                start: "top 82%",
+                once: true,
+              },
+            }
+          );
+        });
+      };
+
+      const animateCards = () => {
+        const cards = root.querySelectorAll(
+          [
+            ".where2-saved-city-card",
+            ".where2-intelligence-primary",
+            ".where2-match-card",
+            ".where2-comparison-summary",
+            ".where2-feature-strip article",
+          ].join(", ")
+        );
+
+        cards.forEach((card, index) => {
+          if (card.dataset.gsapAnimated === "true") {
+            return;
+          }
+
+          card.dataset.gsapAnimated = "true";
+
+          gsap.fromTo(
+            card,
+            {
+              autoAlpha: 0,
+              y: 24,
+            },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.65,
+              delay: (index % 5) * 0.08,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 88%",
+                once: true,
+              },
+            }
+          );
+        });
+      };
+
+      animateSections();
+      animateCards();
+
+      const observer = new MutationObserver(() => {
+        animateSections();
+        animateCards();
+        ScrollTrigger.refresh();
+      });
+
+      observer.observe(root, {
+        childList: true,
+        subtree: true,
+      });
+
+      return () => {
+        observer.disconnect();
+      };
+    }, root);
+
+    return () => {
+      ctx.revert();
+    };
+  }, []);
+
+
   function updatePreference(key, value) {
     onPreferencesChange({
       ...preferences,
@@ -124,7 +253,11 @@ function DashboardHome({
   }
 
   return (
-    <main className="where2-redesign where2-dashboard-redesign">
+    <main
+  ref={dashboardRef}
+  className="where2-redesign where2-dashboard-redesign"
+>
+
       {/* =====================================================
           HERO
       ===================================================== */}

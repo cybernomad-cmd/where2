@@ -346,7 +346,7 @@ function AICityAdvisor({
           AI CITY ADVISOR
       ===================================================== */}
 
-      <div className="where2-ai-card">
+      <div className="where2-ai-card where2-ai-card-enhanced">
         {/* Header */}
 
         <div className="where2-ai-header">
@@ -368,6 +368,27 @@ function AICityAdvisor({
             <RefreshCw size={17} />
           </button>
         </div>
+
+        <div
+  className="where2-ai-ambient"
+  aria-hidden="true"
+>
+  <span className="where2-ai-orb where2-ai-orb-one" />
+  <span className="where2-ai-orb where2-ai-orb-two" />
+  <span className="where2-ai-orb where2-ai-orb-three" />
+
+  <span className="where2-ai-spark where2-ai-spark-one">
+    <Sparkles size={13} />
+  </span>
+
+  <span className="where2-ai-spark where2-ai-spark-two">
+    <Sparkles size={10} />
+  </span>
+
+  <span className="where2-ai-core">
+    <Sparkles size={20} />
+  </span>
+</div>
 
         {/* Introduction */}
 
