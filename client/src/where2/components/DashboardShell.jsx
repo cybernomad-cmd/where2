@@ -156,10 +156,7 @@ function DashboardShell({
         <div className="where2-sidebar-top">
           <div className="where2-brand">
             <div className="where2-brand-mark">
-              <Map
-                size={21}
-                strokeWidth={2.5}
-              />
+              <span>W</span>
             </div>
 
             <span>

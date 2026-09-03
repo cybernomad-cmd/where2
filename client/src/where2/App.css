@@ -25198,12 +25198,9 @@ with a compact product/dashboard experience.*/
 .where2-dashboard-redesign
   .where2-comparison-summary {
   position: relative;
-
   border: 1px solid rgba(73, 91, 145, 0.10);
   border-radius: 22px;
-
   background: rgba(255, 255, 255, 0.92);
-
   box-shadow:
     0 12px 32px rgba(37, 53, 105, 0.07);
 }
@@ -28893,3 +28890,707 @@ with a compact product/dashboard experience.*/
   p {
   background: transparent !important;
 }
+
+/* =========================================================
+   FOCUSFLOW PROJECTS / BUCKET LIST SPACING
+   Keep the section visually close to the feature strip.
+   ========================================================= */
+
+.focusflow-projects {
+  margin-top: 24px !important;
+}
+
+/* Remove extra spacing from the projects header/content
+   when it inherits spacing from another dashboard section. */
+.focusflow-projects-header {
+  margin-top: 0 !important;
+}
+
+/* Desktop */
+@media (min-width: 1101px) {
+  .focusflow-projects {
+    margin-top: 24px !important;
+  }
+}
+
+/* Tablet / mobile */
+@media (max-width: 1100px) {
+  .focusflow-projects {
+    margin-top: 20px !important;
+  }
+}
+
+/* =========================================================
+   WHERE2 HERO CAROUSEL — FINAL VISUAL REFRESH
+   ========================================================= */
+
+.where2-dashboard-redesign .where2-hero-carousel {
+  position: relative;
+  min-height: 520px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 26px;
+  isolation: isolate;
+  background: #10234f;
+  box-shadow:
+    0 24px 60px rgba(30, 58, 138, 0.16);
+}
+
+.where2-dashboard-redesign .where2-hero-slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.where2-dashboard-redesign .where2-hero-background {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  opacity: 0;
+  transform: scale(1.035);
+
+  transition:
+    opacity 700ms ease,
+    transform 7s ease;
+
+  pointer-events: none;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-background-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.where2-dashboard-redesign .where2-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 25, 65, 0.88) 0%,
+      rgba(10, 34, 84, 0.70) 35%,
+      rgba(10, 34, 84, 0.20) 67%,
+      rgba(9, 24, 54, 0.08) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(7, 20, 50, 0.14) 0%,
+      rgba(7, 20, 50, 0.04) 52%,
+      rgba(7, 20, 50, 0.28) 100%
+    );
+}
+
+.where2-dashboard-redesign .where2-hero-content {
+  position: relative;
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: min(660px, 62%);
+  min-height: 520px;
+
+  padding: 54px 48px 72px;
+  box-sizing: border-box;
+
+  color: #ffffff;
+}
+
+.where2-dashboard-redesign .where2-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  width: fit-content;
+
+  margin-bottom: 20px;
+  padding: 9px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-badge
+  svg {
+  color: #9fc4ff;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-content
+  h1 {
+  max-width: 700px;
+
+  margin: 0 0 20px;
+
+  color: #ffffff;
+
+  font-size: clamp(3rem, 5.3vw, 5.35rem);
+  line-height: 0.96;
+
+  font-weight: 800;
+  letter-spacing: -0.065em;
+  text-wrap: balance;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-description {
+  max-width: 570px;
+
+  margin: 0 0 30px;
+
+  color: rgba(255, 255, 255, 0.90);
+
+  font-size: clamp(1rem, 1.35vw, 1.16rem);
+  line-height: 1.65;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  width: fit-content;
+
+  min-height: 50px;
+  padding: 0 20px;
+
+  border: 0;
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #315bea 0%,
+      #5d62f3 52%,
+      #6f63e8 100%
+    );
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 14px 30px rgba(22, 55, 170, 0.30);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 18px 36px rgba(22, 55, 170, 0.36);
+}
+
+.where2-dashboard-redesign
+  .where2-hero-button:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 4px;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-location {
+  position: absolute;
+  left: 30px;
+  bottom: 25px;
+  z-index: 4;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 9px 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+
+  background: rgba(10, 27, 66, 0.46);
+  color: rgba(255, 255, 255, 0.94);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-city-card {
+  position: absolute;
+  right: 34px;
+  bottom: 44px;
+  z-index: 4;
+  width: min(300px, 27%);
+  padding: 22px;
+
+  box-sizing: border-box;
+
+  border: 1px solid rgba(255, 255, 255, 0.70);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.93);
+
+  box-shadow:
+    0 20px 45px rgba(14, 27, 62, 0.22);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  animation: where2HeroCardFloat 5s ease-in-out infinite;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-city-card-label {
+  display: inline-flex;
+
+  margin-bottom: 9px;
+  padding: 6px 9px;
+
+  border-radius: 999px;
+
+  background: #edf2ff;
+  color: #315bea;
+
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.10em;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-city-card
+  strong {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #122454;
+
+  font-size: 1.55rem;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-city-card-country {
+  display: block;
+
+  margin-bottom: 17px;
+
+  color: #68758d;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-city-card-points {
+  display: grid;
+  gap: 10px;
+
+  margin-bottom: 18px;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-city-card-points span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #596781;
+
+  font-size: 11px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-city-card-points svg {
+  flex: 0 0 auto;
+  color: #315bea;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-city-card
+  button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  color: #315bea;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-city-card
+  button:hover {
+  text-decoration: underline;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+
+  display: grid;
+  place-items: center;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.92);
+  color: #17306b;
+
+  cursor: pointer;
+
+  transform: translateY(-50%);
+
+  box-shadow:
+    0 10px 24px rgba(9, 24, 54, 0.18);
+
+  transition:
+    transform 180ms ease,
+    background 180ms ease;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-nav:hover {
+  background: #ffffff;
+
+  transform:
+    translateY(-50%)
+    scale(1.06);
+}
+
+.where2-dashboard-redesign
+  .where2-hero-nav-prev {
+  left: 24px;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-nav-prev svg {
+  transform: rotate(180deg);
+}
+
+.where2-dashboard-redesign
+  .where2-hero-nav-next {
+  right: 24px;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  transform: translateX(-50%);
+}
+
+.where2-dashboard-redesign
+  .where2-hero-dot {
+  width: 7px;
+  height: 7px;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.50);
+
+  cursor: pointer;
+
+  transition:
+    width 180ms ease,
+    background 180ms ease;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-dot-active {
+  width: 24px;
+  background: #ffffff;
+}
+
+@keyframes where2HeroCardFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+/* =========================================================
+   HERO RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .where2-dashboard-redesign
+    .where2-hero-content {
+    width: 68%;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-city-card {
+    width: 31%;
+    right: 24px;
+  }
+}
+
+@media (max-width: 860px) {
+  .where2-dashboard-redesign
+    .where2-hero-carousel {
+    min-height: 540px;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-content {
+    width: 100%;
+    min-height: 540px;
+
+    padding:
+      48px 34px 110px;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-content
+    h1 {
+    max-width: 600px;
+    font-size: clamp(2.75rem, 7vw, 4.2rem);
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-city-card {
+    right: 24px;
+    bottom: 54px;
+
+    width: 250px;
+
+    padding: 18px;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-city-card-points {
+    gap: 7px;
+    margin-bottom: 12px;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-nav {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@media (max-width: 680px) {
+  .where2-dashboard-redesign
+    .where2-hero-carousel {
+    min-height: 620px;
+    border-radius: 22px;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-background {
+    object-position: 62% center;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(7, 25, 65, 0.56) 0%,
+        rgba(7, 25, 65, 0.72) 45%,
+        rgba(7, 25, 65, 0.92) 100%
+      );
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-content {
+    min-height: 620px;
+
+    padding:
+      42px 24px 180px;
+
+    justify-content: flex-start;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-badge {
+    font-size: 9px;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-content
+    h1 {
+    font-size: clamp(2.4rem, 11vw, 3.5rem);
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-description {
+    font-size: 0.96rem;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-city-card {
+    left: 20px;
+    right: 20px;
+    bottom: 54px;
+
+    width: auto;
+
+    padding: 17px;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-city-card-points {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-nav {
+    top: auto;
+    bottom: 19px;
+
+    transform: none;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-nav:hover {
+    transform: scale(1.06);
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-nav-prev {
+    left: 20px;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-nav-next {
+    right: 20px;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-dots {
+    bottom: 34px;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-location {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .where2-dashboard-redesign
+    .where2-hero-background {
+    transition: opacity 300ms ease;
+    transform: none;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-city-card {
+    animation: none;
+  }
+
+  .where2-dashboard-redesign
+    .where2-hero-button,
+  .where2-dashboard-redesign
+    .where2-hero-nav {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   HERO LOCATION PILL — MOVE TO RIGHT
+   ========================================================= */
+
+.where2-dashboard-redesign
+  .where2-hero-location {
+  right: 150px !important;
+  left: auto !important;
+  bottom: 22px !important;
+
+  width: fit-content !important;
+  max-width: calc(100% - 56px);
+
+  min-height: 0 !important;
+  height: auto !important;
+
+  padding: 7px 12px !important;
+
+  border-radius: 999px;
+
+  box-sizing: border-box;
+
+  background: rgba(10, 27, 66, 0.60) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+
+  color: #ffffff !important;
+
+  box-shadow: 0 8px 22px rgba(7, 20, 50, 0.18);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.where2-dashboard-redesign
+  .where2-hero-location
+  svg {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+}
+
+.where2-dashboard-redesign
+  .where2-hero-location
+  span {
+  white-space: nowrap;
+}
+

@@ -1,4 +1,9 @@
-import { useLayoutEffect, useRef } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -28,7 +33,62 @@ import CostOfLiving from "./CostOfLiving";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const HERO_IMAGE = capeTownHero;
+const HERO_SLIDES = [
+  {
+    city: "Cape Town",
+    country: "South Africa",
+    flag: "🇿🇦",
+    image: capeTownHero,
+    eyebrow: "SMART TRAVEL STARTS HERE",
+    title: "Discover cities that fit your world.",
+    description:
+      "Real-time insights on weather, lifestyle, cost of living, and compatibility — all in one place.",
+  },
+  {
+    city: "Lisbon",
+    country: "Portugal",
+    flag: "🇵🇹",
+    image:
+      "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=1800&q=88",
+    eyebrow: "FIND YOUR NEXT CHAPTER",
+    title: "Explore places made for the way you live.",
+    description:
+      "Compare cities worldwide and discover the places that align with your priorities.",
+  },
+  {
+    city: "Tokyo",
+    country: "Japan",
+    flag: "🇯🇵",
+    image:
+      "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1800&q=88",
+    eyebrow: "YOUR WORLD, EXPANDED",
+    title: "Go beyond the usual city search.",
+    description:
+      "Understand climate, lifestyle, affordability, and compatibility before you decide.",
+  },
+  {
+    city: "Paris",
+    country: "France",
+    flag: "🇫🇷",
+    image:
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1800&q=88",
+    eyebrow: "MAKE THE CHOICE CLEARER",
+    title: "Turn city research into a smarter decision.",
+    description:
+      "Bring the information you need together and build a shortlist around your life.",
+  },
+  {
+    city: "Santorini",
+    country: "Greece",
+    flag: "🇬🇷",
+    image:
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1800&q=88",
+    eyebrow: "WHERE COULD YOU LIVE?",
+    title: "Your next city could be closer than you think.",
+    description:
+      "Explore destinations through the lens of what actually matters to you.",
+  },
+];
 
 const climateOptions = [
   {
@@ -239,93 +299,195 @@ function DashboardHome({
     });
   }
 
-  function togglePriority(priority) {
-    const current = preferences.priorities || [];
+function togglePriority(priority) {
+  const current = preferences.priorities || [];
 
-    const next = current.includes(priority)
-      ? current.filter((item) => item !== priority)
-      : [...current, priority];
+  const next = current.includes(priority)
+    ? current.filter((item) => item !== priority)
+    : [...current, priority];
 
-    onPreferencesChange({
-      ...preferences,
-      priorities: next,
-    });
+  onPreferencesChange({
+    ...preferences,
+    priorities: next,
+  });
+}
+
+/* =====================================================
+   HERO CAROUSEL STATE
+   ===================================================== */
+
+const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+const [isHeroPaused, setIsHeroPaused] = useState(false);
+
+const activeHero = HERO_SLIDES[activeHeroSlide];
+
+useEffect(() => {
+  if (isHeroPaused) {
+    return undefined;
   }
 
-  return (
-    <main
-  ref={dashboardRef}
-  className="where2-redesign where2-dashboard-redesign"
->
+  const interval = window.setInterval(() => {
+    setActiveHeroSlide((current) =>
+      (current + 1) % HERO_SLIDES.length
+    );
+  }, 5500);
+
+  return () => window.clearInterval(interval);
+}, [isHeroPaused]);
+
+function goToHeroSlide(index) {
+  setActiveHeroSlide(
+    (index + HERO_SLIDES.length) % HERO_SLIDES.length
+  );
+}
+
+return (
+  <main
+    ref={dashboardRef}
+    className="where2-redesign where2-dashboard-redesign"
+  >
 
       {/* =====================================================
           HERO
       ===================================================== */}
 
-      <section className="where2-hero">
-        <img
-          className="where2-hero-background"
-          src={HERO_IMAGE}
-          alt="Cape Town coastline and Table Mountain"
-        />
+      <section
+        className="where2-hero where2-hero-carousel"
+        onMouseEnter={() => setIsHeroPaused(true)}
+        onMouseLeave={() => setIsHeroPaused(false)}
+      >
+        <div className="where2-hero-slides" aria-live="polite">
+          {HERO_SLIDES.map((slide, index) => (
+            <img
+              key={slide.city}
+              className={`where2-hero-background ${
+                index === activeHeroSlide
+                  ? "where2-hero-background-active"
+                  : ""
+              }`}
+              src={slide.image}
+              alt={`${slide.city}, ${slide.country}`}
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          ))}
+        </div>
 
         <div className="where2-hero-overlay" />
 
         <div className="where2-hero-content">
-          <p className="where2-hero-eyebrow">
-            FIND YOUR PLACE
-          </p>
+          <div className="where2-hero-badge">
+            <Sparkles size={14} />
+            <span>{activeHero.eyebrow}</span>
+          </div>
 
-          <h1>
-            Find the right place to live your best life
-          </h1>
+          <h1>{activeHero.title}</h1>
 
           <p className="where2-hero-description">
-            Compare cities worldwide based on weather,
-            cost of living and lifestyle that fit you.
+            {activeHero.description}
           </p>
 
           <button
             type="button"
             className="where2-hero-button"
             onClick={() => {
-              const searchSection =
-                document.querySelector(
-                  ".where2-search-section"
-                );
+              const discoverSection =
+                document.querySelector("#where2-discover");
 
-              if (searchSection) {
-                searchSection.scrollIntoView({
+              if (discoverSection) {
+                discoverSection.scrollIntoView({
                   behavior: "smooth",
                   block: "start",
                 });
-              } else {
-                const discoverSection =
-                  document.querySelector(
-                    "#where2-discover"
-                  );
-
-                if (discoverSection) {
-                  discoverSection.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-                }
               }
             }}
           >
             <Sparkles size={17} />
-
             <span>Find my match</span>
-
             <ArrowRight size={17} />
           </button>
         </div>
 
         <div className="where2-hero-location">
           <MapPin size={14} />
+          <span className="where2-hero-location-flag" aria-hidden="true">
+            {activeHero.flag}
+          </span>
 
-          <span>Cape Town, South Africa</span>
+          <span>  
+            {activeHero.city}, {activeHero.country}
+          </span>
+        </div>
+
+        <div className="where2-hero-city-card">
+          <span className="where2-hero-city-card-label">
+            TOP PICK FOR YOU
+          </span>
+
+          <strong>{activeHero.city}</strong>
+
+          <span className="where2-hero-city-card-country">
+          <span className="where2-hero-flag" aria-hidden="true">
+            {activeHero.flag}
+          </span>
+            <span>{activeHero.country}</span>
+          </span>
+
+
+          <div className="where2-hero-city-card-points">
+            <span>
+              <Check size={14} />
+              Real-time city insights
+            </span>
+
+            <span>
+              <Check size={14} />
+              Lifestyle compatibility
+            </span>
+
+            <span>
+              <Check size={14} />
+              Cost of living context
+            </span>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              const discoverSection =
+                document.querySelector("#where2-discover");
+
+              if (discoverSection) {
+                discoverSection.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }
+            }}
+          >
+            Explore {activeHero.city}
+            <ArrowRight size={15} />
+          </button>
+        </div>
+
+        <div className="where2-hero-dots">
+          {HERO_SLIDES.map((slide, index) => (
+            <button
+              type="button"
+              key={slide.city}
+              className={`where2-hero-dot ${
+                index === activeHeroSlide
+                  ? "where2-hero-dot-active"
+                  : ""
+              }`}
+              aria-label={`Show ${slide.city}`}
+              aria-current={
+                index === activeHeroSlide
+                  ? "true"
+                  : undefined
+              }
+              onClick={() => goToHeroSlide(index)}
+            />
+          ))}
         </div>
       </section>
 
